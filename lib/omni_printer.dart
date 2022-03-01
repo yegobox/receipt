@@ -58,8 +58,8 @@ class OmniPrinter {
 
   Future<bool> autoPrint() async {
     Printing.layoutPdf(
-      // format: PdfPageFormat.roll80,
-      format: PdfPageFormat.a6,
+      format: PdfPageFormat.roll80,
+      // format: PdfPageFormat.a4,
       onLayout: (PdfPageFormat format) async {
         return doc.save();
       },
@@ -82,7 +82,7 @@ class OmniPrinter {
   }) {
     doc.addPage(
       pw.Page(
-        pageFormat: PdfPageFormat.roll80,
+        pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
           return pw.Column(children: [
             ...header,
@@ -103,6 +103,7 @@ class OmniPrinter {
     /// Printing.directPrintPdf(printer: printer, onLayout: onLayout)
     await Printing.sharePdf(
       bytes: await doc.save(),
+      // format: PdfPageFormat.a4,
       filename: 'receipt.pdf',
       subject: "receipt",
       body: "Thank you for visinting us",
