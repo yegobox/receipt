@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
+import 'package:isar_demo/pw_page.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -75,23 +76,18 @@ class OmniPrinter {
     throw Exception('Not implemented');
   }
 
-  Future<Uint8List> generateDoc({
-    required List<pw.Widget> header,
-    required List<pw.Widget> subHeader,
-    required pw.Widget body,
-  }) {
+  Future<Uint8List> generateDoc() {
     doc.addPage(
       pw.Page(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
-          return pw.Column(children: [
-            ...header,
-            pw.Row(
-              children: subHeader,
-            ),
-            pw.Text('\n'),
-            body,
-          ]);
+          return PwPage(
+              date: 'March 02, 2022',
+              info: 'Invoice#223393',
+              taxID: 'IKSZHZOZ234EDLE3A',
+              receiverName: 'Always Good Apps, LLC',
+              receiverMail: 'martinosoyen@gmail.com',
+              receiverPhone: '+1(233)2304-1223');
         },
       ),
     );
