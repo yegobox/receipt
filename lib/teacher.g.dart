@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user.dart';
+part of 'teacher.dart';
 
 // **************************************************************************
 // IsarCollectionGenerator
@@ -8,26 +8,26 @@ part of 'user.dart';
 
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast
 
-extension GetUserCollection on Isar {
-  IsarCollection<User> get users {
-    return getCollection('User');
+extension GetTeacherCollection on Isar {
+  IsarCollection<Teacher> get teachers {
+    return getCollection('Teacher');
   }
 }
 
-final UserSchema = CollectionSchema(
-  name: 'User',
+final TeacherSchema = CollectionSchema(
+  name: 'Teacher',
   schema:
-      '{"name":"User","idName":"id","properties":[{"name":"name","type":"String"}],"indexes":[],"links":[{"name":"posts","target":"Post"}]}',
-  nativeAdapter: const _UserNativeAdapter(),
-  webAdapter: const _UserWebAdapter(),
+      '{"name":"Teacher","idName":"id","properties":[{"name":"subject","type":"String"}],"indexes":[],"links":[]}',
+  nativeAdapter: const _TeacherNativeAdapter(),
+  webAdapter: const _TeacherWebAdapter(),
   idName: 'id',
-  propertyIds: {'name': 0},
+  propertyIds: {'subject': 0},
   listProperties: {},
   indexIds: {},
   indexTypes: {},
-  linkIds: {'posts': 0},
+  linkIds: {},
   backlinkIds: {},
-  linkedCollections: ['Post'],
+  linkedCollections: [],
   getId: (obj) {
     if (obj.id == Isar.autoIncrement) {
       return null;
@@ -36,28 +36,26 @@ final UserSchema = CollectionSchema(
     }
   },
   setId: (obj, id) => obj.id = id,
-  getLinks: (obj) => [obj.posts],
+  getLinks: (obj) => [],
   version: 2,
 );
 
-class _UserWebAdapter extends IsarWebTypeAdapter<User> {
-  const _UserWebAdapter();
+class _TeacherWebAdapter extends IsarWebTypeAdapter<Teacher> {
+  const _TeacherWebAdapter();
 
   @override
-  Object serialize(IsarCollection<User> collection, User object) {
+  Object serialize(IsarCollection<Teacher> collection, Teacher object) {
     final jsObj = IsarNative.newJsObject();
     IsarNative.jsObjectSet(jsObj, 'id', object.id);
-    IsarNative.jsObjectSet(jsObj, 'name', object.name);
+    IsarNative.jsObjectSet(jsObj, 'subject', object.subject);
     return jsObj;
   }
 
   @override
-  User deserialize(IsarCollection<User> collection, dynamic jsObj) {
-    final object = User();
-    object.id = IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity;
-    object.name = IsarNative.jsObjectGet(jsObj, 'name') ?? '';
-    attachLinks(collection.isar,
-        IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity, object);
+  Teacher deserialize(IsarCollection<Teacher> collection, dynamic jsObj) {
+    final object = Teacher();
+    object.id = IsarNative.jsObjectGet(jsObj, 'id');
+    object.subject = IsarNative.jsObjectGet(jsObj, 'subject') ?? '';
     return object;
   }
 
@@ -65,53 +63,43 @@ class _UserWebAdapter extends IsarWebTypeAdapter<User> {
   P deserializeProperty<P>(Object jsObj, String propertyName) {
     switch (propertyName) {
       case 'id':
-        return (IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity)
-            as P;
-      case 'name':
-        return (IsarNative.jsObjectGet(jsObj, 'name') ?? '') as P;
+        return (IsarNative.jsObjectGet(jsObj, 'id')) as P;
+      case 'subject':
+        return (IsarNative.jsObjectGet(jsObj, 'subject') ?? '') as P;
       default:
         throw 'Illegal propertyName';
     }
   }
 
   @override
-  void attachLinks(Isar isar, int id, User object) {
-    object.posts.attach(
-      id,
-      isar.users,
-      isar.getCollection<Post>('Post'),
-      'posts',
-      false,
-    );
-  }
+  void attachLinks(Isar isar, int id, Teacher object) {}
 }
 
-class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
-  const _UserNativeAdapter();
+class _TeacherNativeAdapter extends IsarNativeTypeAdapter<Teacher> {
+  const _TeacherNativeAdapter();
 
   @override
-  void serialize(IsarCollection<User> collection, IsarRawObject rawObj,
-      User object, int staticSize, List<int> offsets, AdapterAlloc alloc) {
+  void serialize(IsarCollection<Teacher> collection, IsarRawObject rawObj,
+      Teacher object, int staticSize, List<int> offsets, AdapterAlloc alloc) {
     var dynamicSize = 0;
-    final value0 = object.name;
-    final _name = IsarBinaryWriter.utf8Encoder.convert(value0);
-    dynamicSize += (_name.length) as int;
+    final value0 = object.subject;
+    final _subject = IsarBinaryWriter.utf8Encoder.convert(value0);
+    dynamicSize += (_subject.length) as int;
     final size = staticSize + dynamicSize;
 
     rawObj.buffer = alloc(size);
     rawObj.buffer_length = size;
     final buffer = IsarNative.bufAsBytes(rawObj.buffer, size);
     final writer = IsarBinaryWriter(buffer, staticSize);
-    writer.writeBytes(offsets[0], _name);
+    writer.writeBytes(offsets[0], _subject);
   }
 
   @override
-  User deserialize(IsarCollection<User> collection, int id,
+  Teacher deserialize(IsarCollection<Teacher> collection, int id,
       IsarBinaryReader reader, List<int> offsets) {
-    final object = User();
+    final object = Teacher();
     object.id = id;
-    object.name = reader.readString(offsets[0]);
-    attachLinks(collection.isar, id, object);
+    object.subject = reader.readString(offsets[0]);
     return object;
   }
 
@@ -129,25 +117,17 @@ class _UserNativeAdapter extends IsarNativeTypeAdapter<User> {
   }
 
   @override
-  void attachLinks(Isar isar, int id, User object) {
-    object.posts.attach(
-      id,
-      isar.users,
-      isar.getCollection<Post>('Post'),
-      'posts',
-      false,
-    );
-  }
+  void attachLinks(Isar isar, int id, Teacher object) {}
 }
 
-extension UserQueryWhereSort on QueryBuilder<User, User, QWhere> {
-  QueryBuilder<User, User, QAfterWhere> anyId() {
+extension TeacherQueryWhereSort on QueryBuilder<Teacher, Teacher, QWhere> {
+  QueryBuilder<Teacher, Teacher, QAfterWhere> anyId() {
     return addWhereClauseInternal(const WhereClause(indexName: null));
   }
 }
 
-extension UserQueryWhere on QueryBuilder<User, User, QWhereClause> {
-  QueryBuilder<User, User, QAfterWhereClause> idEqualTo(int id) {
+extension TeacherQueryWhere on QueryBuilder<Teacher, Teacher, QWhereClause> {
+  QueryBuilder<Teacher, Teacher, QAfterWhereClause> idEqualTo(int? id) {
     return addWhereClauseInternal(WhereClause(
       indexName: null,
       lower: [id],
@@ -157,7 +137,7 @@ extension UserQueryWhere on QueryBuilder<User, User, QWhereClause> {
     ));
   }
 
-  QueryBuilder<User, User, QAfterWhereClause> idNotEqualTo(int id) {
+  QueryBuilder<Teacher, Teacher, QAfterWhereClause> idNotEqualTo(int? id) {
     if (whereSortInternal == Sort.asc) {
       return addWhereClauseInternal(WhereClause(
         indexName: null,
@@ -181,8 +161,8 @@ extension UserQueryWhere on QueryBuilder<User, User, QWhereClause> {
     }
   }
 
-  QueryBuilder<User, User, QAfterWhereClause> idGreaterThan(
-    int id, {
+  QueryBuilder<Teacher, Teacher, QAfterWhereClause> idGreaterThan(
+    int? id, {
     bool include = false,
   }) {
     return addWhereClauseInternal(WhereClause(
@@ -192,8 +172,8 @@ extension UserQueryWhere on QueryBuilder<User, User, QWhereClause> {
     ));
   }
 
-  QueryBuilder<User, User, QAfterWhereClause> idLessThan(
-    int id, {
+  QueryBuilder<Teacher, Teacher, QAfterWhereClause> idLessThan(
+    int? id, {
     bool include = false,
   }) {
     return addWhereClauseInternal(WhereClause(
@@ -203,9 +183,9 @@ extension UserQueryWhere on QueryBuilder<User, User, QWhereClause> {
     ));
   }
 
-  QueryBuilder<User, User, QAfterWhereClause> idBetween(
-    int lowerId,
-    int upperId, {
+  QueryBuilder<Teacher, Teacher, QAfterWhereClause> idBetween(
+    int? lowerId,
+    int? upperId, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -219,8 +199,17 @@ extension UserQueryWhere on QueryBuilder<User, User, QWhereClause> {
   }
 }
 
-extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
-  QueryBuilder<User, User, QAfterFilterCondition> idEqualTo(int value) {
+extension TeacherQueryFilter
+    on QueryBuilder<Teacher, Teacher, QFilterCondition> {
+  QueryBuilder<Teacher, Teacher, QAfterFilterCondition> idIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'id',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<Teacher, Teacher, QAfterFilterCondition> idEqualTo(int? value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
       property: 'id',
@@ -228,8 +217,8 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> idGreaterThan(
-    int value, {
+  QueryBuilder<Teacher, Teacher, QAfterFilterCondition> idGreaterThan(
+    int? value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -240,8 +229,8 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> idLessThan(
-    int value, {
+  QueryBuilder<Teacher, Teacher, QAfterFilterCondition> idLessThan(
+    int? value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -252,9 +241,9 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> idBetween(
-    int lower,
-    int upper, {
+  QueryBuilder<Teacher, Teacher, QAfterFilterCondition> idBetween(
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -267,19 +256,19 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> nameEqualTo(
+  QueryBuilder<Teacher, Teacher, QAfterFilterCondition> subjectEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
-      property: 'name',
+      property: 'subject',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> nameGreaterThan(
+  QueryBuilder<Teacher, Teacher, QAfterFilterCondition> subjectGreaterThan(
     String value, {
     bool caseSensitive = true,
     bool include = false,
@@ -287,13 +276,13 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.gt,
       include: include,
-      property: 'name',
+      property: 'subject',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> nameLessThan(
+  QueryBuilder<Teacher, Teacher, QAfterFilterCondition> subjectLessThan(
     String value, {
     bool caseSensitive = true,
     bool include = false,
@@ -301,13 +290,13 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.lt,
       include: include,
-      property: 'name',
+      property: 'subject',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> nameBetween(
+  QueryBuilder<Teacher, Teacher, QAfterFilterCondition> subjectBetween(
     String lower,
     String upper, {
     bool caseSensitive = true,
@@ -315,7 +304,7 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     bool includeUpper = true,
   }) {
     return addFilterConditionInternal(FilterCondition.between(
-      property: 'name',
+      property: 'subject',
       lower: lower,
       includeLower: includeLower,
       upper: upper,
@@ -324,114 +313,112 @@ extension UserQueryFilter on QueryBuilder<User, User, QFilterCondition> {
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> nameStartsWith(
+  QueryBuilder<Teacher, Teacher, QAfterFilterCondition> subjectStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.startsWith,
-      property: 'name',
+      property: 'subject',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> nameEndsWith(
+  QueryBuilder<Teacher, Teacher, QAfterFilterCondition> subjectEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.endsWith,
-      property: 'name',
+      property: 'subject',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> nameContains(String value,
+  QueryBuilder<Teacher, Teacher, QAfterFilterCondition> subjectContains(
+      String value,
       {bool caseSensitive = true}) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.contains,
-      property: 'name',
+      property: 'subject',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
-  QueryBuilder<User, User, QAfterFilterCondition> nameMatches(String pattern,
+  QueryBuilder<Teacher, Teacher, QAfterFilterCondition> subjectMatches(
+      String pattern,
       {bool caseSensitive = true}) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.matches,
-      property: 'name',
+      property: 'subject',
       value: pattern,
       caseSensitive: caseSensitive,
     ));
   }
 }
 
-extension UserQueryLinks on QueryBuilder<User, User, QFilterCondition> {
-  QueryBuilder<User, User, QAfterFilterCondition> posts(FilterQuery<Post> q) {
-    return linkInternal(
-      isar.posts,
-      q,
-      'posts',
-    );
-  }
-}
+extension TeacherQueryLinks
+    on QueryBuilder<Teacher, Teacher, QFilterCondition> {}
 
-extension UserQueryWhereSortBy on QueryBuilder<User, User, QSortBy> {
-  QueryBuilder<User, User, QAfterSortBy> sortById() {
+extension TeacherQueryWhereSortBy on QueryBuilder<Teacher, Teacher, QSortBy> {
+  QueryBuilder<Teacher, Teacher, QAfterSortBy> sortById() {
     return addSortByInternal('id', Sort.asc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> sortByIdDesc() {
+  QueryBuilder<Teacher, Teacher, QAfterSortBy> sortByIdDesc() {
     return addSortByInternal('id', Sort.desc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> sortByName() {
-    return addSortByInternal('name', Sort.asc);
+  QueryBuilder<Teacher, Teacher, QAfterSortBy> sortBySubject() {
+    return addSortByInternal('subject', Sort.asc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> sortByNameDesc() {
-    return addSortByInternal('name', Sort.desc);
+  QueryBuilder<Teacher, Teacher, QAfterSortBy> sortBySubjectDesc() {
+    return addSortByInternal('subject', Sort.desc);
   }
 }
 
-extension UserQueryWhereSortThenBy on QueryBuilder<User, User, QSortThenBy> {
-  QueryBuilder<User, User, QAfterSortBy> thenById() {
+extension TeacherQueryWhereSortThenBy
+    on QueryBuilder<Teacher, Teacher, QSortThenBy> {
+  QueryBuilder<Teacher, Teacher, QAfterSortBy> thenById() {
     return addSortByInternal('id', Sort.asc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> thenByIdDesc() {
+  QueryBuilder<Teacher, Teacher, QAfterSortBy> thenByIdDesc() {
     return addSortByInternal('id', Sort.desc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> thenByName() {
-    return addSortByInternal('name', Sort.asc);
+  QueryBuilder<Teacher, Teacher, QAfterSortBy> thenBySubject() {
+    return addSortByInternal('subject', Sort.asc);
   }
 
-  QueryBuilder<User, User, QAfterSortBy> thenByNameDesc() {
-    return addSortByInternal('name', Sort.desc);
+  QueryBuilder<Teacher, Teacher, QAfterSortBy> thenBySubjectDesc() {
+    return addSortByInternal('subject', Sort.desc);
   }
 }
 
-extension UserQueryWhereDistinct on QueryBuilder<User, User, QDistinct> {
-  QueryBuilder<User, User, QDistinct> distinctById() {
+extension TeacherQueryWhereDistinct
+    on QueryBuilder<Teacher, Teacher, QDistinct> {
+  QueryBuilder<Teacher, Teacher, QDistinct> distinctById() {
     return addDistinctByInternal('id');
   }
 
-  QueryBuilder<User, User, QDistinct> distinctByName(
+  QueryBuilder<Teacher, Teacher, QDistinct> distinctBySubject(
       {bool caseSensitive = true}) {
-    return addDistinctByInternal('name', caseSensitive: caseSensitive);
+    return addDistinctByInternal('subject', caseSensitive: caseSensitive);
   }
 }
 
-extension UserQueryProperty on QueryBuilder<User, User, QQueryProperty> {
-  QueryBuilder<User, int, QQueryOperations> idProperty() {
+extension TeacherQueryProperty
+    on QueryBuilder<Teacher, Teacher, QQueryProperty> {
+  QueryBuilder<Teacher, int?, QQueryOperations> idProperty() {
     return addPropertyNameInternal('id');
   }
 
-  QueryBuilder<User, String, QQueryOperations> nameProperty() {
-    return addPropertyNameInternal('name');
+  QueryBuilder<Teacher, String, QQueryOperations> subjectProperty() {
+    return addPropertyNameInternal('subject');
   }
 }
