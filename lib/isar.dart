@@ -1,4 +1,5 @@
 import 'package:isar/isar.dart';
+import 'package:isar_demo/stock_sync.dart';
 import 'package:isar_demo/student.dart';
 import 'package:isar_demo/teacher.dart';
 import 'user.dart';
@@ -18,6 +19,26 @@ class IsarApi {
     await isar.writeTxn((isar) async {
       await a.posts.save();
     });
+
+    // test complicated
+    StockSync stock = StockSync()
+      ..canTrackingStock = false
+      ..showLowStockAlert = false
+      ..currentStock = 0.0
+      ..branchId = 1
+      ..variantId = 1
+      ..supplyPrice = 0.0
+      ..retailPrice = 0.0
+      ..lowStock = 10.0
+      ..canTrackingStock = true
+      ..showLowStockAlert = true
+      ..value = 300.0
+      ..active = false
+      ..productId = 1;
+
+    await isar.writeTxn((isar) async {
+      return isar.stockSyncs.put(stock, saveLinks: true);
+    });
   }
 
   // a stream of posts from isar db
@@ -29,6 +50,7 @@ class IsarApi {
         UserSchema,
         StudentSchema,
         TeacherSchema,
+        StockSyncSchema,
       ],
       inspector: true,
     );
