@@ -20,7 +20,7 @@ class PwPage extends StatelessWidget {
   @override
   Widget build(Context context) {
     final body = Table(children: [
-      ///Table Header
+      ///TODOmake this more custom
       TableRow(children: [
         Text('DEC', style: TextStyle(fontWeight: FontWeight.bold)),
         Text(
@@ -121,9 +121,10 @@ class PwPage extends StatelessWidget {
                         Text(
                           'TAX ID',
                           style: TextStyle(
-                              fontBold: Font.helveticaBold(),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15),
+                            fontBold: Font.helveticaBold(),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
                         ),
                         SizedBox(height: 10),
                         Text(
@@ -140,8 +141,9 @@ class PwPage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
             decoration: BoxDecoration(
-                color: PdfColor.fromHex('#FFF'),
-                borderRadius: BorderRadius.circular(10)),
+              color: PdfColor.fromHex('#FFF'),
+              borderRadius: BorderRadius.circular(10),
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -177,27 +179,29 @@ class PwPage extends StatelessWidget {
           ),
           SizedBox(height: 15),
           Container(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
-              decoration: BoxDecoration(
-                  color: PdfColor.fromHex('#FFF'),
-                  borderRadius: BorderRadius.circular(10)),
-              child: body),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
+            decoration: BoxDecoration(
+                color: PdfColor.fromHex('#FFF'),
+                borderRadius: BorderRadius.circular(10)),
+            child: body,
+          ),
           SizedBox(height: 25),
           Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 22),
-              decoration: BoxDecoration(
-                  color: PdfColor.fromHex('#129F4B'),
-                  borderRadius: BorderRadius.circular(10)),
-              child: Text(
-                'Thanks for visiting us',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: PdfColor.fromHex('#FFF'),
-                    fontBold: Font.helveticaBold()),
-                textAlign: TextAlign.center,
-              )),
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 22),
+            decoration: BoxDecoration(
+                color: PdfColor.fromHex('#129F4B'),
+                borderRadius: BorderRadius.circular(10)),
+            child: Text(
+              'Thanks for visiting us',
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: PdfColor.fromHex('#FFF'),
+                  fontBold: Font.helveticaBold()),
+              textAlign: TextAlign.center,
+            ),
+          ),
         ],
       ),
     );

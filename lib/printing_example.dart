@@ -184,31 +184,32 @@ class _PrintigExampleState extends State<PrintigExample> {
               SizedBox(
                 width: double.infinity,
                 child: DataTable(
-                    dividerThickness: 1,
-                    headingRowHeight: 45,
-                    headingTextStyle: const TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10)),
-                    columns: const <DataColumn>[
-                      DataColumn(
-                        label: Text(
-                          'DEC',
-                        ),
+                  dividerThickness: 1,
+                  headingRowHeight: 45,
+                  headingTextStyle: const TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.black),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)),
+                  columns: const <DataColumn>[
+                    DataColumn(
+                      label: Text(
+                        'DEC',
                       ),
-                      DataColumn(
-                        label: Text(
-                          'ATM',
-                        ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'ATM',
                       ),
-                      DataColumn(
-                        label: Text(
-                          'PRICE',
-                        ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'PRICE',
                       ),
-                    ],
-                    rows: dataRows),
+                    ),
+                  ],
+                  rows: dataRows,
+                ),
               ),
             ],
           ),
