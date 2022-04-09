@@ -76,22 +76,30 @@ class OmniPrinter {
     throw Exception('Not implemented');
   }
 
-  Future<Uint8List> generateDoc() {
+  // Uint8List
+  Future<void> generateDoc({String email = "info@yegobox.com"}) async {
     doc.addPage(
       pw.Page(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
           return PwPage(
-              date: 'March 02, 2022',
-              info: 'Invoice#223393',
-              taxID: 'IKSZHZOZ234EDLE3A',
-              receiverName: 'Always Good Apps, LLC',
-              receiverMail: 'martinosoyen@gmail.com',
-              receiverPhone: '+1(233)2304-1223');
+            date: 'March 02, 2022',
+            info: 'Invoice#223393',
+            taxID: 'IKSZHZOZ234EDLE3A',
+            receiverName: 'Always Good Apps, LLC',
+            receiverMail: 'martinosoyen@gmail.com',
+            receiverPhone: '+1(233)2304-1223',
+          );
         },
       ),
     );
-    return doc.save();
+    await Printing.sharePdf(
+      bytes: await doc.save(),
+      filename: 'receipt.pdf',
+      subject: "receipt",
+      body: "Thank you for visinting us",
+      emails: [email],
+    );
   }
 
   Future<void> shareDoc() async {

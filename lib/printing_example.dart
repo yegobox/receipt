@@ -15,7 +15,7 @@ class _PrintigExampleState extends State<PrintigExample> {
   @override
   void initState() {
     printer = OmniPrinter();
-    printer.generateDoc();
+    // printer.generateDoc();
     super.initState();
   }
 
@@ -78,7 +78,7 @@ class _PrintigExampleState extends State<PrintigExample> {
                   elevation: 0, shape: const StadiumBorder()),
               child: const Text('PRINT NOW'),
               onPressed: () async {
-                await printer.shareDoc();
+                await printer.generateDoc();
                 // await printer.autoPrint();
               },
             ),
