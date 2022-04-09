@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:receipt/omni_printer.dart';
 
-class PrintingModel extends StatefulWidget {
-  const PrintingModel({Key? key}) : super(key: key);
+class PrintigExample extends StatefulWidget {
+  const PrintigExample({Key? key}) : super(key: key);
 
   @override
-  State<PrintingModel> createState() => _PrintingModelState();
+  State<PrintigExample> createState() => _PrintigExampleState();
 }
 
-class _PrintingModelState extends State<PrintingModel> {
+class _PrintigExampleState extends State<PrintigExample> {
   late OmniPrinter printer;
 
   @override
