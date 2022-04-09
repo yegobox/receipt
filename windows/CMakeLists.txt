@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(isar_demo LANGUAGES CXX)
+project(receipt LANGUAGES CXX)
 
-set(BINARY_NAME "isar_demo")
+set(BINARY_NAME "receipt")
 
 cmake_policy(SET CMP0063 NEW)
 

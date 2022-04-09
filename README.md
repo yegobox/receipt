@@ -1,4 +1,4 @@
-# isar_demo
+# receipt
 
 A new Flutter project.
 

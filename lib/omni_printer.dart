@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
-import 'package:isar_demo/pw_page.dart';
+import 'package:receipt/pw_page.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';

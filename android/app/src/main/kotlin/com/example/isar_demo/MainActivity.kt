@@ -1,4 +1,4 @@
-package com.example.isar_demo
+package com.example.receipt
 
 import io.flutter.embedding.android.FlutterActivity
 

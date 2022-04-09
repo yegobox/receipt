@@ -1,6 +1,6 @@
 {
-    "name": "isar_demo",
-    "short_name": "isar_demo",
+    "name": "receipt",
+    "short_name": "receipt",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

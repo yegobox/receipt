@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:isar_demo/omni_printer.dart';
+import 'package:receipt/omni_printer.dart';
 
 class PrintingModel extends StatefulWidget {
   const PrintingModel({Key? key}) : super(key: key);
