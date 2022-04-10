@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="E:\demos\experiments\isar_demo\build\windows\pdfium-download\CMakeFiles\b2ab1482680d7735214e6c838a525f45\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{3C2223E4-CE93-360A-8AC4-B9260E3442F7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "E:/demos/experiments/isar_demo/build/windows/pdfium-download/CMakeFiles/pdfium-download"
+		},
+		{
+			"file" : "E:/demos/experiments/isar_demo/build/windows/pdfium-download/CMakeFiles/b2ab1482680d7735214e6c838a525f45/pdfium-download.rule"
+		},
+		{
+			"file" : "E:/demos/experiments/isar_demo/build/windows/pdfium-download/CMakeFiles/275accf4ace74dd624a8b83d75ef80fe/pdfium-download-complete.rule"
+		},
+		{
+			"file" : "E:/demos/experiments/isar_demo/build/windows/pdfium-download/CMakeFiles/e8083a879344a502121019429d6be07b/pdfium-download-build.rule"
+		},
+		{
+			"file" : "E:/demos/experiments/isar_demo/build/windows/pdfium-download/CMakeFiles/e8083a879344a502121019429d6be07b/pdfium-download-configure.rule"
+		},
+		{
+			"file" : "E:/demos/experiments/isar_demo/build/windows/pdfium-download/CMakeFiles/e8083a879344a502121019429d6be07b/pdfium-download-download.rule"
+		},
+		{
+			"file" : "E:/demos/experiments/isar_demo/build/windows/pdfium-download/CMakeFiles/e8083a879344a502121019429d6be07b/pdfium-download-install.rule"
+		},
+		{
+			"file" : "E:/demos/experiments/isar_demo/build/windows/pdfium-download/CMakeFiles/e8083a879344a502121019429d6be07b/pdfium-download-mkdir.rule"
+		},
+		{
+			"file" : "E:/demos/experiments/isar_demo/build/windows/pdfium-download/CMakeFiles/e8083a879344a502121019429d6be07b/pdfium-download-patch.rule"
+		},
+		{
+			"file" : "E:/demos/experiments/isar_demo/build/windows/pdfium-download/CMakeFiles/e8083a879344a502121019429d6be07b/pdfium-download-test.rule"
+		},
+		{
+			"file" : "E:/demos/experiments/isar_demo/build/windows/pdfium-download/CMakeFiles/e8083a879344a502121019429d6be07b/pdfium-download-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"pdfium-download"
+		],
+		"name" : "pdfium-download"
+	}
+}

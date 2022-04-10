@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="E:\demos\experiments\isar_demo\windows\flutter\ephemeral\.plugin_symlinks\isar_flutter_libs\windows\isar_flutter_libs_plugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\demos\experiments\isar_demo\windows\flutter\ephemeral\.plugin_symlinks\isar_flutter_libs\windows\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{EE6FAA44-5EDA-3E0A-8B38-17D99CCC92C1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

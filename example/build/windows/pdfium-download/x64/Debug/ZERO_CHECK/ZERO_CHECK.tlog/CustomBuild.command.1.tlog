@@ -1,0 +1,10 @@
+^E:\DEMOS\EXPERIMENTS\ISAR_DEMO\BUILD\WINDOWS\PDFIUM-DOWNLOAD\CMAKEFILES\B2AB1482680D7735214E6C838A525F45\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:/demos/experiments/isar_demo/build/windows/pdfium-download -BE:/demos/experiments/isar_demo/build/windows/pdfium-download --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file E:/demos/experiments/isar_demo/build/windows/pdfium-download/pdfium-download.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

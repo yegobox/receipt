@@ -1,7 +1,7 @@
 name: receipt
 description: A new Flutter package project.
 version: 0.0.1
-# homepage:
+repository: "https://github.com/yegobox/receipt"
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -10,7 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  printing: ^5.3.0
+  printing: ^5.7.5
+  pdf: ^3.7.3
   open_file: ^3.2.1
   gap: ^2.0.0
 

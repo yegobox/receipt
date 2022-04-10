@@ -1,0 +1,28 @@
+^E:\DEMOS\EXPERIMENTS\ISAR_DEMO\BUILD\WINDOWS\CMAKEFILES\4A4024E06C1B9F9CB13C9F97D8DFC557\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\Users\RichardMuragijimana\flutter PROJECT_DIR=E:\demos\experiments\isar_demo FLUTTER_ROOT=C:\Users\RichardMuragijimana\flutter FLUTTER_EPHEMERAL_DIR=E:\demos\experiments\isar_demo\windows\flutter\ephemeral PROJECT_DIR=E:\demos\experiments\isar_demo FLUTTER_TARGET=E:\demos\experiments\isar_demo\lib\main.dart DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ== DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=E:\demos\experiments\isar_demo\.dart_tool\package_config.json C:/Users/RichardMuragijimana/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^E:\DEMOS\EXPERIMENTS\ISAR_DEMO\BUILD\WINDOWS\CMAKEFILES\369DE7BF30C71926852F4D920C098B41\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^E:\DEMOS\EXPERIMENTS\ISAR_DEMO\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:/demos/experiments/isar_demo/windows -BE:/demos/experiments/isar_demo/build/windows --check-stamp-file E:/demos/experiments/isar_demo/build/windows/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

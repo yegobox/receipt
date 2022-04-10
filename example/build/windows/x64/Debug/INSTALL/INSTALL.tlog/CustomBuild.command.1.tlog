@@ -1,0 +1,10 @@
+^E:\DEMOS\EXPERIMENTS\ISAR_DEMO\BUILD\WINDOWS\CMAKEFILES\75D3FEEDF7713F414E95E7E948D9FF45\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

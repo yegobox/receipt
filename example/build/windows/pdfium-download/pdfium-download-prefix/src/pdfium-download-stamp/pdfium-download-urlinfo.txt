@@ -1,0 +1,3 @@
+repository='external project URL'
+module='https://github.com/bblanchon/pdfium-binaries/releases/download/chromium/4706/pdfium-win-x64.tgz'
+tag=''

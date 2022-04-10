@@ -1,0 +1,10 @@
+^E:\DEMOS\EXPERIMENTS\ISAR_DEMO\WINDOWS\FLUTTER\EPHEMERAL\.PLUGIN_SYMLINKS\URL_LAUNCHER_WINDOWS\WINDOWS\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:/demos/experiments/isar_demo/windows -BE:/demos/experiments/isar_demo/build/windows --check-stamp-file E:/demos/experiments/isar_demo/build/windows/plugins/url_launcher_windows/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
