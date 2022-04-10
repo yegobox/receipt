@@ -14,6 +14,9 @@ class Print {
         Text(item.name),
         Text(item.price.toString()),
       ]));
+      rows.add(TableRow(children: [
+        SizedBox(height: 10),
+      ]));
     }
     return rows;
   }
@@ -39,9 +42,9 @@ class Print {
       email: email,
       rows: <TableRow>[
         TableRow(children: [
-          Text('DEC', style: TextStyle(fontWeight: FontWeight.bold)),
+          Text('Qty', style: TextStyle(fontWeight: FontWeight.bold)),
           Text(
-            'ATM',
+            'Product',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           Text('PRICE', style: TextStyle(fontWeight: FontWeight.bold)),

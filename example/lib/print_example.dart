@@ -22,7 +22,7 @@ class _PrintExampleState extends State<PrintExample> {
                 print.feed(
                   [
                     OrderItem()
-                      ..name = 'Test'
+                      ..name = 'Beans'
                       ..price = 100
                       ..count = 1
                       ..discount = 10
@@ -33,7 +33,7 @@ class _PrintExampleState extends State<PrintExample> {
                       ..orderId = 1
                       ..variantId = 1,
                     OrderItem()
-                      ..name = 'Test'
+                      ..name = 'Mango'
                       ..price = 100
                       ..count = 1
                       ..discount = 10
@@ -56,7 +56,7 @@ class _PrintExampleState extends State<PrintExample> {
                   email: "info@yegobox.com",
                 );
               },
-              child: const Text('Print Example'),
+              child: const Text('Print Now'),
             ),
           )
         ],

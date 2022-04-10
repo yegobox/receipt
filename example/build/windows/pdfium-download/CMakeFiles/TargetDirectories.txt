@@ -1,3 +1,0 @@
-E:/demos/experiments/isar_demo/build/windows/pdfium-download/CMakeFiles/pdfium-download.dir
-E:/demos/experiments/isar_demo/build/windows/pdfium-download/CMakeFiles/ALL_BUILD.dir
-E:/demos/experiments/isar_demo/build/windows/pdfium-download/CMakeFiles/ZERO_CHECK.dir
