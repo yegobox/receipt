@@ -23,9 +23,7 @@ dependencies:
   url_launcher: ^6.0.6
   intl: ^0.17.0
   gap: ^2.0.0
-  receipt:
-  # receipt:
-  #   path: ".."
+  receipt: ^1.0.0-dev.2
 
 dev_dependencies:
   flutter_test:

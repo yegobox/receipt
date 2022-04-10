@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'printing_example.dart';
+import 'print_example.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MaterialApp(home: PrintigExample()));
+  runApp(const MaterialApp(home: PrintExample()));
 }

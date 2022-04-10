@@ -1,3 +1,5 @@
+library receipt;
+
 import 'package:pdf/widgets.dart';
 import 'package:pdf/pdf.dart';
 
