@@ -1,6 +1,7 @@
 name: receipt_example
 description: A printing receipt of invoices.
 
+publish_to: "none"
 version: 0.0.1
 
 environment:
