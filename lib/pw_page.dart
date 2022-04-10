@@ -8,72 +8,20 @@ class PwPage extends StatelessWidget {
   final String? receiverName;
   final String? receiverMail;
   final String? receiverPhone;
-
+  final List<TableRow> rows;
   PwPage(
       {this.date,
       this.info,
       this.taxID,
       this.receiverName,
       this.receiverMail,
-      this.receiverPhone});
+      this.receiverPhone,
+      required this.rows});
 
   @override
   Widget build(Context context) {
     final body = Table(children: [
-      ///TODOmake this more custom
-      TableRow(children: [
-        Text('DEC', style: TextStyle(fontWeight: FontWeight.bold)),
-        Text(
-          'ATM',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        Text('PRICE', style: TextStyle(fontWeight: FontWeight.bold)),
-      ]),
-
-      TableRow(children: [
-        SizedBox(height: 10),
-      ]),
-
-      TableRow(children: [
-        Text('1'),
-        Text('Coffee'),
-        Text('\$1.00'),
-      ]),
-
-      TableRow(children: [
-        SizedBox(height: 8),
-      ]),
-
-      TableRow(children: [
-        Text('1'),
-        Text('Coffee'),
-        Text('\$1.00'),
-      ]),
-
-      TableRow(children: [
-        SizedBox(height: 8),
-      ]),
-
-      TableRow(children: [
-        Text('1'),
-        Text('Coffee'),
-        Text('\$1.00'),
-      ]),
-
-      TableRow(children: [
-        SizedBox(height: 12),
-      ]),
-
-      /// show total
-      TableRow(children: [
-        Text(
-          'TOTAL',
-          style: TextStyle(
-              color: PdfColor.fromHex('#F90006'), fontWeight: FontWeight.bold),
-        ),
-        SizedBox(),
-        Text('\$3,000', style: TextStyle(fontWeight: FontWeight.bold))
-      ]),
+      ...rows,
     ]);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
