@@ -459,7 +459,7 @@
     },
     {
       "name": "receipt",
-      "rootUri": "../../",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/receipt-0.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
@@ -638,7 +638,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-04-10T09:32:38.662351Z",
+  "generated": "2022-04-10T09:42:27.715390Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }

@@ -24,7 +24,8 @@ dependencies:
   intl: ^0.17.0
   gap: ^2.0.0
   receipt:
-    path: ".."
+  # receipt:
+  #   path: ".."
 
 dev_dependencies:
   flutter_test:
