@@ -1,6 +1,6 @@
 name: receipt
 description: A new receipt package for print
-version: 0.0.1
+version: 0.1.0
 repository: "https://github.com/yegobox/receipt"
 
 environment:
@@ -14,6 +14,7 @@ dependencies:
   pdf: ^3.7.3
   open_file: ^3.2.1
   gap: ^2.0.0
+  flipper_models: ^0.0.1-dev.5
 
 dev_dependencies:
   flutter_test:
