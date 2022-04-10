@@ -1,20 +1,26 @@
-import 'package:flutter/material.dart' as m;
-
 import 'package:pdf/widgets.dart';
 import 'package:pdf/pdf.dart';
 import 'package:receipt/omni_printer.dart';
 
-class ExampleTwo extends m.StatefulWidget {
-  const ExampleTwo({m.Key? key}) : super(key: key);
+class Print {
+  static List<TableRow> feed(List<Map<String, String>> list) {
+    List<TableRow> rows = [];
+    for (var element in list) {
+      rows.add(TableRow(children: [
+        Text(element['quantity']!, style: const TextStyle(fontSize: 5)),
+      ]));
+    }
+    return <TableRow>[
+      TableRow(children: [
+        Text('1'),
+        Text('Coffee'),
+        Text('\$1.00'),
+      ]),
+    ];
+  }
 
-  @override
-  m.State<ExampleTwo> createState() => _ExampleTwoState();
-}
-
-class _ExampleTwoState extends m.State<ExampleTwo> {
-  late OmniPrinter printer;
-  @override
-  void initState() {
+  static print() {
+    OmniPrinter printer;
     printer = OmniPrinter();
     printer.generateDoc(rows: <TableRow>[
       TableRow(children: [
@@ -71,13 +77,5 @@ class _ExampleTwoState extends m.State<ExampleTwo> {
         Text('\$3,000', style: TextStyle(fontWeight: FontWeight.bold))
       ])
     ]);
-    super.initState();
-  }
-
-  @override
-  m.Widget build(m.BuildContext context) {
-    return m.Container(
-      child: m.Center(child: m.Text("Printing example")),
-    );
   }
 }
