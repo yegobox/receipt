@@ -1,9 +1,10 @@
 library receipt;
 
-import 'package:flipper_models/isar_models.dart';
+// import 'package:flipper_models/isar_models.dart';
 import 'package:pdf/widgets.dart';
 import 'package:pdf/pdf.dart';
 import 'package:receipt/omni_printer.dart';
+import 'package:receipt/order_item.dart';
 
 class Print {
   List<TableRow> rows = [];
