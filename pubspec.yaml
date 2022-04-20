@@ -14,7 +14,7 @@ dependencies:
   pdf: ^3.7.3
   open_file: ^3.2.1
   gap: ^2.0.0
-  # flipper_models: ^0.0.1-dev.5
+  flipper_models: ^0.0.1-dev.5
   isar: ^2.2.0+1
   isar_flutter_libs: ^2.2.0+1
 
