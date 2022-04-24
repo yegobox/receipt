@@ -6,20 +6,16 @@ part of 'order_item.dart';
 // IsarCollectionGenerator
 // **************************************************************************
 
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_variable
 
 extension GetOrderItemCollection on Isar {
-  IsarCollection<OrderItem> get orderItems {
-    return getCollection('OrderItem');
-  }
+  IsarCollection<OrderItem> get orderItems => getCollection();
 }
 
-final OrderItemSchema = CollectionSchema(
+const OrderItemSchema = CollectionSchema(
   name: 'OrderItem',
   schema:
       '{"name":"OrderItem","idName":"id","properties":[{"name":"count","type":"Double"},{"name":"createdAt","type":"String"},{"name":"discount","type":"Double"},{"name":"name","type":"String"},{"name":"orderId","type":"Long"},{"name":"price","type":"Double"},{"name":"remainingStock","type":"Double"},{"name":"reported","type":"Bool"},{"name":"type","type":"String"},{"name":"updatedAt","type":"String"},{"name":"variantId","type":"Long"}],"indexes":[],"links":[]}',
-  nativeAdapter: const _OrderItemNativeAdapter(),
-  webAdapter: const _OrderItemWebAdapter(),
   idName: 'id',
   propertyIds: {
     'count': 0,
@@ -36,282 +32,270 @@ final OrderItemSchema = CollectionSchema(
   },
   listProperties: {},
   indexIds: {},
-  indexTypes: {},
+  indexValueTypes: {},
   linkIds: {},
-  backlinkIds: {},
-  linkedCollections: [],
-  getId: (obj) {
-    if (obj.id == Isar.autoIncrement) {
-      return null;
-    } else {
-      return obj.id;
-    }
-  },
-  setId: (obj, id) => obj.id = id,
-  getLinks: (obj) => [],
-  version: 2,
+  backlinkLinkNames: {},
+  getId: _orderItemGetId,
+  setId: _orderItemSetId,
+  getLinks: _orderItemGetLinks,
+  attachLinks: _orderItemAttachLinks,
+  serializeNative: _orderItemSerializeNative,
+  deserializeNative: _orderItemDeserializeNative,
+  deserializePropNative: _orderItemDeserializePropNative,
+  serializeWeb: _orderItemSerializeWeb,
+  deserializeWeb: _orderItemDeserializeWeb,
+  deserializePropWeb: _orderItemDeserializePropWeb,
+  version: 3,
 );
 
-class _OrderItemWebAdapter extends IsarWebTypeAdapter<OrderItem> {
-  const _OrderItemWebAdapter();
-
-  @override
-  Object serialize(IsarCollection<OrderItem> collection, OrderItem object) {
-    final jsObj = IsarNative.newJsObject();
-    IsarNative.jsObjectSet(jsObj, 'count', object.count);
-    IsarNative.jsObjectSet(jsObj, 'createdAt', object.createdAt);
-    IsarNative.jsObjectSet(jsObj, 'discount', object.discount);
-    IsarNative.jsObjectSet(jsObj, 'id', object.id);
-    IsarNative.jsObjectSet(jsObj, 'name', object.name);
-    IsarNative.jsObjectSet(jsObj, 'orderId', object.orderId);
-    IsarNative.jsObjectSet(jsObj, 'price', object.price);
-    IsarNative.jsObjectSet(jsObj, 'remainingStock', object.remainingStock);
-    IsarNative.jsObjectSet(jsObj, 'reported', object.reported);
-    IsarNative.jsObjectSet(jsObj, 'type', object.type);
-    IsarNative.jsObjectSet(jsObj, 'updatedAt', object.updatedAt);
-    IsarNative.jsObjectSet(jsObj, 'variantId', object.variantId);
-    return jsObj;
+int? _orderItemGetId(OrderItem object) {
+  if (object.id == Isar.autoIncrement) {
+    return null;
+  } else {
+    return object.id;
   }
-
-  @override
-  OrderItem deserialize(IsarCollection<OrderItem> collection, dynamic jsObj) {
-    final object = OrderItem();
-    object.count =
-        IsarNative.jsObjectGet(jsObj, 'count') ?? double.negativeInfinity;
-    object.createdAt = IsarNative.jsObjectGet(jsObj, 'createdAt') ?? '';
-    object.discount = IsarNative.jsObjectGet(jsObj, 'discount');
-    object.id = IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity;
-    object.name = IsarNative.jsObjectGet(jsObj, 'name') ?? '';
-    object.orderId =
-        IsarNative.jsObjectGet(jsObj, 'orderId') ?? double.negativeInfinity;
-    object.price =
-        IsarNative.jsObjectGet(jsObj, 'price') ?? double.negativeInfinity;
-    object.remainingStock = IsarNative.jsObjectGet(jsObj, 'remainingStock') ??
-        double.negativeInfinity;
-    object.reported = IsarNative.jsObjectGet(jsObj, 'reported') ?? false;
-    object.type = IsarNative.jsObjectGet(jsObj, 'type');
-    object.updatedAt = IsarNative.jsObjectGet(jsObj, 'updatedAt') ?? '';
-    object.variantId =
-        IsarNative.jsObjectGet(jsObj, 'variantId') ?? double.negativeInfinity;
-    return object;
-  }
-
-  @override
-  P deserializeProperty<P>(Object jsObj, String propertyName) {
-    switch (propertyName) {
-      case 'count':
-        return (IsarNative.jsObjectGet(jsObj, 'count') ??
-            double.negativeInfinity) as P;
-      case 'createdAt':
-        return (IsarNative.jsObjectGet(jsObj, 'createdAt') ?? '') as P;
-      case 'discount':
-        return (IsarNative.jsObjectGet(jsObj, 'discount')) as P;
-      case 'id':
-        return (IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity)
-            as P;
-      case 'name':
-        return (IsarNative.jsObjectGet(jsObj, 'name') ?? '') as P;
-      case 'orderId':
-        return (IsarNative.jsObjectGet(jsObj, 'orderId') ??
-            double.negativeInfinity) as P;
-      case 'price':
-        return (IsarNative.jsObjectGet(jsObj, 'price') ??
-            double.negativeInfinity) as P;
-      case 'remainingStock':
-        return (IsarNative.jsObjectGet(jsObj, 'remainingStock') ??
-            double.negativeInfinity) as P;
-      case 'reported':
-        return (IsarNative.jsObjectGet(jsObj, 'reported') ?? false) as P;
-      case 'type':
-        return (IsarNative.jsObjectGet(jsObj, 'type')) as P;
-      case 'updatedAt':
-        return (IsarNative.jsObjectGet(jsObj, 'updatedAt') ?? '') as P;
-      case 'variantId':
-        return (IsarNative.jsObjectGet(jsObj, 'variantId') ??
-            double.negativeInfinity) as P;
-      default:
-        throw 'Illegal propertyName';
-    }
-  }
-
-  @override
-  void attachLinks(Isar isar, int id, OrderItem object) {}
 }
 
-class _OrderItemNativeAdapter extends IsarNativeTypeAdapter<OrderItem> {
-  const _OrderItemNativeAdapter();
-
-  @override
-  void serialize(IsarCollection<OrderItem> collection, IsarRawObject rawObj,
-      OrderItem object, int staticSize, List<int> offsets, AdapterAlloc alloc) {
-    var dynamicSize = 0;
-    final value0 = object.count;
-    final _count = value0;
-    final value1 = object.createdAt;
-    final _createdAt = IsarBinaryWriter.utf8Encoder.convert(value1);
-    dynamicSize += (_createdAt.length) as int;
-    final value2 = object.discount;
-    final _discount = value2;
-    final value3 = object.name;
-    final _name = IsarBinaryWriter.utf8Encoder.convert(value3);
-    dynamicSize += (_name.length) as int;
-    final value4 = object.orderId;
-    final _orderId = value4;
-    final value5 = object.price;
-    final _price = value5;
-    final value6 = object.remainingStock;
-    final _remainingStock = value6;
-    final value7 = object.reported;
-    final _reported = value7;
-    final value8 = object.type;
-    IsarUint8List? _type;
-    if (value8 != null) {
-      _type = IsarBinaryWriter.utf8Encoder.convert(value8);
-    }
-    dynamicSize += (_type?.length ?? 0) as int;
-    final value9 = object.updatedAt;
-    final _updatedAt = IsarBinaryWriter.utf8Encoder.convert(value9);
-    dynamicSize += (_updatedAt.length) as int;
-    final value10 = object.variantId;
-    final _variantId = value10;
-    final size = staticSize + dynamicSize;
-
-    rawObj.buffer = alloc(size);
-    rawObj.buffer_length = size;
-    final buffer = IsarNative.bufAsBytes(rawObj.buffer, size);
-    final writer = IsarBinaryWriter(buffer, staticSize);
-    writer.writeDouble(offsets[0], _count);
-    writer.writeBytes(offsets[1], _createdAt);
-    writer.writeDouble(offsets[2], _discount);
-    writer.writeBytes(offsets[3], _name);
-    writer.writeLong(offsets[4], _orderId);
-    writer.writeDouble(offsets[5], _price);
-    writer.writeDouble(offsets[6], _remainingStock);
-    writer.writeBool(offsets[7], _reported);
-    writer.writeBytes(offsets[8], _type);
-    writer.writeBytes(offsets[9], _updatedAt);
-    writer.writeLong(offsets[10], _variantId);
-  }
-
-  @override
-  OrderItem deserialize(IsarCollection<OrderItem> collection, int id,
-      IsarBinaryReader reader, List<int> offsets) {
-    final object = OrderItem();
-    object.count = reader.readDouble(offsets[0]);
-    object.createdAt = reader.readString(offsets[1]);
-    object.discount = reader.readDoubleOrNull(offsets[2]);
-    object.id = id;
-    object.name = reader.readString(offsets[3]);
-    object.orderId = reader.readLong(offsets[4]);
-    object.price = reader.readDouble(offsets[5]);
-    object.remainingStock = reader.readDouble(offsets[6]);
-    object.reported = reader.readBool(offsets[7]);
-    object.type = reader.readStringOrNull(offsets[8]);
-    object.updatedAt = reader.readString(offsets[9]);
-    object.variantId = reader.readLong(offsets[10]);
-    return object;
-  }
-
-  @override
-  P deserializeProperty<P>(
-      int id, IsarBinaryReader reader, int propertyIndex, int offset) {
-    switch (propertyIndex) {
-      case -1:
-        return id as P;
-      case 0:
-        return (reader.readDouble(offset)) as P;
-      case 1:
-        return (reader.readString(offset)) as P;
-      case 2:
-        return (reader.readDoubleOrNull(offset)) as P;
-      case 3:
-        return (reader.readString(offset)) as P;
-      case 4:
-        return (reader.readLong(offset)) as P;
-      case 5:
-        return (reader.readDouble(offset)) as P;
-      case 6:
-        return (reader.readDouble(offset)) as P;
-      case 7:
-        return (reader.readBool(offset)) as P;
-      case 8:
-        return (reader.readStringOrNull(offset)) as P;
-      case 9:
-        return (reader.readString(offset)) as P;
-      case 10:
-        return (reader.readLong(offset)) as P;
-      default:
-        throw 'Illegal propertyIndex';
-    }
-  }
-
-  @override
-  void attachLinks(Isar isar, int id, OrderItem object) {}
+void _orderItemSetId(OrderItem object, int id) {
+  object.id = id;
 }
+
+List<IsarLinkBase> _orderItemGetLinks(OrderItem object) {
+  return [];
+}
+
+void _orderItemSerializeNative(
+    IsarCollection<OrderItem> collection,
+    IsarRawObject rawObj,
+    OrderItem object,
+    int staticSize,
+    List<int> offsets,
+    AdapterAlloc alloc) {
+  var dynamicSize = 0;
+  final value0 = object.count;
+  final _count = value0;
+  final value1 = object.createdAt;
+  final _createdAt = IsarBinaryWriter.utf8Encoder.convert(value1);
+  dynamicSize += (_createdAt.length) as int;
+  final value2 = object.discount;
+  final _discount = value2;
+  final value3 = object.name;
+  final _name = IsarBinaryWriter.utf8Encoder.convert(value3);
+  dynamicSize += (_name.length) as int;
+  final value4 = object.orderId;
+  final _orderId = value4;
+  final value5 = object.price;
+  final _price = value5;
+  final value6 = object.remainingStock;
+  final _remainingStock = value6;
+  final value7 = object.reported;
+  final _reported = value7;
+  final value8 = object.type;
+  IsarUint8List? _type;
+  if (value8 != null) {
+    _type = IsarBinaryWriter.utf8Encoder.convert(value8);
+  }
+  dynamicSize += (_type?.length ?? 0) as int;
+  final value9 = object.updatedAt;
+  final _updatedAt = IsarBinaryWriter.utf8Encoder.convert(value9);
+  dynamicSize += (_updatedAt.length) as int;
+  final value10 = object.variantId;
+  final _variantId = value10;
+  final size = staticSize + dynamicSize;
+
+  rawObj.buffer = alloc(size);
+  rawObj.buffer_length = size;
+  final buffer = IsarNative.bufAsBytes(rawObj.buffer, size);
+  final writer = IsarBinaryWriter(buffer, staticSize);
+  writer.writeDouble(offsets[0], _count);
+  writer.writeBytes(offsets[1], _createdAt);
+  writer.writeDouble(offsets[2], _discount);
+  writer.writeBytes(offsets[3], _name);
+  writer.writeLong(offsets[4], _orderId);
+  writer.writeDouble(offsets[5], _price);
+  writer.writeDouble(offsets[6], _remainingStock);
+  writer.writeBool(offsets[7], _reported);
+  writer.writeBytes(offsets[8], _type);
+  writer.writeBytes(offsets[9], _updatedAt);
+  writer.writeLong(offsets[10], _variantId);
+}
+
+OrderItem _orderItemDeserializeNative(IsarCollection<OrderItem> collection,
+    int id, IsarBinaryReader reader, List<int> offsets) {
+  final object = OrderItem();
+  object.count = reader.readDouble(offsets[0]);
+  object.createdAt = reader.readString(offsets[1]);
+  object.discount = reader.readDoubleOrNull(offsets[2]);
+  object.id = id;
+  object.name = reader.readString(offsets[3]);
+  object.orderId = reader.readLong(offsets[4]);
+  object.price = reader.readDouble(offsets[5]);
+  object.remainingStock = reader.readDouble(offsets[6]);
+  object.reported = reader.readBool(offsets[7]);
+  object.type = reader.readStringOrNull(offsets[8]);
+  object.updatedAt = reader.readString(offsets[9]);
+  object.variantId = reader.readLong(offsets[10]);
+  return object;
+}
+
+P _orderItemDeserializePropNative<P>(
+    int id, IsarBinaryReader reader, int propertyIndex, int offset) {
+  switch (propertyIndex) {
+    case -1:
+      return id as P;
+    case 0:
+      return (reader.readDouble(offset)) as P;
+    case 1:
+      return (reader.readString(offset)) as P;
+    case 2:
+      return (reader.readDoubleOrNull(offset)) as P;
+    case 3:
+      return (reader.readString(offset)) as P;
+    case 4:
+      return (reader.readLong(offset)) as P;
+    case 5:
+      return (reader.readDouble(offset)) as P;
+    case 6:
+      return (reader.readDouble(offset)) as P;
+    case 7:
+      return (reader.readBool(offset)) as P;
+    case 8:
+      return (reader.readStringOrNull(offset)) as P;
+    case 9:
+      return (reader.readString(offset)) as P;
+    case 10:
+      return (reader.readLong(offset)) as P;
+    default:
+      throw 'Illegal propertyIndex';
+  }
+}
+
+dynamic _orderItemSerializeWeb(
+    IsarCollection<OrderItem> collection, OrderItem object) {
+  final jsObj = IsarNative.newJsObject();
+  IsarNative.jsObjectSet(jsObj, 'count', object.count);
+  IsarNative.jsObjectSet(jsObj, 'createdAt', object.createdAt);
+  IsarNative.jsObjectSet(jsObj, 'discount', object.discount);
+  IsarNative.jsObjectSet(jsObj, 'id', object.id);
+  IsarNative.jsObjectSet(jsObj, 'name', object.name);
+  IsarNative.jsObjectSet(jsObj, 'orderId', object.orderId);
+  IsarNative.jsObjectSet(jsObj, 'price', object.price);
+  IsarNative.jsObjectSet(jsObj, 'remainingStock', object.remainingStock);
+  IsarNative.jsObjectSet(jsObj, 'reported', object.reported);
+  IsarNative.jsObjectSet(jsObj, 'type', object.type);
+  IsarNative.jsObjectSet(jsObj, 'updatedAt', object.updatedAt);
+  IsarNative.jsObjectSet(jsObj, 'variantId', object.variantId);
+  return jsObj;
+}
+
+OrderItem _orderItemDeserializeWeb(
+    IsarCollection<OrderItem> collection, dynamic jsObj) {
+  final object = OrderItem();
+  object.count =
+      IsarNative.jsObjectGet(jsObj, 'count') ?? double.negativeInfinity;
+  object.createdAt = IsarNative.jsObjectGet(jsObj, 'createdAt') ?? '';
+  object.discount = IsarNative.jsObjectGet(jsObj, 'discount');
+  object.id = IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity;
+  object.name = IsarNative.jsObjectGet(jsObj, 'name') ?? '';
+  object.orderId =
+      IsarNative.jsObjectGet(jsObj, 'orderId') ?? double.negativeInfinity;
+  object.price =
+      IsarNative.jsObjectGet(jsObj, 'price') ?? double.negativeInfinity;
+  object.remainingStock = IsarNative.jsObjectGet(jsObj, 'remainingStock') ??
+      double.negativeInfinity;
+  object.reported = IsarNative.jsObjectGet(jsObj, 'reported') ?? false;
+  object.type = IsarNative.jsObjectGet(jsObj, 'type');
+  object.updatedAt = IsarNative.jsObjectGet(jsObj, 'updatedAt') ?? '';
+  object.variantId =
+      IsarNative.jsObjectGet(jsObj, 'variantId') ?? double.negativeInfinity;
+  return object;
+}
+
+P _orderItemDeserializePropWeb<P>(Object jsObj, String propertyName) {
+  switch (propertyName) {
+    case 'count':
+      return (IsarNative.jsObjectGet(jsObj, 'count') ?? double.negativeInfinity)
+          as P;
+    case 'createdAt':
+      return (IsarNative.jsObjectGet(jsObj, 'createdAt') ?? '') as P;
+    case 'discount':
+      return (IsarNative.jsObjectGet(jsObj, 'discount')) as P;
+    case 'id':
+      return (IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity)
+          as P;
+    case 'name':
+      return (IsarNative.jsObjectGet(jsObj, 'name') ?? '') as P;
+    case 'orderId':
+      return (IsarNative.jsObjectGet(jsObj, 'orderId') ??
+          double.negativeInfinity) as P;
+    case 'price':
+      return (IsarNative.jsObjectGet(jsObj, 'price') ?? double.negativeInfinity)
+          as P;
+    case 'remainingStock':
+      return (IsarNative.jsObjectGet(jsObj, 'remainingStock') ??
+          double.negativeInfinity) as P;
+    case 'reported':
+      return (IsarNative.jsObjectGet(jsObj, 'reported') ?? false) as P;
+    case 'type':
+      return (IsarNative.jsObjectGet(jsObj, 'type')) as P;
+    case 'updatedAt':
+      return (IsarNative.jsObjectGet(jsObj, 'updatedAt') ?? '') as P;
+    case 'variantId':
+      return (IsarNative.jsObjectGet(jsObj, 'variantId') ??
+          double.negativeInfinity) as P;
+    default:
+      throw 'Illegal propertyName';
+  }
+}
+
+void _orderItemAttachLinks(IsarCollection col, int id, OrderItem object) {}
 
 extension OrderItemQueryWhereSort
     on QueryBuilder<OrderItem, OrderItem, QWhere> {
   QueryBuilder<OrderItem, OrderItem, QAfterWhere> anyId() {
-    return addWhereClauseInternal(const WhereClause(indexName: null));
+    return addWhereClauseInternal(const IdWhereClause.any());
   }
 }
 
 extension OrderItemQueryWhere
     on QueryBuilder<OrderItem, OrderItem, QWhereClause> {
   QueryBuilder<OrderItem, OrderItem, QAfterWhereClause> idEqualTo(int id) {
-    return addWhereClauseInternal(WhereClause(
-      indexName: null,
-      lower: [id],
+    return addWhereClauseInternal(IdWhereClause.between(
+      lower: id,
       includeLower: true,
-      upper: [id],
+      upper: id,
       includeUpper: true,
     ));
   }
 
   QueryBuilder<OrderItem, OrderItem, QAfterWhereClause> idNotEqualTo(int id) {
     if (whereSortInternal == Sort.asc) {
-      return addWhereClauseInternal(WhereClause(
-        indexName: null,
-        upper: [id],
-        includeUpper: false,
-      )).addWhereClauseInternal(WhereClause(
-        indexName: null,
-        lower: [id],
-        includeLower: false,
-      ));
+      return addWhereClauseInternal(
+        IdWhereClause.lessThan(upper: id, includeUpper: false),
+      ).addWhereClauseInternal(
+        IdWhereClause.greaterThan(lower: id, includeLower: false),
+      );
     } else {
-      return addWhereClauseInternal(WhereClause(
-        indexName: null,
-        lower: [id],
-        includeLower: false,
-      )).addWhereClauseInternal(WhereClause(
-        indexName: null,
-        upper: [id],
-        includeUpper: false,
-      ));
+      return addWhereClauseInternal(
+        IdWhereClause.greaterThan(lower: id, includeLower: false),
+      ).addWhereClauseInternal(
+        IdWhereClause.lessThan(upper: id, includeUpper: false),
+      );
     }
   }
 
-  QueryBuilder<OrderItem, OrderItem, QAfterWhereClause> idGreaterThan(
-    int id, {
-    bool include = false,
-  }) {
-    return addWhereClauseInternal(WhereClause(
-      indexName: null,
-      lower: [id],
-      includeLower: include,
-    ));
+  QueryBuilder<OrderItem, OrderItem, QAfterWhereClause> idGreaterThan(int id,
+      {bool include = false}) {
+    return addWhereClauseInternal(
+      IdWhereClause.greaterThan(lower: id, includeLower: include),
+    );
   }
 
-  QueryBuilder<OrderItem, OrderItem, QAfterWhereClause> idLessThan(
-    int id, {
-    bool include = false,
-  }) {
-    return addWhereClauseInternal(WhereClause(
-      indexName: null,
-      upper: [id],
-      includeUpper: include,
-    ));
+  QueryBuilder<OrderItem, OrderItem, QAfterWhereClause> idLessThan(int id,
+      {bool include = false}) {
+    return addWhereClauseInternal(
+      IdWhereClause.lessThan(upper: id, includeUpper: include),
+    );
   }
 
   QueryBuilder<OrderItem, OrderItem, QAfterWhereClause> idBetween(
@@ -320,11 +304,10 @@ extension OrderItemQueryWhere
     bool includeLower = true,
     bool includeUpper = true,
   }) {
-    return addWhereClauseInternal(WhereClause(
-      indexName: null,
-      lower: [lowerId],
+    return addWhereClauseInternal(IdWhereClause.between(
+      lower: lowerId,
       includeLower: includeLower,
-      upper: [upperId],
+      upper: upperId,
       includeUpper: includeUpper,
     ));
   }
@@ -1040,6 +1023,9 @@ extension OrderItemQueryFilter
     ));
   }
 }
+
+extension OrderItemQueryLinks
+    on QueryBuilder<OrderItem, OrderItem, QFilterCondition> {}
 
 extension OrderItemQueryWhereSortBy
     on QueryBuilder<OrderItem, OrderItem, QSortBy> {

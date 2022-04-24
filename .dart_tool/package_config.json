@@ -980,12 +980,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "freezed_annotation",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/freezed_annotation-1.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
       "name": "frontend_server_client",
       "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/frontend_server_client-2.1.2",
       "packageUri": "lib/",
@@ -1233,19 +1227,19 @@
     },
     {
       "name": "isar",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar-2.2.0+1",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar-2.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "isar_flutter_libs",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar_flutter_libs-2.2.0+1",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar_flutter_libs-2.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "isar_generator",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar_generator-2.2.0+1",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar_generator-2.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -2054,7 +2048,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-04-20T07:57:31.610381Z",
+  "generated": "2022-04-24T09:31:30.554612Z",
   "generator": "melos",
   "generatorVersion": "1.5.2"
 }

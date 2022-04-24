@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:receipt/order_item.dart';
+// import 'package:receipt/order_/item.dart';
 import 'package:receipt/print.dart';
-// import 'package:flipper_models/isar_models.dart';
+import 'package:flipper_models/isar_models.dart';
 
 class PrintExample extends StatefulWidget {
   const PrintExample({Key? key}) : super(key: key);
@@ -25,7 +25,7 @@ class _PrintExampleState extends State<PrintExample> {
                     OrderItem()
                       ..name = 'Beans'
                       ..price = 100
-                      ..count = 1
+                      ..qty = 1
                       ..discount = 10
                       ..remainingStock = 10
                       ..createdAt = '2020-01-01'
@@ -36,7 +36,7 @@ class _PrintExampleState extends State<PrintExample> {
                     OrderItem()
                       ..name = 'Mango'
                       ..price = 100
-                      ..count = 1
+                      ..qty = 1
                       ..discount = 10
                       ..remainingStock = 10
                       ..createdAt = '2020-01-01'
