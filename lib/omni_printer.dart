@@ -72,7 +72,14 @@ class OmniPrinter {
 
   // Uint8List
   Future<void> generateDoc({
-    String? date = "4/9/2020",
+
+    String brandName="Simba Supermarket",
+    String brandAddress="SIMBA CITY CENTER, Kigali Rwanda",
+    String brandTel="27131153",
+    String brandTIN="101587390",
+    String brandDescription="Simba Supermaket Stands for Quality Service",
+    String brandFooter="SIMBA Supermaket and Coffee Shop",
+    String date = "4/9/2020",
     String? info,
     String? taxId = "12331",
     String? receiverName = "Richie",
@@ -81,28 +88,40 @@ class OmniPrinter {
     String email = "info@yegobox.com",
     required List<TableRow> rows,
   }) async {
-    doc.addPage(
-      Page(
-        pageFormat: PdfPageFormat.a4,
-        build: (Context context) {
-          return PwPage(
-            date: date,
-            info: info,
-            taxID: taxId,
-            receiverName: receiverName,
-            receiverMail: receiverMail,
-            receiverPhone: receiverPhone,
-            rows: rows,
-          );
-        },
-      ),
-    );
-    await Printing.sharePdf(
-      bytes: await doc.save(),
-      filename: 'receipt.pdf',
-      subject: "receipt",
-      body: "Thank you for visinting us",
-      emails: [email],
-    );
+    try {
+      doc.addPage(
+        MultiPage(
+          pageFormat: PdfPageFormat.a4,
+          orientation: PageOrientation.portrait,
+          build: (context) {
+            return [
+                PwPage(
+              brandName: brandName,
+              brandAddress: brandAddress,
+              brandDescription: brandDescription,
+              brandTel: brandTel,
+              brandTIN: brandTIN,
+              brandFooter: brandFooter,
+              date: date,
+              info: info,
+              taxID: taxId,
+              receiverName: receiverName,
+              receiverMail: receiverMail,
+              receiverPhone: receiverPhone,
+              rows: rows,
+            )
+          ];}
+          ),
+      );
+      await Printing.sharePdf(
+        bytes: await doc.save(),
+        filename: 'receipt.pdf',
+        subject: "receipt",
+        body: "Thank you for visiting us",
+        emails: [email],
+      );
+    }catch(ex){
+      print(ex.toString());
+    }
   }
 }

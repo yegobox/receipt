@@ -9,8 +9,22 @@ class PwPage extends StatelessWidget {
   final String? receiverMail;
   final String? receiverPhone;
   final List<TableRow> rows;
+  final String? brandName;
+  final String? brandAddress;
+  final String? brandTel;
+  final String? brandTIN;
+  final String? brandDescription;
+  final String? brandFooter;
+
   PwPage(
-      {this.date,
+      {
+        this.brandName,
+        this.brandAddress,
+        this.brandTel,
+        this.brandTIN,
+        this.brandDescription,
+        this.brandFooter,
+        this.date,
       this.info,
       this.taxID,
       this.receiverName,
@@ -34,98 +48,79 @@ class PwPage extends StatelessWidget {
                 color: PdfColor.fromHex('#FFF'),
                 borderRadius: BorderRadius.circular(10)),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  date!,
+                  brandName!,
                   style: TextStyle(
                       font: Font.helvetica(),
                       fontBold: Font.helveticaBold(),
                       fontWeight: FontWeight.bold,
-                      fontSize: 20),
+                      fontSize: 18),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 3),
+                Text(
+                  brandAddress!,
+                  style: TextStyle(
+                      font: Font.helvetica(),
+                      fontBold: Font.helveticaBold(),
+                      fontSize: 16),
+                ),
+                SizedBox(height: 3),
+                Text(
+                  "Tel:"+brandTel!,
+                  style: TextStyle(
+                      font: Font.helvetica(),
+                      fontBold: Font.helveticaBold(),
+                      fontSize: 14),
+                ),
+                SizedBox(height: 3),
+                Divider(height: 1),
+                SizedBox(height: 3),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'INFO',
-                          style: TextStyle(
-                              fontBold: Font.helveticaBold(),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15),
-                        ),
-                        SizedBox(height: 10),
-                        Text(info!)
-                      ],
-                    ),
-                    SizedBox(width: 100),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'TAX ID',
-                          style: TextStyle(
-                            fontBold: Font.helveticaBold(),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          taxID!,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 15),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
-            decoration: BoxDecoration(
-              color: PdfColor.fromHex('#FFF'),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'TO',
+                      'TIN',
                       style: TextStyle(
                           fontBold: Font.helveticaBold(),
                           fontWeight: FontWeight.bold,
-                          fontSize: 15),
+                          fontSize: 14),
                     ),
-                    SizedBox(height: 10),
+
+                    SizedBox(width: 100),
                     Text(
-                      receiverName!,
-                      style: TextStyle(fontWeight: FontWeight.normal),
+                      brandTIN!,
+                      style: TextStyle(
+                        fontBold: Font.helveticaBold(),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
                     ),
-                    SizedBox(height: 8),
+
+                  ],
+                ),
+                SizedBox(height: 3),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                     Text(
-                      receiverMail!,
-                      style: const TextStyle(fontSize: 12),
+                      brandDescription!,
+                      style: TextStyle(
+                          fontBold: Font.helveticaBold(),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      receiverPhone!,
-                      style: const TextStyle(fontSize: 12),
-                    ),
+
                   ],
                 ),
               ],
             ),
           ),
-          SizedBox(height: 15),
+          SizedBox(height: 3),
+          Divider(height: 1),
+          SizedBox(height: 3),
+
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
             decoration: BoxDecoration(
@@ -133,19 +128,21 @@ class PwPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10)),
             child: body,
           ),
-          SizedBox(height: 25),
+          SizedBox(height: 3),
+          Divider(height: 1),
+          SizedBox(height: 3),
+
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 22),
             decoration: BoxDecoration(
-                color: PdfColor.fromHex('#129F4B'),
+                color: PdfColor.fromHex('#FFF'),
                 borderRadius: BorderRadius.circular(10)),
             child: Text(
-              'Thanks for visiting us',
+              'Thanks you for shopping from '+brandFooter!,
               style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: PdfColor.fromHex('#FFF'),
                   fontBold: Font.helveticaBold()),
               textAlign: TextAlign.center,
             ),
