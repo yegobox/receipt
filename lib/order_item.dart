@@ -8,7 +8,7 @@ class OrderItem {
   late String name;
   late int orderId;
   late int variantId;
-  late double count;
+  late double qty;
   late double price;
   late double? discount;
 

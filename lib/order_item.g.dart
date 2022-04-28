@@ -15,10 +15,10 @@ extension GetOrderItemCollection on Isar {
 const OrderItemSchema = CollectionSchema(
   name: 'OrderItem',
   schema:
-      '{"name":"OrderItem","idName":"id","properties":[{"name":"count","type":"Double"},{"name":"createdAt","type":"String"},{"name":"discount","type":"Double"},{"name":"name","type":"String"},{"name":"orderId","type":"Long"},{"name":"price","type":"Double"},{"name":"remainingStock","type":"Double"},{"name":"reported","type":"Bool"},{"name":"type","type":"String"},{"name":"updatedAt","type":"String"},{"name":"variantId","type":"Long"}],"indexes":[],"links":[]}',
+      '{"name":"OrderItem","idName":"id","properties":[{"name":"qty","type":"Double"},{"name":"createdAt","type":"String"},{"name":"discount","type":"Double"},{"name":"name","type":"String"},{"name":"orderId","type":"Long"},{"name":"price","type":"Double"},{"name":"remainingStock","type":"Double"},{"name":"reported","type":"Bool"},{"name":"type","type":"String"},{"name":"updatedAt","type":"String"},{"name":"variantId","type":"Long"}],"indexes":[],"links":[]}',
   idName: 'id',
   propertyIds: {
-    'count': 0,
+    'qty': 0,
     'createdAt': 1,
     'discount': 2,
     'name': 3,
@@ -72,7 +72,7 @@ void _orderItemSerializeNative(
     List<int> offsets,
     AdapterAlloc alloc) {
   var dynamicSize = 0;
-  final value0 = object.count;
+  final value0 = object.qty;
   final _count = value0;
   final value1 = object.createdAt;
   final _createdAt = IsarBinaryWriter.utf8Encoder.convert(value1);
@@ -123,7 +123,7 @@ void _orderItemSerializeNative(
 OrderItem _orderItemDeserializeNative(IsarCollection<OrderItem> collection,
     int id, IsarBinaryReader reader, List<int> offsets) {
   final object = OrderItem();
-  object.count = reader.readDouble(offsets[0]);
+  object.qty = reader.readDouble(offsets[0]);
   object.createdAt = reader.readString(offsets[1]);
   object.discount = reader.readDoubleOrNull(offsets[2]);
   object.id = id;
@@ -173,7 +173,7 @@ P _orderItemDeserializePropNative<P>(
 dynamic _orderItemSerializeWeb(
     IsarCollection<OrderItem> collection, OrderItem object) {
   final jsObj = IsarNative.newJsObject();
-  IsarNative.jsObjectSet(jsObj, 'count', object.count);
+  IsarNative.jsObjectSet(jsObj, 'qty', object.qty);
   IsarNative.jsObjectSet(jsObj, 'createdAt', object.createdAt);
   IsarNative.jsObjectSet(jsObj, 'discount', object.discount);
   IsarNative.jsObjectSet(jsObj, 'id', object.id);
@@ -191,8 +191,7 @@ dynamic _orderItemSerializeWeb(
 OrderItem _orderItemDeserializeWeb(
     IsarCollection<OrderItem> collection, dynamic jsObj) {
   final object = OrderItem();
-  object.count =
-      IsarNative.jsObjectGet(jsObj, 'count') ?? double.negativeInfinity;
+  object.qty = IsarNative.jsObjectGet(jsObj, 'qty') ?? double.negativeInfinity;
   object.createdAt = IsarNative.jsObjectGet(jsObj, 'createdAt') ?? '';
   object.discount = IsarNative.jsObjectGet(jsObj, 'discount');
   object.id = IsarNative.jsObjectGet(jsObj, 'id') ?? double.negativeInfinity;
@@ -213,8 +212,8 @@ OrderItem _orderItemDeserializeWeb(
 
 P _orderItemDeserializePropWeb<P>(Object jsObj, String propertyName) {
   switch (propertyName) {
-    case 'count':
-      return (IsarNative.jsObjectGet(jsObj, 'count') ?? double.negativeInfinity)
+    case 'qty':
+      return (IsarNative.jsObjectGet(jsObj, 'qty') ?? double.negativeInfinity)
           as P;
     case 'createdAt':
       return (IsarNative.jsObjectGet(jsObj, 'createdAt') ?? '') as P;
@@ -320,7 +319,7 @@ extension OrderItemQueryFilter
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.gt,
       include: false,
-      property: 'count',
+      property: 'qty',
       value: value,
     ));
   }
@@ -330,7 +329,7 @@ extension OrderItemQueryFilter
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.lt,
       include: false,
-      property: 'count',
+      property: 'qty',
       value: value,
     ));
   }
@@ -338,7 +337,7 @@ extension OrderItemQueryFilter
   QueryBuilder<OrderItem, OrderItem, QAfterFilterCondition> countBetween(
       double lower, double upper) {
     return addFilterConditionInternal(FilterCondition.between(
-      property: 'count',
+      property: 'qty',
       lower: lower,
       includeLower: false,
       upper: upper,
@@ -1030,11 +1029,11 @@ extension OrderItemQueryLinks
 extension OrderItemQueryWhereSortBy
     on QueryBuilder<OrderItem, OrderItem, QSortBy> {
   QueryBuilder<OrderItem, OrderItem, QAfterSortBy> sortByCount() {
-    return addSortByInternal('count', Sort.asc);
+    return addSortByInternal('qty', Sort.asc);
   }
 
   QueryBuilder<OrderItem, OrderItem, QAfterSortBy> sortByCountDesc() {
-    return addSortByInternal('count', Sort.desc);
+    return addSortByInternal('qty', Sort.desc);
   }
 
   QueryBuilder<OrderItem, OrderItem, QAfterSortBy> sortByCreatedAt() {
@@ -1129,11 +1128,11 @@ extension OrderItemQueryWhereSortBy
 extension OrderItemQueryWhereSortThenBy
     on QueryBuilder<OrderItem, OrderItem, QSortThenBy> {
   QueryBuilder<OrderItem, OrderItem, QAfterSortBy> thenByCount() {
-    return addSortByInternal('count', Sort.asc);
+    return addSortByInternal('qty', Sort.asc);
   }
 
   QueryBuilder<OrderItem, OrderItem, QAfterSortBy> thenByCountDesc() {
-    return addSortByInternal('count', Sort.desc);
+    return addSortByInternal('qty', Sort.desc);
   }
 
   QueryBuilder<OrderItem, OrderItem, QAfterSortBy> thenByCreatedAt() {
@@ -1228,7 +1227,7 @@ extension OrderItemQueryWhereSortThenBy
 extension OrderItemQueryWhereDistinct
     on QueryBuilder<OrderItem, OrderItem, QDistinct> {
   QueryBuilder<OrderItem, OrderItem, QDistinct> distinctByCount() {
-    return addDistinctByInternal('count');
+    return addDistinctByInternal('qty');
   }
 
   QueryBuilder<OrderItem, OrderItem, QDistinct> distinctByCreatedAt(
@@ -1283,7 +1282,7 @@ extension OrderItemQueryWhereDistinct
 extension OrderItemQueryProperty
     on QueryBuilder<OrderItem, OrderItem, QQueryProperty> {
   QueryBuilder<OrderItem, double, QQueryOperations> countProperty() {
-    return addPropertyNameInternal('count');
+    return addPropertyNameInternal('qty');
   }
 
   QueryBuilder<OrderItem, String, QQueryOperations> createdAtProperty() {
