@@ -24,6 +24,7 @@ dependencies:
   intl: ^0.17.0
   gap: ^2.0.0
   receipt: ^1.0.0-dev.2
+  qr_flutter: ^4.0.0
   # receipt:
   #   path: ..
 

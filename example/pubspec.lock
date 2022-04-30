@@ -1828,7 +1828,7 @@ packages:
     source: hosted
     version: "0.6.1"
   qr_flutter:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../../qr.flutter"
       relative: true

@@ -2,10 +2,9 @@ library receipt;
 
 import 'package:flipper_models/isar_models.dart';
 import 'package:pdf/widgets.dart';
-import 'package:pdf/pdf.dart';
-import 'package:printing/printing.dart';
 import 'package:receipt/omni_printer.dart';
 // import 'package:receipt/order_item.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class Print {
   DateTime dateTime = DateTime.now();
@@ -15,9 +14,12 @@ class Print {
   double totalItems = 0;
   List<TableRow> rows = [];
   ImageProvider? netImage;
-  Future<ImageProvider> receiptQr(String url) async {
-    netImage = await networkImage(url);
-    return netImage!;
+  Future<QrImageView> receiptQr(QrImageView url) async {
+    // imageFromAssetBundle(url.toString());
+    // the purpose of Qr code is when scanned can to the shop web address.
+    // netImage = await networkImage(url);
+    // netImage = await url
+    return url;
   }
 
   Future<List<TableRow>> feed(
@@ -56,9 +58,9 @@ class Print {
   print({
     required double grandTotal,
     required String currencySymbol,
-    required double totalTax,
+    required String totalTax,
     required double totalB,
-    required double totalB18,
+    required String totalB18,
     required double totalAEx,
     required double cash,
     required double received,
@@ -71,21 +73,15 @@ class Print {
     required String brandTIN,
     required String brandDescription,
     required String brandFooter,
-    required String info,
-    required String taxId,
     required String cashierName,
     required String payMode,
     required String bank,
     required String mrc,
     required String internalData,
     required String receiptSignature,
-    required String receiptQrCode,
-    required String receiverName,
-    required String receiverMail,
-    required String receiverPhone,
-    required String email,
+    required QrImageView receiptQrCode,
   }) {
-    receiptQr(receiptQrCode).then((value) {
+    receiptQr(receiptQrCode).then((qrCode) {
       OmniPrinter printer;
       printer = OmniPrinter();
       printer.generateDoc(
@@ -95,12 +91,6 @@ class Print {
         brandTel: brandTel,
         brandTIN: brandTIN,
         brandFooter: brandFooter,
-        info: info,
-        taxId: taxId,
-        receiverName: receiverName,
-        receiverMail: receiverMail,
-        receiverPhone: receiverPhone,
-        email: email,
         rows: <TableRow>[
           ...rows,
           TableRow(children: [
@@ -135,8 +125,7 @@ class Print {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(),
-            Text(totalB18.toString(),
-                style: TextStyle(fontWeight: FontWeight.bold))
+            Text(totalB18, style: TextStyle(fontWeight: FontWeight.bold))
           ]),
           TableRow(children: [
             Text(
@@ -153,8 +142,7 @@ class Print {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(),
-            Text(totalTax.toString(),
-                style: TextStyle(fontWeight: FontWeight.bold))
+            Text(totalTax, style: TextStyle(fontWeight: FontWeight.bold))
           ]),
           TableRow(children: [
             SizedBox(height: 1),
@@ -330,13 +318,14 @@ class Print {
           TableRow(children: [
             SizedBox(height: 1),
           ]),
-          TableRow(children: [
-            SizedBox(),
-            Center(
-              child: Image(netImage!, width: 100, height: 100),
-            ),
-            SizedBox(),
-          ]),
+          // TODO:disable Qr code for now.
+          // TableRow(children: [
+          //   SizedBox(),
+          //   Center(
+          //     child: Image(netImage!, width: 100, height: 100),
+          //   ),
+          //   SizedBox(),
+          // ]),
           TableRow(children: [
             SizedBox(height: 1),
           ]),
