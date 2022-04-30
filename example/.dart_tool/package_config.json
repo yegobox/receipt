@@ -699,7 +699,7 @@
     },
     {
       "name": "fluent_ui",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/fluent_ui-3.10.3",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/fluent_ui-3.11.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -2036,7 +2036,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-04-30T06:59:55.525496Z",
+  "generated": "2022-04-30T13:50:50.701568Z",
   "generator": "melos",
   "generatorVersion": "1.5.2"
 }
