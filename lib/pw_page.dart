@@ -17,14 +17,13 @@ class PwPage extends StatelessWidget {
   final String? brandFooter;
 
   PwPage(
-      {
-        this.brandName,
-        this.brandAddress,
-        this.brandTel,
-        this.brandTIN,
-        this.brandDescription,
-        this.brandFooter,
-        this.date,
+      {this.brandName,
+      this.brandAddress,
+      this.brandTel,
+      this.brandTIN,
+      this.brandDescription,
+      this.brandFooter,
+      this.date,
       this.info,
       this.taxID,
       this.receiverName,
@@ -68,7 +67,7 @@ class PwPage extends StatelessWidget {
                 ),
                 SizedBox(height: 3),
                 Text(
-                  "Tel:"+brandTel!,
+                  "Tel:" + brandTel!,
                   style: TextStyle(
                       font: Font.helvetica(),
                       fontBold: Font.helveticaBold(),
@@ -87,7 +86,6 @@ class PwPage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 14),
                     ),
-
                     SizedBox(width: 100),
                     Text(
                       brandTIN!,
@@ -97,7 +95,6 @@ class PwPage extends StatelessWidget {
                         fontSize: 14,
                       ),
                     ),
-
                   ],
                 ),
                 SizedBox(height: 3),
@@ -111,7 +108,6 @@ class PwPage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 14),
                     ),
-
                   ],
                 ),
               ],
@@ -120,7 +116,6 @@ class PwPage extends StatelessWidget {
           SizedBox(height: 3),
           Divider(height: 1),
           SizedBox(height: 3),
-
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
             decoration: BoxDecoration(
@@ -131,7 +126,6 @@ class PwPage extends StatelessWidget {
           SizedBox(height: 3),
           Divider(height: 1),
           SizedBox(height: 3),
-
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 22),
@@ -139,7 +133,7 @@ class PwPage extends StatelessWidget {
                 color: PdfColor.fromHex('#FFF'),
                 borderRadius: BorderRadius.circular(10)),
             child: Text(
-              'Thanks you for shopping from '+brandFooter!,
+              'Thank you for visiting our store: ' + brandFooter!,
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
