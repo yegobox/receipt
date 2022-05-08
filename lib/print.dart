@@ -268,7 +268,8 @@ class Print {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(),
-            Text(sdcReceiptNum, style: TextStyle(fontWeight: FontWeight.bold))
+            Text(sdcReceiptNum + " " + "NS",
+                style: TextStyle(fontWeight: FontWeight.bold))
           ]),
           TableRow(children: [
             SizedBox(height: 1),
