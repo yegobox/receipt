@@ -5,15 +5,15 @@ publish_to: "none"
 version: 0.0.1
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  isar_flutter_libs: 2.4.0
-  isar: 2.4.0
+  isar_flutter_libs: ^2.4.0
+  isar: ^2.4.0
   path_provider: ^2.0.9
   equatable: ^2.0.3
   uuid: ^3.0.5
@@ -29,10 +29,8 @@ dependencies:
   #   path: ..
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
   build_runner: any
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.0
 flutter:
   uses-material-design: true
 #  flutter packages pub run build_runner build --delete-conflicting-outputs
