@@ -25,26 +25,18 @@ class Print {
   Future<List<TableRow>> feed(
     List<OrderItem> items,
   ) async {
-    date = dateTime.day.toString() +
-        "/" +
-        dateTime.month.toString() +
-        "/" +
-        dateTime.year.toString();
-    time = dateTime.hour.toString() +
-        ":" +
-        dateTime.minute.toString() +
-        ":" +
-        dateTime.second.toString();
+    date = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
+    time = "${dateTime.hour}:${dateTime.minute}:${dateTime.second}";
 
     for (var item in items) {
       totalItems = totalItems + 1;
-      double total = item.price * item.qty;
+      double total = item.price;
       totalPrice = total + totalPrice;
       rows.add(TableRow(children: [
         Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
       ]));
       rows.add(TableRow(children: [
-        Text(item.price.toString()),
+        Text((item.price / item.qty).toString()),
         Text(item.qty.toString()),
         Text(total.toString(), style: TextStyle(fontWeight: FontWeight.bold)),
       ]));
@@ -183,11 +175,11 @@ class Print {
           ]),
           TableRow(children: [
             Text(
-              'RcvdAmt: ' + received.toString(),
+              'RcvdAmt: $received',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(),
-            Text("Change: " + (cash - received).toString(),
+            Text("Change: ${cash - received}",
                 style: TextStyle(fontWeight: FontWeight.bold))
           ]),
           TableRow(children: [
@@ -245,13 +237,13 @@ class Print {
             SizedBox(
                 width: 150,
                 child: Text(
-                  'Date: ' + date,
+                  'Date: $date',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )),
             SizedBox(),
             SizedBox(
                 width: 150,
-                child: Text("Time: " + time,
+                child: Text("Time: $time",
                     style: TextStyle(fontWeight: FontWeight.bold)))
           ]),
           TableRow(children: [
@@ -268,7 +260,7 @@ class Print {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(),
-            Text(sdcReceiptNum + " " + "NS",
+            Text("$sdcReceiptNum NS",
                 style: TextStyle(fontWeight: FontWeight.bold))
           ]),
           TableRow(children: [
@@ -351,13 +343,13 @@ class Print {
             SizedBox(
                 width: 150,
                 child: Text(
-                  'DATE: ' + date,
+                  'DATE: $date',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )),
             SizedBox(),
             SizedBox(
                 width: 150,
-                child: Text("TIME: " + time,
+                child: Text("TIME: $time",
                     style: TextStyle(fontWeight: FontWeight.bold)))
           ]),
           TableRow(children: [

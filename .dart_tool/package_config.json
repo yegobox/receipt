@@ -183,19 +183,19 @@
     },
     {
       "name": "cloud_firestore",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/cloud_firestore-3.1.14",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/cloud_firestore-3.1.15",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "cloud_firestore_platform_interface",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/cloud_firestore_platform_interface-5.5.5",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/cloud_firestore_platform_interface-5.5.6",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "cloud_firestore_web",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/cloud_firestore_web-2.6.14",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/cloud_firestore_web-2.6.15",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
@@ -429,7 +429,7 @@
     },
     {
       "name": "firebase_auth",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_auth-3.3.17",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_auth-3.3.18",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
@@ -447,13 +447,13 @@
     },
     {
       "name": "firebase_auth_platform_interface",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_auth_platform_interface-6.2.5",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_auth_platform_interface-6.2.6",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "firebase_auth_web",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_auth_web-3.3.14",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_auth_web-3.3.15",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
@@ -477,13 +477,13 @@
     },
     {
       "name": "firebase_core_platform_interface",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_core_platform_interface-4.3.0",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_core_platform_interface-4.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "firebase_core_web",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_core_web-1.6.3",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_core_web-1.6.4",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
@@ -501,31 +501,31 @@
     },
     {
       "name": "firebase_database",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_database-9.0.13",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_database-9.0.14",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "firebase_database_platform_interface",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_database_platform_interface-0.2.1+5",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_database_platform_interface-0.2.1+6",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "firebase_database_web",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_database_web-0.2.0+12",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_database_web-0.2.0+13",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "firebase_dynamic_links",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_dynamic_links-4.2.2",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_dynamic_links-4.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "firebase_dynamic_links_platform_interface",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_dynamic_links_platform_interface-0.2.3+1",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/firebase_dynamic_links_platform_interface-0.2.3+2",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
@@ -687,7 +687,7 @@
     },
     {
       "name": "fluent_ui",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/fluent_ui-3.11.1",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/fluent_ui-3.12.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -941,7 +941,7 @@
       "name": "flutterfire_ui",
       "rootUri": "../../../packages/flutterfire_ui",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.16"
     },
     {
       "name": "font_awesome_flutter",
@@ -2030,7 +2030,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-05-13T14:31:16.884851Z",
+  "generated": "2022-05-14T10:38:48.382895Z",
   "generator": "melos",
   "generatorVersion": "2.3.0"
 }
