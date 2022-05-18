@@ -14,13 +14,13 @@ dependencies:
   open_file: ^3.2.1
   gap: ^2.0.0
   flipper_models: ^0.0.1-dev.7
-  isar: 2.4.0
-  isar_flutter_libs: 2.4.0
+  isar: ^3.0.0-dev.0
+  isar_flutter_libs: ^3.0.0-dev.0
   qr_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: ^2.1.7
-  isar_generator: 2.4.0
+  isar_generator: ^3.0.0-dev.0
 
 flutter:

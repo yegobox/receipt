@@ -135,9 +135,9 @@
     },
     {
       "name": "cached_network_image",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/cached_network_image-3.2.0",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/cached_network_image-3.2.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "cached_network_image_platform_interface",
@@ -387,7 +387,7 @@
     },
     {
       "name": "ffi",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/ffi-1.1.2",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/ffi-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1203,15 +1203,15 @@
     },
     {
       "name": "isar",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar-2.4.0",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar-3.0.0-dev.0",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.17"
     },
     {
       "name": "isar_flutter_libs",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar_flutter_libs-2.4.0",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar_flutter_libs-3.0.0-dev.0",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.17"
     },
     {
       "name": "js",
@@ -2012,7 +2012,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-05-14T16:48:16.340980Z",
-  "generator": "melos",
-  "generatorVersion": "2.3.0"
+  "generated": "2022-05-18T22:42:17.181252Z",
+  "generator": "pub",
+  "generatorVersion": "2.17.0"
 }
