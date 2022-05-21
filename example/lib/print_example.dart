@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:receipt/order_/item.dart';
 import 'package:receipt/print.dart';
 import 'package:flipper_models/isar_models.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class PrintExample extends StatefulWidget {
   const PrintExample({Key? key}) : super(key: key);
@@ -108,11 +106,7 @@ class _PrintExampleState extends State<PrintExample> {
               bank: "MTN I&M",
               mrc: "SIMBASM0050",
               internalData: "YRFH-C5J5-EQ67-7238-8383-8282-D8W0",
-              receiptQrCode: QrImageView(
-                data: '000',
-                version: QrVersions.auto,
-                size: 200.0,
-              ),
+              receiptQrCode: '000',
               receiptSignature: "YU73-28JM-KDL2-DN22",
               cashierName: "ABC",
               sdcId: "SDC003001109",

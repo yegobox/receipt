@@ -1,5 +1,7 @@
 library receipt;
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart' as c;
 import 'package:pdf/widgets.dart';
 import 'package:pdf/pdf.dart';
 
@@ -72,13 +74,12 @@ class OmniPrinter {
 
   // Uint8List
   Future<void> generateDoc({
-
-    String brandName="Simba Supermarket",
-    String brandAddress="SIMBA CITY CENTER, Kigali Rwanda",
-    String brandTel="27131153",
-    String brandTIN="101587390",
-    String brandDescription="Simba Supermaket Stands for Quality Service",
-    String brandFooter="SIMBA Supermaket and Coffee Shop",
+    String brandName = "Simba Supermarket",
+    String brandAddress = "SIMBA CITY CENTER, Kigali Rwanda",
+    String brandTel = "27131153",
+    String brandTIN = "101587390",
+    String brandDescription = "Simba Supermaket Stands for Quality Service",
+    String brandFooter = "SIMBA Supermaket and Coffee Shop",
     String date = "4/9/2020",
     String? info,
     String? taxId = "12331",
@@ -88,30 +89,39 @@ class OmniPrinter {
     String email = "info@yegobox.com",
     required List<TableRow> rows,
   }) async {
+    ImageProvider? image;
+    if (!kIsWeb) {
+      const imageLogo = c.AssetImage(
+        'assets/rralogo.jpg',
+      );
+      image = await flutterImageProvider(imageLogo);
+    }
+
     try {
       doc.addPage(
         MultiPage(
-          pageFormat: PdfPageFormat.a4,
-          orientation: PageOrientation.portrait,
-          build: (context) {
-            return [
+            pageFormat: PdfPageFormat.a4,
+            orientation: PageOrientation.portrait,
+            build: (context) {
+              return [
                 PwPage(
-              brandName: brandName,
-              brandAddress: brandAddress,
-              brandDescription: brandDescription,
-              brandTel: brandTel,
-              brandTIN: brandTIN,
-              brandFooter: brandFooter,
-              date: date,
-              info: info,
-              taxID: taxId,
-              receiverName: receiverName,
-              receiverMail: receiverMail,
-              receiverPhone: receiverPhone,
-              rows: rows,
-            )
-          ];}
-          ),
+                  brandName: brandName,
+                  brandAddress: brandAddress,
+                  brandDescription: brandDescription,
+                  brandTel: brandTel,
+                  brandTIN: brandTIN,
+                  brandFooter: brandFooter,
+                  date: date,
+                  info: info,
+                  taxID: taxId,
+                  receiverName: receiverName,
+                  receiverMail: receiverMail,
+                  receiverPhone: receiverPhone,
+                  rows: rows,
+                  image: image,
+                )
+              ];
+            }),
       );
       await Printing.sharePdf(
         bytes: await doc.save(),
@@ -120,8 +130,6 @@ class OmniPrinter {
         body: "Thank you for visiting us",
         emails: [email],
       );
-    }catch(ex){
-      print(ex.toString());
-    }
+    } catch (ex) {}
   }
 }

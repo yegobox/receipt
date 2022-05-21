@@ -1503,7 +1503,7 @@
     },
     {
       "name": "printing",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/printing-5.8.0",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/printing-5.9.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -2012,7 +2012,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-05-18T22:42:17.181252Z",
+  "generated": "2022-05-21T08:50:21.712713Z",
   "generator": "pub",
   "generatorVersion": "2.17.0"
 }

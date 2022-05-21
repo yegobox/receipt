@@ -3,8 +3,6 @@ library receipt;
 import 'package:flipper_models/isar_models.dart';
 import 'package:pdf/widgets.dart';
 import 'package:receipt/omni_printer.dart';
-// import 'package:receipt/order_item.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class Print {
   DateTime dateTime = DateTime.now();
@@ -14,11 +12,7 @@ class Print {
   double totalItems = 0;
   List<TableRow> rows = [];
   ImageProvider? netImage;
-  Future<QrImageView> receiptQr(QrImageView url) async {
-    // imageFromAssetBundle(url.toString());
-    // the purpose of Qr code is when scanned can to the shop web address.
-    // netImage = await networkImage(url);
-    // netImage = await url
+  Future<String> receiptQr(String url) async {
     return url;
   }
 
@@ -32,13 +26,19 @@ class Print {
       totalItems = totalItems + 1;
       double total = item.price;
       totalPrice = total + totalPrice;
+      String taxLabel = item.isTaxExempted ? "-EX" : "B";
       rows.add(TableRow(children: [
         Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
       ]));
       rows.add(TableRow(children: [
         Text((item.price / item.qty).toString()),
         Text(item.qty.toString()),
-        Text(total.toString(), style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(
+          "$total $taxLabel",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ]));
       rows.add(TableRow(children: [
         SizedBox(height: 1),
@@ -71,7 +71,7 @@ class Print {
     required String mrc,
     required String internalData,
     required String receiptSignature,
-    required QrImageView receiptQrCode,
+    required String receiptQrCode,
   }) {
     receiptQr(receiptQrCode).then((qrCode) {
       OmniPrinter printer;
@@ -311,14 +311,22 @@ class Print {
           TableRow(children: [
             SizedBox(height: 1),
           ]),
-          // TODO:disable Qr code for now.
-          // TableRow(children: [
-          //   SizedBox(),
-          //   Center(
-          //     child: Image(netImage!, width: 100, height: 100),
-          //   ),
-          //   SizedBox(),
-          // ]),
+          TableRow(children: [
+            SizedBox(),
+            Center(
+              child: SizedBox(
+                width: 100,
+                height: 100,
+                child: BarcodeWidget(
+                  barcode: Barcode.qrCode(
+                    errorCorrectLevel: BarcodeQRCorrectionLevel.high,
+                  ),
+                  data: qrCode,
+                ),
+              ),
+            ),
+            SizedBox(),
+          ]),
           TableRow(children: [
             SizedBox(height: 1),
           ]),

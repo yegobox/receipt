@@ -758,7 +758,7 @@ packages:
     source: path
     version: "0.0.1-dev.5"
   flipper_models:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../../../packages/flipper_models"
       relative: true
@@ -1753,7 +1753,7 @@ packages:
       name: printing
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.8.0"
+    version: "5.9.1"
   process:
     dependency: transitive
     description:

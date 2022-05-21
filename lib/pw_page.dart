@@ -15,7 +15,7 @@ class PwPage extends StatelessWidget {
   final String? brandTIN;
   final String? brandDescription;
   final String? brandFooter;
-
+  final ImageProvider? image;
   PwPage(
       {this.brandName,
       this.brandAddress,
@@ -29,7 +29,8 @@ class PwPage extends StatelessWidget {
       this.receiverName,
       this.receiverMail,
       this.receiverPhone,
-      required this.rows});
+      required this.rows,
+      this.image});
 
   @override
   Widget build(Context context) {
@@ -44,47 +45,49 @@ class PwPage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
             decoration: BoxDecoration(
-                color: PdfColor.fromHex('#FFF'),
-                borderRadius: BorderRadius.circular(10)),
+              color: PdfColor.fromHex('#FFF'),
+              borderRadius: BorderRadius.circular(0),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                image != null ? Image(image!) : Text(""),
                 Text(
                   brandName!,
                   style: TextStyle(
-                      font: Font.helvetica(),
-                      fontBold: Font.helveticaBold(),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18),
+                    font: Font.helvetica(),
+                    fontBold: Font.helveticaBold(),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
                 ),
                 SizedBox(height: 3),
                 Text(
                   brandAddress!,
                   style: TextStyle(
-                      font: Font.helvetica(),
-                      fontBold: Font.helveticaBold(),
-                      fontSize: 16),
+                    font: Font.helvetica(),
+                    fontBold: Font.helveticaBold(),
+                    fontSize: 16,
+                  ),
                 ),
                 SizedBox(height: 3),
                 Text(
-                  "Tel:" + brandTel!,
+                  "Tel:${brandTel!}",
                   style: TextStyle(
                       font: Font.helvetica(),
                       fontBold: Font.helveticaBold(),
                       fontSize: 14),
                 ),
-                SizedBox(height: 3),
-                Divider(height: 1),
-                SizedBox(height: 3),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       'TIN',
                       style: TextStyle(
-                          fontBold: Font.helveticaBold(),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14),
+                        fontBold: Font.helveticaBold(),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
                     ),
                     SizedBox(width: 100),
                     Text(
@@ -113,9 +116,6 @@ class PwPage extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 3),
-          Divider(height: 1),
-          SizedBox(height: 3),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
             decoration: BoxDecoration(
@@ -123,9 +123,6 @@ class PwPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10)),
             child: body,
           ),
-          SizedBox(height: 3),
-          Divider(height: 1),
-          SizedBox(height: 3),
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 22),
@@ -133,7 +130,7 @@ class PwPage extends StatelessWidget {
                 color: PdfColor.fromHex('#FFF'),
                 borderRadius: BorderRadius.circular(10)),
             child: Text(
-              'Thank you for visiting our store: ' + brandFooter!,
+              'Thank you for visiting our store: ${brandFooter!}',
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
