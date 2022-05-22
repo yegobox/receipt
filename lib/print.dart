@@ -71,6 +71,8 @@ class Print {
     required String internalData,
     required String receiptSignature,
     required String receiptQrCode,
+    required List<String> emails,
+    required num? customerTin,
   }) {
     receiptQr(receiptQrCode).then((qrCode) {
       OmniPrinter printer;
@@ -82,6 +84,8 @@ class Print {
         brandTel: brandTel,
         brandTIN: brandTIN,
         brandFooter: brandFooter,
+        emails: emails,
+        customerTin: customerTin.toString(),
         rows: [
           ...rows,
           TableRow(children: [
@@ -251,8 +255,7 @@ class Print {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(),
-            Text("$sdcReceiptNum NS",
-                style: TextStyle(fontWeight: FontWeight.bold))
+            Text(sdcReceiptNum, style: TextStyle(fontWeight: FontWeight.bold))
           ]),
           TableRow(children: [
             SizedBox(height: 1),

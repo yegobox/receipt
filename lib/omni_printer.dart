@@ -81,13 +81,8 @@ class OmniPrinter {
     String brandTIN = "101587390",
     String brandDescription = "We build app that server you!",
     String brandFooter = "yegobox shop",
-    String date = "4/9/2020",
-    String? info,
-    String? taxId = "12331",
-    String? receiverName = "Richie",
-    String? receiverMail = "info@yegobox.com",
     String? receiverPhone,
-    String email = "info@yegobox.com",
+    List<String>? emails,
     String? customerTin = "000000000",
     required List<TableRow> rows,
   }) async {
@@ -163,19 +158,6 @@ class OmniPrinter {
                       ],
                     ),
                     SizedBox(height: 1),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     Text(
-                    //       brandDescription,
-                    //       style: TextStyle(
-                    //         fontBold: Font.helveticaBold(),
-                    //         fontWeight: FontWeight.bold,
-                    //         fontSize: 14,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                     Text(
                       'Client ID: $customerTin',
                       style: TextStyle(
@@ -185,7 +167,6 @@ class OmniPrinter {
                       ),
                     ),
                   ]),
-                  // text: 'Hello $index',
                   level: level,
                 ),
                 Container(
@@ -210,7 +191,7 @@ class OmniPrinter {
       filename: 'receipt.pdf',
       subject: "receipt",
       body: "Thank you for visiting us",
-      emails: [email],
+      emails: emails,
     );
   }
 }
