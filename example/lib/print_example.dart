@@ -29,6 +29,7 @@ class _PrintExampleState extends State<PrintExample> {
                   ..createdAt = '2020-01-01'
                   ..updatedAt = '2020-01-01'
                   ..reported = false
+                  ..isTaxExempted = false
                   ..orderId = 1
                   ..variantId = 1,
                 OrderItem()
@@ -36,18 +37,7 @@ class _PrintExampleState extends State<PrintExample> {
                   ..price = 100
                   ..qty = 1
                   ..qty = 2
-                  ..discount = 10
-                  ..remainingStock = 10
-                  ..createdAt = '2020-01-01'
-                  ..updatedAt = '2020-01-01'
-                  ..reported = false
-                  ..orderId = 1
-                  ..variantId = 1,
-                OrderItem()
-                  ..name = 'Mangosss'
-                  ..price = 100
-                  ..qty = 1
-                  ..qty = 2
+                  ..isTaxExempted = false
                   ..discount = 10
                   ..remainingStock = 10
                   ..createdAt = '2020-01-01'
@@ -60,6 +50,7 @@ class _PrintExampleState extends State<PrintExample> {
                   ..price = 100
                   ..qty = 1
                   ..qty = 2
+                  ..isTaxExempted = false
                   ..discount = 10
                   ..remainingStock = 10
                   ..createdAt = '2020-01-01'
@@ -72,18 +63,7 @@ class _PrintExampleState extends State<PrintExample> {
                   ..price = 100
                   ..qty = 1
                   ..qty = 2
-                  ..discount = 10
-                  ..remainingStock = 10
-                  ..createdAt = '2020-01-01'
-                  ..updatedAt = '2020-01-01'
-                  ..reported = false
-                  ..orderId = 1
-                  ..variantId = 1,
-                OrderItem()
-                  ..name = 'Mango'
-                  ..price = 100
-                  ..qty = 1
-                  ..qty = 2
+                  ..isTaxExempted = false
                   ..discount = 10
                   ..remainingStock = 10
                   ..createdAt = '2020-01-01'

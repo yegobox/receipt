@@ -1,11 +1,12 @@
 library receipt;
 
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' as c;
 import 'package:pdf/widgets.dart';
 import 'package:pdf/pdf.dart';
 
-import 'package:receipt/pw_page.dart';
 import 'package:printing/printing.dart';
 
 /// [generateDoc] example
@@ -74,12 +75,12 @@ class OmniPrinter {
 
   // Uint8List
   Future<void> generateDoc({
-    String brandName = "Simba Supermarket",
-    String brandAddress = "SIMBA CITY CENTER, Kigali Rwanda",
+    String brandName = "yegobox shop",
+    String brandAddress = "CITY CENTER, Kigali Rwanda",
     String brandTel = "27131153",
     String brandTIN = "101587390",
-    String brandDescription = "Simba Supermaket Stands for Quality Service",
-    String brandFooter = "SIMBA Supermaket and Coffee Shop",
+    String brandDescription = "We build app that server you!",
+    String brandFooter = "yegobox shop",
     String date = "4/9/2020",
     String? info,
     String? taxId = "12331",
@@ -87,6 +88,7 @@ class OmniPrinter {
     String? receiverMail = "info@yegobox.com",
     String? receiverPhone,
     String email = "info@yegobox.com",
+    String? customerTin = "000000000",
     required List<TableRow> rows,
   }) async {
     ImageProvider? image;
@@ -97,39 +99,118 @@ class OmniPrinter {
       image = await flutterImageProvider(imageLogo);
     }
 
-    try {
-      doc.addPage(
-        MultiPage(
-            pageFormat: PdfPageFormat.a4,
-            orientation: PageOrientation.portrait,
-            build: (context) {
-              return [
-                PwPage(
-                  brandName: brandName,
-                  brandAddress: brandAddress,
-                  brandDescription: brandDescription,
-                  brandTel: brandTel,
-                  brandTIN: brandTIN,
-                  brandFooter: brandFooter,
-                  date: date,
-                  info: info,
-                  taxID: taxId,
-                  receiverName: receiverName,
-                  receiverMail: receiverMail,
-                  receiverPhone: receiverPhone,
-                  rows: rows,
-                  image: image,
-                )
-              ];
-            }),
-      );
-      await Printing.sharePdf(
-        bytes: await doc.save(),
-        filename: 'receipt.pdf',
-        subject: "receipt",
-        body: "Thank you for visiting us",
-        emails: [email],
-      );
-    } catch (ex) {}
+    doc.addPage(
+      MultiPage(
+        pageFormat: PdfPageFormat.a4,
+        orientation: PageOrientation.portrait,
+        footer: (c) => Align(
+            alignment: Alignment.centerRight,
+            child: Text('Page: ${c.pageNumber}/${c.pagesCount}')),
+        build: (context) => [
+          ...Iterable<Widget>.generate(1, (index) {
+            final level = (sin(index / 5) * 6).abs().toInt();
+            return Column(
+              children: [
+                Header(
+                  child: Column(children: [
+                    image != null ? Image(image) : Text(""),
+                    Text(
+                      brandName,
+                      style: TextStyle(
+                        font: Font.helvetica(),
+                        fontBold: Font.helveticaBold(),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(height: 3),
+                    Text(
+                      brandAddress,
+                      style: TextStyle(
+                        font: Font.helvetica(),
+                        fontBold: Font.helveticaBold(),
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 3),
+                    Text(
+                      "Tel:$brandTel",
+                      style: TextStyle(
+                          font: Font.helvetica(),
+                          fontBold: Font.helveticaBold(),
+                          fontSize: 14),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'TIN:',
+                          style: TextStyle(
+                            fontBold: Font.helveticaBold(),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                        SizedBox(width: 100),
+                        Text(
+                          brandTIN,
+                          style: TextStyle(
+                            fontBold: Font.helveticaBold(),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 1),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Text(
+                    //       brandDescription,
+                    //       style: TextStyle(
+                    //         fontBold: Font.helveticaBold(),
+                    //         fontWeight: FontWeight.bold,
+                    //         fontSize: 14,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    Text(
+                      'Client ID: $customerTin',
+                      style: TextStyle(
+                        fontBold: Font.helveticaBold(),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ]),
+                  // text: 'Hello $index',
+                  level: level,
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+                  decoration: BoxDecoration(
+                      color: PdfColor.fromHex('#FFF'),
+                      borderRadius: BorderRadius.circular(0)),
+                  child: Table(children: [
+                    ...rows,
+                  ]),
+                ),
+              ],
+            );
+          }),
+        ],
+      ),
+    );
+
+    await Printing.sharePdf(
+      bytes: await doc.save(),
+      filename: 'receipt.pdf',
+      subject: "receipt",
+      body: "Thank you for visiting us",
+      emails: [email],
+    );
   }
 }

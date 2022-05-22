@@ -24,14 +24,14 @@ class Print {
 
     for (var item in items) {
       totalItems = totalItems + 1;
-      double total = item.price;
+      double total = item.price * item.qty;
       totalPrice = total + totalPrice;
-      String taxLabel = item.isTaxExempted ? "-EX" : "B";
+      String taxLabel = item.isTaxExempted ? "-EX" : "-B";
       rows.add(TableRow(children: [
         Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
       ]));
       rows.add(TableRow(children: [
-        Text((item.price / item.qty).toString()),
+        Text((item.price).toString()),
         Text(item.qty.toString()),
         Text(
           "$total $taxLabel",
@@ -67,7 +67,6 @@ class Print {
     required String brandFooter,
     required String cashierName,
     required String payMode,
-    required String bank,
     required String mrc,
     required String internalData,
     required String receiptSignature,
@@ -83,7 +82,7 @@ class Print {
         brandTel: brandTel,
         brandTIN: brandTIN,
         brandFooter: brandFooter,
-        rows: <TableRow>[
+        rows: [
           ...rows,
           TableRow(children: [
             Divider(height: 1),
@@ -196,21 +195,13 @@ class Print {
           TableRow(children: [
             Text('Pay Mode', style: TextStyle(fontWeight: FontWeight.bold)),
             Text(
-              'Bank',
+              payMode,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Text('Amount', style: TextStyle(fontWeight: FontWeight.bold)),
           ]),
           TableRow(children: [
             SizedBox(height: 1),
-          ]),
-          TableRow(children: [
-            Text(payMode),
-            Text(
-              bank,
-            ),
-            Text(totalPrice.toString(),
-                style: TextStyle(fontWeight: FontWeight.bold)),
           ]),
           TableRow(children: [
             SizedBox(height: 1),
@@ -272,44 +263,21 @@ class Print {
             Divider(height: 1)
           ]),
           TableRow(children: [
-            SizedBox(height: 1),
-          ]),
-          TableRow(children: [
-            SizedBox(),
             Text("Internal Data:",
-                textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(),
+            Text(internalData, style: TextStyle(fontWeight: FontWeight.normal)),
           ]),
           TableRow(children: [
             SizedBox(height: 1),
           ]),
           TableRow(children: [
-            SizedBox(),
-            Text(internalData,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(),
-          ]),
-          TableRow(children: [
-            SizedBox(),
             Text("Receipt Signature:",
-                textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(),
-          ]),
-          TableRow(children: [
-            SizedBox(height: 1),
-          ]),
-          TableRow(children: [
-            SizedBox(),
             Text(receiptSignature,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(),
+                style: TextStyle(fontWeight: FontWeight.normal)),
           ]),
           TableRow(children: [
-            SizedBox(height: 1),
+            SizedBox(height: 4),
           ]),
           TableRow(children: [
             SizedBox(),
