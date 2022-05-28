@@ -72,7 +72,9 @@ class Print {
     required String receiptSignature,
     required String receiptQrCode,
     required List<String> emails,
-    required num? customerTin,
+    required String? customerTin,
+    //add receipt type to I can add more wording.
+    required String invoiceType,
   }) {
     receiptQr(receiptQrCode).then((qrCode) {
       OmniPrinter printer;
@@ -86,8 +88,19 @@ class Print {
         brandFooter: brandFooter,
         emails: emails,
         customerTin: customerTin.toString(),
+        invoiceType: invoiceType,
+        sdcReceiptNum: sdcReceiptNum,
         rows: [
           ...rows,
+          if (invoiceType == "TS" || invoiceType == "PS")
+            TableRow(children: [
+              Text(
+                'THIS IS NOT AN OFFICIAL RECEIPT',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              SizedBox(),
+              Text(totalB18, style: TextStyle(fontWeight: FontWeight.bold))
+            ]),
           TableRow(children: [
             Divider(height: 1),
             Divider(height: 1),
@@ -218,6 +231,24 @@ class Print {
           TableRow(children: [
             SizedBox(height: 1),
           ]),
+          if (invoiceType == "TS")
+            TableRow(children: [
+              Text(
+                'TRAINING MODE',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              SizedBox(),
+              Text(totalB18, style: TextStyle(fontWeight: FontWeight.bold))
+            ]),
+          if (invoiceType == "PS")
+            TableRow(children: [
+              Text(
+                'PROFORMA',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              SizedBox(),
+              Text(totalB18, style: TextStyle(fontWeight: FontWeight.bold))
+            ]),
           TableRow(children: [
             SizedBox(),
             Text("SDC INFORMATION",

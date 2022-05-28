@@ -45,32 +45,6 @@ class _PrintExampleState extends State<PrintExample> {
                   ..reported = false
                   ..orderId = 1
                   ..variantId = 1,
-                OrderItem()
-                  ..name = 'Mango'
-                  ..price = 100
-                  ..qty = 1
-                  ..qty = 2
-                  ..isTaxExempted = false
-                  ..discount = 10
-                  ..remainingStock = 10
-                  ..createdAt = '2020-01-01'
-                  ..updatedAt = '2020-01-01'
-                  ..reported = false
-                  ..orderId = 1
-                  ..variantId = 1,
-                OrderItem()
-                  ..name = 'Mango'
-                  ..price = 100
-                  ..qty = 1
-                  ..qty = 2
-                  ..isTaxExempted = false
-                  ..discount = 10
-                  ..remainingStock = 10
-                  ..createdAt = '2020-01-01'
-                  ..updatedAt = '2020-01-01'
-                  ..reported = false
-                  ..orderId = 1
-                  ..variantId = 1,
               ],
             );
             print.print(
@@ -97,7 +71,8 @@ class _PrintExampleState extends State<PrintExample> {
                 brandTIN: "101587390",
                 brandDescription: "Simba Supermaket Stands for Quality Service",
                 brandFooter: "SIMBA Supermaket and Coffee Shop",
-                customerTin: 123456,
+                customerTin: "123456",
+                invoiceType: "NR",
                 emails: ['info@yegobox.com']);
           },
           child: const Text('Print Now'),

@@ -4,9 +4,8 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' as c;
-import 'package:pdf/widgets.dart';
 import 'package:pdf/pdf.dart';
-
+import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 
 /// [generateDoc] example
@@ -85,6 +84,8 @@ class OmniPrinter {
     List<String>? emails,
     String? customerTin = "000000000",
     required List<TableRow> rows,
+    required String invoiceType,
+    required String sdcReceiptNum,
   }) async {
     ImageProvider? image;
     if (!kIsWeb) {
@@ -167,6 +168,74 @@ class OmniPrinter {
                         fontSize: 14,
                       ),
                     ),
+                    // add wording
+                    if (invoiceType == "NR")
+                      Text(
+                        'Refund',
+                        style: TextStyle(
+                          fontBold: Font.helveticaBold(),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                    if (invoiceType == "NR") SizedBox(height: 3),
+                    if (invoiceType == "NR")
+                      Text(
+                        'REF.NORMAL RECEIPT#:$sdcReceiptNum',
+                        style: TextStyle(
+                          fontBold: Font.helveticaBold(),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                    if (invoiceType == "NR") SizedBox(height: 3),
+                    if (invoiceType == "NR")
+                      Text(
+                        'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT\n Client ID:$customerTin',
+                        style: TextStyle(
+                          fontBold: Font.helveticaBold(),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                    if (invoiceType == "CS")
+                      Text(
+                        'COPY',
+                        style: TextStyle(
+                          fontBold: Font.helveticaBold(),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                    if (invoiceType == "CS") SizedBox(height: 3),
+                    if (invoiceType == "CS")
+                      Text(
+                        'REF.NORMAL RECEIPT#:$sdcReceiptNum',
+                        style: TextStyle(
+                          fontBold: Font.helveticaBold(),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                    if (invoiceType == "CS") SizedBox(height: 3),
+                    if (invoiceType == "CS")
+                      Text(
+                        'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT\n Client ID:$customerTin',
+                        style: TextStyle(
+                          fontBold: Font.helveticaBold(),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                    if (invoiceType == "TS")
+                      Text(
+                        'TRAINING MODE',
+                        style: TextStyle(
+                          fontBold: Font.helveticaBold(),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
                   ]),
                   level: level,
                 ),
