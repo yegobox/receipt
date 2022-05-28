@@ -94,12 +94,13 @@ class Print {
           ...rows,
           if (invoiceType == "TS" || invoiceType == "PS")
             TableRow(children: [
+              SizedBox(),
               Text(
                 'THIS IS NOT AN OFFICIAL RECEIPT',
+                textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               SizedBox(),
-              Text(totalB18, style: TextStyle(fontWeight: FontWeight.bold))
             ]),
           TableRow(children: [
             Divider(height: 1),
@@ -233,21 +234,23 @@ class Print {
           ]),
           if (invoiceType == "TS")
             TableRow(children: [
+              SizedBox(),
               Text(
                 'TRAINING MODE',
+                textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               SizedBox(),
-              Text(totalB18, style: TextStyle(fontWeight: FontWeight.bold))
             ]),
           if (invoiceType == "PS")
             TableRow(children: [
+              SizedBox(),
               Text(
                 'PROFORMA',
+                textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               SizedBox(),
-              Text(totalB18, style: TextStyle(fontWeight: FontWeight.bold))
             ]),
           TableRow(children: [
             SizedBox(),

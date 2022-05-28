@@ -101,7 +101,7 @@ class OmniPrinter {
         orientation: PageOrientation.portrait,
         footer: (c) => Align(
             alignment: Alignment.centerRight,
-            child: Text('Thank you for your visit!')),
+            child: Text('Thank you for your visit! EBM v2: v1.5')),
         // child: Text('Page: ${c.pageNumber}/${c.pagesCount}')),
         build: (context) => [
           ...Iterable<Widget>.generate(1, (index) {
