@@ -33,6 +33,58 @@ class _PrintExampleState extends State<PrintExample> {
                   ..orderId = 1
                   ..variantId = 1,
                 OrderItem()
+                  ..name = 'Weat'
+                  ..price = 100
+                  ..qty = 1
+                  ..qty = 3
+                  ..discount = 10
+                  ..remainingStock = 10
+                  ..createdAt = '2020-01-01'
+                  ..updatedAt = '2020-01-01'
+                  ..reported = false
+                  ..isTaxExempted = false
+                  ..orderId = 1
+                  ..variantId = 1,
+                OrderItem()
+                  ..name = 'Ibirayi'
+                  ..price = 100
+                  ..qty = 1
+                  ..qty = 3
+                  ..discount = 10
+                  ..remainingStock = 10
+                  ..createdAt = '2020-01-01'
+                  ..updatedAt = '2020-01-01'
+                  ..reported = false
+                  ..isTaxExempted = false
+                  ..orderId = 1
+                  ..variantId = 1,
+                OrderItem()
+                  ..name = 'PopCorn'
+                  ..price = 100
+                  ..qty = 1
+                  ..qty = 3
+                  ..discount = 10
+                  ..remainingStock = 10
+                  ..createdAt = '2020-01-01'
+                  ..updatedAt = '2020-01-01'
+                  ..reported = false
+                  ..isTaxExempted = false
+                  ..orderId = 1
+                  ..variantId = 1,
+                OrderItem()
+                  ..name = 'Beans'
+                  ..price = 100
+                  ..qty = 1
+                  ..qty = 3
+                  ..discount = 10
+                  ..remainingStock = 10
+                  ..createdAt = '2020-01-01'
+                  ..updatedAt = '2020-01-01'
+                  ..reported = false
+                  ..isTaxExempted = false
+                  ..orderId = 1
+                  ..variantId = 1,
+                OrderItem()
                   ..name = 'Mango'
                   ..price = 100
                   ..qty = 1
@@ -45,6 +97,45 @@ class _PrintExampleState extends State<PrintExample> {
                   ..reported = false
                   ..orderId = 1
                   ..variantId = 1,
+                // OrderItem()
+                //   ..name = 'Mango'
+                //   ..price = 100
+                //   ..qty = 1
+                //   ..qty = 2
+                //   ..isTaxExempted = false
+                //   ..discount = 10
+                //   ..remainingStock = 10
+                //   ..createdAt = '2020-01-01'
+                //   ..updatedAt = '2020-01-01'
+                //   ..reported = false
+                //   ..orderId = 1
+                //   ..variantId = 1,
+                // OrderItem()
+                //   ..name = 'Mango'
+                //   ..price = 100
+                //   ..qty = 1
+                //   ..qty = 2
+                //   ..isTaxExempted = false
+                //   ..discount = 10
+                //   ..remainingStock = 10
+                //   ..createdAt = '2020-01-01'
+                //   ..updatedAt = '2020-01-01'
+                //   ..reported = false
+                //   ..orderId = 1
+                //   ..variantId = 1,
+                // OrderItem()
+                //   ..name = 'Mango'
+                //   ..price = 100
+                //   ..qty = 1
+                //   ..qty = 2
+                //   ..isTaxExempted = false
+                //   ..discount = 10
+                //   ..remainingStock = 10
+                //   ..createdAt = '2020-01-01'
+                //   ..updatedAt = '2020-01-01'
+                //   ..reported = false
+                //   ..orderId = 1
+                //   ..variantId = 1,
               ],
             );
             print.print(
@@ -72,7 +163,7 @@ class _PrintExampleState extends State<PrintExample> {
                 brandDescription: "Simba Supermaket Stands for Quality Service",
                 brandFooter: "SIMBA Supermaket and Coffee Shop",
                 customerTin: "123456",
-                invoiceType: "NR",
+                invoiceType: "PS",
                 emails: ['info@yegobox.com']);
           },
           child: const Text('Print Now'),

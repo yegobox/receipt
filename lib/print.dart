@@ -11,6 +11,7 @@ class Print {
   double totalPrice = 0;
   double totalItems = 0;
   List<TableRow> rows = [];
+  List<OrderItem> orderItems = [];
   ImageProvider? netImage;
   Future<String> receiptQr(String url) async {
     return url;
@@ -21,7 +22,7 @@ class Print {
   ) async {
     date = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
     time = "${dateTime.hour}:${dateTime.minute}:${dateTime.second}";
-
+    orderItems = items;
     for (var item in items) {
       totalItems = totalItems + 1;
       double total = item.price * item.qty;
@@ -79,7 +80,7 @@ class Print {
     receiptQr(receiptQrCode).then((qrCode) {
       OmniPrinter printer;
       printer = OmniPrinter();
-      printer.generateDoc(
+      printer.generateDocv2(
         brandName: brandName,
         brandAddress: brandAddress,
         brandDescription: brandDescription,
@@ -90,291 +91,322 @@ class Print {
         customerTin: customerTin.toString(),
         invoiceType: invoiceType,
         sdcReceiptNum: sdcReceiptNum,
-        rows: [
-          ...rows,
-          if (invoiceType == "TS" || invoiceType == "PS")
-            TableRow(children: [
-              SizedBox(),
-              Text(
-                'THIS IS NOT AN OFFICIAL RECEIPT',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              SizedBox(),
-            ]),
-          TableRow(children: [
-            Divider(height: 1),
-            Divider(height: 1),
-            Divider(height: 1)
-          ]),
-          TableRow(children: [
-            SizedBox(height: 1),
-          ]),
-          TableRow(children: [
-            Text(
-              'TOTAL:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(),
-            Text(totalPrice.toString(),
-                style: TextStyle(fontWeight: FontWeight.bold))
-          ]),
-          TableRow(children: [
-            Text(
-              'TOTAL A-EX:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(),
-            Text(totalAEx.toString(),
-                style: TextStyle(fontWeight: FontWeight.bold))
-          ]),
-          TableRow(children: [
-            Text(
-              'TOTAL B-18%:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(),
-            Text(totalB18, style: TextStyle(fontWeight: FontWeight.bold))
-          ]),
-          TableRow(children: [
-            Text(
-              'TOTAL TAX B:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(),
-            Text(totalB.toString(),
-                style: TextStyle(fontWeight: FontWeight.bold))
-          ]),
-          TableRow(children: [
-            Text(
-              'TOTAL TAX:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(),
-            Text(totalTax, style: TextStyle(fontWeight: FontWeight.bold))
-          ]),
-          TableRow(children: [
-            SizedBox(height: 1),
-          ]),
-          TableRow(children: [
-            Divider(height: 1),
-            Divider(height: 1),
-            Divider(height: 1)
-          ]),
-          TableRow(children: [
-            SizedBox(height: 1),
-          ]),
-          TableRow(children: [
-            Text(
-              'CASH:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(),
-            Text(cash.toString(), style: TextStyle(fontWeight: FontWeight.bold))
-          ]),
-          TableRow(children: [
-            Text(
-              'ITEMS NUMBER:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(),
-            Text(totalItems.toString(),
-                style: TextStyle(fontWeight: FontWeight.bold))
-          ]),
-          TableRow(children: [
-            Text(
-              'Cashier Name:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(),
-            Text(cashierName.toString(),
-                style: TextStyle(fontWeight: FontWeight.bold))
-          ]),
-          TableRow(children: [
-            Text(
-              'RcvdAmt: $received',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(),
-            Text("Change: ${cash - received}",
-                style: TextStyle(fontWeight: FontWeight.bold))
-          ]),
-          TableRow(children: [
-            SizedBox(height: 1),
-          ]),
-          TableRow(children: [
-            Divider(height: 1),
-            Divider(height: 1),
-            Divider(height: 1)
-          ]),
-          TableRow(children: [
-            SizedBox(height: 1),
-          ]),
-          TableRow(children: [
-            Text('Pay Mode', style: TextStyle(fontWeight: FontWeight.bold)),
-            Text(
-              payMode,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Text('Amount', style: TextStyle(fontWeight: FontWeight.bold)),
-          ]),
-          TableRow(children: [
-            SizedBox(height: 1),
-          ]),
-          TableRow(children: [
-            SizedBox(height: 1),
-          ]),
-          TableRow(children: [
-            Divider(height: 1),
-            Divider(height: 1),
-            Divider(height: 1)
-          ]),
-          TableRow(children: [
-            SizedBox(height: 1),
-          ]),
-          if (invoiceType == "TS")
-            TableRow(children: [
-              SizedBox(),
-              Text(
-                'TRAINING MODE',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              SizedBox(),
-            ]),
-          if (invoiceType == "PS")
-            TableRow(children: [
-              SizedBox(),
-              Text(
-                'PROFORMA',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              SizedBox(),
-            ]),
-          TableRow(children: [
-            SizedBox(),
-            Text("SDC INFORMATION",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(),
-          ]),
-          TableRow(children: [
-            SizedBox(height: 1),
-          ]),
-          TableRow(children: [
-            SizedBox(
-                width: 150,
-                child: Text(
-                  'Date: $date',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )),
-            SizedBox(),
-            SizedBox(
-                width: 150,
-                child: Text("Time: $time",
-                    style: TextStyle(fontWeight: FontWeight.bold)))
-          ]),
-          TableRow(children: [
-            Text(
-              'SDC ID:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(),
-            Text(sdcId, style: TextStyle(fontWeight: FontWeight.bold))
-          ]),
-          TableRow(children: [
-            Text(
-              'RECEIPT NUMBER:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(),
-            Text(sdcReceiptNum, style: TextStyle(fontWeight: FontWeight.bold))
-          ]),
-          TableRow(children: [
-            SizedBox(height: 1),
-          ]),
-          TableRow(children: [
-            Divider(height: 1),
-            Divider(height: 1),
-            Divider(height: 1)
-          ]),
-          TableRow(children: [
-            Text("Internal Data:",
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            Text(internalData, style: TextStyle(fontWeight: FontWeight.normal)),
-          ]),
-          TableRow(children: [
-            SizedBox(height: 1),
-          ]),
-          TableRow(children: [
-            Text("Receipt Signature:",
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            Text(receiptSignature,
-                style: TextStyle(fontWeight: FontWeight.normal)),
-          ]),
-          TableRow(children: [
-            SizedBox(height: 4),
-          ]),
-          TableRow(children: [
-            SizedBox(),
-            Center(
-              child: SizedBox(
-                width: 100,
-                height: 100,
-                child: BarcodeWidget(
-                  barcode: Barcode.qrCode(
-                    errorCorrectLevel: BarcodeQRCorrectionLevel.high,
-                  ),
-                  data: qrCode,
-                ),
-              ),
-            ),
-            SizedBox(),
-          ]),
-          TableRow(children: [
-            SizedBox(height: 1),
-          ]),
-          TableRow(children: [
-            Divider(height: 1),
-            Divider(height: 1),
-            Divider(height: 1)
-          ]),
-          TableRow(children: [
-            SizedBox(height: 1),
-          ]),
-          TableRow(children: [
-            Text(
-              'INVOICE NUMBER:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(),
-            Text(invoiceNum.toString(),
-                style: TextStyle(fontWeight: FontWeight.bold))
-          ]),
-          TableRow(children: [
-            SizedBox(
-                width: 150,
-                child: Text(
-                  'DATE: $date',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )),
-            SizedBox(),
-            SizedBox(
-                width: 150,
-                child: Text("TIME: $time",
-                    style: TextStyle(fontWeight: FontWeight.bold)))
-          ]),
-          TableRow(children: [
-            Text(
-              'MRC',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(),
-            Text(mrc, style: TextStyle(fontWeight: FontWeight.bold))
-          ]),
-        ],
+        items: orderItems,
+        totalAEx: totalAEx,
+        totalB18: totalB18,
+        totalB: totalB,
+        totalTax: totalTax,
+        receiverPhone: "",
+        cash: cash,
+        cashierName: cashierName,
+        received: received,
+        payMode: payMode,
+        date: date,
+        time: time,
+        sdcId: sdcId,
+        internalData: internalData,
+        receiptSignature: receiptSignature,
+        receiptQrCode: qrCode,
+        invoiceNum: invoiceNum,
+        mrc: mrc,
       );
+
+      // printer.generateDoc(
+      //   brandName: brandName,
+      //   brandAddress: brandAddress,
+      //   brandDescription: brandDescription,
+      //   brandTel: brandTel,
+      //   brandTIN: brandTIN,
+      //   brandFooter: brandFooter,
+      //   emails: emails,
+      //   customerTin: customerTin.toString(),
+      //   invoiceType: invoiceType,
+      //   sdcReceiptNum: sdcReceiptNum,
+      //   rows: [
+      //     ...rows,
+      //     if (invoiceType == "TS" || invoiceType == "PS")
+      //       TableRow(children: [
+      //         SizedBox(),
+      //         Text(
+      //           'THIS IS NOT AN OFFICIAL RECEIPT',
+      //           textAlign: TextAlign.center,
+      //           style: TextStyle(fontWeight: FontWeight.bold),
+      //         ),
+      //         SizedBox(),
+      //       ]),
+      //     TableRow(children: [
+      //       Divider(height: 1),
+      //       Divider(height: 1),
+      //       Divider(height: 1)
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(height: 1),
+      //     ]),
+      //     TableRow(children: [
+      //       Text(
+      //         'TOTAL:',
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       SizedBox(),
+      //       Text(totalPrice.toString(),
+      //           style: TextStyle(fontWeight: FontWeight.bold))
+      //     ]),
+      //     TableRow(children: [
+      //       Text(
+      //         'TOTAL A-EX:',
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       SizedBox(),
+      //       Text(totalAEx.toString(),
+      //           style: TextStyle(fontWeight: FontWeight.bold))
+      //     ]),
+      //     TableRow(children: [
+      //       Text(
+      //         'TOTAL B-18%:',
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       SizedBox(),
+      //       Text(totalB18, style: TextStyle(fontWeight: FontWeight.bold))
+      //     ]),
+      //     TableRow(children: [
+      //       Text(
+      //         'TOTAL TAX B:',
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       SizedBox(),
+      //       Text(totalB.toString(),
+      //           style: TextStyle(fontWeight: FontWeight.bold))
+      //     ]),
+      //     TableRow(children: [
+      //       Text(
+      //         'TOTAL TAX:',
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       SizedBox(),
+      //       Text(totalTax, style: TextStyle(fontWeight: FontWeight.bold))
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(height: 1),
+      //     ]),
+      //     TableRow(children: [
+      //       Divider(height: 1),
+      //       Divider(height: 1),
+      //       Divider(height: 1)
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(height: 1),
+      //     ]),
+      //     TableRow(children: [
+      //       Text(
+      //         'CASH:',
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       SizedBox(),
+      //       Text(cash.toString(), style: TextStyle(fontWeight: FontWeight.bold))
+      //     ]),
+      //     TableRow(children: [
+      //       Text(
+      //         'ITEMS NUMBER:',
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       SizedBox(),
+      //       Text(totalItems.toString(),
+      //           style: TextStyle(fontWeight: FontWeight.bold))
+      //     ]),
+      //     TableRow(children: [
+      //       Text(
+      //         'Cashier Name:',
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       SizedBox(),
+      //       Text(cashierName.toString(),
+      //           style: TextStyle(fontWeight: FontWeight.bold))
+      //     ]),
+      //     TableRow(children: [
+      //       Text(
+      //         'RcvdAmt: $received',
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       SizedBox(),
+      //       Text("Change: ${cash - received}",
+      //           style: TextStyle(fontWeight: FontWeight.bold))
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(height: 1),
+      //     ]),
+      //     TableRow(children: [
+      //       Divider(height: 1),
+      //       Divider(height: 1),
+      //       Divider(height: 1)
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(height: 1),
+      //     ]),
+      //     TableRow(children: [
+      //       Text('Pay Mode', style: TextStyle(fontWeight: FontWeight.bold)),
+      //       Text(
+      //         payMode,
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       Text('Amount', style: TextStyle(fontWeight: FontWeight.bold)),
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(height: 1),
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(height: 1),
+      //     ]),
+      //     TableRow(children: [
+      //       Divider(height: 1),
+      //       Divider(height: 1),
+      //       Divider(height: 1)
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(height: 1),
+      //     ]),
+      //     if (invoiceType == "TS")
+      //       TableRow(children: [
+      //         SizedBox(),
+      //         Text(
+      //           'TRAINING MODE',
+      //           textAlign: TextAlign.center,
+      //           style: TextStyle(fontWeight: FontWeight.bold),
+      //         ),
+      //         SizedBox(),
+      //       ]),
+      //     if (invoiceType == "PS")
+      //       TableRow(children: [
+      //         SizedBox(),
+      //         Text(
+      //           'PROFORMA',
+      //           textAlign: TextAlign.center,
+      //           style: TextStyle(fontWeight: FontWeight.bold),
+      //         ),
+      //         SizedBox(),
+      //       ]),
+      //     TableRow(children: [
+      //       SizedBox(),
+      //       Text("SDC INFORMATION",
+      //           textAlign: TextAlign.center,
+      //           style: TextStyle(fontWeight: FontWeight.bold)),
+      //       SizedBox(),
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(height: 1),
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(
+      //           width: 150,
+      //           child: Text(
+      //             'Date: $date',
+      //             style: TextStyle(fontWeight: FontWeight.bold),
+      //           )),
+      //       SizedBox(),
+      //       SizedBox(
+      //           width: 150,
+      //           child: Text("Time: $time",
+      //               style: TextStyle(fontWeight: FontWeight.bold)))
+      //     ]),
+      //     TableRow(children: [
+      //       Text(
+      //         'SDC ID:',
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       SizedBox(),
+      //       Text(sdcId, style: TextStyle(fontWeight: FontWeight.bold))
+      //     ]),
+      //     TableRow(children: [
+      //       Text(
+      //         'RECEIPT NUMBER:',
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       SizedBox(),
+      //       Text(sdcReceiptNum, style: TextStyle(fontWeight: FontWeight.bold))
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(height: 1),
+      //     ]),
+      //     TableRow(children: [
+      //       Divider(height: 1),
+      //       Divider(height: 1),
+      //       Divider(height: 1)
+      //     ]),
+      //     TableRow(children: [
+      //       Text("Internal Data:",
+      //           style: TextStyle(fontWeight: FontWeight.bold)),
+      //       Text(internalData, style: TextStyle(fontWeight: FontWeight.normal)),
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(height: 1),
+      //     ]),
+      //     TableRow(children: [
+      //       Text("Receipt Signature:",
+      //           style: TextStyle(fontWeight: FontWeight.bold)),
+      //       Text(receiptSignature,
+      //           style: TextStyle(fontWeight: FontWeight.normal)),
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(height: 4),
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(),
+      //       Center(
+      //         child: SizedBox(
+      //           width: 100,
+      //           height: 100,
+      //           child: BarcodeWidget(
+      //             barcode: Barcode.qrCode(
+      //               errorCorrectLevel: BarcodeQRCorrectionLevel.high,
+      //             ),
+      //             data: qrCode,
+      //           ),
+      //         ),
+      //       ),
+      //       SizedBox(),
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(height: 1),
+      //     ]),
+      //     TableRow(children: [
+      //       Divider(height: 1),
+      //       Divider(height: 1),
+      //       Divider(height: 1)
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(height: 1),
+      //     ]),
+      //     TableRow(children: [
+      //       Text(
+      //         'INVOICE NUMBER:',
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       SizedBox(),
+      //       Text(invoiceNum.toString(),
+      //           style: TextStyle(fontWeight: FontWeight.bold))
+      //     ]),
+      //     TableRow(children: [
+      //       SizedBox(
+      //           width: 150,
+      //           child: Text(
+      //             'DATE: $date',
+      //             style: TextStyle(fontWeight: FontWeight.bold),
+      //           )),
+      //       SizedBox(),
+      //       SizedBox(
+      //           width: 150,
+      //           child: Text("TIME: $time",
+      //               style: TextStyle(fontWeight: FontWeight.bold)))
+      //     ]),
+      //     TableRow(children: [
+      //       Text(
+      //         'MRC',
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       SizedBox(),
+      //       Text(mrc, style: TextStyle(fontWeight: FontWeight.bold))
+      //     ]),
+      //   ],
+      // );
     });
   }
 }
