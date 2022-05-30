@@ -163,7 +163,7 @@ class _PrintExampleState extends State<PrintExample> {
                 brandDescription: "Simba Supermaket Stands for Quality Service",
                 brandFooter: "SIMBA Supermaket and Coffee Shop",
                 customerTin: "123456",
-                invoiceType: "PS",
+                receiptType: "PS",
                 emails: ['info@yegobox.com']);
           },
           child: const Text('Print Now'),

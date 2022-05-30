@@ -1,9 +1,11 @@
 library receipt;
 
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:flipper_models/isar/order_item.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flipper_services/proxy.dart';
 import 'package:flutter/material.dart' as c;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
@@ -84,7 +86,7 @@ class OmniPrinter {
     List<String>? emails,
     String? customerTin = "000000000",
     required List<OrderItem> items,
-    required String invoiceType,
+    required String receiptType,
     required String sdcReceiptNum,
     required String totalTax,
     required double totalB,
@@ -111,6 +113,7 @@ class OmniPrinter {
       );
       image = await flutterImageProvider(imageLogo);
     }
+    final font = await PdfGoogleFonts.cairoRegular();
 
     List<TableRow> rows = [];
     rows.add(TableRow(
@@ -177,7 +180,7 @@ class OmniPrinter {
             ),
           ),
           // add wording
-          if (invoiceType == "NR")
+          if (receiptType == "NR")
             Text(
               'Refund',
               style: TextStyle(
@@ -186,8 +189,8 @@ class OmniPrinter {
                 fontSize: 14,
               ),
             ),
-          if (invoiceType == "NR") SizedBox(height: 3),
-          if (invoiceType == "NR")
+          if (receiptType == "NR") SizedBox(height: 3),
+          if (receiptType == "NR")
             Text(
               'REF.NORMAL RECEIPT#:$sdcReceiptNum',
               style: TextStyle(
@@ -196,8 +199,8 @@ class OmniPrinter {
                 fontSize: 14,
               ),
             ),
-          if (invoiceType == "NR") SizedBox(height: 3),
-          if (invoiceType == "NR")
+          if (receiptType == "NR") SizedBox(height: 3),
+          if (receiptType == "NR")
             Text(
               'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT\n Client ID:$customerTin',
               style: TextStyle(
@@ -206,7 +209,7 @@ class OmniPrinter {
                 fontSize: 14,
               ),
             ),
-          if (invoiceType == "CS")
+          if (receiptType == "CS")
             Text(
               'COPY',
               style: TextStyle(
@@ -215,8 +218,8 @@ class OmniPrinter {
                 fontSize: 14,
               ),
             ),
-          if (invoiceType == "CS") SizedBox(height: 3),
-          if (invoiceType == "CS")
+          if (receiptType == "CS") SizedBox(height: 3),
+          if (receiptType == "CS")
             Text(
               'REF.NORMAL RECEIPT#:$sdcReceiptNum',
               style: TextStyle(
@@ -225,8 +228,8 @@ class OmniPrinter {
                 fontSize: 14,
               ),
             ),
-          if (invoiceType == "CS") SizedBox(height: 3),
-          if (invoiceType == "CS")
+          if (receiptType == "CS") SizedBox(height: 3),
+          if (receiptType == "CS")
             Text(
               'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT\n Client ID:$customerTin',
               style: TextStyle(
@@ -235,7 +238,7 @@ class OmniPrinter {
                 fontSize: 14,
               ),
             ),
-          if (invoiceType == "TS")
+          if (receiptType == "TS")
             Text(
               'TRAINING MODE',
               style: TextStyle(
@@ -282,7 +285,7 @@ class OmniPrinter {
         Divider(height: 1)
       ]),
     );
-    if (invoiceType == "TS" || invoiceType == "PS") {
+    if (receiptType == "TS" || receiptType == "PS") {
       row = TableRow(children: [
         SizedBox(),
         Text(
@@ -428,7 +431,7 @@ class OmniPrinter {
         Divider(height: 1)
       ]),
     );
-    if (invoiceType == "TS") {
+    if (receiptType == "TS") {
       row = TableRow(children: [
         SizedBox(),
         Text(
@@ -441,7 +444,7 @@ class OmniPrinter {
       rows.add(row);
     }
 
-    if (invoiceType == "PS") {
+    if (receiptType == "PS") {
       row = TableRow(children: [
         SizedBox(),
         Text(
@@ -497,7 +500,8 @@ class OmniPrinter {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         SizedBox(),
-        Text(sdcReceiptNum, style: TextStyle(fontWeight: FontWeight.bold))
+        Text("$sdcReceiptNum $receiptType",
+            style: TextStyle(fontWeight: FontWeight.bold))
       ]),
     );
     rows.add(
@@ -590,6 +594,11 @@ class OmniPrinter {
         maxPages: 100,
         pageFormat: PdfPageFormat.a4,
         orientation: PageOrientation.portrait,
+        footer: (c) => Align(
+            alignment: Alignment.centerRight,
+            child: Center(
+                child: Text('Thank you for your visit! EBM v2: v1.5',
+                    style: TextStyle(font: font)))),
         build: (context) {
           return List<Widget>.generate(1, (index) {
             return Column(
@@ -603,13 +612,23 @@ class OmniPrinter {
         },
       ),
     );
-    await Printing.sharePdf(
-      bytes: await doc.save(),
-      filename: 'receipt.pdf',
-      subject: "receipt",
-      body: "Thank you for visiting us",
-      emails: emails,
-    );
+    // experiment layout the pdf file
+    Uint8List pdfData = await doc.save();
+
+    if (ProxyService.box.isAutoPrintEnabled()) {
+      await Printing.layoutPdf(
+          name: 'receipt', onLayout: (PdfPageFormat format) async => pdfData);
+      return;
+    } else {
+      // end of experiment
+      await Printing.sharePdf(
+        bytes: pdfData,
+        filename: 'receipt.pdf',
+        subject: "receipt",
+        body: "Thank you for visiting us",
+        emails: emails,
+      );
+    }
   }
 
   // Uint8List

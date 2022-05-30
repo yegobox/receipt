@@ -75,7 +75,7 @@ class Print {
     required List<String> emails,
     required String? customerTin,
     //add receipt type to I can add more wording.
-    required String invoiceType,
+    required String receiptType,
   }) {
     receiptQr(receiptQrCode).then((qrCode) {
       OmniPrinter printer;
@@ -89,7 +89,7 @@ class Print {
         brandFooter: brandFooter,
         emails: emails,
         customerTin: customerTin.toString(),
-        invoiceType: invoiceType,
+        receiptType: receiptType,
         sdcReceiptNum: sdcReceiptNum,
         items: orderItems,
         totalAEx: totalAEx,
