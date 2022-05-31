@@ -82,7 +82,6 @@ class OmniPrinter {
     String brandTIN = "101587390",
     String brandDescription = "We build app that server you!",
     String brandFooter = "yegobox shop",
-    String? receiverPhone,
     List<String>? emails,
     String? customerTin = "000000000",
     required List<OrderItem> items,
@@ -104,6 +103,7 @@ class OmniPrinter {
     required String receiptQrCode,
     required int invoiceNum,
     required String mrc,
+    required double totalPrice,
   }) async {
     ImageProvider? image;
     // https://github.com/flutter/flutter/issues/103803 web is broken.
@@ -171,6 +171,17 @@ class OmniPrinter {
             ],
           ),
           SizedBox(height: 1),
+          Divider(height: 1),
+          Divider(height: 1),
+          Divider(height: 1),
+          Text(
+            'Welcome to $brandName',
+            style: TextStyle(
+              fontBold: Font.helveticaBold(),
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+          ),
           Text(
             'Client ID: $customerTin',
             style: TextStyle(
@@ -179,6 +190,9 @@ class OmniPrinter {
               fontSize: 14,
             ),
           ),
+          Divider(height: 1),
+          Divider(height: 1),
+          Divider(height: 1),
           // add wording
           if (receiptType == "NR")
             Text(
@@ -304,7 +318,8 @@ class OmniPrinter {
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       SizedBox(),
-      Text(5000.toString(), style: TextStyle(fontWeight: FontWeight.bold))
+      Text((receiptType == "NR") ? "-$totalPrice" : "$totalPrice",
+          style: TextStyle(fontWeight: FontWeight.bold))
     ]));
     rows.add(TableRow(children: [
       Text(
@@ -312,7 +327,8 @@ class OmniPrinter {
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       SizedBox(),
-      Text(totalAEx.toString(), style: TextStyle(fontWeight: FontWeight.bold))
+      Text((receiptType == "NR") ? "-$totalAEx" : totalAEx.toString(),
+          style: TextStyle(fontWeight: FontWeight.bold))
     ]));
     rows.add(TableRow(children: [
       Text(
@@ -320,7 +336,8 @@ class OmniPrinter {
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       SizedBox(),
-      Text(totalB18, style: TextStyle(fontWeight: FontWeight.bold))
+      Text((receiptType == "NR") ? "-$totalB18" : totalB18,
+          style: TextStyle(fontWeight: FontWeight.bold))
     ]));
     rows.add(
       TableRow(children: [
@@ -329,7 +346,8 @@ class OmniPrinter {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         SizedBox(),
-        Text(totalB.toString(), style: TextStyle(fontWeight: FontWeight.bold))
+        Text((receiptType == "NR") ? "-$totalB" : totalB.toString(),
+            style: TextStyle(fontWeight: FontWeight.bold))
       ]),
     );
     rows.add(
@@ -339,7 +357,8 @@ class OmniPrinter {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         SizedBox(),
-        Text(totalTax, style: TextStyle(fontWeight: FontWeight.bold))
+        Text((receiptType == "NR") ? "-$totalTax" : totalTax,
+            style: TextStyle(fontWeight: FontWeight.bold))
       ]),
     );
     rows.add(
@@ -419,7 +438,7 @@ class OmniPrinter {
           payMode,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        Text('Amount', style: TextStyle(fontWeight: FontWeight.bold)),
+        // Text('Amount', style: TextStyle(fontWeight: FontWeight.bold)),
       ]),
     );
     rows.add(
@@ -596,9 +615,11 @@ class OmniPrinter {
         orientation: PageOrientation.portrait,
         footer: (c) => Align(
             alignment: Alignment.centerRight,
-            child: Center(
-                child: Text('Thank you for your visit! EBM v2: v1.5',
-                    style: TextStyle(font: font)))),
+            child: Column(children: [
+              Text('Thank you'),
+              Text('Come back again'),
+              Text('EBM v2: v1.5', style: TextStyle(font: font))
+            ])),
         build: (context) {
           return List<Widget>.generate(1, (index) {
             return Column(

@@ -24,26 +24,29 @@ class Print {
     time = "${dateTime.hour}:${dateTime.minute}:${dateTime.second}";
     orderItems = items;
     for (var item in items) {
-      totalItems = totalItems + 1;
-      double total = item.price * item.qty;
-      totalPrice = total + totalPrice;
-      String taxLabel = item.isTaxExempted ? "-EX" : "-B";
-      rows.add(TableRow(children: [
-        Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
-      ]));
-      rows.add(TableRow(children: [
-        Text((item.price).toString()),
-        Text(item.qty.toString()),
-        Text(
-          "$total $taxLabel",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
+      // if the isRefunded is null i.e the item has not been refunded so we add it to the total price
+      if (item.isRefunded == null) {
+        totalItems = totalItems + 1;
+        double total = item.price * item.qty;
+        totalPrice = total + totalPrice;
+        String taxLabel = item.isTaxExempted ? "-EX" : "-B";
+        rows.add(TableRow(children: [
+          Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
+        ]));
+        rows.add(TableRow(children: [
+          Text((item.price).toString()),
+          Text(item.qty.toString()),
+          Text(
+            "$total $taxLabel",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-      ]));
-      rows.add(TableRow(children: [
-        SizedBox(height: 1),
-      ]));
+        ]));
+        rows.add(TableRow(children: [
+          SizedBox(height: 1),
+        ]));
+      }
     }
     return rows;
   }
@@ -74,7 +77,6 @@ class Print {
     required String receiptQrCode,
     required List<String> emails,
     required String? customerTin,
-    //add receipt type to I can add more wording.
     required String receiptType,
   }) {
     receiptQr(receiptQrCode).then((qrCode) {
@@ -96,7 +98,6 @@ class Print {
         totalB18: totalB18,
         totalB: totalB,
         totalTax: totalTax,
-        receiverPhone: "",
         cash: cash,
         cashierName: cashierName,
         received: received,
@@ -109,6 +110,7 @@ class Print {
         receiptQrCode: qrCode,
         invoiceNum: invoiceNum,
         mrc: mrc,
+        totalPrice: totalPrice,
       );
     });
   }
