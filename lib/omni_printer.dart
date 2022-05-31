@@ -118,8 +118,8 @@ class OmniPrinter {
     List<TableRow> rows = [];
     rows.add(TableRow(
       children: [
-        SizedBox(width: 10),
-        Center(
+        receiptType == "NR" ? SizedBox(width: 1) : SizedBox(width: 10),
+        Container(
             child: Column(children: [
           image != null ? Image(image) : Text(""),
           Text(
@@ -164,16 +164,13 @@ class OmniPrinter {
                 brandTIN,
                 style: TextStyle(
                   fontBold: Font.helveticaBold(),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 12,
                 ),
               ),
             ],
           ),
           SizedBox(height: 1),
-          Divider(height: 1),
-          Divider(height: 1),
-          Divider(height: 1),
           Text(
             'Welcome to $brandName',
             style: TextStyle(
@@ -190,9 +187,7 @@ class OmniPrinter {
               fontSize: 14,
             ),
           ),
-          Divider(height: 1),
-          Divider(height: 1),
-          Divider(height: 1),
+
           // add wording
           if (receiptType == "NR")
             Text(
@@ -203,24 +198,20 @@ class OmniPrinter {
                 fontSize: 14,
               ),
             ),
-          if (receiptType == "NR") SizedBox(height: 3),
           if (receiptType == "NR")
             Text(
-              'REF.NORMAL RECEIPT#:$sdcReceiptNum',
+              'REF.NORMAL RECEIPT:# $sdcReceiptNum',
               style: TextStyle(
                 fontBold: Font.helveticaBold(),
                 fontWeight: FontWeight.bold,
-                fontSize: 14,
               ),
             ),
-          if (receiptType == "NR") SizedBox(height: 3),
           if (receiptType == "NR")
             Text(
-              'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT\n Client ID:$customerTin',
+              'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
               style: TextStyle(
                 fontBold: Font.helveticaBold(),
                 fontWeight: FontWeight.bold,
-                fontSize: 14,
               ),
             ),
           if (receiptType == "CS")
@@ -245,7 +236,7 @@ class OmniPrinter {
           if (receiptType == "CS") SizedBox(height: 3),
           if (receiptType == "CS")
             Text(
-              'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT\n Client ID:$customerTin',
+              'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
               style: TextStyle(
                 fontBold: Font.helveticaBold(),
                 fontWeight: FontWeight.bold,
@@ -434,11 +425,11 @@ class OmniPrinter {
     rows.add(
       TableRow(children: [
         Text('Pay Mode', style: TextStyle(fontWeight: FontWeight.bold)),
+        SizedBox(),
         Text(
           payMode,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        // Text('Amount', style: TextStyle(fontWeight: FontWeight.bold)),
       ]),
     );
     rows.add(
@@ -607,6 +598,18 @@ class OmniPrinter {
       SizedBox(),
       Text(mrc, style: TextStyle(fontWeight: FontWeight.bold))
     ]));
+    rows.add(
+      TableRow(children: [
+        SizedBox(),
+        Text('Thank you!'),
+      ]),
+    );
+    rows.add(
+      TableRow(children: [
+        SizedBox(),
+        Text('Come back again'),
+      ]),
+    );
     // end of footer
     doc.addPage(
       MultiPage(
@@ -616,8 +619,6 @@ class OmniPrinter {
         footer: (c) => Align(
             alignment: Alignment.centerRight,
             child: Column(children: [
-              Text('Thank you'),
-              Text('Come back again'),
               Text('EBM v2: v1.5', style: TextStyle(font: font))
             ])),
         build: (context) {

@@ -110,7 +110,7 @@ class Print {
         receiptQrCode: qrCode,
         invoiceNum: invoiceNum,
         mrc: mrc,
-        totalPrice: totalPrice,
+        totalPrice: 0,
       );
     });
   }
