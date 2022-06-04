@@ -75,6 +75,7 @@ class OmniPrinter {
     return Future.value(false);
   }
 
+  // connect to thermal printer https://github.com/DavBfr/dart_pdf/wiki/Document-Output#using-another-plugin
   Future<void> generateDocv2({
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
