@@ -1,6 +1,7 @@
 library receipt;
 
 import 'package:flipper_models/isar_models.dart';
+import 'package:flipper_services/proxy.dart';
 import 'package:pdf/widgets.dart';
 import 'package:receipt/omni_printer.dart';
 
@@ -82,36 +83,69 @@ class Print {
     receiptQr(receiptQrCode).then((qrCode) {
       OmniPrinter printer;
       printer = OmniPrinter();
-      printer.generateDocv2(
-        brandName: brandName,
-        brandAddress: brandAddress,
-        brandDescription: brandDescription,
-        brandTel: brandTel,
-        brandTIN: brandTIN,
-        brandFooter: brandFooter,
-        emails: emails,
-        customerTin: customerTin.toString(),
-        receiptType: receiptType,
-        sdcReceiptNum: sdcReceiptNum,
-        items: orderItems,
-        totalAEx: totalAEx,
-        totalB18: totalB18,
-        totalB: totalB,
-        totalTax: totalTax,
-        cash: cash,
-        cashierName: cashierName,
-        received: received,
-        payMode: payMode,
-        date: date,
-        time: time,
-        sdcId: sdcId,
-        internalData: internalData,
-        receiptSignature: receiptSignature,
-        receiptQrCode: qrCode,
-        invoiceNum: invoiceNum,
-        mrc: mrc,
-        totalPrice: 0,
-      );
+      if (ProxyService.box.isAutoPrintEnabled()) {
+        printer.generatePdfAndPrint(
+          brandName: brandName,
+          brandAddress: brandAddress,
+          brandDescription: brandDescription,
+          brandTel: brandTel,
+          brandTIN: brandTIN,
+          brandFooter: brandFooter,
+          emails: emails,
+          customerTin: customerTin.toString(),
+          receiptType: receiptType,
+          sdcReceiptNum: sdcReceiptNum,
+          items: orderItems,
+          totalAEx: totalAEx,
+          totalB18: totalB18,
+          totalB: totalB,
+          totalTax: totalTax,
+          cash: cash,
+          cashierName: cashierName,
+          received: received,
+          payMode: payMode,
+          date: date,
+          time: time,
+          sdcId: sdcId,
+          internalData: internalData,
+          receiptSignature: receiptSignature,
+          receiptQrCode: qrCode,
+          invoiceNum: invoiceNum,
+          mrc: mrc,
+          totalPrice: 0,
+        );
+      } else {
+        printer.generatePdfAndPrintv1(
+          brandName: brandName,
+          brandAddress: brandAddress,
+          brandDescription: brandDescription,
+          brandTel: brandTel,
+          brandTIN: brandTIN,
+          brandFooter: brandFooter,
+          emails: emails,
+          customerTin: customerTin.toString(),
+          receiptType: receiptType,
+          sdcReceiptNum: sdcReceiptNum,
+          items: orderItems,
+          totalAEx: totalAEx,
+          totalB18: totalB18,
+          totalB: totalB,
+          totalTax: totalTax,
+          cash: cash,
+          cashierName: cashierName,
+          received: received,
+          payMode: payMode,
+          date: date,
+          time: time,
+          sdcId: sdcId,
+          internalData: internalData,
+          receiptSignature: receiptSignature,
+          receiptQrCode: qrCode,
+          invoiceNum: invoiceNum,
+          mrc: mrc,
+          totalPrice: 0,
+        );
+      }
     });
   }
 }
