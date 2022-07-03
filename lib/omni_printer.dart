@@ -874,14 +874,14 @@ class OmniPrinter {
                 fontSize: 14,
               ),
             ),
-          if (receiptType == "CS") SizedBox(height: 3),
+          if (receiptType != "CS") SizedBox(height: 3),
           if (receiptType == "CS")
             Text(
               'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
               style: TextStyle(
                 fontBold: Font.helveticaBold(),
                 fontWeight: FontWeight.bold,
-                fontSize: 14,
+                fontSize: 10,
               ),
             ),
           if (receiptType == "TS")
@@ -896,13 +896,15 @@ class OmniPrinter {
         ])),
       ],
     ));
-    rows.add(
-      TableRow(children: [
-        Divider(height: 1),
-        Divider(height: 1),
-        Divider(height: 1)
-      ]),
-    );
+    if (receiptType != "CS") {
+      rows.add(
+        TableRow(children: [
+          Divider(height: 1),
+          Divider(height: 1),
+          Divider(height: 1)
+        ]),
+      );
+    }
     // end of heading
     for (OrderItem item in items) {
       double total = item.price * item.qty;
@@ -924,13 +926,15 @@ class OmniPrinter {
     TableRow row = const TableRow(
       children: [],
     );
-    rows.add(
-      TableRow(children: [
-        Divider(height: 1),
-        Divider(height: 1),
-        Divider(height: 1)
-      ]),
-    );
+    if (receiptType != "CS") {
+      rows.add(
+        TableRow(children: [
+          Divider(height: 1),
+          Divider(height: 1),
+          Divider(height: 1)
+        ]),
+      );
+    }
     if (receiptType == "TS" || receiptType == "PS") {
       row = TableRow(children: [
         SizedBox(),
@@ -1248,7 +1252,7 @@ class OmniPrinter {
     rows.add(
       TableRow(children: [
         SizedBox(),
-        Text('Come back again'),
+        Text('EBM v2: v1.5'),
       ]),
     );
     // end of footer
@@ -1257,11 +1261,6 @@ class OmniPrinter {
         maxPages: 100,
         pageFormat: PdfPageFormat.a4,
         orientation: PageOrientation.portrait,
-        footer: (c) => Align(
-            alignment: Alignment.centerRight,
-            child: Column(children: [
-              Text('EBM v2: v1.5', style: TextStyle(font: font))
-            ])),
         build: (context) {
           return List<Widget>.generate(1, (index) {
             return Column(
