@@ -12,13 +12,13 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  isar_flutter_libs: ^3.0.0-dev.0
-  isar: ^3.0.0-dev.0
+  isar_flutter_libs: ^3.0.0-dev.5
+  isar: ^3.0.0-dev.5
   path_provider: ^2.0.9
   equatable: ^2.0.3
   uuid: ^3.0.5
   http: ^0.13.4
-  printing: ^5.9.1
+  printing: ^5.9.2-dev
   open_file: ^3.2.1
   url_launcher: ^6.0.6
   intl: ^0.17.0

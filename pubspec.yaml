@@ -9,13 +9,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  printing: ^5.9.1
+  printing: ^5.9.2-dev
   pdf: ^3.7.3
   open_file: ^3.2.1
   gap: ^2.0.0
   flipper_models: ^0.0.1-dev.7
-  isar: ^3.0.0-dev.0
-  isar_flutter_libs: ^3.0.0-dev.0
+  isar: ^3.0.0-dev.5
+  isar_flutter_libs: ^3.0.0-dev.5
   qr_flutter: ^4.0.0
   flipper_services: ^0.0.1-dev.6
   universal_platform: ^1.0.0+1
@@ -24,7 +24,7 @@ dependencies:
 dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: ^2.1.7
-  isar_generator: ^3.0.0-dev.0
+  isar_generator: ^3.0.0-dev.5
 flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

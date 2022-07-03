@@ -1,7 +1,8 @@
 library receipt;
 
+import 'dart:developer';
 import 'dart:io';
-import 'dart:math';
+import 'dart:math' as math;
 import 'dart:typed_data';
 
 import 'package:flipper_models/isar/order_item.dart';
@@ -697,11 +698,11 @@ class OmniPrinter {
             final file = File(
                 '$path/page-${i.toString().padLeft(3, DateTime.now().toIso8601String())}.png');
             await file.writeAsBytes(png);
-            print('Saved to ${file.absolute.path}');
+            log('Saved to ${file.absolute.path}');
             i++;
           }
         } else {
-          print('no permission granted');
+          log('no permission granted');
         }
       }
     } else {
@@ -1329,7 +1330,7 @@ class OmniPrinter {
                     style: TextStyle(font: font)))),
         build: (context) => [
           ...Iterable<Widget>.generate(1, (index) {
-            final level = (sin(index / 5) * 6).abs().toInt();
+            final level = (math.sin(index / 5) * 6).abs().toInt();
             return Column(
               children: [
                 Header(
