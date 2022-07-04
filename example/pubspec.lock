@@ -793,7 +793,7 @@ packages:
     source: path
     version: "1.0.1-dev.3"
   flipper_services:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../../../packages/flipper_services"
       relative: true
@@ -1158,7 +1158,7 @@ packages:
     source: hosted
     version: "7.2.0"
   get_storage:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: get_storage
       url: "https://pub.dartlang.org"

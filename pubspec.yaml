@@ -20,6 +20,7 @@ dependencies:
   flipper_services: ^0.0.1-dev.6
   universal_platform: ^1.0.0+1
   downloads_path_provider_28: ^0.1.2
+  get_storage: ^2.0.3
 
 dev_dependencies:
   flutter_lints: ^2.0.0

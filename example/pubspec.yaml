@@ -26,8 +26,8 @@ dependencies:
   receipt: ^1.0.0-dev.2
   qr_flutter: ^4.0.0
   flipper_models: ^0.0.1-dev.7
-  # receipt:
-  #   path: ..
+  flipper_services: ^0.0.1-dev.6
+  get_storage: ^2.0.3
 
 dev_dependencies:
   build_runner: any
