@@ -157,7 +157,7 @@ class _PrintExampleState extends State<PrintExample> {
                 sdcReceiptNum: "8383/9280 NS",
                 invoiceNum: 1884,
                 brandName: "Simba Supermarket",
-                brandAddress: "SIMBA CITY CENTER, Kigali Rwanda",
+                brandAddress: "OOOOO CITY CENTER, Kigali Rwanda",
                 brandTel: "27131153",
                 brandTIN: "101587390",
                 brandDescription: "Simba Supermaket Stands for Quality Service",

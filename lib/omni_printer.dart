@@ -15,6 +15,8 @@ import 'package:printing/printing.dart';
 import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 
 final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 
@@ -747,171 +749,167 @@ class OmniPrinter {
     required double totalPrice,
   }) async {
     ImageProvider? image;
-    // https://github.com/flutter/flutter/issues/103803 web is broken.
+    // https://github.com/flutter/flutter/issues/103803
     if (!kIsWeb) {
       const imageLogo = c.AssetImage(
         'assets/rralogo.jpg',
       );
       image = await flutterImageProvider(imageLogo);
     }
-    final font = await PdfGoogleFonts.cairoRegular();
 
     List<TableRow> rows = [];
+    rows.add(TableRow(children: [
+      receiptType == "NR" ? SizedBox(width: 1) : SizedBox(width: 10),
+      image != null ? Image(image) : Text(""),
+    ]));
     rows.add(TableRow(
+      verticalAlignment: TableCellVerticalAlignment.full,
       children: [
-        receiptType == "NR" ? SizedBox(width: 1) : SizedBox(width: 10),
-        Container(
-            child: Column(children: [
-          image != null ? Image(image) : Text(""),
-          Text(
-            brandName,
-            style: TextStyle(
-              font: Font.helvetica(),
-              fontBold: Font.helveticaBold(),
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
-          ),
-          SizedBox(height: 3),
-          Text(
-            brandAddress,
-            style: TextStyle(
-              font: Font.helvetica(),
-              fontBold: Font.helveticaBold(),
-              fontSize: 16,
-            ),
-          ),
-          SizedBox(height: 3),
-          Text(
-            "Tel:$brandTel",
-            style: TextStyle(
-                font: Font.helvetica(),
-                fontBold: Font.helveticaBold(),
-                fontSize: 14),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'TIN:',
-                style: TextStyle(
-                  fontBold: Font.helveticaBold(),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                ),
-              ),
-              SizedBox(width: 100),
-              Text(
-                brandTIN,
-                style: TextStyle(
-                  fontBold: Font.helveticaBold(),
-                  fontWeight: FontWeight.normal,
-                  fontSize: 12,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 1),
-          Text(
-            'Welcome to $brandName',
-            style: TextStyle(
-              fontBold: Font.helveticaBold(),
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
-          ),
-          Text(
-            'Client ID: $customerTin',
-            style: TextStyle(
-              fontBold: Font.helveticaBold(),
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
-          ),
+        Text(
+          brandAddress,
+        ),
+        // Text(
+        //   "OOOOO",
+        // ),
+        // Text(
+        //   "CITY CENTER,",
+        // ),
+        // Text(
+        //   "Kigali Rwanda",
+        // ),
+        // Column(children: [
+        //   SizedBox(width: 10),
+        //   image != null ? Image(image) : Text(""),
+        // Text(
+        //   brandAddress,
+        // ),
 
-          // add wording
-          if (receiptType == "NR")
-            Text(
-              'Refund',
-              style: TextStyle(
-                fontBold: Font.helveticaBold(),
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
-            ),
-          if (receiptType == "NR")
-            Text(
-              'REF.NORMAL RECEIPT:# $sdcReceiptNum',
-              style: TextStyle(
-                fontBold: Font.helveticaBold(),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          if (receiptType == "NR")
-            Text(
-              'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-              style: TextStyle(
-                fontBold: Font.helveticaBold(),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          if (receiptType == "CS")
-            Text(
-              'COPY',
-              style: TextStyle(
-                fontBold: Font.helveticaBold(),
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
-            ),
-          if (receiptType == "CS") SizedBox(height: 3),
-          if (receiptType == "CS")
-            Text(
-              'REF.NORMAL RECEIPT#:$sdcReceiptNum',
-              style: TextStyle(
-                fontBold: Font.helveticaBold(),
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
-            ),
-          if (receiptType != "CS") SizedBox(height: 3),
-          if (receiptType == "CS")
-            Text(
-              'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-              style: TextStyle(
-                fontBold: Font.helveticaBold(),
-                fontWeight: FontWeight.bold,
-                fontSize: 10,
-              ),
-            ),
-          if (receiptType == "TS")
-            Text(
-              'TRAINING MODE',
-              style: TextStyle(
-                fontBold: Font.helveticaBold(),
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
-            ),
-        ])),
+        //   SizedBox(height: 1),
+        //   Text(
+        //     "Tel:$brandTel",
+        //     style: TextStyle(
+        //         font: Font.helvetica(),
+        //         fontBold: Font.helveticaBold(),
+        //         fontSize: 14),
+        //   ),
+        //   Row(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: [
+        //       Text(
+        //         'TIN:',
+        //         style: TextStyle(
+        //           fontBold: Font.helveticaBold(),
+        //           fontWeight: FontWeight.bold,
+        //           fontSize: 14,
+        //         ),
+        //       ),
+        //       SizedBox(width: 100),
+        //       Text(
+        //         brandTIN,
+        //         style: TextStyle(
+        //           fontBold: Font.helveticaBold(),
+        //           fontWeight: FontWeight.normal,
+        //           fontSize: 12,
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        //   SizedBox(height: 1),
+        //   Text(
+        //     'Welcome to $brandName',
+        //     style: TextStyle(
+        //       fontBold: Font.helveticaBold(),
+        //       fontWeight: FontWeight.bold,
+        //       fontSize: 14,
+        //     ),
+        //   ),
+        //   Text(
+        //     'Client ID: $customerTin',
+        //     style: TextStyle(
+        //       fontBold: Font.helveticaBold(),
+        //       fontWeight: FontWeight.bold,
+        //       fontSize: 14,
+        //     ),
+        //   ),
+
+        //   // add wording
+        //   if (receiptType == "NR")
+        //     Text(
+        //       'Refund',
+        //       style: TextStyle(
+        //         fontBold: Font.helveticaBold(),
+        //         fontWeight: FontWeight.bold,
+        //         fontSize: 14,
+        //       ),
+        //     ),
+        //   if (receiptType == "NR")
+        //     Text(
+        //       'REF.NORMAL RECEIPT:# $sdcReceiptNum',
+        //       style: TextStyle(
+        //         fontBold: Font.helveticaBold(),
+        //         fontWeight: FontWeight.bold,
+        //       ),
+        //     ),
+        //   if (receiptType == "NR")
+        //     Text(
+        //       'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
+        //       style: TextStyle(
+        //         fontBold: Font.helveticaBold(),
+        //         fontWeight: FontWeight.bold,
+        //       ),
+        //     ),
+        //   if (receiptType == "CS")
+        //     Text(
+        //       'COPY',
+        //       style: TextStyle(
+        //         fontBold: Font.helveticaBold(),
+        //         fontWeight: FontWeight.bold,
+        //         fontSize: 14,
+        //       ),
+        //     ),
+        //   if (receiptType == "CS") SizedBox(height: 3),
+        //   if (receiptType == "CS")
+        //     Text(
+        //       'REF.NORMAL RECEIPT#:$sdcReceiptNum',
+        //       style: TextStyle(
+        //         fontBold: Font.helveticaBold(),
+        //         fontWeight: FontWeight.bold,
+        //         fontSize: 14,
+        //       ),
+        //     ),
+        //   if (receiptType != "CS") SizedBox(height: 3),
+        //   if (receiptType == "CS")
+        //     Text(
+        //       'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
+        //       style: TextStyle(
+        //         fontBold: Font.helveticaBold(),
+        //         fontWeight: FontWeight.bold,
+        //         fontSize: 10,
+        //       ),
+        //     ),
+        //   if (receiptType == "TS")
+        //     Text(
+        //       'TRAINING MODE',
+        //       style: TextStyle(
+        //         fontBold: Font.helveticaBold(),
+        //         fontWeight: FontWeight.bold,
+        //         fontSize: 14,
+        //       ),
+        //     ),
+        // ]),
       ],
     ));
-    if (receiptType != "CS") {
-      rows.add(
-        TableRow(children: [
-          Divider(height: 1),
-          Divider(height: 1),
-          Divider(height: 1)
-        ]),
-      );
-    }
+
     // end of heading
     for (OrderItem item in items) {
       double total = item.price * item.qty;
 
       String taxLabel = item.isTaxExempted ? "-EX" : "-B";
       rows.add(TableRow(children: [
-        Text(item.name.length > 5 ? item.name.substring(0, 5) : item.name,
+        Text(
+            item.name.length > 5
+                ? "${item.name.substring(0, 5)}RW2BCXU0000001"
+                : "${item.name}RW2BCXU0000001",
             style: TextStyle(fontWeight: FontWeight.bold)),
         Text("${item.price} X ${item.qty}"),
         Text(
@@ -1257,40 +1255,75 @@ class OmniPrinter {
     );
     // end of footer
     doc.addPage(
-      MultiPage(
-        maxPages: 100,
-        pageFormat: PdfPageFormat.a4,
+      Page(
+        pageFormat: PdfPageFormat.roll80,
         orientation: PageOrientation.portrait,
-        build: (context) {
-          return List<Widget>.generate(1, (index) {
-            return Column(
-              children: [
-                Table(
-                  children: rows,
-                ),
-              ],
-            );
-          });
-        },
+        build: (context) => Table(
+          children: rows,
+        ),
       ),
     );
     // experiment layout the pdf file
     Uint8List pdfData = await doc.save();
 
-    if (ProxyService.box.isAutoPrintEnabled()) {
-      await Printing.layoutPdf(
-          name: 'receipt', onLayout: (PdfPageFormat format) async => pdfData);
-      return;
+    if (!ProxyService.box.isAutoPrintEnabled()) {
+      if (isDesktopOrWeb) {
+        // await Printing.layoutPdf(
+        //     name: DateTime.now().toIso8601String().replaceAll('-', '').replaceAll('.', '').replaceAll(':', ''), onLayout: (PdfPageFormat format) async => pdfData);
+        await Printing.sharePdf(
+          bytes: pdfData,
+          filename:
+              "${DateTime.now().toIso8601String().replaceAll('-', '').replaceAll('.', '').replaceAll(':', '')}.pdf",
+          subject: "receipt",
+          body: "Thank you for visiting us",
+          emails: emails,
+        );
+      } else {
+        Map<Permission, PermissionStatus> statuses = await [
+          Permission.storage,
+          Permission.manageExternalStorage
+        ].request();
+        if (statuses[Permission.storage]!.isGranted) {
+          // var dir = await DownloadsPathProvider.downloadsDirectory;
+          Directory? dir = await getDownloadsDirectory();
+          var i = 0;
+          final path = dir?.path;
+          await for (final page in Printing.raster(pdfData, dpi: 150)) {
+            final png = await page.toPng();
+            final file = File(p.normalize(
+                '$path/page-${i.toString().padLeft(3, DateTime.now().toIso8601String().replaceAll('-', '').replaceAll('.', '').replaceAll(':', ''))}.png'));
+            await file.writeAsBytes(png);
+            log('Saved to ${file.absolute.path}');
+            i++;
+          }
+        } else {
+          log('no permission granted');
+        }
+      }
     } else {
-      // end of experiment
       await Printing.sharePdf(
         bytes: pdfData,
-        filename: 'receipt.pdf',
+        filename:
+            "${DateTime.now().toIso8601String().replaceAll('-', '').replaceAll('.', '').replaceAll(':', '')}.pdf",
         subject: "receipt",
         body: "Thank you for visiting us",
         emails: emails,
       );
     }
+    // if (ProxyService.box.isAutoPrintEnabled()) {
+    //   await Printing.layoutPdf(
+    //       name: 'receipt', onLayout: (PdfPageFormat format) async => pdfData);
+    //   return;
+    // } else {
+    //   // end of experiment
+    //   await Printing.sharePdf(
+    //     bytes: pdfData,
+    //     filename: 'receipt.pdf',
+    //     subject: "receipt",
+    //     body: "Thank you for visiting us",
+    //     emails: emails,
+    //   );
+    // }
   }
 
   // Uint8List

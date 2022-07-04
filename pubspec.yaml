@@ -21,6 +21,8 @@ dependencies:
   universal_platform: ^1.0.0+1
   downloads_path_provider_28: ^0.1.2
   get_storage: ^2.0.3
+  path_provider: ^2.0.8
+  path: ^1.8.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
