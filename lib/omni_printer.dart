@@ -40,28 +40,28 @@ final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 ///     )
 ///   ],
 ///   body: Table(children: [
-///     TableRow(children: [
+///     Column(children: [
 ///       Text('Qty', style: const TextStyle(fontSize: 5)),
 ///       Text('DESC', style: const TextStyle(fontSize: 5)),
 ///       Text('AMT', style: const TextStyle(fontSize: 5)),
 ///     ]),
-///     TableRow(children: [
+///     Column(children: [
 ///       Text('1', style: const TextStyle(fontSize: 5)),
 ///       Text('Coffee', style: const TextStyle(fontSize: 5)),
 ///       Text('\$1.00', style: const TextStyle(fontSize: 5)),
 ///     ]),
-///     TableRow(children: [
+///     Column(children: [
 ///       Text('1', style: const TextStyle(fontSize: 5)),
 ///       Text('Coffee', style: const TextStyle(fontSize: 5)),
 ///       Text('\$1.00', style: const TextStyle(fontSize: 5)),
 ///     ]),
-///     TableRow(children: [
+///     Column(children: [
 ///       Text('1', style: const TextStyle(fontSize: 5)),
 ///       Text('Coffee', style: const TextStyle(fontSize: 5)),
 ///       Text('\$1.00', style: const TextStyle(fontSize: 5)),
 ///     ]),
 ///     /// show total
-///     TableRow(children: [
+///     Column(children: [
 ///       Text(''),
 ///       Text('Total', style: const TextStyle(fontSize: 6)),
 ///       Text('\$3.00', style: const TextStyle(fontSize: 6)),
@@ -70,655 +70,7 @@ final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 /// );
 class OmniPrinter {
   final doc = Document(version: PdfVersion.pdf_1_5, compress: true);
-
-  Future<bool> autoPrint() async {
-    Printing.layoutPdf(
-      format: PdfPageFormat.roll80,
-      // format: PdfPageFormat.a4,
-      onLayout: (PdfPageFormat format) async {
-        return doc.save();
-      },
-      // this will use a default printer if it is set.
-      usePrinterSettings: true,
-    );
-    return Future.value(false);
-  }
-
-  // connect to thermal printer https://github.com/DavBfr/dart_pdf/wiki/Document-Output#using-another-plugin
   Future<void> generatePdfAndPrint({
-    String brandName = "yegobox shop",
-    String brandAddress = "CITY CENTER, Kigali Rwanda",
-    String brandTel = "27131153",
-    String brandTIN = "101587390",
-    String brandDescription = "We build app that server you!",
-    String brandFooter = "yegobox shop",
-    List<String>? emails,
-    String? customerTin = "000000000",
-    required List<OrderItem> items,
-    required String receiptType,
-    required String sdcReceiptNum,
-    required String totalTax,
-    required double totalB,
-    required String totalB18,
-    required double totalAEx,
-    required double cash,
-    required String cashierName,
-    required double received,
-    required String payMode,
-    required String date,
-    required String time,
-    required String sdcId,
-    required String internalData,
-    required String receiptSignature,
-    required String receiptQrCode,
-    required int invoiceNum,
-    required String mrc,
-    required double totalPrice,
-  }) async {
-    final font1 = await PdfGoogleFonts.nunitoRegular();
-    final font2 = await PdfGoogleFonts.nunitoBold();
-    // final font = await PdfGoogleFonts.cairoRegular();
-    ImageProvider? image;
-    // https://github.com/flutter/flutter/issues/103803 web is broken.
-    if (!kIsWeb) {
-      const imageLogo = c.AssetImage(
-        'assets/rralogo.jpg',
-      );
-      image = await flutterImageProvider(imageLogo);
-    }
-
-    List<TableRow> rows = [];
-    rows.add(TableRow(
-      verticalAlignment: TableCellVerticalAlignment.full,
-      children: [
-        receiptType == "NR" ? SizedBox(width: 1) : SizedBox(width: 10),
-        Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          image != null ? Image(image) : Text(""),
-          Text(brandName,
-              style: TextStyle(
-                color: PdfColors.black,
-                fontWeight: FontWeight.normal,
-                fontSize: 10,
-                font: font1,
-              )),
-          SizedBox(height: 3),
-          Text(brandAddress,
-              style: TextStyle(
-                color: PdfColors.black,
-                fontWeight: FontWeight.normal,
-                fontSize: 10,
-                font: font1,
-              )),
-          SizedBox(height: 3),
-          Text(
-            "Tel:$brandTel",
-            style: TextStyle(
-              color: PdfColors.black,
-              fontWeight: FontWeight.normal,
-              fontSize: 10,
-              font: font1,
-            ),
-          ),
-          Row(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'TIN:',
-                style: TextStyle(
-                  color: PdfColors.black,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 10,
-                  font: font1,
-                ),
-              ),
-              SizedBox(width: 100),
-              Text(
-                brandTIN,
-                style: TextStyle(
-                  color: PdfColors.black,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 18,
-                  font: font1,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 1),
-          Text(
-            'Welcome to $brandName',
-            style: TextStyle(
-              color: PdfColors.black,
-              fontWeight: FontWeight.normal,
-              fontSize: 10,
-              font: font1,
-            ),
-          ),
-          Text(
-            'Client ID: $customerTin',
-            style: TextStyle(
-              color: PdfColors.black,
-              fontWeight: FontWeight.normal,
-              fontSize: 10,
-              font: font1,
-            ),
-          ),
-
-          // add wording
-          if (receiptType == "NR")
-            Text(
-              'Refund',
-              style: TextStyle(
-                color: PdfColors.black,
-                fontWeight: FontWeight.normal,
-                fontSize: 18,
-                font: font1,
-              ),
-            ),
-          if (receiptType == "NR")
-            Text(
-              'REF.NORMAL RECEIPT:# $sdcReceiptNum',
-              style: TextStyle(
-                color: PdfColors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                font: font1,
-              ),
-            ),
-          if (receiptType == "NR")
-            Text(
-              'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-              style: TextStyle(
-                color: PdfColors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                font: font1,
-              ),
-            ),
-          if (receiptType == "CS")
-            Text(
-              'COPY',
-              style: TextStyle(
-                color: PdfColors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                font: font1,
-              ),
-            ),
-          if (receiptType == "CS") SizedBox(height: 3),
-          if (receiptType == "CS")
-            Text(
-              'REF.NORMAL RECEIPT#:$sdcReceiptNum',
-              style: TextStyle(
-                fontBold: Font.helveticaBold(),
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
-            ),
-          if (receiptType == "CS") SizedBox(height: 3),
-          if (receiptType == "CS")
-            Text(
-              'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-              style: TextStyle(
-                color: PdfColors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                font: font1,
-              ),
-            ),
-          if (receiptType == "TS")
-            Text(
-              'TRAINING MODE',
-              style: TextStyle(
-                color: PdfColors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                font: font1,
-              ),
-            ),
-        ]),
-      ],
-    ));
-    rows.add(
-      TableRow(children: [
-        Divider(height: 1),
-        Divider(height: 1),
-        Divider(height: 1)
-      ]),
-    );
-    // end of heading
-    for (OrderItem item in items) {
-      double total = item.price * item.qty;
-
-      String taxLabel = item.isTaxExempted ? "-EX" : "-B";
-      rows.add(TableRow(children: [
-        Text(item.name.length > 5 ? item.name.substring(0, 5) : item.name,
-            style: TextStyle(
-              color: PdfColors.black,
-              fontWeight: FontWeight.normal,
-              fontSize: 18,
-              font: font1,
-            )),
-        Text(
-          "${item.price} X ${item.qty}",
-          style: TextStyle(
-            color: PdfColors.black,
-            fontWeight: FontWeight.normal,
-            fontSize: 18,
-            font: font1,
-          ),
-        ),
-        Text("$total $taxLabel",
-            style: TextStyle(
-              color: PdfColors.black,
-              fontWeight: FontWeight.normal,
-              fontSize: 18,
-              font: font1,
-            )),
-      ]));
-    }
-
-    TableRow row = const TableRow(
-      children: [],
-    );
-    rows.add(
-      TableRow(children: [
-        Divider(height: 1),
-        Divider(height: 1),
-        Divider(height: 1)
-      ]),
-    );
-    if (receiptType == "TS" || receiptType == "PS") {
-      row = TableRow(children: [
-        SizedBox(),
-        Text(
-          'THIS IS NOT AN OFFICIAL RECEIPT',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        SizedBox(),
-      ]);
-      rows.add(row);
-    }
-
-    rows.add(TableRow(children: [
-      Text(
-        'TOTAL:',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      SizedBox(),
-      Text((receiptType == "NR") ? "-$totalPrice" : "$totalPrice",
-          style: TextStyle(fontWeight: FontWeight.bold))
-    ]));
-    rows.add(TableRow(children: [
-      Text(
-        'TOTAL A-EX:',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      SizedBox(),
-      Text((receiptType == "NR") ? "-$totalAEx" : totalAEx.toString(),
-          style: TextStyle(fontWeight: FontWeight.bold))
-    ]));
-    rows.add(TableRow(children: [
-      Text(
-        'TOTAL B-18%:',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      SizedBox(),
-      Text((receiptType == "NR") ? "-$totalB18" : totalB18,
-          style: TextStyle(fontWeight: FontWeight.bold))
-    ]));
-    rows.add(
-      TableRow(children: [
-        Text(
-          'TOTAL TAX B:',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        SizedBox(),
-        Text((receiptType == "NR") ? "-$totalB" : totalB.toString(),
-            style: TextStyle(fontWeight: FontWeight.bold))
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        Text(
-          'TOTAL TAX:',
-          style: TextStyle(
-            color: PdfColors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-            font: font1,
-          ),
-        ),
-        SizedBox(),
-        Text((receiptType == "NR") ? "-$totalTax" : totalTax,
-            style: TextStyle(
-              color: PdfColors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-              font: font1,
-            ))
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        SizedBox(height: 1),
-      ]),
-    );
-
-    rows.add(
-      TableRow(children: [
-        SizedBox(height: 1),
-      ]),
-    );
-    rows.add(TableRow(children: [
-      Text(
-        'CASH:',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      SizedBox(),
-      Text(cash.toString(), style: TextStyle(fontWeight: FontWeight.bold))
-    ]));
-    rows.add(TableRow(children: [
-      Text(
-        'ITEMS NUMBER:',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      SizedBox(),
-      Text(items.length.toString(),
-          style: TextStyle(fontWeight: FontWeight.bold))
-    ]));
-    rows.add(TableRow(children: [
-      Text(
-        'Cashier Name:',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      SizedBox(),
-      Text(cashierName.toString(),
-          style: TextStyle(fontWeight: FontWeight.bold))
-    ]));
-    rows.add(
-      TableRow(children: [
-        SizedBox(height: 1),
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        Text(
-          'RcvdAmt: $received',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        SizedBox(),
-        Text("Change: ${cash - received}",
-            style: TextStyle(fontWeight: FontWeight.bold))
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        SizedBox(height: 1),
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        Divider(height: 1),
-        Divider(height: 1),
-        Divider(height: 1)
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        SizedBox(height: 1),
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        Text('Pay Mode', style: TextStyle(fontWeight: FontWeight.bold)),
-        SizedBox(),
-        Text(
-          payMode,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        SizedBox(height: 1),
-        SizedBox(height: 1),
-        Divider(height: 1),
-        Divider(height: 1),
-        Divider(height: 1)
-      ]),
-    );
-    if (receiptType == "TS") {
-      row = TableRow(children: [
-        SizedBox(),
-        Text(
-          'TRAINING MODE',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        SizedBox(),
-      ]);
-      rows.add(row);
-    }
-
-    if (receiptType == "PS") {
-      row = TableRow(children: [
-        SizedBox(),
-        Text(
-          'PROFORMA',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        SizedBox(),
-      ]);
-      rows.add(row);
-    }
-    rows.add(
-      TableRow(children: [
-        SizedBox(),
-        Text("SDC INFORMATION",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        SizedBox(),
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        SizedBox(height: 1),
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        SizedBox(
-            width: 150,
-            child: Text(
-              'Date: $date',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            )),
-        SizedBox(),
-        SizedBox(
-            width: 150,
-            child: Text("Time: $time",
-                style: TextStyle(fontWeight: FontWeight.bold)))
-      ]),
-    );
-    rows.add(TableRow(children: [
-      Text(
-        'SDC ID:',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      SizedBox(),
-      Text(sdcId, style: TextStyle(fontWeight: FontWeight.bold))
-    ]));
-    rows.add(
-      TableRow(children: [
-        Text(
-          'RECEIPT NUMBER:',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        SizedBox(),
-        Text("$sdcReceiptNum $receiptType",
-            style: TextStyle(fontWeight: FontWeight.bold))
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        SizedBox(height: 1),
-        Divider(height: 1),
-        Divider(height: 1),
-        Divider(height: 1)
-      ]),
-    );
-    rows.add(TableRow(children: [
-      Text("Internal Data:", style: TextStyle(fontWeight: FontWeight.bold)),
-      Text(internalData, style: TextStyle(fontWeight: FontWeight.normal)),
-    ]));
-    rows.add(
-      TableRow(children: [
-        SizedBox(height: 1),
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        Text("Receipt Signature:",
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        Text(receiptSignature, style: TextStyle(fontWeight: FontWeight.normal)),
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        SizedBox(height: 4),
-      ]),
-    );
-    rows.add(TableRow(children: [
-      SizedBox(),
-      Center(
-        child: SizedBox(
-          width: 100,
-          height: 100,
-          child: BarcodeWidget(
-            barcode: Barcode.qrCode(
-              errorCorrectLevel: BarcodeQRCorrectionLevel.high,
-            ),
-            data: receiptQrCode,
-          ),
-        ),
-      ),
-      SizedBox(),
-    ]));
-    rows.add(
-      TableRow(children: [
-        SizedBox(height: 4),
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        Text(
-          'INVOICE NUMBER:',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        SizedBox(),
-        Text(invoiceNum.toString(),
-            style: TextStyle(fontWeight: FontWeight.bold))
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        SizedBox(
-            width: 150,
-            child: Text(
-              'DATE: $date',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            )),
-        SizedBox(),
-        SizedBox(
-            width: 150,
-            child: Text("TIME: $time",
-                style: TextStyle(fontWeight: FontWeight.bold)))
-      ]),
-    );
-    rows.add(TableRow(children: [
-      Text(
-        'MRC',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      SizedBox(),
-      Text(mrc, style: TextStyle(fontWeight: FontWeight.bold))
-    ]));
-    rows.add(
-      TableRow(children: [
-        SizedBox(),
-        Text('Thank you!'),
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        SizedBox(),
-        Text('Come back again'),
-      ]),
-    );
-
-    // end of footer
-    doc.addPage(
-      Page(
-        pageTheme: PageTheme(
-          theme: ThemeData.withFont(
-            base: font1,
-            bold: font2,
-          ),
-          margin: const EdgeInsets.all(0.0),
-          orientation: PageOrientation.portrait,
-          pageFormat: const PdfPageFormat(
-              72 * PdfPageFormat.mm, double.infinity,
-              marginAll: 0 * PdfPageFormat.mm),
-        ),
-        build: (context) {
-          return Table(
-            children: rows,
-          );
-        },
-      ),
-    );
-    // experiment layout the pdf file
-    Uint8List pdfData = await doc.save();
-
-    if (ProxyService.box.isAutoPrintEnabled()) {
-      if (isDesktopOrWeb) {
-        await Printing.layoutPdf(
-            name: 'receipt', onLayout: (PdfPageFormat format) async => pdfData);
-      } else {
-        Map<Permission, PermissionStatus> statuses = await [
-          Permission.storage,
-          Permission.manageExternalStorage
-        ].request();
-        if (statuses[Permission.storage]!.isGranted) {
-          var dir = await DownloadsPathProvider.downloadsDirectory;
-          var i = 0;
-          final path = dir?.path;
-          await for (final page in Printing.raster(pdfData, dpi: 150)) {
-            final png = await page.toPng();
-            final file = File(
-                '$path/page-${i.toString().padLeft(3, DateTime.now().toIso8601String())}.png');
-            await file.writeAsBytes(png);
-            log('Saved to ${file.absolute.path}');
-            i++;
-          }
-        } else {
-          log('no permission granted');
-        }
-      }
-    } else {
-      await Printing.sharePdf(
-        bytes: pdfData,
-        filename: 'receipt.pdf',
-        subject: "receipt",
-        body: "Thank you for visiting us",
-        emails: emails,
-      );
-    }
-  }
-
-  Future<void> generatePdfAndPrintv1({
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
     String brandTel = "27131153",
@@ -757,184 +109,166 @@ class OmniPrinter {
       image = await flutterImageProvider(imageLogo);
     }
 
-    List<TableRow> rows = [];
-    rows.add(TableRow(children: [
-      receiptType == "NR" ? SizedBox(width: 1) : SizedBox(width: 10),
+    List<Widget> rows = [];
+
+    rows.add(Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+      SizedBox(width: 10),
       image != null ? Image(image) : Text(""),
-    ]));
-    rows.add(TableRow(
-      verticalAlignment: TableCellVerticalAlignment.full,
-      children: [
+      Text(
+        brandAddress,
+      ),
+      SizedBox(height: 1),
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text(
-          brandAddress,
+          "Tel:$brandTel",
+          style: TextStyle(
+              font: Font.helvetica(),
+              fontBold: Font.helveticaBold(),
+              fontSize: 14),
         ),
-        // Text(
-        //   "OOOOO",
-        // ),
-        // Text(
-        //   "CITY CENTER,",
-        // ),
-        // Text(
-        //   "Kigali Rwanda",
-        // ),
-        // Column(children: [
-        //   SizedBox(width: 10),
-        //   image != null ? Image(image) : Text(""),
-        // Text(
-        //   brandAddress,
-        // ),
+      ]),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'TIN:',
+            style: TextStyle(
+              fontBold: Font.helveticaBold(),
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+          ),
+          Text(
+            brandTIN,
+            style: TextStyle(
+              fontBold: Font.helveticaBold(),
+              fontWeight: FontWeight.normal,
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
+      SizedBox(height: 1),
+      Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text(
+          'Welcome to $brandName',
+          style: TextStyle(
+            fontBold: Font.helveticaBold(),
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+        ),
+        Text(
+          'Client ID: $customerTin',
+          style: TextStyle(
+            fontBold: Font.helveticaBold(),
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+        ),
+      ]),
 
-        //   SizedBox(height: 1),
-        //   Text(
-        //     "Tel:$brandTel",
-        //     style: TextStyle(
-        //         font: Font.helvetica(),
-        //         fontBold: Font.helveticaBold(),
-        //         fontSize: 14),
-        //   ),
-        //   Row(
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     children: [
-        //       Text(
-        //         'TIN:',
-        //         style: TextStyle(
-        //           fontBold: Font.helveticaBold(),
-        //           fontWeight: FontWeight.bold,
-        //           fontSize: 14,
-        //         ),
-        //       ),
-        //       SizedBox(width: 100),
-        //       Text(
-        //         brandTIN,
-        //         style: TextStyle(
-        //           fontBold: Font.helveticaBold(),
-        //           fontWeight: FontWeight.normal,
-        //           fontSize: 12,
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        //   SizedBox(height: 1),
-        //   Text(
-        //     'Welcome to $brandName',
-        //     style: TextStyle(
-        //       fontBold: Font.helveticaBold(),
-        //       fontWeight: FontWeight.bold,
-        //       fontSize: 14,
-        //     ),
-        //   ),
-        //   Text(
-        //     'Client ID: $customerTin',
-        //     style: TextStyle(
-        //       fontBold: Font.helveticaBold(),
-        //       fontWeight: FontWeight.bold,
-        //       fontSize: 14,
-        //     ),
-        //   ),
-
-        //   // add wording
-        //   if (receiptType == "NR")
-        //     Text(
-        //       'Refund',
-        //       style: TextStyle(
-        //         fontBold: Font.helveticaBold(),
-        //         fontWeight: FontWeight.bold,
-        //         fontSize: 14,
-        //       ),
-        //     ),
-        //   if (receiptType == "NR")
-        //     Text(
-        //       'REF.NORMAL RECEIPT:# $sdcReceiptNum',
-        //       style: TextStyle(
-        //         fontBold: Font.helveticaBold(),
-        //         fontWeight: FontWeight.bold,
-        //       ),
-        //     ),
-        //   if (receiptType == "NR")
-        //     Text(
-        //       'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-        //       style: TextStyle(
-        //         fontBold: Font.helveticaBold(),
-        //         fontWeight: FontWeight.bold,
-        //       ),
-        //     ),
-        //   if (receiptType == "CS")
-        //     Text(
-        //       'COPY',
-        //       style: TextStyle(
-        //         fontBold: Font.helveticaBold(),
-        //         fontWeight: FontWeight.bold,
-        //         fontSize: 14,
-        //       ),
-        //     ),
-        //   if (receiptType == "CS") SizedBox(height: 3),
-        //   if (receiptType == "CS")
-        //     Text(
-        //       'REF.NORMAL RECEIPT#:$sdcReceiptNum',
-        //       style: TextStyle(
-        //         fontBold: Font.helveticaBold(),
-        //         fontWeight: FontWeight.bold,
-        //         fontSize: 14,
-        //       ),
-        //     ),
-        //   if (receiptType != "CS") SizedBox(height: 3),
-        //   if (receiptType == "CS")
-        //     Text(
-        //       'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-        //       style: TextStyle(
-        //         fontBold: Font.helveticaBold(),
-        //         fontWeight: FontWeight.bold,
-        //         fontSize: 10,
-        //       ),
-        //     ),
-        //   if (receiptType == "TS")
-        //     Text(
-        //       'TRAINING MODE',
-        //       style: TextStyle(
-        //         fontBold: Font.helveticaBold(),
-        //         fontWeight: FontWeight.bold,
-        //         fontSize: 14,
-        //       ),
-        //     ),
-        // ]),
-      ],
-    ));
+      // add wording
+      if (receiptType == "NR")
+        Text(
+          'Refund',
+          style: TextStyle(
+            fontBold: Font.helveticaBold(),
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+        ),
+      if (receiptType == "NR")
+        Text(
+          'REF.NORMAL RECEIPT:# $sdcReceiptNum',
+          style: TextStyle(
+            fontBold: Font.helveticaBold(),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      if (receiptType == "NR")
+        Text(
+          'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
+          style: TextStyle(
+            fontBold: Font.helveticaBold(),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      if (receiptType == "CS")
+        Text(
+          'COPY',
+          style: TextStyle(
+            fontBold: Font.helveticaBold(),
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+        ),
+      if (receiptType == "CS") SizedBox(height: 3),
+      if (receiptType == "CS")
+        Text(
+          'REF.NORMAL RECEIPT#:$sdcReceiptNum',
+          style: TextStyle(
+            fontBold: Font.helveticaBold(),
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+        ),
+      if (receiptType != "CS") SizedBox(height: 3),
+      if (receiptType == "CS")
+        Text(
+          'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
+          style: TextStyle(
+            fontBold: Font.helveticaBold(),
+            fontWeight: FontWeight.bold,
+            fontSize: 10,
+          ),
+        ),
+      if (receiptType == "TS")
+        Text(
+          'TRAINING MODE',
+          style: TextStyle(
+            fontBold: Font.helveticaBold(),
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+        ),
+    ]));
 
     // end of heading
     for (OrderItem item in items) {
       double total = item.price * item.qty;
 
-      String taxLabel = item.isTaxExempted ? "-EX" : "-B";
-      rows.add(TableRow(children: [
-        Text(
-            item.name.length > 5
-                ? "${item.name.substring(0, 5)}RW2BCXU0000001"
-                : "${item.name}RW2BCXU0000001",
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        Text("${item.price} X ${item.qty}"),
-        Text(
-          "$total $taxLabel",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
+      String taxLabel = item.isTaxExempted ? "-EX" : "-B 18%";
+      rows.add(Column(children: [
+        Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Text(item.name.length > 5 ? item.name.substring(0, 5) : item.name,
+              style: TextStyle(fontWeight: FontWeight.bold)),
+          Spacer(),
+          Text("RW2BCXU0000001"),
+        ]),
+        Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Text("${item.price} X ${item.qty}"),
+          Spacer(),
+          Text(
+            "$total $taxLabel",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
+        ])
       ]));
     }
 
-    TableRow row = const TableRow(
+    Column row = Column(
       children: [],
     );
     if (receiptType != "CS") {
       rows.add(
-        TableRow(children: [
-          Divider(height: 1),
-          Divider(height: 1),
-          Divider(height: 1)
-        ]),
+        Column(children: [SizedBox(height: 10)]),
       );
     }
     if (receiptType == "TS" || receiptType == "PS") {
-      row = TableRow(children: [
+      row = Column(children: [
         SizedBox(),
         Text(
           'THIS IS NOT AN OFFICIAL RECEIPT',
@@ -946,7 +280,7 @@ class OmniPrinter {
       rows.add(row);
     }
 
-    rows.add(TableRow(children: [
+    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Text(
         'TOTAL:',
         style: TextStyle(fontWeight: FontWeight.bold),
@@ -955,7 +289,7 @@ class OmniPrinter {
       Text((receiptType == "NR") ? "-$totalPrice" : "$totalPrice",
           style: TextStyle(fontWeight: FontWeight.bold))
     ]));
-    rows.add(TableRow(children: [
+    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Text(
         'TOTAL A-EX:',
         style: TextStyle(fontWeight: FontWeight.bold),
@@ -964,7 +298,7 @@ class OmniPrinter {
       Text((receiptType == "NR") ? "-$totalAEx" : totalAEx.toString(),
           style: TextStyle(fontWeight: FontWeight.bold))
     ]));
-    rows.add(TableRow(children: [
+    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Text(
         'TOTAL B-18%:',
         style: TextStyle(fontWeight: FontWeight.bold),
@@ -974,7 +308,7 @@ class OmniPrinter {
           style: TextStyle(fontWeight: FontWeight.bold))
     ]));
     rows.add(
-      TableRow(children: [
+      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Text(
           'TOTAL TAX B:',
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -985,7 +319,7 @@ class OmniPrinter {
       ]),
     );
     rows.add(
-      TableRow(children: [
+      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Text(
           'TOTAL TAX:',
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -996,17 +330,17 @@ class OmniPrinter {
       ]),
     );
     rows.add(
-      TableRow(children: [
+      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         SizedBox(height: 1),
       ]),
     );
 
     rows.add(
-      TableRow(children: [
+      Column(children: [
         SizedBox(height: 1),
       ]),
     );
-    rows.add(TableRow(children: [
+    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Text(
         'CASH:',
         style: TextStyle(fontWeight: FontWeight.bold),
@@ -1014,7 +348,7 @@ class OmniPrinter {
       SizedBox(),
       Text(cash.toString(), style: TextStyle(fontWeight: FontWeight.bold))
     ]));
-    rows.add(TableRow(children: [
+    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Text(
         'ITEMS NUMBER:',
         style: TextStyle(fontWeight: FontWeight.bold),
@@ -1023,7 +357,7 @@ class OmniPrinter {
       Text(items.length.toString(),
           style: TextStyle(fontWeight: FontWeight.bold))
     ]));
-    rows.add(TableRow(children: [
+    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Text(
         'Cashier Name:',
         style: TextStyle(fontWeight: FontWeight.bold),
@@ -1033,59 +367,52 @@ class OmniPrinter {
           style: TextStyle(fontWeight: FontWeight.bold))
     ]));
     rows.add(
-      TableRow(children: [
+      Column(children: [
         SizedBox(height: 1),
       ]),
     );
     rows.add(
-      TableRow(children: [
+      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Text(
-          'RcvdAmt: $received',
+          'Received Amount: $received',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        SizedBox(),
+      ]),
+    );
+    rows.add(
+      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Text("Change: ${cash - received}",
             style: TextStyle(fontWeight: FontWeight.bold))
       ]),
     );
     rows.add(
-      TableRow(children: [
+      Column(children: [
         SizedBox(height: 1),
       ]),
     );
     rows.add(
-      TableRow(children: [
-        Divider(height: 1),
-        Divider(height: 1),
-        Divider(height: 1)
+      Column(children: [
+        SizedBox(height: 10),
       ]),
     );
     rows.add(
-      TableRow(children: [
-        SizedBox(height: 1),
-      ]),
-    );
-    rows.add(
-      TableRow(children: [
-        Text('Pay Mode', style: TextStyle(fontWeight: FontWeight.bold)),
-        SizedBox(),
+      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+        Text('Pay Mode:', style: TextStyle(fontWeight: FontWeight.bold)),
+        Spacer(),
         Text(
           payMode,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ]),
     );
+
     rows.add(
-      TableRow(children: [
-        SizedBox(height: 1),
-        SizedBox(height: 1),
-        Divider(height: 1),
-        Divider(height: 1),
-        Divider(height: 1)
+      Column(children: [
+        SizedBox(height: 10),
       ]),
     );
     if (receiptType == "TS") {
-      row = TableRow(children: [
+      row = Column(children: [
         SizedBox(),
         Text(
           'TRAINING MODE',
@@ -1098,7 +425,7 @@ class OmniPrinter {
     }
 
     if (receiptType == "PS") {
-      row = TableRow(children: [
+      row = Column(children: [
         SizedBox(),
         Text(
           'PROFORMA',
@@ -1110,7 +437,7 @@ class OmniPrinter {
       rows.add(row);
     }
     rows.add(
-      TableRow(children: [
+      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         SizedBox(),
         Text("SDC INFORMATION",
             textAlign: TextAlign.center,
@@ -1119,18 +446,22 @@ class OmniPrinter {
       ]),
     );
     rows.add(
-      TableRow(children: [
+      Column(children: [
         SizedBox(height: 1),
       ]),
     );
     rows.add(
-      TableRow(children: [
+      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         SizedBox(
             width: 150,
             child: Text(
               'Date: $date',
               style: TextStyle(fontWeight: FontWeight.bold),
             )),
+      ]),
+    );
+    rows.add(
+      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         SizedBox(),
         SizedBox(
             width: 150,
@@ -1138,55 +469,54 @@ class OmniPrinter {
                 style: TextStyle(fontWeight: FontWeight.bold)))
       ]),
     );
-    rows.add(TableRow(children: [
+    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Text(
         'SDC ID:',
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
-      SizedBox(),
+      Spacer(),
       Text(sdcId, style: TextStyle(fontWeight: FontWeight.bold))
     ]));
     rows.add(
-      TableRow(children: [
+      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Text(
           'RECEIPT NUMBER:',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        SizedBox(),
+        Spacer(),
         Text("$sdcReceiptNum $receiptType",
             style: TextStyle(fontWeight: FontWeight.bold))
       ]),
     );
     rows.add(
-      TableRow(children: [
-        SizedBox(height: 1),
-        Divider(height: 1),
-        Divider(height: 1),
-        Divider(height: 1)
+      Column(children: [
+        SizedBox(height: 10),
       ]),
     );
-    rows.add(TableRow(children: [
+    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Text("Internal Data:", style: TextStyle(fontWeight: FontWeight.bold)),
+    ]));
+    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Text(internalData, style: TextStyle(fontWeight: FontWeight.normal)),
     ]));
     rows.add(
-      TableRow(children: [
+      Column(children: [
         SizedBox(height: 1),
       ]),
     );
     rows.add(
-      TableRow(children: [
+      Column(children: [
         Text("Receipt Signature:",
             style: TextStyle(fontWeight: FontWeight.bold)),
         Text(receiptSignature, style: TextStyle(fontWeight: FontWeight.normal)),
       ]),
     );
     rows.add(
-      TableRow(children: [
+      Column(children: [
         SizedBox(height: 4),
       ]),
     );
-    rows.add(TableRow(children: [
+    rows.add(Column(children: [
       SizedBox(),
       Center(
         child: SizedBox(
@@ -1203,53 +533,52 @@ class OmniPrinter {
       SizedBox(),
     ]));
     rows.add(
-      TableRow(children: [
+      Column(children: [
         SizedBox(height: 4),
       ]),
     );
     rows.add(
-      TableRow(children: [
+      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Text(
           'INVOICE NUMBER:',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        SizedBox(),
         Text(invoiceNum.toString(),
             style: TextStyle(fontWeight: FontWeight.bold))
       ]),
     );
     rows.add(
-      TableRow(children: [
+      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         SizedBox(
-            width: 150,
             child: Text(
-              'DATE: $date',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            )),
-        SizedBox(),
+          'DATE: $date',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        )),
+      ]),
+    );
+    rows.add(
+      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         SizedBox(
-            width: 150,
             child: Text("TIME: $time",
                 style: TextStyle(fontWeight: FontWeight.bold)))
       ]),
     );
-    rows.add(TableRow(children: [
+    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Text(
         'MRC',
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
-      SizedBox(),
       Text(mrc, style: TextStyle(fontWeight: FontWeight.bold))
     ]));
     rows.add(
-      TableRow(children: [
-        SizedBox(),
+      Column(children: [
+        SizedBox(height: 10),
         Text('Thank you!'),
       ]),
     );
     rows.add(
-      TableRow(children: [
-        SizedBox(),
+      Column(children: [
+        SizedBox(height: 10),
         Text('EBM v2: v1.5'),
       ]),
     );
@@ -1258,7 +587,7 @@ class OmniPrinter {
       Page(
         pageFormat: PdfPageFormat.roll80,
         orientation: PageOrientation.portrait,
-        build: (context) => Table(
+        build: (context) => Column(
           children: rows,
         ),
       ),
@@ -1266,18 +595,15 @@ class OmniPrinter {
     // experiment layout the pdf file
     Uint8List pdfData = await doc.save();
 
-    if (!ProxyService.box.isAutoPrintEnabled()) {
+    if (ProxyService.box.isAutoPrintEnabled()) {
       if (isDesktopOrWeb) {
-        // await Printing.layoutPdf(
-        //     name: DateTime.now().toIso8601String().replaceAll('-', '').replaceAll('.', '').replaceAll(':', ''), onLayout: (PdfPageFormat format) async => pdfData);
-        await Printing.sharePdf(
-          bytes: pdfData,
-          filename:
-              "${DateTime.now().toIso8601String().replaceAll('-', '').replaceAll('.', '').replaceAll(':', '')}.pdf",
-          subject: "receipt",
-          body: "Thank you for visiting us",
-          emails: emails,
-        );
+        await Printing.layoutPdf(
+            name: DateTime.now()
+                .toIso8601String()
+                .replaceAll('-', '')
+                .replaceAll('.', '')
+                .replaceAll(':', ''),
+            onLayout: (PdfPageFormat format) async => pdfData);
       } else {
         Map<Permission, PermissionStatus> statuses = await [
           Permission.storage,
@@ -1310,215 +636,5 @@ class OmniPrinter {
         emails: emails,
       );
     }
-    // if (ProxyService.box.isAutoPrintEnabled()) {
-    //   await Printing.layoutPdf(
-    //       name: 'receipt', onLayout: (PdfPageFormat format) async => pdfData);
-    //   return;
-    // } else {
-    //   // end of experiment
-    //   await Printing.sharePdf(
-    //     bytes: pdfData,
-    //     filename: 'receipt.pdf',
-    //     subject: "receipt",
-    //     body: "Thank you for visiting us",
-    //     emails: emails,
-    //   );
-    // }
-  }
-
-  // Uint8List
-  Future<void> generateDoc({
-    String brandName = "yegobox shop",
-    String brandAddress = "CITY CENTER, Kigali Rwanda",
-    String brandTel = "27131153",
-    String brandTIN = "101587390",
-    String brandDescription = "We build app that server you!",
-    String brandFooter = "yegobox shop",
-    String? receiverPhone,
-    List<String>? emails,
-    String? customerTin = "000000000",
-    required List<TableRow> rows,
-    required String invoiceType,
-    required String sdcReceiptNum,
-  }) async {
-    ImageProvider? image;
-    if (!kIsWeb) {
-      const imageLogo = c.AssetImage(
-        'assets/rralogo.jpg',
-      );
-      image = await flutterImageProvider(imageLogo);
-    }
-    final font = await PdfGoogleFonts.cairoRegular();
-
-    doc.addPage(
-      MultiPage(
-        maxPages: 100,
-        pageFormat: PdfPageFormat.a4,
-        orientation: PageOrientation.portrait,
-        footer: (c) => Align(
-            alignment: Alignment.centerRight,
-            child: Center(
-                child: Text('Thank you for your visit! EBM v2: v1.5',
-                    style: TextStyle(font: font)))),
-        build: (context) => [
-          ...Iterable<Widget>.generate(1, (index) {
-            final level = (math.sin(index / 5) * 6).abs().toInt();
-            return Column(
-              children: [
-                Header(
-                  child: Column(children: [
-                    image != null ? Image(image) : Text(""),
-                    Text(
-                      brandName,
-                      style: TextStyle(
-                        font: Font.helvetica(),
-                        fontBold: Font.helveticaBold(),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    SizedBox(height: 3),
-                    Text(
-                      brandAddress,
-                      style: TextStyle(
-                        font: Font.helvetica(),
-                        fontBold: Font.helveticaBold(),
-                        fontSize: 16,
-                      ),
-                    ),
-                    SizedBox(height: 3),
-                    Text(
-                      "Tel:$brandTel",
-                      style: TextStyle(
-                          font: Font.helvetica(),
-                          fontBold: Font.helveticaBold(),
-                          fontSize: 14),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'TIN:',
-                          style: TextStyle(
-                            fontBold: Font.helveticaBold(),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
-                          ),
-                        ),
-                        SizedBox(width: 100),
-                        Text(
-                          brandTIN,
-                          style: TextStyle(
-                            fontBold: Font.helveticaBold(),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 1),
-                    Text(
-                      'Client ID: $customerTin',
-                      style: TextStyle(
-                        fontBold: Font.helveticaBold(),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
-                    ),
-                    // add wording
-                    if (invoiceType == "NR")
-                      Text(
-                        'Refund',
-                        style: TextStyle(
-                          fontBold: Font.helveticaBold(),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ),
-                    if (invoiceType == "NR") SizedBox(height: 3),
-                    if (invoiceType == "NR")
-                      Text(
-                        'REF.NORMAL RECEIPT#:$sdcReceiptNum',
-                        style: TextStyle(
-                          fontBold: Font.helveticaBold(),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ),
-                    if (invoiceType == "NR") SizedBox(height: 3),
-                    if (invoiceType == "NR")
-                      Text(
-                        'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT\n Client ID:$customerTin',
-                        style: TextStyle(
-                          fontBold: Font.helveticaBold(),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ),
-                    if (invoiceType == "CS")
-                      Text(
-                        'COPY',
-                        style: TextStyle(
-                          fontBold: Font.helveticaBold(),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ),
-                    if (invoiceType == "CS") SizedBox(height: 3),
-                    if (invoiceType == "CS")
-                      Text(
-                        'REF.NORMAL RECEIPT#:$sdcReceiptNum',
-                        style: TextStyle(
-                          fontBold: Font.helveticaBold(),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ),
-                    if (invoiceType == "CS") SizedBox(height: 3),
-                    if (invoiceType == "CS")
-                      Text(
-                        'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT\n Client ID:$customerTin',
-                        style: TextStyle(
-                          fontBold: Font.helveticaBold(),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ),
-                    if (invoiceType == "TS")
-                      Text(
-                        'TRAINING MODE',
-                        style: TextStyle(
-                          fontBold: Font.helveticaBold(),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ),
-                  ]),
-                  level: level,
-                ),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
-                  decoration: BoxDecoration(
-                      color: PdfColor.fromHex('#FFF'),
-                      borderRadius: BorderRadius.circular(0)),
-                  child: Table(children: [
-                    ...rows,
-                  ]),
-                ),
-              ],
-            );
-          }),
-        ],
-      ),
-    );
-
-    await Printing.sharePdf(
-      bytes: await doc.save(),
-      filename: 'receipt.pdf',
-      subject: "receipt",
-      body: "Thank you for visiting us",
-      emails: emails,
-    );
   }
 }

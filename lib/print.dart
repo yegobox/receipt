@@ -115,7 +115,7 @@ class Print {
           totalPrice: 0,
         );
       } else {
-        printer.generatePdfAndPrintv1(
+        printer.generatePdfAndPrint(
           brandName: brandName,
           brandAddress: brandAddress,
           brandDescription: brandDescription,
