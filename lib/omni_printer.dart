@@ -16,58 +16,11 @@ import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
 
 final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 
-/// [generateDoc] example
-/// generateDoc(
-///   header: [
-///     Text('K5 25 Ave', style: const TextStyle(fontSize: 5)),
-///     Text('+250 788 888 888',
-///         style: const TextStyle(fontSize: 5)),
-///   ],
-///   subHeader: [
-///     Text('Cashier: John Doe',
-///         style: const TextStyle(fontSize: 5)),
-///     Container(width: 10),
-///     Column(
-///       children: [
-///         Text('June 19,2021',
-///             style: const TextStyle(fontSize: 5)),
-///         Text('11:20 am', style: const TextStyle(fontSize: 5)),
-///       ],
-///     )
-///   ],
-///   body: Table(children: [
-///     Column(children: [
-///       Text('Qty', style: const TextStyle(fontSize: 5)),
-///       Text('DESC', style: const TextStyle(fontSize: 5)),
-///       Text('AMT', style: const TextStyle(fontSize: 5)),
-///     ]),
-///     Column(children: [
-///       Text('1', style: const TextStyle(fontSize: 5)),
-///       Text('Coffee', style: const TextStyle(fontSize: 5)),
-///       Text('\$1.00', style: const TextStyle(fontSize: 5)),
-///     ]),
-///     Column(children: [
-///       Text('1', style: const TextStyle(fontSize: 5)),
-///       Text('Coffee', style: const TextStyle(fontSize: 5)),
-///       Text('\$1.00', style: const TextStyle(fontSize: 5)),
-///     ]),
-///     Column(children: [
-///       Text('1', style: const TextStyle(fontSize: 5)),
-///       Text('Coffee', style: const TextStyle(fontSize: 5)),
-///       Text('\$1.00', style: const TextStyle(fontSize: 5)),
-///     ]),
-///     /// show total
-///     Column(children: [
-///       Text(''),
-///       Text('Total', style: const TextStyle(fontSize: 6)),
-///       Text('\$3.00', style: const TextStyle(fontSize: 6)),
-///     ]),
-///   ]),
-/// );
+/// [generatePdfAndPrint] example
+
 class OmniPrinter {
   final doc = Document(version: PdfVersion.pdf_1_5, compress: true);
   Future<void> generatePdfAndPrint({
@@ -610,8 +563,7 @@ class OmniPrinter {
           Permission.manageExternalStorage
         ].request();
         if (statuses[Permission.storage]!.isGranted) {
-          // var dir = await DownloadsPathProvider.downloadsDirectory;
-          Directory? dir = await getDownloadsDirectory();
+          var dir = await DownloadsPathProvider.downloadsDirectory;
           var i = 0;
           final path = dir?.path;
           await for (final page in Printing.raster(pdfData, dpi: 150)) {

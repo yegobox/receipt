@@ -33,6 +33,19 @@ class _PrintExampleState extends State<PrintExample> {
                   ..orderId = 1
                   ..variantId = 1,
                 OrderItem()
+                  ..name = 'Beans'
+                  ..price = 100
+                  ..qty = 1
+                  ..qty = 3
+                  ..discount = 10
+                  ..remainingStock = 10
+                  ..createdAt = '2020-01-01'
+                  ..updatedAt = '2020-01-01'
+                  ..reported = false
+                  ..isTaxExempted = false
+                  ..orderId = 1
+                  ..variantId = 1,
+                OrderItem()
                   ..name = 'Weat'
                   ..price = 100
                   ..qty = 1
