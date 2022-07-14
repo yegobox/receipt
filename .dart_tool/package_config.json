@@ -614,12 +614,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "fl_chart",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/fl_chart-0.40.6",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "flex_color_scheme",
       "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flex_color_scheme-4.2.0",
       "packageUri": "lib/",
@@ -885,7 +879,7 @@
     },
     {
       "name": "flutter_svg",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_svg-1.1.0",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_svg-1.1.1+1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -1023,7 +1017,7 @@
     },
     {
       "name": "google_fonts",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/google_fonts-2.3.3",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/google_fonts-3.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1056,12 +1050,6 @@
       "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/google_sign_in_web-0.10.1+2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
-    },
-    {
-      "name": "google_ui",
-      "rootUri": "../../google_ui",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
     },
     {
       "name": "googleapis",
@@ -1185,19 +1173,19 @@
     },
     {
       "name": "isar",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar-3.0.0-dev.5",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar-3.0.0-dev.7",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "isar_flutter_libs",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar_flutter_libs-3.0.0-dev.5",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar_flutter_libs-3.0.0-dev.7",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "isar_generator",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar_generator-3.0.0-dev.5",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/isar_generator-3.0.0-dev.7",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -1290,6 +1278,12 @@
       "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/mime-1.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "modal_bottom_sheet",
+      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/modal_bottom_sheet-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "msix",
@@ -1718,12 +1712,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "simple_animations",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/simple_animations-3.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "sky_engine",
       "rootUri": "file:///C:/Users/RichardMuragijimana/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -1740,12 +1728,6 @@
       "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/source_span-1.9.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
-    },
-    {
-      "name": "spring",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/spring-2.0.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
     },
     {
       "name": "sqflite",
@@ -1810,18 +1792,6 @@
     {
       "name": "string_scanner",
       "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/string_scanner-1.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "supercharged",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/supercharged-2.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "supercharged_dart",
-      "rootUri": "file:///C:/Users/RichardMuragijimana/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/supercharged_dart-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -2012,7 +1982,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-07-04T13:24:53.143384Z",
+  "generated": "2022-07-14T04:47:06.709808Z",
   "generator": "pub",
   "generatorVersion": "2.17.5"
 }

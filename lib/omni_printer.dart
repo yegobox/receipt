@@ -389,6 +389,18 @@ class OmniPrinter {
       ]);
       rows.add(row);
     }
+    var i = 0;
+    final dashesInternalData = {2, 3, 4, 5, 6, 7};
+
+    final replacedInternalData = internalData.splitMapJoin(RegExp('....'),
+        onNonMatch: (s) => dashesInternalData.contains(i++) ? '-' : '');
+
+    final dashesReceiptSignature = {1, 2, 3, 4};
+
+    final replacedReceiptSignature = receiptSignature.splitMapJoin(
+        RegExp('....'),
+        onNonMatch: (s) => dashesReceiptSignature.contains(i++) ? '-' : '');
+
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         SizedBox(),
@@ -450,7 +462,8 @@ class OmniPrinter {
       Text("Internal Data:", style: TextStyle(fontWeight: FontWeight.bold)),
     ]));
     rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-      Text(internalData, style: TextStyle(fontWeight: FontWeight.normal)),
+      Text(replacedInternalData,
+          style: TextStyle(fontWeight: FontWeight.normal)),
     ]));
     rows.add(
       Column(children: [
@@ -461,7 +474,10 @@ class OmniPrinter {
       Column(children: [
         Text("Receipt Signature:",
             style: TextStyle(fontWeight: FontWeight.bold)),
-        Text(receiptSignature, style: TextStyle(fontWeight: FontWeight.normal)),
+        Text(
+            replacedReceiptSignature.substring(
+                0, replacedReceiptSignature.length - 1),
+            style: TextStyle(fontWeight: FontWeight.normal)),
       ]),
     );
     rows.add(

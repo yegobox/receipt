@@ -56,8 +56,7 @@ dependency_overrides:
     path: ..\\flutter_slidable
   flutterfire_ui:
     path: ..\\..\\packages\\flutterfire_ui
-  google_ui:
-    path: ..\\google_ui
+
   msix:
     path: ..\\msix
   open_file:
