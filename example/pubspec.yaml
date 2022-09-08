@@ -12,8 +12,8 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  isar_flutter_libs: ^3.0.0-dev.8
-  isar: ^3.0.0-dev.8
+  isar_flutter_libs: ^3.0.0-dev.14
+  isar: ^3.0.0-dev.14
   path_provider: ^2.0.9
   equatable: ^2.0.3
   uuid: ^3.0.5

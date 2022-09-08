@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: cli_dialog,dart_console,device_info_plus,device_info_plus_linux,device_info_plus_macos,device_info_plus_platform_interface,device_info_plus_web,device_info_plus_windows,example,file_picker,flipper_chat,flipper_dashboard,flipper_data_table,flipper_finance,flipper_loading,flipper_localize,flipper_login,flipper_models,flipper_routing,flipper_rw,flipper_services,flipper_ui,flutter_chat_types,flutter_chat_ui,flutter_datetime_picker,flutter_firebase_chat_core,flutter_slidable,flutterfire_ui,google_ui,msix,open_file,package_info_plus,package_info_plus_linux,package_info_plus_macos,package_info_plus_platform_interface,package_info_plus_web,package_info_plus_windows,pdf,printing,pubnub,qr_code_scanner,qr_flutter,scrollable_positioned_list,upgrader,win32
+# melos_managed_dependency_overrides: cli_dialog,dart_console,device_info_plus,device_info_plus_linux,device_info_plus_macos,device_info_plus_platform_interface,device_info_plus_web,device_info_plus_windows,example,file_picker,flipper_chat,flipper_dashboard,flipper_data_table,flipper_finance,flipper_loading,flipper_localize,flipper_login,flipper_models,flipper_routing,flipper_rw,flipper_services,flipper_ui,flutter_chat_types,flutter_chat_ui,flutter_datetime_picker,flutter_firebase_chat_core,flutter_slidable,msix,open_file,package_info_plus,package_info_plus_linux,package_info_plus_macos,package_info_plus_platform_interface,package_info_plus_web,package_info_plus_windows,pdf,printing,pubnub,qr_code_scanner,qr_flutter,scrollable_positioned_list,upgrader,win32
 dependency_overrides:
   cli_dialog:
     path: ..\\cli_dialog
@@ -54,9 +54,6 @@ dependency_overrides:
     path: ..\\flutter_firebase_chat_core
   flutter_slidable:
     path: ..\\flutter_slidable
-  flutterfire_ui:
-    path: ..\\..\\packages\\flutterfire_ui
-
   msix:
     path: ..\\msix
   open_file:
