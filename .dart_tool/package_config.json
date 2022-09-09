@@ -465,13 +465,13 @@
     },
     {
       "name": "firebase_auth_dart",
-      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_dart-0.1.3",
+      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_dart-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "firebase_auth_desktop",
-      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_desktop-0.1.3",
+      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_desktop-1.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -495,15 +495,15 @@
     },
     {
       "name": "firebase_core_dart",
-      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_dart-0.1.1",
+      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_dart-1.0.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "firebase_core_desktop",
-      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_desktop-0.1.1",
+      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_desktop-1.0.2",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "firebase_core_platform_interface",
@@ -2012,7 +2012,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-09-08T18:37:15.167504Z",
+  "generated": "2022-09-09T05:00:40.448143Z",
   "generator": "pub",
   "generatorVersion": "2.18.0"
 }
