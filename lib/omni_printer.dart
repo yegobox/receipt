@@ -2,9 +2,7 @@ library receipt;
 
 import 'dart:developer';
 import 'dart:io';
-import 'dart:math' as math;
-import 'dart:typed_data';
-
+import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
 import 'package:flipper_models/isar/order_item.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flipper_services/proxy.dart';
@@ -12,7 +10,6 @@ import 'package:flutter/material.dart' as c;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
-import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as p;
@@ -299,7 +296,7 @@ class OmniPrinter {
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       SizedBox(),
-      Text(cash.toString(), style: TextStyle(fontWeight: FontWeight.bold))
+      Text(received.toString(), style: TextStyle(fontWeight: FontWeight.bold))
     ]));
     rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Text(
@@ -420,18 +417,9 @@ class OmniPrinter {
         SizedBox(
             width: 150,
             child: Text(
-              'Date: $date',
+              'Date Time: $date $time',
               style: TextStyle(fontWeight: FontWeight.bold),
             )),
-      ]),
-    );
-    rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        SizedBox(),
-        SizedBox(
-            width: 150,
-            child: Text("Time: $time",
-                style: TextStyle(fontWeight: FontWeight.bold)))
       ]),
     );
     rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -520,18 +508,12 @@ class OmniPrinter {
       Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         SizedBox(
             child: Text(
-          'DATE: $date',
+          'DATE TIME: $date $time',
           style: TextStyle(fontWeight: FontWeight.bold),
         )),
       ]),
     );
-    rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        SizedBox(
-            child: Text("TIME: $time",
-                style: TextStyle(fontWeight: FontWeight.bold)))
-      ]),
-    );
+
     rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Text(
         'MRC',
@@ -579,7 +561,7 @@ class OmniPrinter {
           Permission.manageExternalStorage
         ].request();
         if (statuses[Permission.storage]!.isGranted) {
-          var dir = await DownloadsPathProvider.downloadsDirectory;
+          Directory? dir = await DownloadsPath.downloadsDirectory();
           var i = 0;
           final path = dir?.path;
           await for (final page in Printing.raster(pdfData, dpi: 150)) {
