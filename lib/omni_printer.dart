@@ -386,17 +386,19 @@ class OmniPrinter {
       ]);
       rows.add(row);
     }
-    var i = 0;
+    //
+    var x = 0;
     final dashesInternalData = {2, 3, 4, 5, 6, 7};
 
     final replacedInternalData = internalData.splitMapJoin(RegExp('....'),
-        onNonMatch: (s) => dashesInternalData.contains(i++) ? '-' : '');
+        onNonMatch: (s) => dashesInternalData.contains(x++) ? '-' : '');
 
     final dashesReceiptSignature = {1, 2, 3, 4};
 
+    var y = 0;
     final replacedReceiptSignature = receiptSignature.splitMapJoin(
         RegExp('....'),
-        onNonMatch: (s) => dashesReceiptSignature.contains(i++) ? '-' : '');
+        onNonMatch: (s) => dashesReceiptSignature.contains(y++) ? '-' : '');
 
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.start, children: [
