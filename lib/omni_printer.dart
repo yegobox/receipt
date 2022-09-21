@@ -213,11 +213,7 @@ class OmniPrinter {
         ])
       ]));
     }
-    rows.add(
-      Column(children: [
-        Divider(height: 1),
-      ]),
-    );
+    
     Column row = Column(
       children: [],
     );
