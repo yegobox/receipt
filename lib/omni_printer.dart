@@ -77,6 +77,7 @@ class OmniPrinter {
               fontSize: 14),
         ),
       ]),
+
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -183,7 +184,11 @@ class OmniPrinter {
           ),
         ),
     ]));
-
+    rows.add(
+      Column(children: [
+        Divider(height: 1),
+      ]),
+    );
     // end of heading
     for (OrderItem item in items) {
       double total = item.price * item.qty;
@@ -208,7 +213,11 @@ class OmniPrinter {
         ])
       ]));
     }
-
+    rows.add(
+      Column(children: [
+        Divider(height: 1),
+      ]),
+    );
     Column row = Column(
       children: [],
     );
@@ -229,7 +238,11 @@ class OmniPrinter {
       ]);
       rows.add(row);
     }
-
+    rows.add(
+      Column(children: [
+        Divider(height: 1),
+      ]),
+    );
     rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Text(
         'TOTAL:',
@@ -257,6 +270,7 @@ class OmniPrinter {
       Text((receiptType == "NR") ? "-$totalB18" : totalB18,
           style: TextStyle(fontWeight: FontWeight.bold))
     ]));
+
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Text(
@@ -316,6 +330,7 @@ class OmniPrinter {
       Text(cashierName.toString(),
           style: TextStyle(fontWeight: FontWeight.bold))
     ]));
+
     rows.add(
       Column(children: [
         SizedBox(height: 1),
@@ -355,7 +370,11 @@ class OmniPrinter {
         ),
       ]),
     );
-
+    rows.add(
+      Column(children: [
+        Divider(height: 1),
+      ]),
+    );
     rows.add(
       Column(children: [
         SizedBox(height: 10),
@@ -475,6 +494,7 @@ class OmniPrinter {
         SizedBox(height: 4),
       ]),
     );
+
     rows.add(Column(children: [
       SizedBox(),
       Center(
