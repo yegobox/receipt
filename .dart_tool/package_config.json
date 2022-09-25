@@ -963,15 +963,15 @@
     },
     {
       "name": "geolocator",
-      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator-8.2.1",
+      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator-9.0.2",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.15"
     },
     {
       "name": "geolocator_android",
-      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_android-3.2.1",
+      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_android-4.1.3",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.15"
     },
     {
       "name": "geolocator_apple",
@@ -1185,19 +1185,19 @@
     },
     {
       "name": "isar",
-      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/isar-3.0.0",
+      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/isar-3.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "isar_flutter_libs",
-      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/isar_flutter_libs-3.0.0",
+      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/isar_flutter_libs-3.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "isar_generator",
-      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/isar_generator-3.0.0",
+      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/isar_generator-3.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -2012,7 +2012,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-09-18T09:54:11.031814Z",
+  "generated": "2022-09-24T18:36:29.055066Z",
   "generator": "pub",
-  "generatorVersion": "2.18.0"
+  "generatorVersion": "2.18.1"
 }
