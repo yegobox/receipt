@@ -1334,10 +1334,10 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "open_file",
-      "rootUri": "../../open_file",
+      "name": "open_filex",
+      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/open_filex-4.1.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "os_detect",
@@ -2012,7 +2012,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-09-25T19:58:59.224522Z",
+  "generated": "2022-10-06T06:47:42.135106Z",
   "generator": "pub",
   "generatorVersion": "2.18.1"
 }
