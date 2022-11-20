@@ -861,7 +861,7 @@
     },
     {
       "name": "flutter_svg",
-      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-1.1.4",
+      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-1.1.6",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -2006,7 +2006,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-11-20T04:38:50.095590Z",
+  "generated": "2022-11-20T06:04:43.586856Z",
   "generator": "pub",
   "generatorVersion": "2.18.2"
 }
