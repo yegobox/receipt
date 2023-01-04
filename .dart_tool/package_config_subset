@@ -170,10 +170,6 @@ flipper_ui
 2.17
 file:///C:/Users/SPENN/Documents/flipper/packages/flipper_ui/
 file:///C:/Users/SPENN/Documents/flipper/packages/flipper_ui/lib/
-location
-2.12
-file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/git/flutterlocation-91fc47700e0645fc4d4616fe8123672fa0b5e9c5/packages/location/
-file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/git/flutterlocation-91fc47700e0645fc4d4616fe8123672fa0b5e9c5/packages/location/lib/
 _discoveryapis_commons
 2.12
 file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/_discoveryapis_commons-1.0.3/
@@ -858,6 +854,10 @@ loading
 2.1
 file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/loading-1.0.2/
 file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/loading-1.0.2/lib/
+location
+2.12
+file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/location-4.4.0/
+file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/location-4.4.0/lib/
 location_platform_interface
 2.12
 file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/location_platform_interface-2.3.0/

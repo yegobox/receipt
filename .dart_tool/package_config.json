@@ -1221,7 +1221,7 @@
     },
     {
       "name": "location",
-      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/git/flutterlocation-91fc47700e0645fc4d4616fe8123672fa0b5e9c5/packages/location",
+      "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/location-4.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -2006,7 +2006,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-11-20T06:04:43.586856Z",
+  "generated": "2022-12-29T13:17:19.452039Z",
   "generator": "pub",
-  "generatorVersion": "2.18.2"
+  "generatorVersion": "2.18.6"
 }
