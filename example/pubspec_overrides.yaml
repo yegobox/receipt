@@ -22,8 +22,6 @@ dependency_overrides:
     path: ..\\..\\flutterfire_desktop\\packages\\firebase_core\\firebase_core_dart
   firebase_core_desktop:
     path: ..\\..\\flutterfire_desktop\\packages\\firebase_core\\firebase_core_desktop
-  flipper_chat:
-    path: ..\\..\\..\\packages\\flipper_chat
   flipper_dashboard:
     path: ..\\..\\..\\packages\\flipper_dashboard
   flipper_data_table:
@@ -46,14 +44,8 @@ dependency_overrides:
     path: ..\\..\\..\\packages\\flipper_services
   flipper_ui:
     path: ..\\..\\..\\packages\\flipper_ui
-  flutter_chat_types:
-    path: ..\\..\\flutter_chat_types
-  flutter_chat_ui:
-    path: ..\\..\\flutter_chat_ui
   flutter_datetime_picker:
     path: ..\\..\\flutter_datetime_picker
-  flutter_firebase_chat_core:
-    path: ..\\..\\flutter_firebase_chat_core
   flutter_slidable:
     path: ..\\..\\flutter_slidable
   package_info_plus:
