@@ -5,13 +5,10 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   connectivity_plus_windows
   desktop_webview_auth
-  flutter_acrylic
   geolocator_windows
   isar_flutter_libs
   permission_handler_windows
   printing
-  sentry_flutter
-  system_theme
   url_launcher_windows
 )
 
