@@ -40,6 +40,7 @@ dependency_overrides:
     path: ..\\..\\packages\\flipper_routing
   flipper_services:
     path: ..\\..\\packages\\flipper_services
+
   flipper_ui:
     path: ..\\..\\packages\\flipper_ui
   flutter_datetime_picker:
