@@ -627,7 +627,7 @@
     },
     {
       "name": "flipper_nfc",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flipper_nfc-1.0.1",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flipper_nfc-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -1856,7 +1856,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-01-31T07:59:38.692860Z",
+  "generated": "2023-01-31T16:43:29.355436Z",
   "generator": "pub",
   "generatorVersion": "2.19.0"
 }
