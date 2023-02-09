@@ -326,12 +326,6 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "dio",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/dio-4.0.6",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "email_validator",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/email_validator-2.1.17",
       "packageUri": "lib/",
@@ -774,6 +768,12 @@
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_native_splash-2.2.16",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "flutter_native_timezone",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_native_timezone-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_plugin_android_lifecycle",
@@ -1892,7 +1892,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-02-06T08:55:51.311674Z",
+  "generated": "2023-02-09T12:30:28.941615Z",
   "generator": "pub",
-  "generatorVersion": "2.19.0"
+  "generatorVersion": "2.19.1"
 }

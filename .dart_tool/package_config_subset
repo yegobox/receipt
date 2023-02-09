@@ -190,10 +190,6 @@ desktop_webview_auth
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/desktop_webview_auth-0.0.11/
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/desktop_webview_auth-0.0.11/lib/
-dio
-2.12
-file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/dio-4.0.6/
-file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/dio-4.0.6/lib/
 email_validator
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/email_validator-2.1.17/
@@ -418,6 +414,10 @@ flutter_native_splash
 2.18
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_native_splash-2.2.16/
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_native_splash-2.2.16/lib/
+flutter_native_timezone
+2.12
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_native_timezone-2.0.0/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_native_timezone-2.0.0/lib/
 flutter_plugin_android_lifecycle
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.7/
