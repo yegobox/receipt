@@ -1101,19 +1101,19 @@
     },
     {
       "name": "isar",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/isar-3.0.5",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/isar-3.0.6-dev.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "isar_flutter_libs",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/isar_flutter_libs-3.0.5",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/isar_flutter_libs-3.0.6-dev.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "isar_generator",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/isar_generator-3.0.5",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/isar_generator-3.0.6-dev.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -1431,7 +1431,7 @@
     },
     {
       "name": "pocketbase",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pocketbase-0.7.1+1",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pocketbase-0.7.2",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -1898,7 +1898,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-02-16T19:17:30.851413Z",
+  "generated": "2023-02-17T08:30:43.566428Z",
   "generator": "pub",
   "generatorVersion": "2.19.1"
 }
