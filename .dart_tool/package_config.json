@@ -236,12 +236,6 @@
       "languageVersion": "2.18"
     },
     {
-      "name": "cron",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/cron-0.4.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "cross_file",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/cross_file-0.3.3+2",
       "packageUri": "lib/",
@@ -650,6 +644,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "fluentui_system_icons",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/fluentui_system_icons-1.1.190",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///C:/Users/SPENN/Documents/flutter/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -798,6 +798,12 @@
       "rootUri": "../../flutter_slidable",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "flutter_statusbarcolor_ns",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_statusbarcolor_ns-0.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_svg",
@@ -1898,7 +1904,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-02-17T08:30:43.566428Z",
+  "generated": "2023-02-18T19:01:06.124533Z",
   "generator": "pub",
   "generatorVersion": "2.19.1"
 }

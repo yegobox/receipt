@@ -154,10 +154,6 @@ convert
 2.18
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/convert-3.1.1/
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/convert-3.1.1/lib/
-cron
-2.12
-file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/cron-0.4.1/
-file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/cron-0.4.1/lib/
 cross_file
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/cross_file-0.3.3+2/
@@ -346,6 +342,10 @@ fluent_ui
 2.14
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/fluent_ui-3.12.0/
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/fluent_ui-3.12.0/lib/
+fluentui_system_icons
+2.12
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/fluentui_system_icons-1.1.190/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/fluentui_system_icons-1.1.190/lib/
 flutter_bloc
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_bloc-8.1.1/
@@ -430,6 +430,10 @@ flutter_settings_ui
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_settings_ui-2.0.1/
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_settings_ui-2.0.1/lib/
+flutter_statusbarcolor_ns
+2.12
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_statusbarcolor_ns-0.5.0/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_statusbarcolor_ns-0.5.0/lib/
 flutter_svg
 2.17
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-1.1.6/
