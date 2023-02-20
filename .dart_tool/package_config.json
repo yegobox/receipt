@@ -1136,6 +1136,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "keyboard_visibility_pro",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/keyboard_visibility_pro-0.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "lecle_downloads_path_provider",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/lecle_downloads_path_provider-0.0.2+8",
       "packageUri": "lib/",
@@ -1904,7 +1910,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-02-18T19:01:06.124533Z",
+  "generated": "2023-02-20T19:26:18.190915Z",
   "generator": "pub",
   "generatorVersion": "2.19.1"
 }
