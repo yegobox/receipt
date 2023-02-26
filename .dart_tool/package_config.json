@@ -74,6 +74,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "badges",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/badges-2.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "barcode",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/barcode-2.2.3",
       "packageUri": "lib/",
@@ -330,6 +336,12 @@
       "rootUri": "../../plus_plugins/packages/device_info_plus/device_info_plus_windows",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "easy_sidemenu",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/easy_sidemenu-441ec8fa0125eb37d7beb6eb90598d07b0de053f/",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "email_validator",
@@ -1940,7 +1952,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-02-22T14:47:03.300082Z",
+  "generated": "2023-02-26T15:10:57.328867Z",
   "generator": "pub",
   "generatorVersion": "2.19.2"
 }
