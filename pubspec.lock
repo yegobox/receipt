@@ -817,7 +817,7 @@ packages:
       path: "../../lib/flipper_localize"
       relative: true
     source: path
-    version: "0.0.4"
+    version: "0.0.4-dev"
   flipper_login:
     dependency: "direct overridden"
     description:
