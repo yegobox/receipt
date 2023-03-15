@@ -623,7 +623,7 @@
       "name": "flipper_localize",
       "rootUri": "../../../lib/flipper_localize",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.15"
     },
     {
       "name": "flipper_login",
@@ -1958,7 +1958,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-03-12T19:05:55.763597Z",
+  "generated": "2023-03-15T01:35:58.707334Z",
   "generator": "pub",
   "generatorVersion": "2.19.3"
 }
