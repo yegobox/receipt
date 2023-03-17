@@ -1149,7 +1149,7 @@
     },
     {
       "name": "isar_generator",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/isar_generator-3.0.6-dev.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/isar-45aa19bc4cbb0aaa91d0556d63e98e3bdbe6f195/packages/isar_generator",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -1958,7 +1958,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-03-15T07:55:38.068653Z",
+  "generated": "2023-03-17T13:59:48.748244Z",
   "generator": "pub",
-  "generatorVersion": "2.19.3"
+  "generatorVersion": "2.19.4"
 }
