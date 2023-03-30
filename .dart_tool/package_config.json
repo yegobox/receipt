@@ -717,7 +717,7 @@
     },
     {
       "name": "flutter_form_bloc",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_form_bloc-0.29.3",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_form_bloc-0.30.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -891,7 +891,7 @@
     },
     {
       "name": "form_bloc",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/form_bloc-0.29.1",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/form_bloc-0.30.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -981,9 +981,9 @@
     },
     {
       "name": "go_router",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/go_router-3.1.1",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/go_router-6.5.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "google_fonts",
@@ -1982,7 +1982,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-03-28T08:15:44.670070Z",
+  "generated": "2023-03-30T08:39:53.549963Z",
   "generator": "pub",
   "generatorVersion": "2.19.4"
 }
