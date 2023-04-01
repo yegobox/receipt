@@ -980,12 +980,6 @@
       "languageVersion": "2.15"
     },
     {
-      "name": "go_router",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/go_router-6.5.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
       "name": "google_fonts",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/google_fonts-4.0.3",
       "packageUri": "lib/",
@@ -1982,7 +1976,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-03-30T08:39:53.549963Z",
+  "generated": "2023-03-31T19:34:22.830475Z",
   "generator": "pub",
   "generatorVersion": "2.19.4"
 }
