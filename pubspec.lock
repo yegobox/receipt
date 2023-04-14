@@ -41,6 +41,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.0"
+  animated_icon_button:
+    dependency: transitive
+    description:
+      name: animated_icon_button
+      sha256: a483ca86d56fe358f4913ba79be8f0bd8fca3282de06f1ae3df108aece5b2a04
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   animations:
     dependency: transitive
     description:
@@ -1166,6 +1174,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0-nullsafety.1"
+  freezed_annotation:
+    dependency: transitive
+    description:
+      name: freezed_annotation
+      sha256: aeac15850ef1b38ee368d4c53ba9a847e900bb2c53a4db3f6881cbb3cb684338
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   frontend_server_client:
     dependency: transitive
     description:
@@ -1262,6 +1278,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  getwidget:
+    dependency: transitive
+    description:
+      name: getwidget
+      sha256: d97c08d2cc8f2456bb8b28e34931879b1c5da6545453f3d64b7bebd70b7abfcf
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   glob:
     dependency: transitive
     description:
@@ -1910,6 +1934,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.0"
+  pip_view:
+    dependency: transitive
+    description:
+      name: pip_view
+      sha256: "1ba2abcc3229dc6df72e6f23e263c966f9b0fbf3cb6a4b87bbef01ad9a930c81"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.7"
   platform:
     dependency: transitive
     description:
