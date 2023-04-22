@@ -1179,7 +1179,7 @@
     },
     {
       "name": "isar",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/isar-3.0.6-dev.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/isar-3.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -1191,13 +1191,13 @@
     },
     {
       "name": "isar_flutter_libs",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/isar_flutter_libs-3.0.6-dev.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/isar_flutter_libs-3.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "isar_generator",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/isar_generator-3.0.6-dev.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/isar_generator-3.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -1425,9 +1425,9 @@
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider-2.0.12",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider-2.0.14",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.17"
     },
     {
       "name": "path_provider_android",
@@ -2024,7 +2024,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-04-17T06:53:14.027021Z",
+  "generated": "2023-04-22T04:08:47.934400Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }
