@@ -284,6 +284,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "custom_floating_action_button",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/custom_floating_action_button-0.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
       "name": "dart_style",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/dart_style-2.2.4",
       "packageUri": "lib/",
@@ -2024,7 +2030,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-04-22T04:08:47.934400Z",
+  "generated": "2023-04-22T16:55:20.854431Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }
