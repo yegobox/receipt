@@ -70,6 +70,10 @@ battery_plus_platform_interface
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/battery_plus_platform_interface-1.2.2/
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/battery_plus_platform_interface-1.2.2/lib/
+bidi
+2.12
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/bidi-2.0.6/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/bidi-2.0.6/lib/
 bloc
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/bloc-8.1.0/
@@ -1163,11 +1167,11 @@ flipper_localize
 file:///C:/Users/SPENN/Documents/flipper/lib/flipper_localize/
 file:///C:/Users/SPENN/Documents/flipper/lib/flipper_localize/lib/
 pdf
-2.12
+2.18
 file:///C:/Users/SPENN/Documents/flipper/open-sources/dart_pdf/pdf/
 file:///C:/Users/SPENN/Documents/flipper/open-sources/dart_pdf/pdf/lib/
 printing
-2.12
+2.18
 file:///C:/Users/SPENN/Documents/flipper/open-sources/dart_pdf/printing/
 file:///C:/Users/SPENN/Documents/flipper/open-sources/dart_pdf/printing/lib/
 scrollable_positioned_list

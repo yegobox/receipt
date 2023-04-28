@@ -104,6 +104,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "bidi",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/bidi-2.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "bloc",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/bloc-8.1.0",
       "packageUri": "lib/",
@@ -1457,7 +1463,7 @@
       "name": "pdf",
       "rootUri": "../../dart_pdf/pdf",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "pedantic",
@@ -1541,7 +1547,7 @@
       "name": "printing",
       "rootUri": "../../dart_pdf/printing",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "process",
@@ -2018,7 +2024,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-04-28T00:32:06.858377Z",
+  "generated": "2023-04-28T00:54:14.626350Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }
