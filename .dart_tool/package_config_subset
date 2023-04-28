@@ -824,8 +824,8 @@ file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_plat
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_platform_interface-2.0.5/lib/
 path_provider_windows
 2.17
-file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.1.3/
-file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.1.3/lib/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.1.6/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.1.6/lib/
 pedantic
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pedantic-1.11.1/
@@ -1146,6 +1146,10 @@ web_socket_channel
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/web_socket_channel-2.3.0/
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/web_socket_channel-2.3.0/lib/
+win32
+2.17
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/win32-4.1.3/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/win32-4.1.3/lib/
 xdg_directories
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/xdg_directories-0.2.0+3/
@@ -1282,10 +1286,6 @@ upgrader
 2.12
 file:///C:/Users/SPENN/Documents/flipper/open-sources/upgrader/
 file:///C:/Users/SPENN/Documents/flipper/open-sources/upgrader/lib/
-win32
-2.18
-file:///C:/Users/SPENN/Documents/flipper/open-sources/win32/
-file:///C:/Users/SPENN/Documents/flipper/open-sources/win32/lib/
 flipper_dashboard
 2.18
 file:///C:/Users/SPENN/Documents/flipper/packages/flipper_dashboard/
