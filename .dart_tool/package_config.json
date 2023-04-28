@@ -347,7 +347,7 @@
       "name": "device_info_plus_windows",
       "rootUri": "../../plus_plugins/packages/device_info_plus/device_info_plus_windows",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "dio",
@@ -376,12 +376,6 @@
     {
       "name": "equatable",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/equatable-2.0.5",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "esc_pos_utils_plus",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/esc_pos_utils_plus-2.0.1+6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -485,7 +479,7 @@
       "name": "firebase_core_desktop",
       "rootUri": "../../flutterfire_desktop/packages/firebase_core/firebase_core_desktop",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "firebase_core_platform_interface",
@@ -629,7 +623,7 @@
       "name": "flipper_data_table",
       "rootUri": "../../../packages/flipper_data_table",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "flipper_finance",
@@ -641,25 +635,25 @@
       "name": "flipper_loading",
       "rootUri": "../../../packages/flipper_loading",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "flipper_localize",
       "rootUri": "../../../lib/flipper_localize",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "flipper_login",
       "rootUri": "../../../packages/flipper_login",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "flipper_models",
       "rootUri": "../../../packages/flipper_models",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "flipper_nfc",
@@ -671,25 +665,25 @@
       "name": "flipper_routing",
       "rootUri": "../../../packages/flipper_routing",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "flipper_services",
       "rootUri": "../../../packages/flipper_services",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "flipper_socials",
       "rootUri": "../../../packages/flipper_socials",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "flipper_ui",
       "rootUri": "../../../packages/flipper_ui",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "fluent_ui",
@@ -737,7 +731,7 @@
       "name": "flutter_datetime_picker",
       "rootUri": "../../flutter_datetime_picker",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "flutter_form_bloc",
@@ -819,13 +813,13 @@
     },
     {
       "name": "flutter_luban",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_luban-0.1.13",
+      "rootUri": "../../flutter_luban",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter_native_splash",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_native_splash-2.2.16",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_native_splash-2.2.17",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -857,7 +851,7 @@
       "name": "flutter_slidable",
       "rootUri": "../../flutter_slidable",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "flutter_statusbarcolor_ns",
@@ -1070,12 +1064,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "hex",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/hex-0.2.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "hive",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/hive-2.2.3",
       "packageUri": "lib/",
@@ -1113,7 +1101,7 @@
     },
     {
       "name": "image",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/image-3.3.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/image-4.0.15",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
@@ -1601,7 +1589,7 @@
       "name": "qr_flutter",
       "rootUri": "../../qr.flutter",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "quiver",
@@ -1997,7 +1985,7 @@
       "name": "win32",
       "rootUri": "../../win32",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "xdg_directories",
@@ -2027,10 +2015,10 @@
       "name": "receipt",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-04-27T17:44:01.369863Z",
+  "generated": "2023-04-28T00:32:06.858377Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }
