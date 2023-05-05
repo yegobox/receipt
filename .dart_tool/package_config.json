@@ -1089,9 +1089,9 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/http-0.13.5",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/http-0.13.6",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.19"
     },
     {
       "name": "http_multi_server",
@@ -2024,7 +2024,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-05-04T14:28:40.162688Z",
+  "generated": "2023-05-05T12:52:55.549315Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }
