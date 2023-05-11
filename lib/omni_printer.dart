@@ -213,7 +213,7 @@ class OmniPrinter {
         ])
       ]));
     }
-    
+
     Column row = Column(
       children: [],
     );
