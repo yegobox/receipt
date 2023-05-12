@@ -4,7 +4,7 @@ version: 1.0.0-dev.2
 repository: "https://github.com/yegobox/receipt"
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -21,7 +21,7 @@ dependencies:
   universal_platform: ^1.0.0+1
   lecle_downloads_path_provider: ^0.0.2+7
   get_storage: ^2.0.3
-  path_provider: ^2.0.8
+  path_provider: ^2.0.15
   path: ^1.8.1
 
 dev_dependencies:
