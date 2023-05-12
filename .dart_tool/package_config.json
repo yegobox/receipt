@@ -1461,7 +1461,7 @@
     },
     {
       "name": "pdf",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pdf-3.10.1",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pdf-3.10.3",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -1509,9 +1509,9 @@
     },
     {
       "name": "petitparser",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/petitparser-5.1.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/petitparser-5.4.0",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.19"
     },
     {
       "name": "pip_view",
@@ -2001,9 +2001,9 @@
     },
     {
       "name": "xml",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/xml-6.2.2",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/xml-6.3.0",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.19"
     },
     {
       "name": "xxh3",
@@ -2024,7 +2024,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-05-12T16:55:53.012329Z",
+  "generated": "2023-05-12T17:27:14.480823Z",
   "generator": "pub",
   "generatorVersion": "3.0.0"
 }
