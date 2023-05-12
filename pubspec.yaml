@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   printing: ^5.10.3
-  pdf: ^3.7.3
+  pdf: ^3.10.3
   open_filex: ^4.1.1
   gap: ^2.0.0
   flipper_models: ^0.0.1-dev.7
