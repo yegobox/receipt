@@ -321,39 +321,15 @@
     },
     {
       "name": "device_info_plus",
-      "rootUri": "../../plus_plugins/packages/device_info_plus/device_info_plus",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/device_info_plus-9.0.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
-      "name": "device_info_plus_linux",
-      "rootUri": "../../plus_plugins/packages/device_info_plus/device_info_plus_linux",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
-      "name": "device_info_plus_macos",
-      "rootUri": "../../plus_plugins/packages/device_info_plus/device_info_plus_macos",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "2.18"
     },
     {
       "name": "device_info_plus_platform_interface",
-      "rootUri": "../../plus_plugins/packages/device_info_plus/device_info_plus_platform_interface",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/device_info_plus_platform_interface-7.0.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
-      "name": "device_info_plus_web",
-      "rootUri": "../../plus_plugins/packages/device_info_plus/device_info_plus_web",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
-      "name": "device_info_plus_windows",
-      "rootUri": "../../plus_plugins/packages/device_info_plus/device_info_plus_windows",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "2.12"
     },
     {
       "name": "dio",
@@ -1371,39 +1347,15 @@
     },
     {
       "name": "package_info_plus",
-      "rootUri": "../../plus_plugins/packages/package_info_plus/package_info_plus",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/package_info_plus-3.1.2",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
-      "name": "package_info_plus_linux",
-      "rootUri": "../../plus_plugins/packages/package_info_plus/package_info_plus_linux",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
-      "name": "package_info_plus_macos",
-      "rootUri": "../../plus_plugins/packages/package_info_plus/package_info_plus_macos",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "2.12"
     },
     {
       "name": "package_info_plus_platform_interface",
-      "rootUri": "../../plus_plugins/packages/package_info_plus/package_info_plus_platform_interface",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/package_info_plus_platform_interface-2.0.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
-      "name": "package_info_plus_web",
-      "rootUri": "../../plus_plugins/packages/package_info_plus/package_info_plus_web",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
-      "name": "package_info_plus_windows",
-      "rootUri": "../../plus_plugins/packages/package_info_plus/package_info_plus_windows",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "2.12"
     },
     {
       "name": "path",
@@ -1461,13 +1413,7 @@
     },
     {
       "name": "pdf",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pdf-3.10.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "pdf_widget_wrapper",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pdf_widget_wrapper-1.0.0",
+      "rootUri": "../../dart_pdf/pdf",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -1551,7 +1497,7 @@
     },
     {
       "name": "printing",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/printing-5.10.4",
+      "rootUri": "../../dart_pdf/printing",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -1641,15 +1587,15 @@
     },
     {
       "name": "sentry",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/sentry-6.22.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/sentry-7.5.2",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "sentry_flutter",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/sentry_flutter-6.22.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/sentry_flutter-7.5.2",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "share_plus",
@@ -1994,6 +1940,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "win32_registry",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/win32_registry-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "xdg_directories",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/xdg_directories-0.2.0+3",
       "packageUri": "lib/",
@@ -2024,7 +1976,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-05-12T17:27:14.480823Z",
+  "generated": "2023-05-13T08:08:40.167273Z",
   "generator": "pub",
   "generatorVersion": "3.0.0"
 }
