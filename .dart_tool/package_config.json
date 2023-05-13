@@ -290,12 +290,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "custom_floating_action_button",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/custom_floating_action_button-0.0.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.16"
-    },
-    {
       "name": "dart_style",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/dart_style-2.3.1",
       "packageUri": "lib/",
@@ -1280,6 +1274,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "mobile_scanner",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/mobile_scanner-3.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "modal_bottom_sheet",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/modal_bottom_sheet-3.0.0-pre",
       "packageUri": "lib/",
@@ -1976,7 +1976,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-05-13T08:08:40.167273Z",
+  "generated": "2023-05-13T14:47:36.930917Z",
   "generator": "pub",
   "generatorVersion": "3.0.0"
 }
