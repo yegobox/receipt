@@ -1,3 +1,7 @@
+printing
+2.18
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/dart_pdf-7f10234bd60c4461058bdd4df915134f88e383d0/printing/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/dart_pdf-7f10234bd60c4461058bdd4df915134f88e383d0/printing/lib/
 easy_sidemenu
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/easy_sidemenu-02f0d1bbd16f61adcb6d4d1f218b06a096c960f2/
@@ -284,8 +288,8 @@ file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_web-
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_web-5.5.0/lib/
 firebase_core
 2.18
-file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core-2.12.0/
-file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core-2.12.0/lib/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core-2.13.0/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core-2.13.0/lib/
 firebase_core_platform_interface
 2.18
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core_platform_interface-4.8.0/
@@ -774,10 +778,6 @@ nm
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/nm-0.5.0/
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/nm-0.5.0/lib/
-number_display
-2.12
-file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/number_display-3.0.0/
-file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/number_display-3.0.0/lib/
 octo_image
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/octo_image-1.0.2/
@@ -842,6 +842,10 @@ path_provider_windows
 2.17
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.1.6/
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.1.6/lib/
+pdf
+2.18
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pdf-3.10.3/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pdf-3.10.3/lib/
 pedantic
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pedantic-1.11.1/
@@ -924,8 +928,8 @@ file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/readmore-2.2.0/
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/readmore-2.2.0/lib/
 responsive_builder
 2.17
-file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/responsive_builder-0.6.4/
-file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/responsive_builder-0.6.4/lib/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/responsive_builder-0.7.0/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/responsive_builder-0.7.0/lib/
 riverpod
 2.14
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/riverpod-1.0.3/
@@ -1206,14 +1210,6 @@ flipper_localize
 3.0
 file:///C:/Users/SPENN/Documents/flutter3.10.0/flipper/lib/flipper_localize/
 file:///C:/Users/SPENN/Documents/flutter3.10.0/flipper/lib/flipper_localize/lib/
-pdf
-2.18
-file:///C:/Users/SPENN/Documents/flutter3.10.0/flipper/open-sources/dart_pdf/pdf/
-file:///C:/Users/SPENN/Documents/flutter3.10.0/flipper/open-sources/dart_pdf/pdf/lib/
-printing
-2.18
-file:///C:/Users/SPENN/Documents/flutter3.10.0/flipper/open-sources/dart_pdf/printing/
-file:///C:/Users/SPENN/Documents/flutter3.10.0/flipper/open-sources/dart_pdf/printing/lib/
 scrollable_positioned_list
 3.0
 file:///C:/Users/SPENN/Documents/flutter3.10.0/flipper/open-sources/flutter.widgets/packages/scrollable_positioned_list/
