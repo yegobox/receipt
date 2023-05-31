@@ -321,6 +321,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
+  country_code_picker:
+    dependency: transitive
+    description:
+      name: country_code_picker
+      sha256: "92818885f0e47486539f80463b66f649970506a91dd3c0731ca3ba5308324a4d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   cross_file:
     dependency: transitive
     description:
@@ -880,6 +888,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
+  flutter_carousel_slider:
+    dependency: transitive
+    description:
+      name: flutter_carousel_slider
+      sha256: "4cd0691b98ebbf8b40361e01779b3a211002c963d3709630e775fba699d3b821"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   flutter_datetime_picker:
     dependency: "direct overridden"
     description:
@@ -1773,10 +1789,11 @@ packages:
   pdf:
     dependency: "direct main"
     description:
-      path: "../dart_pdf/pdf"
-      relative: true
-    source: path
-    version: "3.10.4-flipper"
+      name: pdf
+      sha256: "9f75fc7f5580ea5e635b5724de58fb27f684c9ad03ed46fdc1aac768e4557315"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.10.4"
   pedantic:
     dependency: transitive
     description:
@@ -1884,10 +1901,12 @@ packages:
   printing:
     dependency: "direct main"
     description:
-      path: "../dart_pdf/printing"
-      relative: true
-    source: path
-    version: "5.11.0-flipper"
+      path: printing
+      ref: master
+      resolved-ref: c83bb4cfa323a808f37c4daf6e29322716eb2eeb
+      url: "https://github.com/DavBfr/dart_pdf"
+    source: git
+    version: "5.11.0"
   process:
     dependency: transitive
     description:
@@ -2499,4 +2518,4 @@ packages:
     version: "3.1.2"
 sdks:
   dart: ">=3.0.0 <4.0.0"
-  flutter: ">=3.7.0"
+  flutter: ">=3.10.0"

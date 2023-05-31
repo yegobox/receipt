@@ -1,3 +1,7 @@
+printing
+3.0
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/dart_pdf-c83bb4cfa323a808f37c4daf6e29322716eb2eeb/printing/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/dart_pdf-c83bb4cfa323a808f37c4daf6e29322716eb2eeb/printing/lib/
 easy_sidemenu
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/easy_sidemenu-02f0d1bbd16f61adcb6d4d1f218b06a096c960f2/
@@ -162,6 +166,10 @@ convert
 2.18
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/convert-3.1.1/
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/convert-3.1.1/lib/
+country_code_picker
+2.12
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/country_code_picker-3.0.0/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/country_code_picker-3.0.0/lib/
 cross_file
 2.17
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/cross_file-0.3.3+4/
@@ -382,6 +390,10 @@ flutter_cache_manager
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_cache_manager-3.3.0/
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_cache_manager-3.3.0/lib/
+flutter_carousel_slider
+2.18
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_carousel_slider-1.1.0/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_carousel_slider-1.1.0/lib/
 flutter_inappwebview
 2.14
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/
@@ -802,6 +814,10 @@ path_provider_windows
 2.17
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.1.6/
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.1.6/lib/
+pdf
+2.18
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pdf-3.10.4/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pdf-3.10.4/lib/
 pedantic
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pedantic-1.11.1/
@@ -1166,14 +1182,6 @@ flipper_localize
 3.0
 file:///C:/Users/SPENN/Documents/web/flipper/lib/flipper_localize/
 file:///C:/Users/SPENN/Documents/web/flipper/lib/flipper_localize/lib/
-pdf
-2.18
-file:///C:/Users/SPENN/Documents/web/flipper/open-sources/dart_pdf/pdf/
-file:///C:/Users/SPENN/Documents/web/flipper/open-sources/dart_pdf/pdf/lib/
-printing
-2.18
-file:///C:/Users/SPENN/Documents/web/flipper/open-sources/dart_pdf/printing/
-file:///C:/Users/SPENN/Documents/web/flipper/open-sources/dart_pdf/printing/lib/
 scrollable_positioned_list
 3.0
 file:///C:/Users/SPENN/Documents/web/flipper/open-sources/flutter.widgets/packages/scrollable_positioned_list/

@@ -242,6 +242,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "country_code_picker",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/country_code_picker-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "cross_file",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/cross_file-0.3.3+4",
       "packageUri": "lib/",
@@ -672,6 +678,12 @@
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_cache_manager-3.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_carousel_slider",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_carousel_slider-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "flutter_datetime_picker",
@@ -1353,7 +1365,7 @@
     },
     {
       "name": "pdf",
-      "rootUri": "../../dart_pdf/pdf",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pdf-3.10.4",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -1437,9 +1449,9 @@
     },
     {
       "name": "printing",
-      "rootUri": "../../dart_pdf/printing",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/dart_pdf-c83bb4cfa323a808f37c4daf6e29322716eb2eeb/printing",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.0"
     },
     {
       "name": "process",
@@ -1910,7 +1922,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-05-31T13:52:12.683652Z",
+  "generated": "2023-05-31T14:45:57.888914Z",
   "generator": "pub",
   "generatorVersion": "3.0.2"
 }
