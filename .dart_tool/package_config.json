@@ -242,12 +242,6 @@
       "languageVersion": "2.18"
     },
     {
-      "name": "country_code_picker",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/country_code_picker-3.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "cross_file",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/cross_file-0.3.3+4",
       "packageUri": "lib/",
@@ -678,12 +672,6 @@
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_cache_manager-3.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
-    },
-    {
-      "name": "flutter_carousel_slider",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_carousel_slider-1.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
     },
     {
       "name": "flutter_datetime_picker",
@@ -1922,7 +1910,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-05-31T13:16:58.115687Z",
+  "generated": "2023-05-31T13:52:12.683652Z",
   "generator": "pub",
   "generatorVersion": "3.0.2"
 }
