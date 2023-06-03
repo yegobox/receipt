@@ -620,6 +620,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "flipper_nfc",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flipper_nfc-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "flipper_routing",
       "rootUri": "../../../packages/flipper_routing",
       "packageUri": "lib/",
@@ -810,6 +816,12 @@
       "rootUri": "../../flutter_slidable",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "flutter_statusbarcolor_ns",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_statusbarcolor_ns-0.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_svg",
@@ -1260,6 +1272,12 @@
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/nested-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "nfc_manager",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/nfc_manager-3.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "nm",
@@ -1922,7 +1940,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-06-01T09:18:33.039200Z",
+  "generated": "2023-06-03T07:51:22.015951Z",
   "generator": "pub",
   "generatorVersion": "3.0.2"
 }
