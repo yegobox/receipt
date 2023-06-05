@@ -93,15 +93,15 @@
     },
     {
       "name": "battery_plus",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/battery_plus-4.0.1",
+      "rootUri": "../../plus_plugins/packages/battery_plus/battery_plus",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "battery_plus_platform_interface",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/battery_plus_platform_interface-1.2.2",
+      "rootUri": "../../plus_plugins/packages/battery_plus/battery_plus_platform_interface",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "bidi",
@@ -225,15 +225,15 @@
     },
     {
       "name": "connectivity_plus",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/connectivity_plus-4.0.1",
+      "rootUri": "../../plus_plugins/packages/connectivity_plus/connectivity_plus",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "connectivity_plus_platform_interface",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/connectivity_plus_platform_interface-1.2.4",
+      "rootUri": "../../plus_plugins/packages/connectivity_plus/connectivity_plus_platform_interface",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "convert",
@@ -297,15 +297,15 @@
     },
     {
       "name": "device_info_plus",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/device_info_plus-9.0.2",
+      "rootUri": "../../plus_plugins/packages/device_info_plus/device_info_plus",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "device_info_plus_platform_interface",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/device_info_plus_platform_interface-7.0.0",
+      "rootUri": "../../plus_plugins/packages/device_info_plus/device_info_plus_platform_interface",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "dio",
@@ -1323,15 +1323,15 @@
     },
     {
       "name": "package_info_plus",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/package_info_plus-3.1.2",
+      "rootUri": "../../plus_plugins/packages/package_info_plus/package_info_plus",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "package_info_plus_platform_interface",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/package_info_plus_platform_interface-2.0.1",
+      "rootUri": "../../plus_plugins/packages/package_info_plus/package_info_plus_platform_interface",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "path",
@@ -1569,15 +1569,15 @@
     },
     {
       "name": "share_plus",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/share_plus-7.0.2",
+      "rootUri": "../../plus_plugins/packages/share_plus/share_plus",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "share_plus_platform_interface",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/share_plus_platform_interface-3.2.1",
+      "rootUri": "../../plus_plugins/packages/share_plus/share_plus_platform_interface",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "shared_preferences",
@@ -1940,7 +1940,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-06-05T14:53:13.928236Z",
+  "generated": "2023-06-05T16:43:04.546552Z",
   "generator": "pub",
   "generatorVersion": "3.0.2"
 }
