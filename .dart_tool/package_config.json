@@ -57,9 +57,9 @@
     },
     {
       "name": "args",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/args-2.4.1",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/args-2.4.2",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.19"
     },
     {
       "name": "asn1lib",
@@ -153,7 +153,7 @@
     },
     {
       "name": "build_runner_core",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/build_runner_core-7.2.9",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/build_runner_core-7.2.10",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -165,7 +165,7 @@
     },
     {
       "name": "built_value",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/built_value-8.6.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/built_value-8.6.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -213,9 +213,9 @@
     },
     {
       "name": "code_builder",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/code_builder-4.4.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/code_builder-4.5.0",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.19"
     },
     {
       "name": "collection",
@@ -309,7 +309,7 @@
     },
     {
       "name": "dio",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/dio-5.1.2",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/dio-5.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
@@ -651,7 +651,7 @@
     },
     {
       "name": "fluentui_system_icons",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/fluentui_system_icons-1.1.201",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/fluentui_system_icons-1.1.202",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -753,7 +753,7 @@
     },
     {
       "name": "flutter_local_notifications",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_local_notifications-14.1.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_local_notifications-14.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -783,9 +783,9 @@
     },
     {
       "name": "flutter_native_splash",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_native_splash-2.3.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_native_splash-2.3.1",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.19"
     },
     {
       "name": "flutter_native_timezone",
@@ -921,7 +921,7 @@
     },
     {
       "name": "geolocator_apple",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/geolocator_apple-2.2.5",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/geolocator_apple-2.2.6",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
@@ -1089,7 +1089,7 @@
     },
     {
       "name": "image_picker_android",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.6+16",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.6+19",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -1179,7 +1179,7 @@
     },
     {
       "name": "lints",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/lints-2.1.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/lints-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -1221,7 +1221,7 @@
     },
     {
       "name": "logger",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/logger-1.3.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/logger-1.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1401,7 +1401,7 @@
     },
     {
       "name": "permission_handler_android",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/permission_handler_android-10.2.1",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/permission_handler_android-10.2.2",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
@@ -1467,7 +1467,7 @@
     },
     {
       "name": "printing",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/dart_pdf-c83bb4cfa323a808f37c4daf6e29322716eb2eeb/printing",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/dart_pdf-42fd788fb143a3f082405977137d040786506674/printing",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -1557,13 +1557,13 @@
     },
     {
       "name": "sentry",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/sentry-7.6.3",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/sentry-7.7.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "sentry_flutter",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/sentry_flutter-7.6.3",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/sentry_flutter-7.7.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -1671,13 +1671,13 @@
     },
     {
       "name": "stacked",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/stacked-3.3.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/stacked-3.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "stacked_services",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/stacked_services-1.0.4",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/stacked_services-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
@@ -1773,9 +1773,9 @@
     },
     {
       "name": "universal_io",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/universal_io-2.2.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/universal_io-2.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.15"
+      "languageVersion": "2.17"
     },
     {
       "name": "universal_platform",
@@ -1940,7 +1940,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-06-05T16:50:53.368850Z",
+  "generated": "2023-06-06T15:43:16.458125Z",
   "generator": "pub",
   "generatorVersion": "3.0.2"
 }
