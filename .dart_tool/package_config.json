@@ -813,13 +813,13 @@
     },
     {
       "name": "flutter_local_notifications",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/flutter_local_notifications-310ea54cf3fafeea087a60608d6f9f4c3b6080b7/flutter_local_notifications",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_local_notifications-14.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "flutter_local_notifications_linux",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/flutter_local_notifications-03b9104dfa284eff2d43f04250ef8e3aa8c7161e/flutter_local_notifications_linux",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_local_notifications_linux-4.0.0+1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -2078,12 +2078,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "xdg_desktop_portal",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/xdg_desktop_portal.dart-8d18d560ba3388627c998011a0803defc0e84c30/",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
       "name": "xdg_directories",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/xdg_directories-0.2.0+3",
       "packageUri": "lib/",
@@ -2114,7 +2108,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-07-01T05:39:10.318782Z",
+  "generated": "2023-07-10T16:31:36.778669Z",
   "generator": "pub",
-  "generatorVersion": "3.0.3"
+  "generatorVersion": "3.0.5"
 }
