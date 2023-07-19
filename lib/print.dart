@@ -12,14 +12,14 @@ class Print {
   double totalPrice = 0;
   double totalItems = 0;
   List<TableRow> rows = [];
-  List<OrderItem> orderItems = [];
+  List<TransactionItem> orderItems = [];
   ImageProvider? netImage;
   Future<String> receiptQr(String url) async {
     return url;
   }
 
   Future<List<TableRow>> feed(
-    List<OrderItem> items,
+    List<TransactionItem> items,
   ) async {
     date = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
     time = "${dateTime.hour}:${dateTime.minute}:${dateTime.second}";
