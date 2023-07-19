@@ -2,7 +2,7 @@ library receipt;
 
 import 'dart:developer';
 import 'dart:io';
-import 'package:flipper_models/isar_models.dart';
+import 'package:flipper_models/isar_models.dart' as isar;
 import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flipper_services/proxy.dart';
@@ -29,7 +29,7 @@ class OmniPrinter {
     String brandFooter = "yegobox shop",
     List<String>? emails,
     String? customerTin = "000000000",
-    required List<TransactionItem> items,
+    required List<isar.TransactionItem> items,
     required String receiptType,
     required String sdcReceiptNum,
     required String totalTax,
@@ -190,7 +190,7 @@ class OmniPrinter {
       ]),
     );
     // end of heading
-    for (TransactionItem item in items) {
+    for (isar.TransactionItem item in items) {
       double total = item.price * item.qty;
 
       String taxLabel = item.isTaxExempted ? "-EX" : "-B 18%";
