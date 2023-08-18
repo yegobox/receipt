@@ -1035,7 +1035,7 @@
     },
     {
       "name": "google_fonts",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/google_fonts-4.0.4",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/google_fonts-5.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -1119,9 +1119,9 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/http-0.13.6",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.1.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "http_multi_server",
@@ -2096,7 +2096,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-08-17T09:56:04.574663Z",
+  "generated": "2023-08-18T09:50:27.800200Z",
   "generator": "pub",
   "generatorVersion": "3.1.0"
 }

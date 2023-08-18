@@ -29,7 +29,8 @@ dependencies:
   path_provider: ^2.0.15
   path: ^1.8.1
   permission_handler: ^10.4.3
-
+dependency_overrides:
+  http: ^1.1.0
 dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: ^2.0.0
