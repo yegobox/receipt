@@ -406,6 +406,10 @@ flutter_chat_ui
 2.19
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_chat_ui-1.6.9/
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_chat_ui-1.6.9/lib/
+flutter_form_bloc
+2.12
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_form_bloc-0.31.0/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_form_bloc-0.31.0/lib/
 flutter_inappwebview
 2.14
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/
@@ -510,6 +514,10 @@ font_awesome_flutter
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/font_awesome_flutter-9.2.0/
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/font_awesome_flutter-9.2.0/lib/
+form_bloc
+2.12
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/form_bloc-0.31.0/
+file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/form_bloc-0.31.0/lib/
 form_data
 2.12
 file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/form_data-1.0.0-nullsafety.1/
@@ -1278,14 +1286,6 @@ firebase_core_desktop
 2.17
 file:///C:/Users/SPENN/Documents/dev-fli/flipper/open-sources/flutterfire_desktop/packages/firebase_core/firebase_core_desktop/
 file:///C:/Users/SPENN/Documents/dev-fli/flipper/open-sources/flutterfire_desktop/packages/firebase_core/firebase_core_desktop/lib/
-flutter_form_bloc
-2.12
-file:///C:/Users/SPENN/Documents/dev-fli/flipper/open-sources/form_block/packages/flutter_form_bloc/
-file:///C:/Users/SPENN/Documents/dev-fli/flipper/open-sources/form_block/packages/flutter_form_bloc/lib/
-form_bloc
-2.14
-file:///C:/Users/SPENN/Documents/dev-fli/flipper/open-sources/form_block/packages/form_bloc/
-file:///C:/Users/SPENN/Documents/dev-fli/flipper/open-sources/form_block/packages/form_bloc/lib/
 battery_plus
 2.18
 file:///C:/Users/SPENN/Documents/dev-fli/flipper/open-sources/plus_plugins/packages/battery_plus/battery_plus/
