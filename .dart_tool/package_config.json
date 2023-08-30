@@ -417,7 +417,7 @@
     },
     {
       "name": "firebase_auth",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth-4.7.3",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth-4.8.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -425,23 +425,23 @@
       "name": "firebase_auth_dart",
       "rootUri": "../../flutterfire_desktop/packages/firebase_auth/firebase_auth_dart",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.15"
     },
     {
       "name": "firebase_auth_desktop",
       "rootUri": "../../flutterfire_desktop/packages/firebase_auth/firebase_auth_desktop",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.15"
     },
     {
       "name": "firebase_auth_platform_interface",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_platform_interface-6.16.2",
+      "rootUri": "../../../packages/firebase_auth_platform_interface",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_auth_web",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_web-5.6.3",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_web-5.7.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -2114,7 +2114,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-08-27T07:20:57.998211Z",
+  "generated": "2023-08-30T11:59:31.607198Z",
   "generator": "pub",
   "generatorVersion": "3.1.0"
 }
