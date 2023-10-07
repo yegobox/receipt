@@ -866,6 +866,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_screen_lock",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_screen_lock-9.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "flutter_settings_ui",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_settings_ui-2.0.1",
       "packageUri": "lib/",
@@ -1276,6 +1282,36 @@
     {
       "name": "lints",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/lints-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "local_auth",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth-2.1.7",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "local_auth_android",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth_android-1.0.34",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "local_auth_ios",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth_ios-1.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "local_auth_platform_interface",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth_platform_interface-1.0.8",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "local_auth_windows",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth_windows-1.0.10",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -2114,7 +2150,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-10-02T08:07:29.186720Z",
+  "generated": "2023-10-07T07:57:38.446561Z",
   "generator": "pub",
   "generatorVersion": "3.1.3"
 }
