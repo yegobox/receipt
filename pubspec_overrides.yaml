@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: http,battery_plus,battery_plus_platform_interface,connectivity_plus,connectivity_plus_platform_interface,device_info_plus,device_info_plus_platform_interface,firebase_auth_dart,firebase_auth_desktop,firebase_auth_platform_interface,firebase_core_dart,firebase_core_desktop,flipper_actionable,flipper_dashboard,flipper_data_table,flipper_finance,flipper_loading,flipper_localize,flipper_login,flipper_models,flipper_routing,flipper_services,flipper_socials,flipper_ui,flutter_datetime_picker,flutter_luban,flutter_slidable,package_info_plus,package_info_plus_platform_interface,qr_code_scanner,qr_flutter,scrollable_positioned_list,share_plus,share_plus_platform_interface,upgrader
+# melos_managed_dependency_overrides: http,battery_plus,battery_plus_platform_interface,connectivity_plus,connectivity_plus_platform_interface,device_info_plus,device_info_plus_platform_interface,flipper_actionable,flipper_dashboard,flipper_data_table,flipper_finance,flipper_loading,flipper_localize,flipper_login,flipper_models,flipper_routing,flipper_services,flipper_socials,flipper_ui,flutter_datetime_picker,flutter_luban,flutter_slidable,package_info_plus,package_info_plus_platform_interface,qr_code_scanner,qr_flutter,scrollable_positioned_list,share_plus,share_plus_platform_interface,upgrader
 dependency_overrides:
   http: ^1.1.0
   battery_plus:
@@ -13,16 +13,6 @@ dependency_overrides:
     path: ..\\plus_plugins\\packages\\device_info_plus\\device_info_plus
   device_info_plus_platform_interface:
     path: ..\\plus_plugins\\packages\\device_info_plus\\device_info_plus_platform_interface
-  firebase_auth_dart:
-    path: ..\\flutterfire_desktop\\packages\\firebase_auth\\firebase_auth_dart
-  firebase_auth_desktop:
-    path: ..\\flutterfire_desktop\\packages\\firebase_auth\\firebase_auth_desktop
-  firebase_auth_platform_interface:
-    path: ..\\..\\packages\\firebase_auth_platform_interface
-  firebase_core_dart:
-    path: ..\\flutterfire_desktop\\packages\\firebase_core\\firebase_core_dart
-  firebase_core_desktop:
-    path: ..\\flutterfire_desktop\\packages\\firebase_core\\firebase_core_desktop
   flipper_actionable:
     path: ..\\..\\packages\\flipper_actionable
   flipper_dashboard:
