@@ -15,7 +15,7 @@
     },
     {
       "name": "_flutterfire_internals",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/_flutterfire_internals-1.3.10",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/_flutterfire_internals-1.3.12",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -222,6 +222,24 @@
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/clock-1.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "cloud_firestore",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore-4.13.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "cloud_firestore_platform_interface",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore_platform_interface-6.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "cloud_firestore_web",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore_web-3.8.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "code_builder",
@@ -453,7 +471,7 @@
     },
     {
       "name": "firebase_core",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core-2.20.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core-2.22.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -2186,7 +2204,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-11-14T09:52:40.687775Z",
+  "generated": "2023-11-18T10:49:59.196353Z",
   "generator": "pub",
-  "generatorVersion": "3.1.5"
+  "generatorVersion": "3.1.3"
 }
