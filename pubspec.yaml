@@ -3,20 +3,13 @@ description: A new receipt package for print
 version: 1.0.0-dev.2
 repository: "https://github.com/yegobox/receipt"
 
-
 environment:
   sdk: ">=3.0.0"
-
 
 dependencies:
   flutter:
     sdk: flutter
-  # printing: 5.10.4
-  printing:
-    git:
-      url: https://github.com/DavBfr/dart_pdf
-      ref: master
-      path: printing
+  printing: ^5.11.1
   pdf: ^3.10.3
   open_filex: ^4.1.1
   gap: ^2.0.0
@@ -36,7 +29,7 @@ dependency_overrides:
 dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: ^2.0.0
-  
+
 flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
