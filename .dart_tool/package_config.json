@@ -230,24 +230,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "cloud_firestore",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore-4.13.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "cloud_firestore_platform_interface",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore_platform_interface-6.0.6",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "cloud_firestore_web",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/cloud_firestore_web-3.8.6",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
       "name": "code_builder",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/code_builder-4.7.0",
       "packageUri": "lib/",
@@ -1940,6 +1922,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "swipe_to_complete",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/swipe_to_complete-0.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "synchronized",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/synchronized-3.1.0",
       "packageUri": "lib/",
@@ -2198,7 +2186,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-11-25T04:26:07.825282Z",
+  "generated": "2023-11-26T17:12:25.081245Z",
   "generator": "pub",
   "generatorVersion": "3.2.0"
 }
