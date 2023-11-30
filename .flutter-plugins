@@ -1,5 +1,7 @@
 # This is a generated file; do not edit or check into version control.
 battery_plus=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\battery_plus-4.1.0\\
+cloud_firestore=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\cloud_firestore-4.13.3\\
+cloud_firestore_web=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\cloud_firestore_web-3.8.7\\
 connectivity_plus=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\connectivity_plus-5.0.1\\
 desktop_webview_auth=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\desktop_webview_auth-0.0.14\\
 device_info_plus=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\device_info_plus-9.1.0\\
@@ -9,10 +11,10 @@ file_selector_macos=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.de
 file_selector_windows=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\file_selector_windows-0.9.3+1\\
 firebase_analytics=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_analytics-10.7.0\\
 firebase_analytics_web=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_analytics_web-0.5.5+7\\
-firebase_auth=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_auth-4.14.1\\
-firebase_auth_web=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_auth_web-5.8.8\\
-firebase_core=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_core-2.23.0\\
-firebase_core_web=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_core_web-2.8.1\\
+firebase_auth=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_auth-4.15.0\\
+firebase_auth_web=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_auth_web-5.8.9\\
+firebase_core=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_core-2.24.0\\
+firebase_core_web=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_core_web-2.9.0\\
 firebase_crashlytics=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_crashlytics-3.4.4\\
 firebase_dynamic_links=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_dynamic_links-5.4.4\\
 firebase_messaging=C:\\Users\\SPENN\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\firebase_messaging-14.7.4\\
