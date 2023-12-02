@@ -1346,6 +1346,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "local_notifier",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/local_notifier-927ce0a719c67f196bf9d2662785e668f4aa17e1/",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "location",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/location-5.0.0-dev.8",
       "packageUri": "lib/",
@@ -2198,7 +2204,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-12-02T06:03:25.024038Z",
+  "generated": "2023-12-02T19:35:20.979323Z",
   "generator": "pub",
   "generatorVersion": "3.2.0"
 }
