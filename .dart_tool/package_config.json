@@ -260,6 +260,18 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "community_charts_common",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/community_charts_common-1.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "community_charts_flutter",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/community_charts_flutter-1.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "connectivity_plus",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/connectivity_plus-5.0.2",
       "packageUri": "lib/",
@@ -459,19 +471,19 @@
     },
     {
       "name": "firebase_auth",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth-4.15.2",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth-4.15.3",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_auth_platform_interface",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_platform_interface-7.0.8",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_platform_interface-7.0.9",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_auth_web",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_web-5.8.11",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_auth_web-5.8.12",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -1286,12 +1298,6 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "keyboard_visibility_pro",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/keyboard_visibility_pro-0.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "launcher_entry",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/launcher_entry-0.1.1",
       "packageUri": "lib/",
@@ -1653,7 +1659,7 @@
     },
     {
       "name": "pocketbase",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pocketbase-0.15.1",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/pocketbase-0.17.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -2240,7 +2246,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-12-12T08:01:25.009916Z",
+  "generated": "2023-12-25T06:29:27.994864Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
