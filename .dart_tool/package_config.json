@@ -698,6 +698,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "fluent_ui",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/fluent_ui-4.8.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "fluentui_system_icons",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/fluentui_system_icons-1.1.223",
       "packageUri": "lib/",
@@ -1418,6 +1424,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "math_expressions",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/math_expressions-2.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "menu_base",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/menu_base-0.1.1",
       "packageUri": "lib/",
@@ -1742,6 +1754,12 @@
       "languageVersion": "3.1"
     },
     {
+      "name": "recase",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/recase-4.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "responsive_builder",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/responsive_builder-0.7.0",
       "packageUri": "lib/",
@@ -1776,6 +1794,12 @@
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/screen_retriever-0.1.9",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "scroll_pos",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/scroll_pos-0.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
     },
     {
       "name": "scroll_to_index",
@@ -2246,7 +2270,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-12-25T10:03:20.490056Z",
+  "generated": "2023-12-27T11:02:18.749074Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
