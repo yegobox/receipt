@@ -362,6 +362,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "dropdown_search",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/dropdown_search-5.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "easy_sidemenu",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/git/easy_sidemenu-02114b837e8532a76a5cf1fb4a52eb96c1db202b/",
       "packageUri": "lib/",
@@ -2270,7 +2276,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-12-27T11:02:18.749074Z",
+  "generated": "2024-01-02T11:45:11.724739Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
