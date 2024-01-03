@@ -26,6 +26,7 @@ dependencies:
   permission_handler: ^10.4.3
 dependency_overrides:
   http: ^1.1.2
+  meta: ^1.11.0
 dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: ^2.0.0
