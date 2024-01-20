@@ -2145,9 +2145,9 @@
     },
     {
       "name": "uuid",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/uuid-4.2.2",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/uuid-4.3.3",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "3.0"
     },
     {
       "name": "vector_graphics",
@@ -2276,7 +2276,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-01-03T19:31:34.553037Z",
+  "generated": "2024-01-16T12:37:48.893804Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
