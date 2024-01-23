@@ -1743,21 +1743,27 @@
     },
     {
       "name": "realm",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/realm-1.6.1",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/realm-1.7.0",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.0"
     },
     {
       "name": "realm_common",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/realm_common-1.6.1",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/realm_common-1.7.0",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "realm_dart",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/realm_dart-1.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "realm_generator",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/realm_generator-1.6.1",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/realm_generator-1.7.0",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.0"
     },
     {
       "name": "recase",
@@ -2276,7 +2282,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-01-16T12:37:48.893804Z",
+  "generated": "2024-01-23T17:28:32.140023Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
