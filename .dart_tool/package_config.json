@@ -1334,6 +1334,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "loading_animation_widget",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/loading_animation_widget-1.2.0+4",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
       "name": "local_auth",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/local_auth-2.1.7",
       "packageUri": "lib/",
@@ -2282,7 +2288,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-01-26T14:26:45.542976Z",
+  "generated": "2024-01-28T10:18:35.688357Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
