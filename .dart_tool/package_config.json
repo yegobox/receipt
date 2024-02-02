@@ -1839,13 +1839,13 @@
     },
     {
       "name": "sentry",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/sentry-7.14.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/sentry-7.16.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "sentry_flutter",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/sentry_flutter-7.14.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/sentry_flutter-7.16.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -2294,7 +2294,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-02-02T08:17:34.241475Z",
+  "generated": "2024-02-02T09:19:14.485158Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
