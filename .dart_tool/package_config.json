@@ -380,6 +380,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "email_validator_flutter",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/email_validator_flutter-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "encrypt",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/encrypt-5.0.3",
       "packageUri": "lib/",
@@ -2288,7 +2294,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-01-28T10:18:35.688357Z",
+  "generated": "2024-01-30T16:33:28.551879Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
