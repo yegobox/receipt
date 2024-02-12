@@ -1977,7 +1977,7 @@
     },
     {
       "name": "stacked",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/stacked-3.4.1+1",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/stacked-3.4.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -2294,7 +2294,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-02-03T14:36:17.691018Z",
+  "generated": "2024-02-12T21:25:46.580102Z",
   "generator": "pub",
-  "generatorVersion": "3.2.3"
+  "generatorVersion": "3.2.6"
 }

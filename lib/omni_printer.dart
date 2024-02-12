@@ -53,9 +53,7 @@ class OmniPrinter {
     ImageProvider? image;
     // https://github.com/flutter/flutter/issues/103803
     if (!kIsWeb) {
-      const imageLogo = c.AssetImage(
-        'assets/rralogo.jpg',
-      );
+      const imageLogo = c.AssetImage('assets/rra.jpg', package: 'receipt');
       image = await flutterImageProvider(imageLogo);
     }
 
