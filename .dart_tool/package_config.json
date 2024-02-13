@@ -362,6 +362,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "dotted_line",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/dotted_line-3.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "dropdown_search",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/dropdown_search-5.0.6",
       "packageUri": "lib/",
@@ -2294,7 +2300,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-02-13T09:23:12.752380Z",
+  "generated": "2024-02-13T13:32:44.960747Z",
   "generator": "pub",
   "generatorVersion": "3.2.6"
 }
