@@ -6,52 +6,14 @@ import 'package:pdf/widgets.dart';
 import 'package:receipt/omni_printer.dart';
 
 class Print {
-  DateTime dateTime = DateTime.now();
-  String date = "";
-  String time = "";
-  double totalPrice = 0;
-  double totalItems = 0;
-  List<TableRow> rows = [];
-  List<TransactionItem> orderItems = [];
   ImageProvider? netImage;
   Future<String> receiptQr(String url) async {
     return url;
   }
 
-  Future<List<TableRow>> feed(
-    List<TransactionItem> items,
-  ) async {
-    date = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
-    time = "${dateTime.hour}:${dateTime.minute}:${dateTime.second}";
-    orderItems = items;
-    for (var item in items) {
-      // if the isRefunded is null i.e the item has not been refunded so we add it to the total price
-      if (item.isRefunded == null) {
-        totalItems = totalItems + 1;
-        double total = item.price * item.qty;
-        totalPrice = total + totalPrice;
-        String taxLabel = item.isTaxExempted ? "-EX" : "-B";
-        rows.add(TableRow(children: [
-          Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
-        ]));
-        rows.add(TableRow(children: [
-          Text((item.price).toString()),
-          Text(item.qty.toString()),
-          Text(
-            "$total $taxLabel",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ]));
-        rows.add(TableRow(children: [
-          SizedBox(height: 1),
-        ]));
-      }
-    }
-    return rows;
-  }
-
+  /// interact with omni_printer pass data required to print a receipt
+  /// this method is kinda a helpter class to avoid having too much code in omni_printer.dart
+  /// the idea is also to be able to debug the receipt outside of the app
   print({
     required double grandTotal,
     required String currencySymbol,
@@ -79,72 +41,70 @@ class Print {
     required List<String> emails,
     required String? customerTin,
     required String receiptType,
+    required List<TransactionItem> items,
+    required ITransaction transaction,
   }) {
     receiptQr(receiptQrCode).then((qrCode) {
       OmniPrinter printer;
       printer = OmniPrinter();
       if (ProxyService.box.isAutoPrintEnabled()) {
         printer.generatePdfAndPrint(
-          brandName: brandName,
-          brandAddress: brandAddress,
-          brandDescription: brandDescription,
-          brandTel: brandTel,
-          brandTIN: brandTIN,
-          brandFooter: brandFooter,
-          emails: emails,
-          customerTin: customerTin.toString(),
-          receiptType: receiptType,
-          sdcReceiptNum: sdcReceiptNum,
-          items: orderItems,
-          totalAEx: totalAEx,
-          totalB18: totalB18,
-          totalB: totalB,
-          totalTax: totalTax,
-          cash: cash,
-          cashierName: cashierName,
-          received: received,
-          payMode: payMode,
-          date: date,
-          time: time,
-          sdcId: sdcId,
-          internalData: internalData,
-          receiptSignature: receiptSignature,
-          receiptQrCode: qrCode,
-          invoiceNum: invoiceNum,
-          mrc: mrc,
-          totalPrice: 0,
-        );
+            brandName: brandName,
+            brandAddress: brandAddress,
+            brandDescription: brandDescription,
+            brandTel: brandTel,
+            brandTIN: brandTIN,
+            brandFooter: brandFooter,
+            emails: emails,
+            customerTin: customerTin.toString(),
+            receiptType: receiptType,
+            sdcReceiptNum: sdcReceiptNum,
+            items: items,
+            totalAEx: totalAEx,
+            totalB18: totalB18,
+            totalB: totalB,
+            totalTax: totalTax,
+            cash: cash,
+            cashierName: cashierName,
+            received: received,
+            payMode: payMode,
+            sdcId: sdcId,
+            internalData: internalData,
+            receiptSignature: receiptSignature,
+            receiptQrCode: qrCode,
+            invoiceNum: invoiceNum,
+            mrc: mrc,
+            totalPrice: 0,
+            transaction: transaction);
       } else {
         printer.generatePdfAndPrint(
-          brandName: brandName,
-          brandAddress: brandAddress,
-          brandDescription: brandDescription,
-          brandTel: brandTel,
-          brandTIN: brandTIN,
-          brandFooter: brandFooter,
-          emails: emails,
-          customerTin: customerTin.toString(),
-          receiptType: receiptType,
-          sdcReceiptNum: sdcReceiptNum,
-          items: orderItems,
-          totalAEx: totalAEx,
-          totalB18: totalB18,
-          totalB: totalB,
-          totalTax: totalTax,
-          cash: cash,
-          cashierName: cashierName,
-          received: received,
-          payMode: payMode,
-          date: date,
-          time: time,
-          sdcId: sdcId,
-          internalData: internalData,
-          receiptSignature: receiptSignature,
-          receiptQrCode: qrCode,
-          invoiceNum: invoiceNum,
-          mrc: mrc,
-          totalPrice: 0,
-        );
+            brandName: brandName,
+            brandAddress: brandAddress,
+            brandDescription: brandDescription,
+            brandTel: brandTel,
+            brandTIN: brandTIN,
+            brandFooter: brandFooter,
+            emails: emails,
+            customerTin: customerTin.toString(),
+            receiptType: receiptType,
+            sdcReceiptNum: sdcReceiptNum,
+            items: items,
+            totalAEx: totalAEx,
+            totalB18: totalB18,
+            totalB: totalB,
+            totalTax: totalTax,
+            cash: cash,
+            cashierName: cashierName,
+            received: received,
+            payMode: payMode,
+            sdcId: sdcId,
+            internalData: internalData,
+            receiptSignature: receiptSignature,
+            receiptQrCode: qrCode,
+            invoiceNum: invoiceNum,
+            mrc: mrc,
+            totalPrice: 0,
+            transaction: transaction);
       }
     });
   }

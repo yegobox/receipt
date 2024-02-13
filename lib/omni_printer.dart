@@ -13,13 +13,81 @@ import 'package:printing/printing.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as p;
+import 'package:intl/intl.dart';
 
 final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 
 /// [generatePdfAndPrint] example
+/// an extension on DateTime that return a string of date time separated by space
+
+extension DateTimeToDateTimeString on DateTime {
+  String toDateTimeString() {
+    final dateFormat = DateFormat('dd/MM/yyyy');
+    final timeFormat = DateFormat('HH:mm:ss');
+    final dateString = dateFormat.format(this);
+    final timeString = timeFormat.format(this);
+    return '$dateString $timeString';
+  }
+}
+
+/// given a string E2P2VANEFD7PWY3COLUULSL3JU as a string, I want an extension that take
+/// this string and apply dashed dashes come after 4 char
+extension StringToDashedString on String {
+  String toDashedString() {
+    if (isEmpty) {
+      return '';
+    }
+
+    var x = 0;
+    final dashesInternalData = {2, 3, 4, 5, 6, 7};
+    final replacedInternalData = splitMapJoin(RegExp('....'),
+        onNonMatch: (s) => dashesInternalData.contains(x++) ? '-' : '');
+    return replacedInternalData;
+  }
+}
 
 class OmniPrinter {
   final doc = Document(version: PdfVersion.pdf_1_5, compress: true);
+  // List<TableRow> rows = [];
+  // DateTime dateTime = DateTime.now();
+  // String date = "";
+  // String time = "";
+  // double totalPrice = 0;
+  // double totalItems = 0;
+  // Future<List<TableRow>> feed(
+  //   List<isar.TransactionItem> items,
+  // ) async {
+  //   date = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
+  //   time = "${dateTime.hour}:${dateTime.minute}:${dateTime.second}";
+
+  //   for (var item in items) {
+  //     // if the isRefunded is null i.e the item has not been refunded so we add it to the total price
+  //     if (item.isRefunded == null) {
+  //       totalItems = totalItems + 1;
+  //       double total = item.price * item.qty;
+  //       totalPrice = total + totalPrice;
+  //       String taxLabel = item.isTaxExempted ? "-EX" : "-B";
+  //       rows.add(TableRow(children: [
+  //         Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
+  //       ]));
+  //       rows.add(TableRow(children: [
+  //         Text((item.price).toString()),
+  //         Text(item.qty.toString()),
+  //         Text(
+  //           "$total $taxLabel",
+  //           style: TextStyle(
+  //             fontWeight: FontWeight.bold,
+  //           ),
+  //         ),
+  //       ]));
+  //       rows.add(TableRow(children: [
+  //         SizedBox(height: 1),
+  //       ]));
+  //     }
+  //   }
+  //   return rows;
+  // }
+
   Future<void> generatePdfAndPrint({
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
@@ -40,8 +108,6 @@ class OmniPrinter {
     required String cashierName,
     required double received,
     required String payMode,
-    required String date,
-    required String time,
     required String sdcId,
     required String internalData,
     required String receiptSignature,
@@ -49,19 +115,20 @@ class OmniPrinter {
     required int invoiceNum,
     required String mrc,
     required double totalPrice,
+    required isar.ITransaction transaction,
   }) async {
+    log("function Invoked:${items.length}", name: "generatePdfAndPrint");
+
     ImageProvider? image;
-    // https://github.com/flutter/flutter/issues/103803
-    if (!kIsWeb) {
-      const imageLogo = c.AssetImage('assets/rra.jpg', package: 'receipt');
-      image = await flutterImageProvider(imageLogo);
-    }
+
+    const imageLogo = c.AssetImage('assets/rra.jpg', package: 'receipt');
+    image = await flutterImageProvider(imageLogo);
 
     List<Widget> rows = [];
 
     rows.add(Column(mainAxisAlignment: MainAxisAlignment.start, children: [
       SizedBox(width: 10),
-      image != null ? Image(image) : Text(""),
+      Image(image),
       Text(
         brandAddress,
       ),
@@ -188,28 +255,34 @@ class OmniPrinter {
       ]),
     );
     // end of heading
+    // List<TableRow> rowsi = await feed(items);
+    // rows.add(rowsi);
     for (isar.TransactionItem item in items) {
       double total = item.price * item.qty;
-
+      log(item.name, name: "in the loop");
       String taxLabel = item.isTaxExempted ? "-EX" : "-B 18%";
-      rows.add(Column(children: [
-        Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Text(item.name.length > 5 ? item.name.substring(0, 5) : item.name,
-              style: TextStyle(fontWeight: FontWeight.bold)),
-          Spacer(),
-          Text("RW2BCXU0000001"),
-        ]),
-        Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Text("${item.price} X ${item.qty}"),
-          Spacer(),
-          Text(
-            "$total $taxLabel",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ])
-      ]));
+      rows.add(
+        Column(
+          children: [
+            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Text(item.name.length > 5 ? item.name.substring(0, 5) : item.name,
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              Spacer(),
+              Text("RW2BCXU0000001"),
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Text("${item.price} X ${item.qty}"),
+              Spacer(),
+              Text(
+                "$total $taxLabel",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ])
+          ],
+        ),
+      );
     }
 
     Column row = Column(
@@ -399,19 +472,12 @@ class OmniPrinter {
       ]);
       rows.add(row);
     }
-    //
+    // //
     var x = 0;
     final dashesInternalData = {2, 3, 4, 5, 6, 7};
 
     final replacedInternalData = internalData.splitMapJoin(RegExp('....'),
         onNonMatch: (s) => dashesInternalData.contains(x++) ? '-' : '');
-
-    final dashesReceiptSignature = {1, 2, 3, 4};
-
-    var y = 0;
-    final replacedReceiptSignature = receiptSignature.splitMapJoin(
-        RegExp('....'),
-        onNonMatch: (s) => dashesReceiptSignature.contains(y++) ? '-' : '');
 
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -432,7 +498,7 @@ class OmniPrinter {
         SizedBox(
             width: 150,
             child: Text(
-              'Date Time: $date $time',
+              transaction.lastTouched?.toDateTimeString() ?? "",
               style: TextStyle(fontWeight: FontWeight.bold),
             )),
       ]),
@@ -461,28 +527,28 @@ class OmniPrinter {
         SizedBox(height: 10),
       ]),
     );
-    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-      Text("Internal Data:", style: TextStyle(fontWeight: FontWeight.bold)),
-    ]));
-    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-      Text(replacedInternalData,
-          style: TextStyle(fontWeight: FontWeight.normal)),
-    ]));
+
+    rows.add(
+      Column(children: [
+        Text("Receipt Signature:",
+            style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(receiptSignature.toDashedString(),
+            style: TextStyle(fontWeight: FontWeight.normal)),
+      ]),
+    );
     rows.add(
       Column(children: [
         SizedBox(height: 1),
       ]),
     );
-    rows.add(
-      Column(children: [
-        Text("Receipt Signature:",
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        Text(
-            replacedReceiptSignature.substring(
-                0, replacedReceiptSignature.length - 1),
-            style: TextStyle(fontWeight: FontWeight.normal)),
-      ]),
-    );
+    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      Text("Internal Data:", style: TextStyle(fontWeight: FontWeight.bold)),
+    ]));
+    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      Text(replacedInternalData.toDashedString(),
+          style: TextStyle(fontWeight: FontWeight.normal)),
+    ]));
+
     rows.add(
       Column(children: [
         SizedBox(height: 4),
@@ -524,7 +590,7 @@ class OmniPrinter {
       Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         SizedBox(
             child: Text(
-          'DATE TIME: $date $time',
+          transaction.lastTouched?.toDateTimeString() ?? "",
           style: TextStyle(fontWeight: FontWeight.bold),
         )),
       ]),
@@ -559,11 +625,13 @@ class OmniPrinter {
         ),
       ),
     );
+
     // experiment layout the pdf file
     Uint8List pdfData = await doc.save();
 
     if (ProxyService.box.isAutoPrintEnabled()) {
       if (isDesktopOrWeb) {
+        log("Share PDF", name: "PDF Generation");
         await Printing.layoutPdf(
             name: DateTime.now()
                 .toIso8601String()
@@ -593,6 +661,7 @@ class OmniPrinter {
         }
       }
     } else {
+      log("About sharing Pdf", name: "PDF Generation");
       await Printing.sharePdf(
         bytes: pdfData,
         filename:
