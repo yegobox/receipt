@@ -1070,12 +1070,6 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "get_storage",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/get_storage-2.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.16"
-    },
-    {
       "name": "getwidget",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/getwidget-3.1.1",
       "packageUri": "lib/",
@@ -2300,7 +2294,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-02-13T13:32:44.960747Z",
+  "generated": "2024-02-17T11:01:20.747635Z",
   "generator": "pub",
   "generatorVersion": "3.2.6"
 }

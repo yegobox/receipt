@@ -47,36 +47,8 @@ class Print {
     receiptQr(receiptQrCode).then((qrCode) {
       OmniPrinter printer;
       printer = OmniPrinter();
-      if (ProxyService.box.isAutoPrintEnabled()) {
-        printer.generatePdfAndPrint(
-            brandName: brandName,
-            brandAddress: brandAddress,
-            brandDescription: brandDescription,
-            brandTel: brandTel,
-            brandTIN: brandTIN,
-            brandFooter: brandFooter,
-            emails: emails,
-            customerTin: customerTin.toString(),
-            receiptType: receiptType,
-            sdcReceiptNum: sdcReceiptNum,
-            items: items,
-            totalAEx: totalAEx,
-            totalB18: totalB18,
-            totalB: totalB,
-            totalTax: totalTax,
-            cash: cash,
-            cashierName: cashierName,
-            received: received,
-            payMode: payMode,
-            sdcId: sdcId,
-            internalData: internalData,
-            receiptSignature: receiptSignature,
-            receiptQrCode: qrCode,
-            invoiceNum: invoiceNum,
-            mrc: mrc,
-            totalPrice: 0,
-            transaction: transaction);
-      } else {
+      //TODO: add back ProxyService.box.isAutoPrintEnabled()
+      if (true) {
         printer.generatePdfAndPrint(
             brandName: brandName,
             brandAddress: brandAddress,

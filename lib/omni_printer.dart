@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:flipper_models/isar_models.dart' as isar;
 import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flipper_services/proxy.dart';
+// import 'package:flipper_services/proxy.dart';
 import 'package:flutter/material.dart' as c;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
@@ -39,7 +39,7 @@ extension StringToDashedString on String {
     }
 
     var x = 0;
-    final dashesInternalData = {2, 3, 4, 5, 6, 7};
+    final dashesInternalData = {2, 3, 4, 12, 6, 7};
     final replacedInternalData = splitMapJoin(RegExp('....'),
         onNonMatch: (s) => dashesInternalData.contains(x++) ? '-' : '');
     return replacedInternalData;
@@ -97,7 +97,7 @@ class OmniPrinter {
     return image;
   }
 
-  _header({
+  Future<void> _header({
     required ImageProvider image,
     required String brandAddress,
     required String brandTel,
@@ -108,122 +108,188 @@ class OmniPrinter {
     required String sdcReceiptNum,
   }) async {
     final font = await PdfGoogleFonts.nunitoExtraLight();
+
+    List<Widget> receiptTypeWidgets(String receiptType) {
+      switch (receiptType) {
+        case "NR":
+          return [
+            Text('Refund', style: TextStyle(font: font, fontSize: 14)),
+            Text('REF.NORMAL RECEIPT:# $sdcReceiptNum',
+                style: TextStyle(font: font)),
+            Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
+                style: TextStyle(font: font)),
+          ];
+        case "CS":
+          return [
+            Text('COPY', style: TextStyle(font: font, fontSize: 14)),
+            SizedBox(height: 1),
+            Text('REF.NORMAL RECEIPT#:$sdcReceiptNum',
+                style: TextStyle(font: font, fontSize: 14)),
+            SizedBox(height: 1),
+            Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
+                style: TextStyle(font: font, fontSize: 12)),
+          ];
+        case "TS":
+          return [
+            Text('TRAINING MODE', style: TextStyle(font: font, fontSize: 14))
+          ];
+        default:
+          return [];
+      }
+    }
+
     rows.add(Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-      SizedBox(width: 10),
-
+      SizedBox(width: 12),
       Row(children: [
-        Image(image, width: 50, height: 50),
-        // add space so one image is on left and another is on right
+        Image(image, width: 25, height: 25),
         Spacer(),
-        Image(image, width: 50, height: 50),
+        Image(image, width: 25, height: 25),
       ]),
-      Text(
-        brandAddress,
-      ),
+      Align(alignment: Alignment.center, child: Text(brandAddress)),
       SizedBox(height: 1),
-      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text(
-          "Tel:$brandTel",
-          style: TextStyle(font: font, fontSize: 14),
-        ),
-      ]),
-
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            'TIN:',
-            style: TextStyle(
-              font: font,
-              fontSize: 14,
-            ),
-          ),
-          Text(
-            brandTIN,
-            style: TextStyle(
-              font: font,
-              fontSize: 12,
-            ),
-          ),
+          Text("Email: $brandTel", style: TextStyle(font: font, fontSize: 12)),
+          Text("TIN  : $brandTIN", style: TextStyle(font: font, fontSize: 12))
         ],
       ),
       SizedBox(height: 1),
-      Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text(
-          'Welcome to $brandName',
-          style: TextStyle(
-            font: font,
-            fontSize: 14,
-          ),
-        ),
-        Text(
-          'Client ID: $customerTin',
-          style: TextStyle(
-            font: font,
-            fontSize: 14,
-          ),
-        ),
+      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text('Welcome to $brandName',
+            style: TextStyle(font: font, fontSize: 12)),
+        Text('Client ID: $customerTin',
+            style: TextStyle(font: font, fontSize: 12)),
       ]),
-
-      // add wording
-      if (receiptType == "NR")
-        Text(
-          'Refund',
-          style: TextStyle(
-            font: font,
-            fontSize: 14,
-          ),
-        ),
-      if (receiptType == "NR")
-        Text(
-          'REF.NORMAL RECEIPT:# $sdcReceiptNum',
-          style: TextStyle(
-            font: font,
-          ),
-        ),
-      if (receiptType == "NR")
-        Text(
-          'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-          style: TextStyle(
-            font: font,
-          ),
-        ),
-      if (receiptType == "CS")
-        Text(
-          'COPY',
-          style: TextStyle(
-            font: font,
-            fontSize: 14,
-          ),
-        ),
-      if (receiptType == "CS") SizedBox(height: 1),
-      if (receiptType == "CS")
-        Text(
-          'REF.NORMAL RECEIPT#:$sdcReceiptNum',
-          style: TextStyle(
-            font: font,
-            fontSize: 14,
-          ),
-        ),
-      if (receiptType != "CS") SizedBox(height: 1),
-      if (receiptType == "CS")
-        Text(
-          'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-          style: TextStyle(
-            font: font,
-            fontSize: 10,
-          ),
-        ),
-      if (receiptType == "TS")
-        Text(
-          'TRAINING MODE',
-          style: TextStyle(
-            font: font,
-            fontSize: 14,
-          ),
-        ),
+      ...receiptTypeWidgets(receiptType),
     ]));
   }
+  // _header({
+  //   required ImageProvider image,
+  //   required String brandAddress,
+  //   required String brandTel,
+  //   required String brandTIN,
+  //   required String brandName,
+  //   required String customerTin,
+  //   required String receiptType,
+  //   required String sdcReceiptNum,
+  // }) async {
+  //   final font = await PdfGoogleFonts.nunitoExtraLight();
+  //   rows.add(Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+  //     SizedBox(width: 12),
+
+  //     Row(children: [
+  //       Image(image, width: 120, height: 120),
+  //       Spacer(),
+  //       Image(image, width: 120, height: 120),
+  //     ]),
+  //     Text(
+  //       brandAddress,
+  //     ),
+  //     SizedBox(height: 1),
+  //     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+  //       Text(
+  //         "Tel:$brandTel",
+  //         style: TextStyle(font: font, fontSize: 14),
+  //       ),
+  //     ]),
+
+  //     Row(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: [
+  //         Text(
+  //           'TIN:',
+  //           style: TextStyle(
+  //             font: font,
+  //             fontSize: 14,
+  //           ),
+  //         ),
+  //         Text(
+  //           brandTIN,
+  //           style: TextStyle(
+  //             font: font,
+  //             fontSize: 12,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //     SizedBox(height: 1),
+  //     Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+  //       Text(
+  //         'Welcome to $brandName',
+  //         style: TextStyle(
+  //           font: font,
+  //           fontSize: 14,
+  //         ),
+  //       ),
+  //       Text(
+  //         'Client ID: $customerTin',
+  //         style: TextStyle(
+  //           font: font,
+  //           fontSize: 14,
+  //         ),
+  //       ),
+  //     ]),
+
+  //     // add wording
+  //     if (receiptType == "NR")
+  //       Text(
+  //         'Refund',
+  //         style: TextStyle(
+  //           font: font,
+  //           fontSize: 14,
+  //         ),
+  //       ),
+  //     if (receiptType == "NR")
+  //       Text(
+  //         'REF.NORMAL RECEIPT:# $sdcReceiptNum',
+  //         style: TextStyle(
+  //           font: font,
+  //         ),
+  //       ),
+  //     if (receiptType == "NR")
+  //       Text(
+  //         'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
+  //         style: TextStyle(
+  //           font: font,
+  //         ),
+  //       ),
+  //     if (receiptType == "CS")
+  //       Text(
+  //         'COPY',
+  //         style: TextStyle(
+  //           font: font,
+  //           fontSize: 14,
+  //         ),
+  //       ),
+  //     if (receiptType == "CS") SizedBox(height: 1),
+  //     if (receiptType == "CS")
+  //       Text(
+  //         'REF.NORMAL RECEIPT#:$sdcReceiptNum',
+  //         style: TextStyle(
+  //           font: font,
+  //           fontSize: 14,
+  //         ),
+  //       ),
+  //     if (receiptType != "CS") SizedBox(height: 1),
+  //     if (receiptType == "CS")
+  //       Text(
+  //         'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
+  //         style: TextStyle(
+  //           font: font,
+  //           fontSize: 12,
+  //         ),
+  //       ),
+  //     if (receiptType == "TS")
+  //       Text(
+  //         'TRAINING MODE',
+  //         style: TextStyle(
+  //           font: font,
+  //           fontSize: 14,
+  //         ),
+  //       ),
+  //   ]));
+  // }
 
   _buildTotalTax({required String totalTax}) async {
     final font = await PdfGoogleFonts.nunitoExtraLight();
@@ -347,7 +413,7 @@ class OmniPrinter {
       // Add a row for each item
       data.add(
         <String>[
-          item.name.length > 5 ? item.name.substring(0, 5) : item.name,
+          item.name.length > 12 ? item.name.substring(0, 12) : item.name,
           item.price.toString(),
           item.qty.toString(),
           '$total $taxLabel',
@@ -383,7 +449,7 @@ class OmniPrinter {
     );
     if (receiptType != "CS") {
       rows.add(
-        Column(children: [SizedBox(height: 10)]),
+        Column(children: [SizedBox(height: 12)]),
       );
     }
     if (receiptType == "TS" || receiptType == "PS") {
@@ -398,11 +464,7 @@ class OmniPrinter {
       ]);
       rows.add(row);
     }
-    rows.add(
-      Column(children: [
-        Divider(thickness: 0.1, color: PdfColors.black),
-      ]),
-    );
+    _dashedLine();
     await _buildTotal(totalPrice: totalPrice);
     await _buildAEx(totalAEx: totalAEx);
     await _buildTaxB(totalTaxB: totalB18);
@@ -414,11 +476,7 @@ class OmniPrinter {
       ]),
     );
 
-    rows.add(
-      Column(children: [
-        SizedBox(height: 1),
-      ]),
-    );
+    _dashedLine();
     rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Text(
         'CASH:',
@@ -489,7 +547,7 @@ class OmniPrinter {
     );
     rows.add(
       Column(children: [
-        SizedBox(height: 10),
+        SizedBox(height: 12),
       ]),
     );
     rows.add(
@@ -507,14 +565,10 @@ class OmniPrinter {
         ),
       ]),
     );
+    _dashedLine();
     rows.add(
       Column(children: [
-        Divider(height: 1),
-      ]),
-    );
-    rows.add(
-      Column(children: [
-        SizedBox(height: 10),
+        SizedBox(height: 12),
       ]),
     );
     if (receiptType == "TS") {
@@ -581,7 +635,7 @@ class OmniPrinter {
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         SizedBox(
-          width: 150,
+          width: 1120,
           child: Text(
             transaction.lastTouched?.toDateTimeString() ?? "",
             style: TextStyle(
@@ -625,7 +679,7 @@ class OmniPrinter {
     );
     rows.add(
       Column(children: [
-        SizedBox(height: 10),
+        SizedBox(height: 12),
       ]),
     );
 
@@ -678,8 +732,8 @@ class OmniPrinter {
         SizedBox(),
         Center(
           child: SizedBox(
-            width: 100,
-            height: 100,
+            width: 120,
+            height: 120,
             child: BarcodeWidget(
               barcode: Barcode.qrCode(
                 errorCorrectLevel: BarcodeQRCorrectionLevel.high,
@@ -743,14 +797,14 @@ class OmniPrinter {
     );
     rows.add(
       Column(children: [
-        SizedBox(height: 10),
+        SizedBox(height: 12),
         Text('Thank you!'),
       ]),
     );
     rows.add(
       Column(children: [
-        SizedBox(height: 10),
-        Text('EBM v2: v1.5'),
+        SizedBox(height: 12),
+        Text('EBM v2: v1.12'),
       ]),
     );
     // end of footer
@@ -759,8 +813,8 @@ class OmniPrinter {
   Future<void> generatePdfAndPrint({
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
-    String brandTel = "27131153",
-    String brandTIN = "101587390",
+    String brandTel = "271311123",
+    String brandTIN = "1211287390",
     String brandDescription = "We build app that server you!",
     String brandFooter = "yegobox shop",
     List<String>? emails,
@@ -784,6 +838,7 @@ class OmniPrinter {
     required String mrc,
     required double totalPrice,
     required isar.ITransaction transaction,
+    bool? autoPrint = false,
   }) async {
     final image = await _loadLogoImage();
 
@@ -798,11 +853,7 @@ class OmniPrinter {
       sdcReceiptNum: sdcReceiptNum,
     );
 
-    rows.add(
-      Column(children: [
-        Divider(height: 1),
-      ]),
-    );
+    _dashedLine();
     await _body(
       items: items,
       totalTax: totalTax,
@@ -840,14 +891,37 @@ class OmniPrinter {
     );
     // experiment layout the pdf file
     Uint8List pdfData = await doc.save();
-    handlePdfData(pdfData, emails);
+    handlePdfData(pdfData: pdfData, emails: emails, autoPrint: autoPrint);
   }
 
-  Future<void> handlePdfData(
-    Uint8List pdfData,
-    List<String>? emails,
-  ) async {
-    if (ProxyService.box.isAutoPrintEnabled()) {
+  void _dashedLine() {
+    rows.add(
+      Column(children: [
+        CustomPaint(
+          size: const PdfPoint(double.infinity, 10),
+          painter: (PdfGraphics canvas, PdfPoint size) {
+            const double dashWidth = 2.0, dashSpace = 2.0;
+            double startX = 0.0;
+            while (startX < size.x) {
+              canvas
+                ..moveTo(startX, 0)
+                ..lineTo(startX + dashWidth, 0)
+                ..setColor(PdfColors.black)
+                ..strokePath();
+              startX += dashWidth + dashSpace;
+            }
+          },
+        )
+      ]),
+    );
+  }
+
+  Future<void> handlePdfData({
+    required Uint8List pdfData,
+    required List<String>? emails,
+    bool? autoPrint = false,
+  }) async {
+    if (autoPrint!) {
       if (isDesktopOrWeb) {
         // log("Share PDF", name: "PDF Generation");
         await Printing.layoutPdf(
@@ -866,7 +940,7 @@ class OmniPrinter {
           Directory? dir = await DownloadsPath.downloadsDirectory();
           var i = 0;
           final path = dir?.path;
-          await for (final page in Printing.raster(pdfData, dpi: 150)) {
+          await for (final page in Printing.raster(pdfData, dpi: 1120)) {
             final png = await page.toPng();
             final file = File(p.normalize(
                 '$path/page-${i.toString().padLeft(3, DateTime.now().toIso8601String().replaceAll('-', '').replaceAll('.', '').replaceAll(':', ''))}.png'));
