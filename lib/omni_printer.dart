@@ -334,7 +334,7 @@ class OmniPrinter {
     );
   }
 
-  _buildTotal({required String totalPrice}) async {
+  _buildTotal({required String totalPayable}) async {
     final font = await PdfGoogleFonts.nunitoExtraLight();
     rows.add(
       Row(
@@ -348,7 +348,7 @@ class OmniPrinter {
           ),
           SizedBox(),
           Text(
-            totalPrice,
+            totalPayable,
             style: TextStyle(
               font: font,
             ),
@@ -385,7 +385,7 @@ class OmniPrinter {
   _body({
     required List<isar.TransactionItem> items,
     required String receiptType,
-    required String totalPrice,
+    required String totalPayable,
     required String totalAEx,
     required String totalB18,
     required String totalB,
@@ -465,7 +465,7 @@ class OmniPrinter {
       rows.add(row);
     }
     _dashedLine();
-    await _buildTotal(totalPrice: totalPrice);
+    await _buildTotal(totalPayable: totalPayable);
     await _buildAEx(totalAEx: totalAEx);
     await _buildTaxB(totalTaxB: totalB18);
     await _buildTotalTax(totalTax: totalTax);
@@ -810,6 +810,39 @@ class OmniPrinter {
     // end of footer
   }
 
+  /// Generates a PDF receipt and prints it.
+  ///
+  /// Parameters:
+  /// - brandName: The brand name to display on the receipt.
+  /// - brandAddress: The brand address to display on the receipt.
+  /// - brandTel: The brand phone number to display on the receipt.
+  /// - brandTIN: The brand tax ID to display on the receipt.
+  /// - brandDescription: A description of the brand to display on the receipt.
+  /// - brandFooter: The footer text to display on the receipt.
+  /// - emails: Optional list of emails to send the PDF to.
+  /// - customerTin: The customer's tax ID.
+  /// - items: The list of transaction items to display on the receipt.
+  /// - receiptType: The type of receipt.
+  /// - sdcReceiptNum: The receipt number from SDC.
+  /// - totalTax: The total tax amount.
+  /// - totalB: The total before tax.
+  /// - totalB18: The total before 18% tax.
+  /// - totalAEx: The total after tax.
+  /// - cash: The amount paid in cash.
+  /// - cashierName: The name of the cashier.
+  /// - received: The total amount received.
+  /// - payMode: The payment mode.
+  /// - sdcId: The SDC ID.
+  /// - internalData: Internal data to display on the receipt.
+  /// - receiptSignature: The signature to display on the receipt.
+  /// - receiptQrCode: The QR code to display on the receipt.
+  /// - invoiceNum: The invoice number.
+  /// - mrc: The MRC number to display.
+  /// - totalPrice: The total price.
+  /// - transaction: The transaction details.
+  /// - autoPrint: Whether to automatically print the receipt.
+  ///
+  /// Returns a Future that completes when the PDF is generated and handled.
   Future<void> generatePdfAndPrint({
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
@@ -836,7 +869,7 @@ class OmniPrinter {
     required String receiptQrCode,
     required int invoiceNum,
     required String mrc,
-    required double totalPrice,
+    required double totalPayable,
     required isar.ITransaction transaction,
     bool? autoPrint = false,
   }) async {
@@ -864,7 +897,7 @@ class OmniPrinter {
       cashierName: cashierName,
       received: received,
       payMode: payMode,
-      totalPrice: totalPrice.toString(),
+      totalPayable: totalPayable.toString(),
       receiptType: receiptType,
     );
 
@@ -894,6 +927,11 @@ class OmniPrinter {
     handlePdfData(pdfData: pdfData, emails: emails, autoPrint: autoPrint);
   }
 
+  /// Draws a dashed line separator on the PDF document.
+  ///
+  /// This function adds a Column with a CustomPaint widget to the rows list,
+  /// which draws a dashed line 10 units high across the full width of the page.
+  /// It is used to draw separator lines between sections of the receipt.
   void _dashedLine() {
     rows.add(
       Column(children: [
@@ -916,6 +954,17 @@ class OmniPrinter {
     );
   }
 
+  /// Handles saving and printing/sharing the generated PDF data.
+  ///
+  /// If autoPrint is true, it will attempt to directly print the PDF
+  /// on desktop/web, or save individual PNG pages on mobile.
+  ///
+  /// If autoPrint is false, it will instead share the PDF data as an
+  /// attachment via the provided email addresses.
+  ///
+  /// The pdfData is the Uint8List containing the actual PDF data.
+  /// emails is an optional list of email addresses to share to.
+  /// autoPrint defaults to false if not provided.
   Future<void> handlePdfData({
     required Uint8List pdfData,
     required List<String>? emails,
@@ -923,45 +972,87 @@ class OmniPrinter {
   }) async {
     if (autoPrint!) {
       if (isDesktopOrWeb) {
-        // log("Share PDF", name: "PDF Generation");
-        await Printing.layoutPdf(
-            name: DateTime.now()
-                .toIso8601String()
-                .replaceAll('-', '')
-                .replaceAll('.', '')
-                .replaceAll(':', ''),
-            onLayout: (PdfPageFormat format) async => pdfData);
+        await printPdf(pdfData);
       } else {
-        Map<Permission, PermissionStatus> statuses = await [
-          Permission.storage,
-          Permission.manageExternalStorage
-        ].request();
-        if (statuses[Permission.storage]!.isGranted) {
-          Directory? dir = await DownloadsPath.downloadsDirectory();
-          var i = 0;
-          final path = dir?.path;
-          await for (final page in Printing.raster(pdfData, dpi: 1120)) {
-            final png = await page.toPng();
-            final file = File(p.normalize(
-                '$path/page-${i.toString().padLeft(3, DateTime.now().toIso8601String().replaceAll('-', '').replaceAll('.', '').replaceAll(':', ''))}.png'));
-            await file.writeAsBytes(png);
-            // log('Saved to ${file.absolute.path}');
-            i++;
-          }
-        } else {
-          // log('no permission granted');
-        }
+        await savePdfAsImage(pdfData);
       }
     } else {
-      // log("About sharing Pdf", name: "PDF Generation");
-      await Printing.sharePdf(
-        bytes: pdfData,
-        filename:
-            "${DateTime.now().toIso8601String().replaceAll('-', '').replaceAll('.', '').replaceAll(':', '')}.pdf",
-        subject: "receipt",
-        body: "Thank you for visiting us",
-        emails: emails,
-      );
+      await sharePdf(pdfData, emails);
     }
+  }
+
+  /// Prints the provided PDF data by sending it to the system printing dialog.
+  ///
+  /// The `pdfData` parameter contains the raw bytes of the PDF file to print.
+  ///
+  /// The `name` parameter provides a suggested filename to use in the printing
+  /// dialog.
+  Future<void> printPdf(Uint8List pdfData) async {
+    await Printing.layoutPdf(
+      name: generateFileName(),
+      onLayout: (PdfPageFormat format) async => pdfData,
+    );
+  }
+
+  /// Saves the provided PDF data as a series of PNG image files,
+  /// by rasterizing each page and writing to the downloads directory.
+  ///
+  /// The `pdfData` parameter contains the raw bytes of the PDF to save.
+  ///
+  /// This handles requesting permissions, finding the downloads directory,
+  /// rasterizing each page, generating a filename, writing the PNG data,
+  /// and incrementing the page count.
+  Future<void> savePdfAsImage(Uint8List pdfData) async {
+    Map<Permission, PermissionStatus> statuses =
+        await [Permission.storage, Permission.manageExternalStorage].request();
+    if (statuses[Permission.storage]?.isGranted ?? false) {
+      Directory? dir = await DownloadsPath.downloadsDirectory();
+      final path = dir?.path;
+      if (path != null) {
+        var i = 0;
+        await for (final page in Printing.raster(pdfData, dpi: 1120)) {
+          final png = await page.toPng();
+          final file = File(p.normalize(
+              '$path/page-${i.toString().padLeft(3, generateFileName())}.png'));
+          await file.writeAsBytes(png);
+          i++;
+        }
+      }
+    }
+  }
+
+  /// Shares the provided PDF data by opening the system share sheet.
+  ///
+  /// The `pdfData` parameter contains the raw bytes of the PDF to share.
+  ///
+  /// The `filename` parameter provides a suggested filename for the PDF.
+  ///
+  /// The `subject` and `body` parameters populate the share sheet with
+  /// prefilled content.
+  ///
+  /// The `emails` parameter optionally specifies email addresses to prefill
+  /// in the share sheet.
+  ///
+  Future<void> sharePdf(Uint8List pdfData, List<String>? emails) async {
+    await Printing.sharePdf(
+      bytes: pdfData,
+      filename: "${generateFileName()}.pdf",
+      subject: "receipt",
+      body: "Thank you for visiting our shop",
+      emails: emails,
+    );
+  }
+
+  /// Generates a filename string based on the current date and time,
+  /// with hypens, colons, and periods removed.
+  ///
+  /// This is useful for generating unique filenames for things like
+  /// saved files, that include a timestamp.
+  String generateFileName() {
+    return DateTime.now()
+        .toIso8601String()
+        .replaceAll('-', '')
+        .replaceAll('.', '')
+        .replaceAll(':', '');
   }
 }

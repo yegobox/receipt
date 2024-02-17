@@ -74,10 +74,10 @@ ITransaction generateDummyTransaction() {
     branchId: random.nextInt(10),
     status: 'dummy_status_${random.nextInt(2)}',
     transactionType: 'dummy_transaction_type_${random.nextInt(2)}',
-    subTotal: random.nextDouble() * 100.0,
+    subTotal: 15000.0,
     paymentType: 'dummy_payment_type_${random.nextInt(2)}',
-    cashReceived: random.nextDouble() * 50.0,
-    customerChangeDue: random.nextDouble() * 20.0,
+    cashReceived: 20000.0,
+    customerChangeDue: 5000,
     createdAt: DateTime.now().toIso8601String(),
     receiptType: 'dummy_receipt_type_${random.nextInt(3)}',
     updatedAt: DateTime.now().toIso8601String(),
@@ -122,22 +122,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
   void _incrementCounter() {
     ITransaction transaction = generateDummyTransaction();
     Print print = Print();
     print.print(
-      grandTotal: 500,
+      grandTotal: transaction.subTotal,
       currencySymbol: "RW",
       transaction: transaction,
       totalAEx: 0,
       items: [generateDummyTransactionItem()],
-      totalB18: (500 * 18 / 118).toStringAsFixed(2),
-      totalB: 500,
-      totalTax: (500 * 18 / 118).toStringAsFixed(2),
-      cash: 500,
-      received: 100,
+      totalB18: (transaction.subTotal * 18 / 118).toStringAsFixed(2),
+      totalB: transaction.subTotal,
+      totalTax: (transaction.subTotal * 18 / 118).toStringAsFixed(2),
+      cash: transaction.subTotal,
+      received: transaction.cashReceived,
       payMode: "Cash",
       mrc: "MRCNO",
       internalData: "receiptintrlData",
@@ -174,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              '0',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
