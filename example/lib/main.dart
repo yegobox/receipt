@@ -88,7 +88,7 @@ ITransaction generateDummyTransaction() {
     ticketName: 'dummy_ticket_${random.nextInt(100)}',
     deletedAt: random.nextBool() ? DateTime.now() : null,
     supplierId: random.nextBool() ? random.nextInt(50) : null,
-    ebmSynced: random.nextBool(),
+    // ebmSynced: random.nextBool(),
   );
 }
 
