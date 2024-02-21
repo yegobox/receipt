@@ -48,45 +48,6 @@ extension StringToDashedString on String {
 
 class OmniPrinter {
   final doc = Document(version: PdfVersion.pdf_1_5, compress: true);
-  // List<TableRow> rows = [];
-  // DateTime dateTime = DateTime.now();
-  // String date = "";
-  // String time = "";
-  // double totalPrice = 0;
-  // double totalItems = 0;
-  // Future<List<TableRow>> feed(
-  //   List<isar.TransactionItem> items,
-  // ) async {
-  //   date = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
-  //   time = "${dateTime.hour}:${dateTime.minute}:${dateTime.second}";
-
-  //   for (var item in items) {
-  //     // if the isRefunded is null i.e the item has not been refunded so we add it to the total price
-  //     if (item.isRefunded == null) {
-  //       totalItems = totalItems + 1;
-  //       double total = item.price * item.qty;
-  //       totalPrice = total + totalPrice;
-  //       String taxLabel = item.isTaxExempted ? "-EX" : "-B";
-  //       rows.add(TableRow(children: [
-  //         Text(item.name, style: TextStyle(font: font,)),
-  //       ]));
-  //       rows.add(TableRow(children: [
-  //         Text((item.price).toString()),
-  //         Text(item.qty.toString()),
-  //         Text(
-  //           "$total $taxLabel",
-  //           style: TextStyle(
-  //             font: font,,
-  //           ),
-  //         ),
-  //       ]));
-  //       rows.add(TableRow(children: [
-  //         SizedBox(height: 1),
-  //       ]));
-  //     }
-  //   }
-  //   return rows;
-  // }
 
   List<Widget> rows = [];
 

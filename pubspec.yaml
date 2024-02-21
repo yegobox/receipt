@@ -4,7 +4,7 @@ version: 1.0.0-dev.2
 repository: "https://github.com/yegobox/receipt"
 
 environment:
-  sdk: ">=3.0.0"
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -13,7 +13,7 @@ dependencies:
   pdf: ^3.10.3
   open_filex: ^4.1.1
   gap: ^2.0.0
-  flipper_models: ^0.0.1-dev.7
+  flipper_models: ^0.0.1-dev.5
   isar: ^4.0.0-dev.13
   isar_flutter_libs: ^4.0.0-dev.13
   qr_flutter: ^4.0.0
