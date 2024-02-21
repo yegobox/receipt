@@ -507,7 +507,7 @@
     },
     {
       "name": "firebase_core",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core-2.24.2",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core-2.25.4",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -519,9 +519,9 @@
     },
     {
       "name": "firebase_core_web",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core_web-2.10.0",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core_web-2.11.4",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.2"
     },
     {
       "name": "firebase_crashlytics",
@@ -1074,6 +1074,12 @@
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/get_it-7.6.7",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "get_storage",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/get_storage-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
     },
     {
       "name": "getwidget",
@@ -2300,7 +2306,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-02-21T06:47:42.482329Z",
-  "generator": "melos",
-  "generatorVersion": "2.9.0"
+  "generated": "2024-02-21T07:32:29.819895Z",
+  "generator": "pub",
+  "generatorVersion": "3.2.6"
 }

@@ -17,7 +17,7 @@ dependencies:
   isar: ^4.0.0-dev.13
   isar_flutter_libs: ^4.0.0-dev.13
   qr_flutter: ^4.0.0
-  flipper_services: ^1.0.0
+  flipper_services: ^1.0.0-dev
   universal_platform: ^1.0.0+1
   lecle_downloads_path_provider: ^0.0.2+7
   path_provider: ^2.0.15
