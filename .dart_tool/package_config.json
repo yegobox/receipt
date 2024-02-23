@@ -1052,12 +1052,6 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "get_storage",
-      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/get_storage-2.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.16"
-    },
-    {
       "name": "getwidget",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/getwidget-3.1.1",
       "packageUri": "lib/",
@@ -2018,6 +2012,18 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "syncfusion_flutter_core",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_core-19.4.56",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "syncfusion_flutter_datepicker",
+      "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_datepicker-19.4.56",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "synchronized",
       "rootUri": "file:///C:/Users/SPENN/AppData/Local/Pub/Cache/hosted/pub.dev/synchronized-3.1.0+1",
       "packageUri": "lib/",
@@ -2282,7 +2288,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-02-21T19:43:24.855086Z",
+  "generated": "2024-02-23T10:53:14.307536Z",
   "generator": "pub",
   "generatorVersion": "3.2.6"
 }
