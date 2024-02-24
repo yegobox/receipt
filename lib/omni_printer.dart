@@ -125,132 +125,6 @@ class OmniPrinter {
       ...receiptTypeWidgets(receiptType),
     ]));
   }
-  // _header({
-  //   required ImageProvider image,
-  //   required String brandAddress,
-  //   required String brandTel,
-  //   required String brandTIN,
-  //   required String brandName,
-  //   required String customerTin,
-  //   required String receiptType,
-  //   required String sdcReceiptNum,
-  // }) async {
-  //   final font = await PdfGoogleFonts.nunitoExtraLight();
-  //   rows.add(Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-  //     SizedBox(width: 12),
-
-  //     Row(children: [
-  //       Image(image, width: 120, height: 120),
-  //       Spacer(),
-  //       Image(image, width: 120, height: 120),
-  //     ]),
-  //     Text(
-  //       brandAddress,
-  //     ),
-  //     SizedBox(height: 1),
-  //     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-  //       Text(
-  //         "Tel:$brandTel",
-  //         style: TextStyle(font: font, fontSize: 14),
-  //       ),
-  //     ]),
-
-  //     Row(
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       children: [
-  //         Text(
-  //           'TIN:',
-  //           style: TextStyle(
-  //             font: font,
-  //             fontSize: 14,
-  //           ),
-  //         ),
-  //         Text(
-  //           brandTIN,
-  //           style: TextStyle(
-  //             font: font,
-  //             fontSize: 12,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //     SizedBox(height: 1),
-  //     Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-  //       Text(
-  //         'Welcome to $brandName',
-  //         style: TextStyle(
-  //           font: font,
-  //           fontSize: 14,
-  //         ),
-  //       ),
-  //       Text(
-  //         'Client ID: $customerTin',
-  //         style: TextStyle(
-  //           font: font,
-  //           fontSize: 14,
-  //         ),
-  //       ),
-  //     ]),
-
-  //     // add wording
-  //     if (receiptType == "NR")
-  //       Text(
-  //         'Refund',
-  //         style: TextStyle(
-  //           font: font,
-  //           fontSize: 14,
-  //         ),
-  //       ),
-  //     if (receiptType == "NR")
-  //       Text(
-  //         'REF.NORMAL RECEIPT:# $sdcReceiptNum',
-  //         style: TextStyle(
-  //           font: font,
-  //         ),
-  //       ),
-  //     if (receiptType == "NR")
-  //       Text(
-  //         'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-  //         style: TextStyle(
-  //           font: font,
-  //         ),
-  //       ),
-  //     if (receiptType == "CS")
-  //       Text(
-  //         'COPY',
-  //         style: TextStyle(
-  //           font: font,
-  //           fontSize: 14,
-  //         ),
-  //       ),
-  //     if (receiptType == "CS") SizedBox(height: 1),
-  //     if (receiptType == "CS")
-  //       Text(
-  //         'REF.NORMAL RECEIPT#:$sdcReceiptNum',
-  //         style: TextStyle(
-  //           font: font,
-  //           fontSize: 14,
-  //         ),
-  //       ),
-  //     if (receiptType != "CS") SizedBox(height: 1),
-  //     if (receiptType == "CS")
-  //       Text(
-  //         'REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-  //         style: TextStyle(
-  //           font: font,
-  //           fontSize: 12,
-  //         ),
-  //       ),
-  //     if (receiptType == "TS")
-  //       Text(
-  //         'TRAINING MODE',
-  //         style: TextStyle(
-  //           font: font,
-  //           fontSize: 14,
-  //         ),
-  //       ),
-  //   ]));
-  // }
 
   _buildTotalTax({required String totalTax}) async {
     final font = await PdfGoogleFonts.nunitoExtraLight();
@@ -425,7 +299,7 @@ class OmniPrinter {
       ]);
       rows.add(row);
     }
-    _dashedLine();
+    dashedLine();
     await _buildTotal(totalPayable: totalPayable);
     await _buildAEx(totalAEx: totalAEx);
     await _buildTaxB(totalTaxB: totalB18);
@@ -437,7 +311,7 @@ class OmniPrinter {
       ]),
     );
 
-    _dashedLine();
+    dashedLine();
     rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Text(
         'CASH:',
@@ -526,7 +400,7 @@ class OmniPrinter {
         ),
       ]),
     );
-    _dashedLine();
+    dashedLine();
     rows.add(
       Column(children: [
         SizedBox(height: 12),
@@ -847,7 +721,7 @@ class OmniPrinter {
       sdcReceiptNum: sdcReceiptNum,
     );
 
-    _dashedLine();
+    dashedLine();
     await _body(
       items: items,
       totalTax: totalTax,
@@ -893,7 +767,7 @@ class OmniPrinter {
   /// This function adds a Column with a CustomPaint widget to the rows list,
   /// which draws a dashed line 10 units high across the full width of the page.
   /// It is used to draw separator lines between sections of the receipt.
-  void _dashedLine() {
+  void dashedLine({double dashThickness = 1.0}) {
     rows.add(
       Column(children: [
         CustomPaint(
@@ -905,7 +779,8 @@ class OmniPrinter {
               canvas
                 ..moveTo(startX, 0)
                 ..lineTo(startX + dashWidth, 0)
-                ..setColor(PdfColors.black)
+                ..setColor(PdfColors.lightBlueAccent)
+                ..setLineWidth(dashThickness)
                 ..strokePath();
               startX += dashWidth + dashSpace;
             }

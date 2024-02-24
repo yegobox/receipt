@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flipper_models/isar_models.dart';
 import 'package:flutter/material.dart';
 import 'package:receipt/print.dart';
+import 'package:receipt/zReport.dart';
 
 TransactionItem generateDummyTransactionItem() {
   final random = Random();
@@ -123,38 +124,62 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
-    ITransaction transaction = generateDummyTransaction();
-    Print print = Print();
-    print.print(
-      grandTotal: transaction.subTotal,
-      currencySymbol: "RW",
-      transaction: transaction,
-      totalAEx: 0,
-      items: [generateDummyTransactionItem()],
-      totalB18: (transaction.subTotal * 18 / 118).toStringAsFixed(2),
-      totalB: transaction.subTotal,
-      totalTax: (transaction.subTotal * 18 / 118).toStringAsFixed(2),
-      cash: transaction.subTotal,
-      received: transaction.cashReceived,
-      payMode: "Cash",
-      mrc: "MRCNO",
-      internalData: "receiptintrlData",
-      receiptQrCode: "receiptqrCode",
-      receiptSignature: "receiptrcptSign",
-      cashierName: "YEGOBOX",
-      sdcId: "SDCID",
-      sdcReceiptNum: "30",
-      invoiceNum: 30,
-      brandName: "YEGOBOX",
-      brandAddress: "Kigali,Rwanda",
-      brandTel: "0783054874",
-      brandTIN: "00000000",
-      brandDescription: "Description",
-      brandFooter: "Thank you",
-      emails: ['info@yegobox.com'],
-      customerTin: "0000000000",
-      receiptType: "NS",
+    ZReport().printZReport(
+      totalNumberSalesNS: 26,
+      totalAmountSalesNS: 191921000,
+      totalNumberCopySalesNS: 0,
+      totalAmountCopySalesNS: 0.0,
+      totalNumberRefundNR: 0,
+      totalAmountRefundNR: 0.00,
+      totalTaxableAEX: 0.0,
+      totalTaxableB: 191921000,
+      totalTaxableC: 0.00,
+      totalTaxableD: 0.00,
+      totalTaxeAEX: 0.00,
+      totalTaxeB: 29276084.75,
+      totalTaxeC: 0.00,
+      totalTaxeD: 0.00,
+      refundTaxableAEX: 0.00,
+      refundTaxableB: 0.00,
+      refundTaxableC: 0.00,
+      refundTaxableD: 0.00,
+      refundTaxeAEX: 0.00,
+      refundTaxeB: 0.00,
+      refundTaxeC: 0.00,
+      refundTaxeD: 0.00,
     );
+    // ITransaction transaction = generateDummyTransaction();
+    // Print print = Print();
+    // print.print(
+    //   grandTotal: transaction.subTotal,
+    //   currencySymbol: "RW",
+    //   transaction: transaction,
+    //   totalAEx: 0,
+    //   items: [generateDummyTransactionItem()],
+    //   totalB18: (transaction.subTotal * 18 / 118).toStringAsFixed(2),
+    //   totalB: transaction.subTotal,
+    //   totalTax: (transaction.subTotal * 18 / 118).toStringAsFixed(2),
+    //   cash: transaction.subTotal,
+    //   received: transaction.cashReceived,
+    //   payMode: "Cash",
+    //   mrc: "MRCNO",
+    //   internalData: "receiptintrlData",
+    //   receiptQrCode: "receiptqrCode",
+    //   receiptSignature: "receiptrcptSign",
+    //   cashierName: "YEGOBOX",
+    //   sdcId: "SDCID",
+    //   sdcReceiptNum: "30",
+    //   invoiceNum: 30,
+    //   brandName: "YEGOBOX",
+    //   brandAddress: "Kigali,Rwanda",
+    //   brandTel: "0783054874",
+    //   brandTIN: "00000000",
+    //   brandDescription: "Description",
+    //   brandFooter: "Thank you",
+    //   emails: ['info@yegobox.com'],
+    //   customerTin: "0000000000",
+    //   receiptType: "NS",
+    // );
   }
 
   @override
