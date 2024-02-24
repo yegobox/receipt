@@ -175,18 +175,19 @@ class ZReport extends OmniPrinter {
   Widget _buildAlign(String text) {
     return Align(
       alignment: Alignment.centerLeft,
-      child:
-          Text(text, style: TextStyle(fontSize: 5), textAlign: TextAlign.left),
+      child: Text(text,
+          style: const TextStyle(fontSize: 5), textAlign: TextAlign.left),
     );
   }
 
-  _header(
-      {required image,
-      required String businessName,
-      required String tinNumber,
-      required String email,
-      required String fromDate,
-      required String toDate}) {
+  _header({
+    required image,
+    required String businessName,
+    required String tinNumber,
+    required String email,
+    required String fromDate,
+    required String toDate,
+  }) {
     rows.add(Column(mainAxisAlignment: MainAxisAlignment.start, children: [
       SizedBox(width: 5),
       Row(children: [
@@ -194,27 +195,28 @@ class ZReport extends OmniPrinter {
       ]),
       SizedBox(height: 5),
       Row(children: [
-        Text(businessName, textScaleFactor: 1, style: TextStyle(fontSize: 5)),
+        Text(businessName,
+            textScaleFactor: 1, style: const TextStyle(fontSize: 5)),
       ]),
       SizedBox(height: 5),
       Row(children: [
         Text('TIN: $tinNumber',
-            textScaleFactor: 1, style: TextStyle(fontSize: 5)),
+            textScaleFactor: 1, style: const TextStyle(fontSize: 5)),
       ]),
       SizedBox(height: 5),
       Row(children: [
         Text('Email: $email',
-            textScaleFactor: 1, style: TextStyle(fontSize: 5)),
+            textScaleFactor: 1, style: const TextStyle(fontSize: 5)),
       ]),
       SizedBox(height: 5),
       Row(children: [
         Text('Daily Z-Report',
-            textScaleFactor: 1, style: TextStyle(fontSize: 5)),
+            textScaleFactor: 1, style: const TextStyle(fontSize: 5)),
       ]),
       SizedBox(height: 5),
       Row(children: [
         Text('From: $fromDate To: $toDate',
-            textScaleFactor: 1, style: TextStyle(fontSize: 5)),
+            textScaleFactor: 1, style: const TextStyle(fontSize: 5)),
       ]),
       SizedBox(height: 5),
     ]));
