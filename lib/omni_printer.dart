@@ -3,6 +3,7 @@ library receipt;
 import 'dart:developer';
 import 'dart:io';
 import 'package:flipper_models/isar_models.dart' as isar;
+import 'package:flipper_models/realm_model_export.dart';
 import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
 import 'package:flutter/foundation.dart';
 // import 'package:flipper_services/proxy.dart';
@@ -218,7 +219,7 @@ class OmniPrinter {
   }
 
   _body({
-    required List<isar.TransactionItem> items,
+    required List<TransactionItem> items,
     required String receiptType,
     required String totalPayable,
     required String totalAEx,
@@ -242,13 +243,13 @@ class OmniPrinter {
     // Iterate over the items
     for (var item in items) {
       double total = item.price * item.qty;
-      log(item.name, name: "in the loop");
+      // log(item.name, name: "in the loop");
       String taxLabel = item.isTaxExempted ? "(EX)" : "(B)";
 
       // Add a row for each item
       data.add(
         <String>[
-          item.name.length > 12 ? item.name.substring(0, 12) : item.name,
+          item.name!.length > 12 ? item.name!.substring(0, 12) : item.name!,
           item.price.toString(),
           item.qty.toString(),
           '$total $taxLabel',
@@ -438,7 +439,7 @@ class OmniPrinter {
   }
 
   _footer({
-    required isar.ITransaction transaction,
+    required ITransaction transaction,
     required String sdcId,
     required String sdcReceiptNum,
     required String receiptType,
@@ -687,7 +688,7 @@ class OmniPrinter {
     String brandFooter = "yegobox shop",
     List<String>? emails,
     String? customerTin = "000000000",
-    required List<isar.TransactionItem> items,
+    required List<TransactionItem> items,
     required String receiptType,
     required String sdcReceiptNum,
     required String totalTax,
@@ -705,7 +706,7 @@ class OmniPrinter {
     required int invoiceNum,
     required String mrc,
     required double totalPayable,
-    required isar.ITransaction transaction,
+    required ITransaction transaction,
     bool? autoPrint = false,
   }) async {
     final image = await _loadLogoImage();

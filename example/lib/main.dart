@@ -1,19 +1,20 @@
 import 'dart:math';
 
-import 'package:flipper_models/isar_models.dart';
+import 'package:flipper_models/realm_model_export.dart';
 import 'package:flutter/material.dart';
-import 'package:receipt/print.dart';
+import 'package:realm/realm.dart';
 import 'package:receipt/zReport.dart';
 
 TransactionItem generateDummyTransactionItem() {
   final random = Random();
 
   return TransactionItem(
-    id: 'dummy_id_${random.nextInt(1000)}',
+    ObjectId(),
+    id: random.nextInt(1000),
     action: 'dummy_action_${random.nextInt(3)}',
     name: 'dummy_name_${random.nextInt(1000)}',
-    transactionId: 'dummy_transaction_id_${random.nextInt(1000)}',
-    variantId: 'dummy_variant_id_${random.nextInt(1000)}',
+    transactionId: random.nextInt(1000),
+    variantId: random.nextInt(1000),
     qty: random.nextDouble() * 10.0,
     price: random.nextDouble() * 50.0,
     branchId: random.nextInt(10),
@@ -68,7 +69,8 @@ ITransaction generateDummyTransaction() {
   final random = Random();
 
   return ITransaction(
-    id: 'dummy_id_${random.nextInt(1000)}',
+    ObjectId(),
+    id: random.nextInt(1000),
     reference: 'dummy_reference_${random.nextInt(1000)}',
     categoryId: 'dummy_category_${random.nextInt(5)}',
     transactionNumber: 'dummy_transaction_number_${random.nextInt(1000)}',
@@ -82,7 +84,7 @@ ITransaction generateDummyTransaction() {
     createdAt: DateTime.now().toIso8601String(),
     receiptType: 'dummy_receipt_type_${random.nextInt(3)}',
     updatedAt: DateTime.now().toIso8601String(),
-    customerId: 'dummy_customer_id_${random.nextInt(100)}',
+    customerId: random.nextInt(1000),
     note: 'dummy_note_${random.nextInt(100)}',
     lastTouched: DateTime.now(),
     action: 'dummy_action_${random.nextInt(3)}',

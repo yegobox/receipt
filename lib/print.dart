@@ -1,6 +1,6 @@
 library receipt;
 
-import 'package:flipper_models/isar_models.dart';
+import 'package:flipper_models/realm_model_export.dart';
 import 'package:pdf/widgets.dart';
 import 'package:receipt/omni_printer.dart';
 

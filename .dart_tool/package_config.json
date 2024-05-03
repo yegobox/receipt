@@ -345,9 +345,9 @@
     },
     {
       "name": "dio",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/dio-4.0.6",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/dio-5.4.3+1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.15"
     },
     {
       "name": "dotted_line",
@@ -411,7 +411,7 @@
     },
     {
       "name": "fast_cached_network_image",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/fast_cached_network_image-1.1.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/fast_cached_network_image-1.2.9",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -543,21 +543,21 @@
     },
     {
       "name": "firebase_messaging",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_messaging-14.7.10",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_messaging-14.9.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_messaging_platform_interface",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_messaging_platform_interface-4.5.18",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_messaging_platform_interface-4.5.34",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_messaging_web",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_messaging_web-3.5.18",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_messaging_web-3.8.4",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.2"
     },
     {
       "name": "firebase_remote_config",
@@ -1136,6 +1136,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "group_button",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/group_button-5.3.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "hive",
       "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/hive-2.2.3",
       "packageUri": "lib/",
@@ -1244,6 +1250,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "internet_connection_checker",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/internet_connection_checker-1.0.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "intl",
       "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/intl-0.18.1",
       "packageUri": "lib/",
@@ -1263,15 +1275,15 @@
     },
     {
       "name": "isar",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/isar-4.0.0-dev.14",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/isar-3.1.0+1",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "2.17"
     },
     {
       "name": "isar_flutter_libs",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/isar_flutter_libs-4.0.0-dev.14",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "2.17"
     },
     {
       "name": "isolated_worker",
@@ -1863,13 +1875,13 @@
     },
     {
       "name": "share_plus",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/share_plus-7.2.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/share_plus-9.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.3"
     },
     {
       "name": "share_plus_platform_interface",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/share_plus_platform_interface-3.3.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/share_plus_platform_interface-4.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -2088,6 +2100,30 @@
       "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/synchronized-3.1.0+1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "talker",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/talker-4.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "talker_dio_logger",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/talker_dio_logger-4.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "talker_flutter",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/talker_flutter-4.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "talker_logger",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/talker_logger-4.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
     },
     {
       "name": "tar",
@@ -2336,7 +2372,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-04-28T09:21:42.414611Z",
+  "generated": "2024-05-02T19:33:57.173807Z",
   "generator": "pub",
   "generatorVersion": "3.3.4"
 }
