@@ -2,7 +2,7 @@ library receipt;
 
 import 'dart:developer';
 import 'dart:io';
-import 'package:flipper_models/isar_models.dart' as isar;
+
 import 'package:flipper_models/realm_model_export.dart';
 import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
 import 'package:flutter/foundation.dart';

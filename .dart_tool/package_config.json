@@ -1274,18 +1274,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "isar",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/isar-3.1.0+1",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "isar_flutter_libs",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
       "name": "isolated_worker",
       "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/isolated_worker-0.1.1",
       "packageUri": "lib/",
@@ -1779,27 +1767,27 @@
     },
     {
       "name": "realm",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/realm-2.1.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/realm-2.2.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "realm_common",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/realm_common-2.1.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/realm_common-2.2.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "realm_dart",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/realm_dart-2.1.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/realm_dart-2.2.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "realm_generator",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/realm_generator-2.1.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/realm_generator-2.2.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "recase",
@@ -2372,7 +2360,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-05-02T19:33:57.173807Z",
+  "generated": "2024-05-04T20:18:42.952372Z",
   "generator": "pub",
   "generatorVersion": "3.3.4"
 }

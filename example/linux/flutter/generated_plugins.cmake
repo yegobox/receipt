@@ -6,7 +6,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   desktop_webview_auth
   file_selector_linux
   flutter_window_close
-  isar_flutter_libs
   local_notifier
   printing
   realm

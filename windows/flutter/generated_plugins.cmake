@@ -12,7 +12,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   firebase_storage
   flutter_window_close
   geolocator_windows
-  isar_flutter_libs
   local_auth_windows
   local_notifier
   permission_handler_windows
