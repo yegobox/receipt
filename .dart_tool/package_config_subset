@@ -238,6 +238,10 @@ device_info_plus_platform_interface
 2.12
 file:///Users/richard/.pub-cache/hosted/pub.dev/device_info_plus_platform_interface-7.0.0/
 file:///Users/richard/.pub-cache/hosted/pub.dev/device_info_plus_platform_interface-7.0.0/lib/
+device_type
+3.2
+file:///Users/richard/.pub-cache/hosted/pub.dev/device_type-0.0.6/
+file:///Users/richard/.pub-cache/hosted/pub.dev/device_type-0.0.6/lib/
 diffutil_dart
 2.12
 file:///Users/richard/.pub-cache/hosted/pub.dev/diffutil_dart-3.0.0/
@@ -1194,6 +1198,10 @@ shortid
 2.12
 file:///Users/richard/.pub-cache/hosted/pub.dev/shortid-0.1.2/
 file:///Users/richard/.pub-cache/hosted/pub.dev/shortid-0.1.2/lib/
+sizer
+2.12
+file:///Users/richard/.pub-cache/hosted/pub.dev/sizer-2.0.15/
+file:///Users/richard/.pub-cache/hosted/pub.dev/sizer-2.0.15/lib/
 smart_auth
 2.16
 file:///Users/richard/.pub-cache/hosted/pub.dev/smart_auth-1.1.1/

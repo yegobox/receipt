@@ -338,6 +338,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "device_type",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/device_type-0.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
       "name": "diffutil_dart",
       "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/diffutil_dart-3.0.0",
       "packageUri": "lib/",
@@ -1934,6 +1940,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "sizer",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/sizer-2.0.15",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///Users/richard/Documents/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -2360,7 +2372,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-05-04T20:18:42.952372Z",
+  "generated": "2024-05-06T10:14:11.992729Z",
   "generator": "pub",
   "generatorVersion": "3.3.4"
 }
