@@ -874,7 +874,7 @@ class OmniPrinter {
     await Printing.sharePdf(
       bytes: pdfData,
       filename: "${generateFileName()}.pdf",
-      subject: "receipt",
+      subject: "${generateFileName()}-receipt",
       body: "Thank you for visiting our shop",
       emails: emails,
     );

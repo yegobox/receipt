@@ -471,21 +471,21 @@
     },
     {
       "name": "firebase_analytics",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_analytics-10.8.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_analytics-10.10.5",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_analytics_platform_interface",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_analytics_platform_interface-3.9.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_analytics_platform_interface-3.10.6",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_analytics_web",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_analytics_web-0.5.5+12",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_analytics_web-0.5.7+5",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.2"
     },
     {
       "name": "firebase_auth",
@@ -909,7 +909,7 @@
     },
     {
       "name": "flutter_settings_ui",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_settings_ui-2.0.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_settings_ui-3.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1299,13 +1299,13 @@
     },
     {
       "name": "json_annotation",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/json_annotation-4.8.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/json_annotation-4.9.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "json_serializable",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/json_serializable-6.7.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/json_serializable-6.8.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -1395,39 +1395,21 @@
     },
     {
       "name": "location",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/location-5.0.0-dev.8",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/location-6.0.2",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "location_android",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/location_android-5.0.0-dev.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "location_ios",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/location_ios-5.0.0-dev.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "location_macos",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/location_macos-5.0.0-dev.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.1"
     },
     {
       "name": "location_platform_interface",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/location_platform_interface-5.0.0-dev.3",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/location_platform_interface-4.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.1"
     },
     {
       "name": "location_web",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/location_web-5.0.0-dev.3",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/location_web-5.0.1",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.1"
     },
     {
       "name": "logger",
@@ -2055,13 +2037,13 @@
     },
     {
       "name": "syncfusion_flutter_core",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/syncfusion_flutter_core-25.1.42",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/syncfusion_flutter_core-25.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "syncfusion_flutter_datagrid",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/syncfusion_flutter_datagrid-25.1.41",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/syncfusion_flutter_datagrid-25.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -2372,7 +2354,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-05-08T12:14:14.044904Z",
+  "generated": "2024-05-12T17:26:03.499443Z",
   "generator": "pub",
   "generatorVersion": "3.3.4"
 }

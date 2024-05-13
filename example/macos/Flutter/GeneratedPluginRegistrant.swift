@@ -23,7 +23,7 @@ import flutter_window_close
 import geolocator_apple
 import google_sign_in_ios
 import local_notifier
-import location_macos
+import location
 import package_info_plus
 import path_provider_foundation
 import printing
