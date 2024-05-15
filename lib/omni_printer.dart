@@ -1,8 +1,4 @@
-library receipt;
-
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:flipper_models/realm_model_export.dart';
 import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
 import 'package:flutter/foundation.dart';
@@ -20,7 +16,6 @@ final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 
 /// [generatePdfAndPrint] example
 /// an extension on DateTime that return a string of date time separated by space
-
 extension DateTimeToDateTimeString on DateTime {
   String toDateTimeString() {
     final dateFormat = DateFormat('dd/MM/yyyy');
@@ -38,7 +33,6 @@ extension StringToDashedString on String {
     if (isEmpty) {
       return '';
     }
-
     var x = 0;
     final dashesInternalData = {2, 3, 4, 12, 6, 7};
     final replacedInternalData = splitMapJoin(RegExp('....'),
@@ -49,8 +43,12 @@ extension StringToDashedString on String {
 
 class OmniPrinter {
   final doc = Document(version: PdfVersion.pdf_1_5, compress: true);
-
   List<Widget> rows = [];
+
+  // Define a style for the receipt
+  static const _receiptTextStyle = TextStyle(
+    fontSize: 10,
+  );
 
   _loadLogoImage() async {
     ImageProvider? image;
@@ -70,24 +68,25 @@ class OmniPrinter {
     required String sdcReceiptNum,
   }) async {
     final font = await PdfGoogleFonts.nunitoExtraLight();
-
     List<Widget> receiptTypeWidgets(String receiptType) {
       switch (receiptType) {
         case "NR":
           return [
             Text('Refund', style: TextStyle(font: font, fontSize: 14)),
+            SizedBox(height: 4),
             Text('REF.NORMAL RECEIPT:# $sdcReceiptNum',
                 style: TextStyle(font: font)),
+            SizedBox(height: 4),
             Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
                 style: TextStyle(font: font)),
           ];
         case "CS":
           return [
             Text('COPY', style: TextStyle(font: font, fontSize: 14)),
-            SizedBox(height: 1),
+            SizedBox(height: 4),
             Text('REF.NORMAL RECEIPT#:$sdcReceiptNum',
                 style: TextStyle(font: font, fontSize: 14)),
-            SizedBox(height: 1),
+            SizedBox(height: 4),
             Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
                 style: TextStyle(font: font, fontSize: 12)),
           ];
@@ -100,48 +99,41 @@ class OmniPrinter {
       }
     }
 
-    rows.add(Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-      SizedBox(width: 12),
+    rows.add(Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+      SizedBox(height: 12),
       Row(children: [
         Image(image, width: 25, height: 25),
         Spacer(),
         Image(image, width: 25, height: 25),
       ]),
-      Align(alignment: Alignment.center, child: Text(brandAddress)),
-      SizedBox(height: 1),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text("Email: $brandTel", style: TextStyle(font: font, fontSize: 12)),
-          Text("TIN  : $brandTIN", style: TextStyle(font: font, fontSize: 12))
-        ],
-      ),
-      SizedBox(height: 1),
-      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text('Welcome to $brandName',
-            style: TextStyle(font: font, fontSize: 12)),
-        Text('Client ID: $customerTin',
-            style: TextStyle(font: font, fontSize: 12)),
-      ]),
+      SizedBox(height: 8),
+      Text(brandName, style: TextStyle(font: font, fontSize: 16)),
+      SizedBox(height: 4),
+      Text(brandAddress, style: TextStyle(font: font, fontSize: 10)),
+      SizedBox(height: 4),
+      Text("Email: $brandTel", style: TextStyle(font: font, fontSize: 10)),
+      SizedBox(height: 4),
+      Text("TIN  : $brandTIN", style: TextStyle(font: font, fontSize: 10)),
+      SizedBox(height: 8),
+      Text('Welcome to $brandName', style: TextStyle(font: font, fontSize: 12)),
+      SizedBox(height: 4),
+      Text('Client ID: $customerTin',
+          style: TextStyle(font: font, fontSize: 12)),
+      SizedBox(height: 8),
       ...receiptTypeWidgets(receiptType),
+      SizedBox(height: 12),
     ]));
   }
 
   _buildTotalTax({required String totalTax}) async {
     final font = await PdfGoogleFonts.nunitoExtraLight();
     rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'TOTAL TAX:',
-          style: TextStyle(
-            font: font,
-          ),
+          style: _receiptTextStyle.copyWith(font: font),
         ),
-        SizedBox(),
-        Text(totalTax,
-            style: TextStyle(
-              font: font,
-            ))
+        Text(totalTax, style: _receiptTextStyle.copyWith(font: font))
       ]),
     );
   }
@@ -150,20 +142,15 @@ class OmniPrinter {
     final font = await PdfGoogleFonts.nunitoExtraLight();
     rows.add(
       Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             'TOTAL B-18%:',
-            style: TextStyle(
-              font: font,
-            ),
+            style: _receiptTextStyle.copyWith(font: font),
           ),
-          SizedBox(),
           Text(
             totalTaxB,
-            style: TextStyle(
-              font: font,
-            ),
+            style: _receiptTextStyle.copyWith(font: font),
           )
         ],
       ),
@@ -174,20 +161,15 @@ class OmniPrinter {
     final font = await PdfGoogleFonts.nunitoExtraLight();
     rows.add(
       Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             'TOTAL:',
-            style: TextStyle(
-              font: font,
-            ),
+            style: _receiptTextStyle.copyWith(font: font),
           ),
-          SizedBox(),
           Text(
             totalPayable,
-            style: TextStyle(
-              font: font,
-            ),
+            style: _receiptTextStyle.copyWith(font: font),
           )
         ],
       ),
@@ -198,20 +180,15 @@ class OmniPrinter {
     final font = await PdfGoogleFonts.nunitoExtraLight();
     rows.add(
       Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             'TOTAL A-EX:',
-            style: TextStyle(
-              font: font,
-            ),
+            style: _receiptTextStyle.copyWith(font: font),
           ),
-          SizedBox(),
           Text(
-            "{$totalAEx}",
-            style: TextStyle(
-              font: font,
-            ),
+            totalAEx,
+            style: _receiptTextStyle.copyWith(font: font),
           )
         ],
       ),
@@ -233,19 +210,15 @@ class OmniPrinter {
   }) async {
     final font = await PdfGoogleFonts.nunitoExtraLight();
     var bodyWidgets = <Widget>[];
-
     // Add the table headers
     List<List<String>> data = <List<String>>[];
-
     // Add the table headers
     data.add(<String>['Items', 'Price', 'Qty', 'Total']);
-
     // Iterate over the items
     for (var item in items) {
       double total = item.price * item.qty;
       // log(item.name, name: "in the loop");
       String taxLabel = item.isTaxExempted ? "(EX)" : "(B)";
-
       // Add a row for each item
       data.add(
         <String>[
@@ -256,11 +229,10 @@ class OmniPrinter {
         ],
       );
     }
-
     // Add the table to bodyWidgets
     bodyWidgets.add(
       TableHelper.fromTextArray(
-        cellStyle: TextStyle(font: font),
+        cellStyle: _receiptTextStyle.copyWith(font: font),
         headerStyle: TextStyle(font: font, color: PdfColors.grey),
         border: null,
         cellPadding: EdgeInsets.zero,
@@ -289,15 +261,17 @@ class OmniPrinter {
       );
     }
     if (receiptType == "TS" || receiptType == "PS") {
-      row = Column(children: [
-        SizedBox(),
-        Text(
-          'THIS IS NOT AN OFFICIAL RECEIPT',
-          textAlign: TextAlign.center,
-          style: TextStyle(font: font),
-        ),
-        SizedBox(),
-      ]);
+      row = Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 8),
+          Text(
+            'THIS IS NOT AN OFFICIAL RECEIPT',
+            style: _receiptTextStyle.copyWith(font: font),
+          ),
+          SizedBox(height: 8),
+        ],
+      );
       rows.add(row);
     }
     dashedLine();
@@ -305,77 +279,58 @@ class OmniPrinter {
     await _buildAEx(totalAEx: totalAEx);
     await _buildTaxB(totalTaxB: totalB18);
     await _buildTotalTax(totalTax: totalTax);
-
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         SizedBox(height: 1),
       ]),
     );
-
     dashedLine();
-    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+
+    rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(
         'CASH:',
-        style: TextStyle(
-          font: font,
-        ),
+        style: _receiptTextStyle.copyWith(font: font),
       ),
-      SizedBox(),
-      Text(received.toString(),
-          style: TextStyle(
-            font: font,
-          ))
+      Text(received.toString(), style: _receiptTextStyle.copyWith(font: font))
     ]));
-    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+    rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(
         'ITEMS NUMBER:',
-        style: TextStyle(
-          font: font,
-        ),
+        style: _receiptTextStyle.copyWith(font: font),
       ),
-      SizedBox(),
       Text(items.length.toString(),
-          style: TextStyle(
-            font: font,
-          ))
+          style: _receiptTextStyle.copyWith(font: font))
     ]));
-    rows.add(Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+    rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(
         'Cashier Name:',
-        style: TextStyle(
-          font: font,
-        ),
+        style: _receiptTextStyle.copyWith(font: font),
       ),
-      SizedBox(),
       Text(cashierName.toString(),
-          style: TextStyle(
-            font: font,
-          ))
+          style: _receiptTextStyle.copyWith(font: font))
     ]));
-
     rows.add(
       Column(children: [
         SizedBox(height: 1),
       ]),
     );
+
+    // Improve display of payment info
     rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Text(
-          'Received Amount: $received',
-          style: TextStyle(
-            font: font,
-          ),
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Received Amount: $received',
+                style: _receiptTextStyle.copyWith(font: font)),
+            Text("Change: ${cash - received}",
+                style: _receiptTextStyle.copyWith(font: font))
+          ],
         ),
-      ]),
+      ),
     );
-    rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Text("Change: ${cash - received}",
-            style: TextStyle(
-              font: font,
-            ))
-      ]),
-    );
+
     rows.add(
       Column(children: [
         SizedBox(height: 1),
@@ -387,17 +342,11 @@ class OmniPrinter {
       ]),
     );
     rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Text('Pay Mode:',
-            style: TextStyle(
-              font: font,
-            )),
-        Spacer(),
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Text('Pay Mode:', style: _receiptTextStyle.copyWith(font: font)),
         Text(
           payMode,
-          style: TextStyle(
-            font: font,
-          ),
+          style: _receiptTextStyle.copyWith(font: font),
         ),
       ]),
     );
@@ -408,32 +357,31 @@ class OmniPrinter {
       ]),
     );
     if (receiptType == "TS") {
-      row = Column(children: [
-        SizedBox(),
-        Text(
-          'TRAINING MODE',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            font: font,
+      row = Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 8),
+          Text(
+            'TRAINING MODE',
+            style: _receiptTextStyle.copyWith(font: font),
           ),
-        ),
-        SizedBox(),
-      ]);
+          SizedBox(height: 8),
+        ],
+      );
       rows.add(row);
     }
-
     if (receiptType == "PS") {
-      row = Column(children: [
-        SizedBox(),
-        Text(
-          'PROFORMA',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            font: font,
+      row = Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 8),
+          Text(
+            'PROFORMA',
+            style: _receiptTextStyle.copyWith(font: font),
           ),
-        ),
-        SizedBox(),
-      ]);
+          SizedBox(height: 8),
+        ],
+      );
       rows.add(row);
     }
   }
@@ -451,8 +399,8 @@ class OmniPrinter {
   }) async {
     final font = await PdfGoogleFonts.nunitoExtraLight();
     rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        SizedBox(),
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        SizedBox(height: 8),
         Text(
           "SDC INFORMATION",
           textAlign: TextAlign.center,
@@ -460,7 +408,7 @@ class OmniPrinter {
             font: font,
           ),
         ),
-        SizedBox(),
+        SizedBox(height: 8),
       ]),
     );
     rows.add(
@@ -469,7 +417,7 @@ class OmniPrinter {
       ]),
     );
     rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
         SizedBox(
           width: 1120,
           child: Text(
@@ -482,14 +430,13 @@ class OmniPrinter {
       ]),
     );
     rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'SDC ID:',
           style: TextStyle(
             font: font,
           ),
         ),
-        Spacer(),
         Text(sdcId,
             style: TextStyle(
               font: font,
@@ -497,14 +444,13 @@ class OmniPrinter {
       ]),
     );
     rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'RECEIPT NUMBER:',
           style: TextStyle(
             font: font,
           ),
         ),
-        Spacer(),
         Text(
           "$sdcReceiptNum $receiptType",
           style: TextStyle(
@@ -518,9 +464,8 @@ class OmniPrinter {
         SizedBox(height: 12),
       ]),
     );
-
     rows.add(
-      Column(children: [
+      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
           "Receipt Signature:",
           style: TextStyle(
@@ -556,13 +501,11 @@ class OmniPrinter {
         ),
       ]),
     );
-
     rows.add(
       Column(children: [
         SizedBox(height: 4),
       ]),
     );
-
     rows.add(
       Column(children: [
         SizedBox(),
@@ -587,7 +530,7 @@ class OmniPrinter {
       ]),
     );
     rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'INVOICE NUMBER:',
           style: TextStyle(
@@ -614,9 +557,8 @@ class OmniPrinter {
         ),
       ]),
     );
-
     rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'MRC',
           style: TextStyle(
@@ -710,7 +652,6 @@ class OmniPrinter {
     bool? autoPrint = false,
   }) async {
     final image = await _loadLogoImage();
-
     await _header(
       image: image,
       brandAddress: brandAddress,
@@ -721,7 +662,6 @@ class OmniPrinter {
       receiptType: receiptType,
       sdcReceiptNum: sdcReceiptNum,
     );
-
     dashedLine();
     await _body(
       items: items,
@@ -736,7 +676,6 @@ class OmniPrinter {
       totalPayable: totalPayable.toString(),
       receiptType: receiptType,
     );
-
     await _footer(
       transaction: transaction,
       sdcId: sdcId,
@@ -749,6 +688,7 @@ class OmniPrinter {
       mrc: mrc,
     );
 
+    // Add a page to the document
     doc.addPage(
       Page(
         pageFormat: PdfPageFormat.roll80,
@@ -758,6 +698,7 @@ class OmniPrinter {
         ),
       ),
     );
+
     // experiment layout the pdf file
     Uint8List pdfData = await doc.save();
     handlePdfData(pdfData: pdfData, emails: emails, autoPrint: autoPrint);
