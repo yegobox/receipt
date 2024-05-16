@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flipper_models/realm_model_export.dart';
 import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
 import 'package:flutter/foundation.dart';
-// import 'package:flipper_services/proxy.dart';
 import 'package:flutter/material.dart' as c;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
@@ -50,15 +49,24 @@ class OmniPrinter {
     fontSize: 10,
   );
 
-  _loadLogoImage() async {
+  _loadLogoImage({required String position}) async {
     ImageProvider? image;
-    const imageLogo = c.AssetImage('assets/rra.jpg', package: 'receipt');
-    image = await flutterImageProvider(imageLogo);
-    return image;
+    if (position == "left") {
+      const imageLogo =
+          c.AssetImage('assets/logo_left.png', package: 'receipt');
+      image = await flutterImageProvider(imageLogo);
+      return image;
+    } else {
+      const imageLogo =
+          c.AssetImage('assets/logo_right.png', package: 'receipt');
+      image = await flutterImageProvider(imageLogo);
+      return image;
+    }
   }
 
   Future<void> _header({
-    required ImageProvider image,
+    required ImageProvider leftImage,
+    required ImageProvider rightImage,
     required String brandAddress,
     required String brandTel,
     required String brandTIN,
@@ -102,9 +110,9 @@ class OmniPrinter {
     rows.add(Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
       SizedBox(height: 12),
       Row(children: [
-        Image(image, width: 25, height: 25),
+        Image(leftImage, width: 25, height: 25),
         Spacer(),
-        Image(image, width: 25, height: 25),
+        Image(rightImage, width: 25, height: 25),
       ]),
       SizedBox(height: 8),
       Text(brandName, style: TextStyle(font: font, fontSize: 16)),
@@ -651,9 +659,11 @@ class OmniPrinter {
     required ITransaction transaction,
     bool? autoPrint = false,
   }) async {
-    final image = await _loadLogoImage();
+    final left = await _loadLogoImage(position: "left");
+    final right = await _loadLogoImage(position: "right");
     await _header(
-      image: image,
+      leftImage: left,
+      rightImage: right,
       brandAddress: brandAddress,
       brandTel: brandTel,
       brandTIN: brandTIN,
