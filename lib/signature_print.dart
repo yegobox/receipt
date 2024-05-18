@@ -1,17 +1,19 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:flipper_models/helperModels/random.dart';
 import 'package:flipper_models/realm_model_export.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as material;
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:intl/intl.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:syncfusion_flutter_barcodes/barcodes.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:receipt/printable.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'dart:ui' as ui;
+
+import 'package:flutter/material.dart' as material;
 
 final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 
@@ -40,26 +42,29 @@ extension StringToDashedString on String {
   }
 }
 
-class OmniPrinter {
+class SignableOmniPrinter implements Printable {
   /// Loads the logo image from assets.
   Future<PdfBitmap> _loadLogoImage({required String position}) async {
     if (position == 'left') {
-      final ByteData data = await rootBundle.load('assets/rra.jpg');
+      final ByteData data = await rootBundle.load('assets/logo_left.png');
       return PdfBitmap(data.buffer.asUint8List());
     } else {
-      final ByteData data = await rootBundle.load('assets/rra.jpg');
+      final ByteData data = await rootBundle.load('assets/logo_right.png');
       return PdfBitmap(data.buffer.asUint8List());
     }
   }
 
   /// Generates a PDF receipt and handles saving or launching it.
+  @override
   Future<void> generatePdfAndPrint({
-    String brandName = "yegobox shop",
-    String brandAddress = "CITY CENTER, Kigali Rwanda",
-    String brandTel = "271311123",
-    String brandTIN = "1211287390",
+    String brandName = "Q Coffee Ltd",
+    String brandAddress = "Kigali City",
+    String brandTel = "0781968027",
+    String brandTIN = "106536281",
+    String brandDescription = "We build app that server you!",
+    String brandFooter = "yegobox shop",
     List<String>? emails,
-    String? customerTin = "000000000",
+    String? customerTin = "121898608",
     required List<TransactionItem> items,
     required String receiptType,
     required String sdcReceiptNum,
@@ -81,9 +86,12 @@ class OmniPrinter {
     required ITransaction transaction,
     bool? autoPrint = false,
   }) async {
+    // Calculate paper width in pixels
+
     final PdfDocument document = PdfDocument();
 
-    // Add a new page to the document.
+    document.pageSettings =
+        PdfPageSettings(const Size(250, 600), PdfPageOrientation.portrait);
     final PdfPage page = document.pages.add();
 
     // Load and draw the logo images.
@@ -113,14 +121,14 @@ class OmniPrinter {
 
     // Create and draw the items grid.
     final PdfGrid grid = _createItemsGrid(items, gridStyle);
-    grid.draw(page: page, bounds: const Rect.fromLTWH(0, 300, 0, 0));
+    grid.draw(page: page, bounds: const Rect.fromLTWH(0, 180, 0, 0));
 
     // Draw the total amount.
     page.graphics.drawString('TOTAL: $totalPayable', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 450, 400, 30));
+        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 330, 400, 30));
 
     // Draw a dashed line separator.
-    _drawDashedLine(page, const Offset(0, 470), const Offset(200, 470));
+    _drawDashedLine(page, const Offset(0, 350), const Offset(200, 350));
 
     // Draw payment information.
     _drawPaymentInfo(page, contentFont, payMode, received, items.length,
@@ -132,24 +140,23 @@ class OmniPrinter {
 
     // Draw Invoice Number and MRC.
     page.graphics.drawString('INVOICE NUMBER: $invoiceNum', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 720, 400, 30));
+        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 620, 400, 30));
     page.graphics.drawString('MRC: $mrc', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 730, 400, 30));
+        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 630, 400, 30));
 
     // Draw Thank you and EBM v2.
     page.graphics.drawString('Thank you!', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 750, 400, 30));
+        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 650, 400, 30));
     page.graphics.drawString('EBM v2: v1.12', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 760, 400, 30));
+        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 660, 400, 30));
 
     // Save the PDF document.
     final List<int> bytes = await document.save();
 
-    // Dispose the document.
     document.dispose();
 
     // Save and launch the file.
-    saveAndLaunchFile(bytes, 'Output.pdf');
+    saveAndLaunchFile(bytes, '${randomString()}.pdf');
   }
 
   /// Draws the header section of the receipt.
@@ -161,54 +168,87 @@ class OmniPrinter {
       String brandTel,
       String brandTIN,
       String? customerTin) {
+    double lineHeight = 15.0; // Adjust for desired line spacing
+    double yPos = 150.0; // Initial vertical position
+
+    // Brand name (centered)
+    final double brandNameWidth = contentFont.measureString(brandName).width;
     page.graphics.drawString(brandName, contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 150, 400, 30));
+        brush: PdfBrushes.black,
+        bounds: Rect.fromLTWH((page.getClientSize().width - brandNameWidth) / 2,
+            yPos, brandNameWidth, lineHeight));
+    yPos += lineHeight; // Move to the next line
+
+    // Brand Address
     page.graphics.drawString(brandAddress, contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 160, 400, 30));
+        brush: PdfBrushes.black,
+        bounds: Rect.fromLTWH(0, yPos, page.getClientSize().width, lineHeight));
+    yPos += lineHeight;
+
+    // Brand Email (adjust width if needed)
     page.graphics.drawString("Email: $brandTel", contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 170, 400, 30));
+        brush: PdfBrushes.black,
+        bounds: Rect.fromLTWH(0, yPos, 200, lineHeight));
+    yPos += lineHeight;
+
+    // Brand TIN (adjust width if needed)
     page.graphics.drawString("TIN  : $brandTIN", contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 180, 400, 30));
+        brush: PdfBrushes.black,
+        bounds: Rect.fromLTWH(0, yPos, 200, lineHeight));
+    yPos += lineHeight;
+
+    // Welcome message (centered)
+    final double welcomeWidth =
+        contentFont.measureString('Welcome to $brandName').width;
     page.graphics.drawString('Welcome to $brandName', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 200, 400, 30));
-    page.graphics.drawString('Client ID: $customerTin', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 210, 400, 30));
+        brush: PdfBrushes.black,
+        bounds: Rect.fromLTWH((page.getClientSize().width - welcomeWidth) / 2,
+            yPos, welcomeWidth, lineHeight));
+    yPos += lineHeight;
+
+    // Customer ID
+    page.graphics.drawString('CLIENT: UNKNOWN', contentFont,
+        brush: PdfBrushes.black,
+        bounds: Rect.fromLTWH(0, yPos, page.getClientSize().width, lineHeight));
+    yPos += lineHeight;
+
+    // Customer TIN
+    page.graphics.drawString('CLIENT TIN: $customerTin', contentFont,
+        brush: PdfBrushes.black,
+        bounds: Rect.fromLTWH(0, yPos, page.getClientSize().width, lineHeight));
+  }
+
+  void _drawCenteredText(PdfPage page, PdfFont font, String text, double yPos) {
+    final double textWidth = font.measureString(text).width;
+    page.graphics.drawString(text, font,
+        brush: PdfBrushes.black,
+        bounds: Rect.fromLTWH((page.getClientSize().width - textWidth) / 2,
+            yPos, textWidth, font.height));
   }
 
   /// Draws the receipt type information.
   void _drawReceiptType(PdfPage page, PdfFont contentFont, String receiptType,
       String sdcReceiptNum, String? customerTin) {
+    const double yPos = 230.0; // Adjust the initial vertical position as needed
+
     switch (receiptType) {
       case "NR":
-        page.graphics.drawString('Refund', contentFont,
-            brush: PdfBrushes.black,
-            bounds: const Rect.fromLTWH(0, 230, 400, 30));
-        page.graphics.drawString(
-            'REF.NORMAL RECEIPT:# $sdcReceiptNum', contentFont,
-            brush: PdfBrushes.black,
-            bounds: const Rect.fromLTWH(0, 240, 400, 30));
-        page.graphics.drawString(
-            'REFUND IS APPROVED FOR CLIENT ID:$customerTin', contentFont,
-            brush: PdfBrushes.black,
-            bounds: const Rect.fromLTWH(0, 250, 400, 30));
+        _drawCenteredText(page, contentFont, 'Refund', yPos);
+        _drawCenteredText(page, contentFont,
+            'REF.NORMAL RECEIPT:# $sdcReceiptNum', yPos + 10);
+        _drawCenteredText(page, contentFont,
+            'REFUND IS APPROVED FOR CLIENT ID:$customerTin', yPos + 20);
         break;
       case "CS":
-        page.graphics.drawString('COPY', contentFont,
-            brush: PdfBrushes.black,
-            bounds: const Rect.fromLTWH(0, 230, 400, 30));
-        page.graphics.drawString(
-            'REF.NORMAL RECEIPT#:$sdcReceiptNum', contentFont,
-            brush: PdfBrushes.black,
-            bounds: const Rect.fromLTWH(0, 240, 400, 30));
-        page.graphics.drawString(
-            'REFUND IS APPROVED FOR CLIENT ID:$customerTin', contentFont,
-            brush: PdfBrushes.black,
-            bounds: const Rect.fromLTWH(0, 250, 400, 30));
+        _drawCenteredText(page, contentFont, 'COPY', yPos);
+        _drawCenteredText(page, contentFont,
+            'REF.NORMAL RECEIPT:# $sdcReceiptNum', yPos + 10);
+        _drawCenteredText(page, contentFont,
+            'COPY OF RECEIPT FOR CLIENT ID:$customerTin', yPos + 20);
+
         break;
       case "TS":
-        page.graphics.drawString('TRAINING MODE', contentFont,
-            brush: PdfBrushes.black,
-            bounds: const Rect.fromLTWH(0, 230, 400, 30));
+        _drawCenteredText(page, contentFont, 'TRAINING MODE', yPos);
         break;
       default:
     }
@@ -219,19 +259,21 @@ class OmniPrinter {
       List<TransactionItem> items, PdfGridStyle gridStyle) {
     final PdfGrid grid = PdfGrid();
     grid.columns.add(count: 4);
+    grid.columns[0].width = 100; // Adjust the width for the 'Items' column
+    grid.columns[1].width = 50; // Adjust the width for the 'Unit' column
+    grid.columns[2].width = 30; // Adjust the width for the 'qty' column
+    grid.columns[3].width = 70; // Adjust the width for the 'Total' column
 
     final PdfGridRow headerRow = grid.headers.add(1)[0];
-    headerRow.cells[0].value = 'Item';
-    headerRow.cells[1].value = 'Price';
-    headerRow.cells[2].value = 'Qty';
+    headerRow.cells[0].value = 'Items';
+    headerRow.cells[1].value = 'Unit';
+    headerRow.cells[2].value = 'qty';
     headerRow.cells[3].value = 'Total';
-
     for (var item in items) {
       double total = item.price * item.qty;
       String taxLabel = item.isTaxExempted ? "(EX)" : "(B)";
       PdfGridRow row = grid.rows.add();
-      row.cells[0].value =
-          item.name!.length > 12 ? item.name!.substring(0, 12) : item.name!;
+      row.cells[0].value = item.name!;
       row.cells[1].value = item.price.toString();
       row.cells[2].value = item.qty.toString();
       row.cells[3].value = '$total $taxLabel';
@@ -254,20 +296,16 @@ class OmniPrinter {
       int itemCount,
       String cashierName,
       ITransaction transaction) {
-    page.graphics.drawString('Pay Mode: $payMode', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 480, 400, 30));
+    const double yPos = 380.0; // Adjust the initial vertical position as needed
 
-    // Improve display of payment info
-    page.graphics.drawString('Received Amount: $received', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 490, 400, 30));
-    page.graphics.drawString(
-        'Change: ${transaction.subTotal - received}', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 500, 400, 30));
-
-    page.graphics.drawString('ITEMS NUMBER: $itemCount', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 520, 400, 30));
-    page.graphics.drawString('Cashier Name: $cashierName', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 530, 400, 30));
+    _drawCenteredText(page, contentFont, 'Pay Mode: $payMode', yPos);
+    _drawCenteredText(
+        page, contentFont, 'Received Amount: $received', yPos + 10);
+    _drawCenteredText(page, contentFont,
+        'Change: ${transaction.subTotal - received}', yPos + 20);
+    _drawCenteredText(page, contentFont, 'ITEMS NUMBER: $itemCount', yPos + 30);
+    _drawCenteredText(
+        page, contentFont, 'Cashier Name: $cashierName', yPos + 40);
   }
 
   /// Draws SDC (Sales Data Controller) information on the receipt.
@@ -281,44 +319,33 @@ class OmniPrinter {
       String internalData,
       String receiptQrCode,
       ITransaction transaction) {
-    page.graphics.drawString('SDC INFORMATION', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 560, 400, 30));
+    const double yPos = 460.0; // Adjust the initial vertical position as needed
 
-    _drawDashedLine(page, const Offset(0, 580), const Offset(200, 580));
-
-    page.graphics.drawString('SDC ID: $sdcId', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 590, 400, 30));
-    page.graphics.drawString(
-        'RECEIPT NUMBER: $sdcReceiptNum $receiptType', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 600, 400, 30));
-
-    // Draw timestamp for SDC info
-    page.graphics.drawString(
-        transaction.lastTouched?.toDateTimeString() ?? "", contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 610, 400, 30));
-
-    page.graphics.drawString('Receipt Signature: ', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 630, 400, 30));
-    page.graphics.drawString(receiptSignature.toDashedString(), contentFont,
-        brush: PdfBrushes.black,
-        bounds: const Rect.fromLTWH(100, 630, 400, 30));
-
-    page.graphics.drawString('Internal Data: ', contentFont,
-        brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 650, 400, 30));
-    page.graphics.drawString(internalData.toDashedString(), contentFont,
-        brush: PdfBrushes.black,
-        bounds: const Rect.fromLTWH(100, 650, 400, 30));
+    _drawCenteredText(page, contentFont, 'SDC INFORMATION', yPos);
+    _drawDashedLine(
+        page, const Offset(0, 480), Offset(page.getClientSize().width, 480));
+    _drawCenteredText(page, contentFont, 'SDC ID: $sdcId', yPos + 20);
+    _drawCenteredText(page, contentFont,
+        'RECEIPT NUMBER: $sdcReceiptNum $receiptType', yPos + 30);
+    _drawCenteredText(page, contentFont,
+        transaction.lastTouched?.toDateTimeString() ?? "", yPos + 40);
+    _drawCenteredText(page, contentFont, 'Receipt Signature: ', yPos + 60);
+    _drawCenteredText(
+        page, contentFont, receiptSignature.toDashedString(), yPos + 70);
+    _drawCenteredText(page, contentFont, 'Internal Data: ', yPos + 80);
+    _drawCenteredText(
+        page, contentFont, internalData.toDashedString(), yPos + 90);
 
     // Draw QR Code
-    _drawQRCode(page, receiptQrCode);
+    // _drawQRCode(page, receiptQrCode);
   }
 
   /// Draws the QR code on the receipt.
-  void _drawQRCode(PdfPage page, String qrCodeData) async {
-    final qrCodeImage = await _generateQrCodeImage(qrCodeData);
-    page.graphics
-        .drawImage(qrCodeImage!, const Rect.fromLTWH(150, 670, 100, 100));
-  }
+  // void _drawQRCode(PdfPage page, String qrCodeData) async {
+  //   final qrCodeImage = await _generateQrCodeImage(qrCodeData);
+  //   page.graphics
+  //       .drawImage(qrCodeImage!, const Rect.fromLTWH(150, 670, 100, 100));
+  // }
 
   final qrCodeKey = GlobalKey();
 
@@ -334,26 +361,16 @@ class OmniPrinter {
   /// ui.Image to PdfBitmap:
   /// The ui.Image is then converted to byte data (ByteData) and finally to a PdfBitmap, which is what the _generateQrCodeImage function returns.
   Future<PdfBitmap?> _generateQrCodeImage(String qrCodeData) async {
-    material.MaterialApp(
-      home: material.Scaffold(
-        body: Center(
-          child: RepaintBoundary(
-            key: qrCodeKey,
-            child: SfBarcodeGenerator(
-              value: qrCodeData,
-              symbology: QRCode(),
-            ),
-          ),
-        ),
-      ),
-    );
-
     try {
-      final boundary =
-          qrCodeKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-      final image = await boundary.toImage(
-          pixelRatio: 3.0); // Adjust pixelRatio for quality
-      final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      final qrCodeImage = await QrPainter(
+        data: qrCodeData,
+        version: QrVersions.auto,
+        color: Colors.black,
+        emptyColor: Colors.white,
+      ).toImage(100); // Adjust size as needed
+
+      final byteData =
+          await qrCodeImage.toByteData(format: ui.ImageByteFormat.png);
       final pngBytes = byteData!.buffer.asUint8List();
       return PdfBitmap(pngBytes);
     } catch (e) {

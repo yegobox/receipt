@@ -9,9 +9,9 @@
     },
     {
       "name": "_fe_analyzer_shared",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-67.0.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-68.0.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "_flutterfire_internals",
@@ -20,10 +20,16 @@
       "languageVersion": "3.2"
     },
     {
-      "name": "analyzer",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/analyzer-6.4.1",
+      "name": "_macros",
+      "rootUri": "file:///Users/richard/Documents/flutter/bin/cache/dart-sdk/pkg/_macros",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "analyzer",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/analyzer-6.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
     },
     {
       "name": "animated_icon_button",
@@ -45,19 +51,19 @@
     },
     {
       "name": "archive",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/archive-3.4.10",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/archive-3.5.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     },
     {
       "name": "args",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/args-2.4.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/args-2.5.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "asn1lib",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/asn1lib-1.5.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/asn1lib-1.5.3",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -81,7 +87,7 @@
     },
     {
       "name": "barcode",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/barcode-2.2.6",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/barcode-2.2.8",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -105,7 +111,7 @@
     },
     {
       "name": "bloc",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/bloc-8.1.3",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/bloc-8.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -123,7 +129,7 @@
     },
     {
       "name": "bottom_sheet",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/bottom_sheet-4.0.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/bottom_sheet-4.0.4",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -147,9 +153,9 @@
     },
     {
       "name": "build_daemon",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/build_daemon-4.0.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/build_daemon-4.0.2",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.4"
     },
     {
       "name": "build_resolvers",
@@ -159,9 +165,9 @@
     },
     {
       "name": "build_runner",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/build_runner-2.4.8",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/build_runner-2.4.10",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.4"
     },
     {
       "name": "build_runner_core",
@@ -177,7 +183,7 @@
     },
     {
       "name": "built_value",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/built_value-8.9.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/built_value-8.9.2",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -195,7 +201,7 @@
     },
     {
       "name": "cached_network_image_web",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/cached_network_image_web-1.1.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/cached_network_image_web-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -243,13 +249,13 @@
     },
     {
       "name": "community_charts_common",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/community_charts_common-1.0.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/community_charts_common-1.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "community_charts_flutter",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/community_charts_flutter-1.0.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/community_charts_flutter-1.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -297,9 +303,9 @@
     },
     {
       "name": "cupertino_icons",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.6",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.8",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.1"
     },
     {
       "name": "dart_mappable",
@@ -309,7 +315,7 @@
     },
     {
       "name": "dart_style",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/dart_style-2.3.4",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/dart_style-2.3.6",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -369,9 +375,9 @@
     },
     {
       "name": "easy_sidemenu",
-      "rootUri": "file:///Users/richard/.pub-cache/git/easy_sidemenu-aaa322c6ab9f9b2ffd87546de7ead84b2081c9fc/",
+      "rootUri": "file:///Users/richard/.pub-cache/git/easy_sidemenu-5f9a0f22b7143e7fef6848e1e3ea43c8eb9781f2/",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.14"
     },
     {
       "name": "ejson",
@@ -429,9 +435,9 @@
     },
     {
       "name": "ffi",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/ffi-2.1.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/ffi-2.1.2",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "file",
@@ -453,9 +459,9 @@
     },
     {
       "name": "file_selector_macos",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/file_selector_macos-0.9.3+3",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/file_selector_macos-0.9.4",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.1"
     },
     {
       "name": "file_selector_platform_interface",
@@ -489,21 +495,21 @@
     },
     {
       "name": "firebase_auth",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_auth-4.16.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_auth-4.19.5",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_auth_platform_interface",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_auth_platform_interface-7.0.9",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_auth_platform_interface-7.2.6",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_auth_web",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_auth_web-5.8.13",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_auth_web-5.11.5",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.2"
     },
     {
       "name": "firebase_core",
@@ -525,25 +531,25 @@
     },
     {
       "name": "firebase_crashlytics",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_crashlytics-3.4.9",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_crashlytics-3.5.5",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_crashlytics_platform_interface",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_crashlytics_platform_interface-3.6.16",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_crashlytics_platform_interface-3.6.33",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_dynamic_links",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_dynamic_links-5.4.8",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_dynamic_links-5.5.5",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_dynamic_links_platform_interface",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_dynamic_links_platform_interface-0.2.6+16",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_dynamic_links_platform_interface-0.2.6+33",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -567,61 +573,61 @@
     },
     {
       "name": "firebase_remote_config",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_remote_config-4.4.4",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_remote_config-4.4.5",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_remote_config_platform_interface",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_remote_config_platform_interface-1.4.32",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_remote_config_platform_interface-1.4.33",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_remote_config_web",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_remote_config_web-1.6.4",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_remote_config_web-1.6.5",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_storage",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_storage-11.6.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_storage-11.7.5",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_storage_platform_interface",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_storage_platform_interface-5.1.3",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_storage_platform_interface-5.1.20",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_storage_web",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_storage_web-3.6.17",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_storage_web-3.9.5",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.2"
     },
     {
       "name": "firebase_ui_auth",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_ui_auth-1.13.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_ui_auth-1.14.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_ui_localizations",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_ui_localizations-1.10.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_ui_localizations-1.11.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_ui_oauth",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_ui_oauth-1.5.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_ui_oauth-1.5.2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "firebase_ui_oauth_google",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_ui_oauth_google-1.3.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/firebase_ui_oauth_google-1.3.2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -711,13 +717,13 @@
     },
     {
       "name": "fluent_ui",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/fluent_ui-4.8.6",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/fluent_ui-4.8.7",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "fluentui_system_icons",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/fluentui_system_icons-1.1.227",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/fluentui_system_icons-1.1.238",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -725,7 +731,7 @@
       "name": "flutter",
       "rootUri": "file:///Users/richard/Documents/flutter/packages/flutter",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.3"
     },
     {
       "name": "flutter_animate",
@@ -735,13 +741,13 @@
     },
     {
       "name": "flutter_bloc",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_bloc-8.1.4",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_bloc-8.1.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter_cache_manager",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_cache_manager-3.3.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_cache_manager-3.3.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -765,7 +771,7 @@
     },
     {
       "name": "flutter_colorpicker",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_colorpicker-1.0.3",
+      "rootUri": "file:///Users/richard/.pub-cache/git/flutter_colorpicker-92bdb69a313a56c391ef148c12ef6539bd31253d/",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -861,7 +867,7 @@
     },
     {
       "name": "flutter_local_notifications_platform_interface",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_local_notifications_platform_interface-7.0.0+1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_local_notifications_platform_interface-7.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -879,9 +885,9 @@
     },
     {
       "name": "flutter_native_splash",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_native_splash-2.3.10",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_native_splash-2.4.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "flutter_parsed_text",
@@ -891,19 +897,19 @@
     },
     {
       "name": "flutter_plugin_android_lifecycle",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.17",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.19",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.2"
     },
     {
       "name": "flutter_riverpod",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_riverpod-2.4.10",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_riverpod-2.5.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "flutter_screen_lock",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_screen_lock-9.0.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/flutter_screen_lock-9.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -941,7 +947,7 @@
       "name": "flutter_test",
       "rootUri": "file:///Users/richard/Documents/flutter/packages/flutter_test",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.3"
     },
     {
       "name": "flutter_text_drawable",
@@ -999,9 +1005,9 @@
     },
     {
       "name": "frontend_server_client",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/frontend_server_client-3.2.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/frontend_server_client-4.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     },
     {
       "name": "gap",
@@ -1023,19 +1029,19 @@
     },
     {
       "name": "geolocator_android",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/geolocator_android-4.5.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/geolocator_android-4.6.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "geolocator_apple",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/geolocator_apple-2.3.6",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/geolocator_apple-2.3.7",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "geolocator_platform_interface",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/geolocator_platform_interface-4.2.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/geolocator_platform_interface-4.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
@@ -1059,7 +1065,7 @@
     },
     {
       "name": "get_it",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/get_it-7.6.7",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/get_it-7.7.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -1077,13 +1083,13 @@
     },
     {
       "name": "go_router",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/go_router-13.2.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/go_router-14.1.1",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.2"
     },
     {
       "name": "google_fonts",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/google_fonts-6.1.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/google_fonts-6.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -1101,13 +1107,13 @@
     },
     {
       "name": "google_sign_in_android",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/google_sign_in_android-6.1.21",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/google_sign_in_android-6.1.23",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "google_sign_in_ios",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/google_sign_in_ios-5.7.4",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/google_sign_in_ios-5.7.6",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -1131,7 +1137,7 @@
     },
     {
       "name": "googleapis_auth",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/googleapis_auth-1.4.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/googleapis_auth-1.6.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -1161,7 +1167,7 @@
     },
     {
       "name": "hooks_riverpod",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/hooks_riverpod-2.4.10",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/hooks_riverpod-2.5.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -1209,9 +1215,9 @@
     },
     {
       "name": "image_picker_android",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/image_picker_android-0.8.9+3",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/image_picker_android-0.8.12+1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "image_picker_for_web",
@@ -1221,9 +1227,9 @@
     },
     {
       "name": "image_picker_ios",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.9+1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.11+2",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "image_picker_linux",
@@ -1239,9 +1245,9 @@
     },
     {
       "name": "image_picker_platform_interface",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/image_picker_platform_interface-2.9.3",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/image_picker_platform_interface-2.10.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "image_picker_windows",
@@ -1251,7 +1257,7 @@
     },
     {
       "name": "injectable",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/injectable-2.4.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/injectable-2.4.1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -1263,9 +1269,9 @@
     },
     {
       "name": "intl",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/intl-0.18.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/intl-0.19.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     },
     {
       "name": "io",
@@ -1287,9 +1293,9 @@
     },
     {
       "name": "jiffy",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/jiffy-6.2.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/jiffy-6.3.1",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "js",
@@ -1317,21 +1323,21 @@
     },
     {
       "name": "leak_tracker",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/leak_tracker-10.0.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/leak_tracker-10.0.4",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.2"
     },
     {
       "name": "leak_tracker_flutter_testing",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/leak_tracker_flutter_testing-2.0.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/leak_tracker_flutter_testing-3.0.3",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.2"
     },
     {
       "name": "leak_tracker_testing",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/leak_tracker_testing-2.0.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/leak_tracker_testing-3.0.1",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.2"
     },
     {
       "name": "lecle_downloads_path_provider",
@@ -1353,25 +1359,25 @@
     },
     {
       "name": "loading_animation_widget",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/loading_animation_widget-1.2.0+4",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/loading_animation_widget-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "local_auth",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/local_auth-2.1.8",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/local_auth-2.2.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "local_auth_android",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/local_auth_android-1.0.37",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/local_auth_android-1.0.38",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
-      "name": "local_auth_ios",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/local_auth_ios-1.1.7",
+      "name": "local_auth_darwin",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/local_auth_darwin-1.3.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -1424,6 +1430,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "macros",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/macros-0.1.0-main.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
       "name": "matcher",
       "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/matcher-0.12.16+1",
       "packageUri": "lib/",
@@ -1437,9 +1449,9 @@
     },
     {
       "name": "math_expressions",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/math_expressions-2.4.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/math_expressions-2.5.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     },
     {
       "name": "menu_base",
@@ -1449,7 +1461,7 @@
     },
     {
       "name": "meta",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/meta-1.12.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/meta-1.15.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1461,9 +1473,9 @@
     },
     {
       "name": "modal_bottom_sheet",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/modal_bottom_sheet-3.0.0-pre",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/modal_bottom_sheet-3.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.3"
     },
     {
       "name": "move_to_background",
@@ -1485,13 +1497,13 @@
     },
     {
       "name": "newrelic_mobile",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/newrelic_mobile-1.0.6",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/newrelic_mobile-1.0.8",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "nfc_manager",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/nfc_manager-3.3.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/nfc_manager-3.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -1575,15 +1587,15 @@
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/path_provider_android-2.2.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/path_provider_android-2.2.4",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "path_provider_foundation",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/path_provider_foundation-2.3.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/path_provider_foundation-2.4.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "path_provider_linux",
@@ -1607,6 +1619,12 @@
       "name": "pdf",
       "rootUri": "../../dart_pdf/pdf",
       "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "pdf_widget_wrapper",
+      "rootUri": "../../dart_pdf/widget_wrapper",
+      "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
@@ -1623,7 +1641,7 @@
     },
     {
       "name": "permission_handler_android",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/permission_handler_android-12.0.5",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/permission_handler_android-12.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
@@ -1695,9 +1713,9 @@
     },
     {
       "name": "pointycastle",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/pointycastle-3.7.4",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/pointycastle-3.9.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "pool",
@@ -1709,11 +1727,11 @@
       "name": "printing",
       "rootUri": "../../dart_pdf/printing",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.3"
     },
     {
       "name": "provider",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/provider-6.1.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/provider-6.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1725,7 +1743,7 @@
     },
     {
       "name": "pubnub",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/pubnub-4.3.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/pubnub-4.3.4",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -1791,13 +1809,13 @@
     },
     {
       "name": "riverpod",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/riverpod-2.5.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/riverpod-2.5.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "riverpod_annotation",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/riverpod_annotation-2.3.4",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/riverpod_annotation-2.3.5",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -1839,13 +1857,13 @@
     },
     {
       "name": "sentry",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/sentry-7.16.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/sentry-7.20.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "sentry_flutter",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/sentry_flutter-7.16.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/sentry_flutter-7.20.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -1863,21 +1881,21 @@
     },
     {
       "name": "shared_preferences",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/shared_preferences-2.2.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/shared_preferences-2.2.3",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.1"
     },
     {
       "name": "shared_preferences_android",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/shared_preferences_android-2.2.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/shared_preferences_android-2.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.2"
     },
     {
       "name": "shared_preferences_foundation",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.3.5",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.4.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "shared_preferences_linux",
@@ -1911,9 +1929,9 @@
     },
     {
       "name": "shelf_web_socket",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/shelf_web_socket-1.0.4",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/shelf_web_socket-2.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.0"
     },
     {
       "name": "shortid",
@@ -1965,15 +1983,15 @@
     },
     {
       "name": "sqflite",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/sqflite-2.3.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/sqflite-2.3.3+1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "sqflite_common",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/sqflite_common-2.5.3",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/sqflite_common-2.5.4",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "stack_trace",
@@ -1989,7 +2007,7 @@
     },
     {
       "name": "stacked_services",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/stacked_services-1.4.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/stacked_services-1.5.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
@@ -2007,7 +2025,7 @@
     },
     {
       "name": "stock",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/stock-1.1.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/stock-1.1.1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -2049,19 +2067,19 @@
     },
     {
       "name": "syncfusion_flutter_datagrid",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/syncfusion_flutter_datagrid-25.2.3",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/syncfusion_flutter_datagrid-25.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "syncfusion_flutter_datagrid_export",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/syncfusion_flutter_datagrid_export-25.1.41",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/syncfusion_flutter_datagrid_export-25.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "syncfusion_flutter_datepicker",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/syncfusion_flutter_datepicker-25.1.41",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/syncfusion_flutter_datepicker-25.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -2073,13 +2091,13 @@
     },
     {
       "name": "syncfusion_flutter_xlsio",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/syncfusion_flutter_xlsio-25.1.41",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/syncfusion_flutter_xlsio-25.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "syncfusion_officecore",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/syncfusion_officecore-25.1.41",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/syncfusion_officecore-25.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -2091,31 +2109,31 @@
     },
     {
       "name": "talker",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/talker-4.1.5",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/talker-4.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "talker_dio_logger",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/talker_dio_logger-4.1.5",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/talker_dio_logger-4.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "talker_flutter",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/talker_flutter-4.1.5",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/talker_flutter-4.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "talker_logger",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/talker_logger-4.1.5",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/talker_logger-4.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "tar",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/tar-1.0.4",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/tar-1.0.5",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -2127,7 +2145,7 @@
     },
     {
       "name": "test_api",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/test_api-0.6.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/test_api-0.7.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -2139,9 +2157,9 @@
     },
     {
       "name": "timezone",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/timezone-0.9.2",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/timezone-0.9.3",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.19"
     },
     {
       "name": "timing",
@@ -2151,9 +2169,9 @@
     },
     {
       "name": "tray_manager",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/tray_manager-0.2.1",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/tray_manager-0.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     },
     {
       "name": "type_plus",
@@ -2199,15 +2217,15 @@
     },
     {
       "name": "url_launcher_android",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "url_launcher_ios",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/url_launcher_ios-6.2.4",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/url_launcher_ios-6.3.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "url_launcher_linux",
@@ -2217,9 +2235,9 @@
     },
     {
       "name": "url_launcher_macos",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/url_launcher_macos-3.1.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/url_launcher_macos-3.2.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.1"
     },
     {
       "name": "url_launcher_platform_interface",
@@ -2229,7 +2247,7 @@
     },
     {
       "name": "url_launcher_web",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/url_launcher_web-2.3.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/url_launcher_web-2.3.1",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -2247,7 +2265,7 @@
     },
     {
       "name": "uuid",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/uuid-4.3.3",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/uuid-4.4.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -2289,9 +2307,9 @@
     },
     {
       "name": "vm_service",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/vm_service-13.0.0",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/vm_service-14.2.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "watcher",
@@ -2306,10 +2324,16 @@
       "languageVersion": "3.3"
     },
     {
-      "name": "web_socket_channel",
-      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/web_socket_channel-2.4.0",
+      "name": "web_socket",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/web_socket-0.1.3",
       "packageUri": "lib/",
-      "languageVersion": "2.15"
+      "languageVersion": "3.3"
+    },
+    {
+      "name": "web_socket_channel",
+      "rootUri": "file:///Users/richard/.pub-cache/hosted/pub.dev/web_socket_channel-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
     },
     {
       "name": "win32",
@@ -2360,7 +2384,10 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-05-16T05:07:59.152969Z",
+  "generated": "2024-05-18T05:44:22.170621Z",
   "generator": "pub",
-  "generatorVersion": "3.3.4"
+  "generatorVersion": "3.4.0",
+  "flutterRoot": "file:///Users/richard/Documents/flutter",
+  "flutterVersion": "3.22.0",
+  "pubCache": "file:///Users/richard/.pub-cache"
 }

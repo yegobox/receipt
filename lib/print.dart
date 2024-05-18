@@ -1,11 +1,11 @@
 library receipt;
 
 import 'package:flipper_models/realm_model_export.dart';
-import 'package:pdf/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:receipt/omni_printer.dart';
+import 'package:receipt/printable.dart';
 
 class Print {
-  ImageProvider? netImage;
   Future<String> receiptQr(String url) async {
     return url;
   }
@@ -73,9 +73,7 @@ class Print {
       required ITransaction transaction,
       bool? autoPrint = false}) {
     receiptQr(receiptQrCode).then((qrCode) {
-      OmniPrinter printer;
-      printer = OmniPrinter();
-
+      Printable printer = OmniPrinter();
       printer.generatePdfAndPrint(
         brandName: brandName,
         brandAddress: brandAddress,

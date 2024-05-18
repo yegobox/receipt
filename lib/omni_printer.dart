@@ -1,15 +1,21 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flipper_models/realm_model_export.dart';
+import 'package:flutter/services.dart';
 import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' as c;
+import 'package:open_filex/open_filex.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
+import 'package:receipt/printable.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as p;
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart' as material;
 
 final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 
@@ -40,7 +46,7 @@ extension StringToDashedString on String {
   }
 }
 
-class OmniPrinter {
+class OmniPrinter implements Printable {
   final doc = Document(version: PdfVersion.pdf_1_5, compress: true);
   List<Widget> rows = [];
 
@@ -75,7 +81,8 @@ class OmniPrinter {
     required String receiptType,
     required String sdcReceiptNum,
   }) async {
-    final font = await PdfGoogleFonts.nunitoExtraLight();
+    final font =
+        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
     List<Widget> receiptTypeWidgets(String receiptType) {
       switch (receiptType) {
         case "NR":
@@ -134,7 +141,8 @@ class OmniPrinter {
   }
 
   _buildTotalTax({required String totalTax}) async {
-    final font = await PdfGoogleFonts.nunitoExtraLight();
+    final font =
+        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
@@ -147,7 +155,8 @@ class OmniPrinter {
   }
 
   _buildTaxB({required String totalTaxB}) async {
-    final font = await PdfGoogleFonts.nunitoExtraLight();
+    final font =
+        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
     rows.add(
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -166,7 +175,8 @@ class OmniPrinter {
   }
 
   _buildTotal({required String totalPayable}) async {
-    final font = await PdfGoogleFonts.nunitoExtraLight();
+    final font =
+        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
     rows.add(
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -185,7 +195,8 @@ class OmniPrinter {
   }
 
   _buildAEx({required String totalAEx}) async {
-    final font = await PdfGoogleFonts.nunitoExtraLight();
+    final font =
+        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
     rows.add(
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -216,7 +227,8 @@ class OmniPrinter {
     required double cash,
     required String payMode,
   }) async {
-    final font = await PdfGoogleFonts.nunitoExtraLight();
+    final font =
+        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
     var bodyWidgets = <Widget>[];
     // Add the table headers
     List<List<String>> data = <List<String>>[];
@@ -405,7 +417,8 @@ class OmniPrinter {
     required String invoiceNum,
     required String mrc,
   }) async {
-    final font = await PdfGoogleFonts.nunitoExtraLight();
+    final font =
+        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         SizedBox(height: 8),
@@ -584,13 +597,24 @@ class OmniPrinter {
     rows.add(
       Column(children: [
         SizedBox(height: 12),
-        Text('Thank you!'),
+        Text(
+          'Thank you!',
+          style: TextStyle(
+            font: font,
+            fontSize: 10,
+          ),
+        ),
       ]),
     );
     rows.add(
       Column(children: [
         SizedBox(height: 12),
-        Text('EBM v2: v1.12'),
+        Text(
+          'EBM v2: v1.12',
+          style: TextStyle(
+            font: font,
+          ),
+        ),
       ]),
     );
     // end of footer
@@ -629,6 +653,7 @@ class OmniPrinter {
   /// - autoPrint: Whether to automatically print the receipt.
   ///
   /// Returns a Future that completes when the PDF is generated and handled.
+  @override
   Future<void> generatePdfAndPrint({
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
@@ -711,6 +736,7 @@ class OmniPrinter {
 
     // experiment layout the pdf file
     Uint8List pdfData = await doc.save();
+    // FYI: https://stackoverflow.com/questions/68871880/do-not-use-buildcontexts-across-async-gaps
     handlePdfData(pdfData: pdfData, emails: emails, autoPrint: autoPrint);
   }
 
@@ -820,12 +846,48 @@ class OmniPrinter {
   ///
   /// The `emails` parameter optionally specifies email addresses to prefill
   /// in the share sheet.
-  ///
+
   Future<void> sharePdf(Uint8List pdfData, List<String>? emails) async {
+    try {
+      // Fetch printer information
+      final printingInfo = await Printing.info();
+      const defaultPrinter = Printer(url: "", isAvailable: false);
+
+      if (printingInfo.canListPrinters) {
+        final printers = await Printing.listPrinters();
+
+        // Pick the first available printer
+        final firstAvailablePrinter = printers.firstWhere(
+          (printer) => printer.isAvailable,
+          orElse: () => defaultPrinter,
+        );
+
+        if (firstAvailablePrinter.isAvailable) {
+          // Print directly to the first available printer
+          await Printing.directPrintPdf(
+            printer: firstAvailablePrinter,
+            onLayout: (PdfPageFormat format) async => pdfData,
+          );
+        } else {
+          // No available printer found, share the PDF via email
+          await sharePdfViaEmail(pdfData, emails);
+        }
+      } else {
+        // Unable to list printers, share the PDF via email
+        await sharePdfViaEmail(pdfData, emails);
+      }
+    } catch (e) {
+      // In case of any errors, share the PDF via email
+      await sharePdfViaEmail(pdfData, emails);
+    }
+  }
+
+  Future<void> sharePdfViaEmail(Uint8List pdfData, List<String>? emails) async {
+    final fileName = generateFileName();
     await Printing.sharePdf(
       bytes: pdfData,
-      filename: "${generateFileName()}.pdf",
-      subject: "${generateFileName()}-receipt",
+      filename: "$fileName.pdf",
+      subject: "$fileName-receipt",
       body: "Thank you for visiting our shop",
       emails: emails,
     );
