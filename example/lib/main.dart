@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:realm/realm.dart';
 import 'package:receipt/omni_printer.dart';
 import 'package:receipt/printable.dart';
-import 'package:receipt/signature_print.dart';
-import 'package:receipt/zReport.dart';
 
-import 'dart:math';
 
 List<TransactionItem> generateDummyTransactionItems() {
   final random = Random();

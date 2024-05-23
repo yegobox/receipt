@@ -1,12 +1,8 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:flipper_models/realm_model_export.dart';
 import 'package:flutter/services.dart';
 import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' as c;
-import 'package:open_filex/open_filex.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
@@ -15,7 +11,6 @@ import 'package:universal_platform/universal_platform.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as p;
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart' as material;
 
 final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 
