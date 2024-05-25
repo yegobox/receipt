@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'package:flipper_models/realm_model_export.dart';
 import 'package:flutter/services.dart';
-import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
+// import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
 import 'package:flutter/material.dart' as c;
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
@@ -815,17 +816,15 @@ class OmniPrinter implements Printable {
     Map<Permission, PermissionStatus> statuses =
         await [Permission.storage, Permission.manageExternalStorage].request();
     if (statuses[Permission.storage]?.isGranted ?? false) {
-      Directory? dir = await DownloadsPath.downloadsDirectory();
-      final path = dir?.path;
-      if (path != null) {
-        var i = 0;
-        await for (final page in Printing.raster(pdfData, dpi: 1120)) {
-          final png = await page.toPng();
-          final file = File(p.normalize(
-              '$path/page-${i.toString().padLeft(3, generateFileName())}.png'));
-          await file.writeAsBytes(png);
-          i++;
-        }
+      Directory? dir = await getApplicationDocumentsDirectory();
+      final path = dir.path;
+      var i = 0;
+      await for (final page in Printing.raster(pdfData, dpi: 1120)) {
+        final png = await page.toPng();
+        final file = File(p.normalize(
+            '$path/page-${i.toString().padLeft(3, generateFileName())}.png'));
+        await file.writeAsBytes(png);
+        i++;
       }
     }
   }
