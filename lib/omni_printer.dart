@@ -12,6 +12,9 @@ import 'package:universal_platform/universal_platform.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as p;
 import 'package:intl/intl.dart';
+import 'package:talker_flutter/talker_flutter.dart';
+
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 
@@ -54,8 +57,7 @@ class OmniPrinter implements Printable {
   _loadLogoImage({required String position}) async {
     ImageProvider? image;
     if (position == "left") {
-      const imageLogo =
-          c.AssetImage('assets/logo_left.png', package: 'receipt');
+      const imageLogo = c.AssetImage('assets/rra.jpg', package: 'receipt');
       image = await flutterImageProvider(imageLogo);
       return image;
     } else {
@@ -846,7 +848,9 @@ class OmniPrinter implements Printable {
       // Fetch printer information
       final printingInfo = await Printing.info();
       const defaultPrinter = Printer(url: "", isAvailable: false);
-
+      final talker = TalkerFlutter.init();
+      talker.info(printingInfo);
+      Sentry.captureMessage("available printers listing");
       if (printingInfo.canListPrinters) {
         final printers = await Printing.listPrinters();
 
@@ -855,7 +859,8 @@ class OmniPrinter implements Printable {
           (printer) => printer.isAvailable,
           orElse: () => defaultPrinter,
         );
-
+        talker.info('first available printer');
+        talker.info(firstAvailablePrinter);
         if (firstAvailablePrinter.isAvailable) {
           // Print directly to the first available printer
           await Printing.directPrintPdf(
