@@ -155,21 +155,23 @@ class OmniPrinter implements Printable {
   _buildTaxB({required String totalTaxB}) async {
     final font =
         Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
-    rows.add(
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'TOTAL B-18%:',
-            style: _receiptTextStyle.copyWith(font: font),
-          ),
-          Text(
-            totalTaxB,
-            style: _receiptTextStyle.copyWith(font: font),
-          )
-        ],
-      ),
-    );
+    if (totalTaxB != "0.0") {
+      rows.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'TOTAL B-18%:',
+              style: _receiptTextStyle.copyWith(font: font),
+            ),
+            Text(
+              totalTaxB,
+              style: _receiptTextStyle.copyWith(font: font),
+            )
+          ],
+        ),
+      );
+    }
   }
 
   _buildTotal({required String totalPayable}) async {
@@ -195,21 +197,23 @@ class OmniPrinter implements Printable {
   _buildAEx({required String totalAEx}) async {
     final font =
         Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
-    rows.add(
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'TOTAL A-EX:',
-            style: _receiptTextStyle.copyWith(font: font),
-          ),
-          Text(
-            totalAEx,
-            style: _receiptTextStyle.copyWith(font: font),
-          )
-        ],
-      ),
-    );
+    if (totalAEx != "0.0") {
+      rows.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'TOTAL A-EX:',
+              style: _receiptTextStyle.copyWith(font: font),
+            ),
+            Text(
+              totalAEx,
+              style: _receiptTextStyle.copyWith(font: font),
+            )
+          ],
+        ),
+      );
+    }
   }
 
   _body({
