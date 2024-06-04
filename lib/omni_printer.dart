@@ -129,26 +129,26 @@ class OmniPrinter implements Printable {
       SizedBox(height: 4),
       Text("TIN  : $brandTIN", style: TextStyle(font: font, fontSize: 10)),
       SizedBox(height: 4),
-        Column(children: [
+      Column(children: [
         CustomPaint(
-        size: const PdfPoint(double.infinity, 10),
-        painter: (PdfGraphics canvas, PdfPoint size) {
-        const double dashWidth = 2.0, dashSpace = 2.0;
-        double startX = 0.0;
-        while (startX < size.x) {
-        canvas
-        ..moveTo(startX, 0)
-        ..lineTo(startX + dashWidth, 0)
-        ..setColor(PdfColors.lightBlueAccent)
-        ..setLineWidth(1.0)
-        ..strokePath();
-        startX += dashWidth + dashSpace;
-        }
-        },
+          size: const PdfPoint(double.infinity, 10),
+          painter: (PdfGraphics canvas, PdfPoint size) {
+            const double dashWidth = 2.0, dashSpace = 2.0;
+            double startX = 0.0;
+            while (startX < size.x) {
+              canvas
+                ..moveTo(startX, 0)
+                ..lineTo(startX + dashWidth, 0)
+                ..setColor(PdfColors.lightBlueAccent)
+                ..setLineWidth(1.0)
+                ..strokePath();
+              startX += dashWidth + dashSpace;
+            }
+          },
         )
-        ]),
+      ]),
       SizedBox(height: 4),
-        Text('Welcome to $brandName', style: TextStyle(font: font, fontSize: 12)),
+      Text('Welcome to $brandName', style: TextStyle(font: font, fontSize: 12)),
       SizedBox(height: 4),
       Text('Client ID: $customerTin',
           style: TextStyle(font: font, fontSize: 12)),
@@ -260,7 +260,7 @@ class OmniPrinter implements Printable {
     for (var item in items) {
       double total = item.price * item.qty;
       // log(item.name, name: "in the loop");
-      String taxtype = item.taxTyCd!;
+      String taxtype = item.taxTyCd ?? "B";
       String taxLabel = item.isTaxExempted ? "(EX)" : taxtype;
       // Add a row for each item
       data.add(
@@ -768,7 +768,7 @@ class OmniPrinter implements Printable {
   /// This function adds a Column with a CustomPaint widget to the rows list,
   /// which draws a dashed line 10 units high across the full width of the page.
   /// It is used to draw separator lines between sections of the receipt.
-   void dashedLine({double dashThickness = 1.0}) {
+  void dashedLine({double dashThickness = 1.0}) {
     rows.add(
       Column(children: [
         CustomPaint(
