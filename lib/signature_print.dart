@@ -13,8 +13,6 @@ import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'dart:ui' as ui;
 
-import 'package:flutter/material.dart' as material;
-
 final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 
 /// An extension on DateTime that returns a string of date and time separated by space.
@@ -68,10 +66,6 @@ class SignableOmniPrinter implements Printable {
     required List<TransactionItem> items,
     required String receiptType,
     required String sdcReceiptNum,
-    required String totalTax,
-    required double totalB,
-    required String totalB18,
-    required double totalAEx,
     required double cash,
     required String cashierName,
     required double received,
@@ -85,6 +79,11 @@ class SignableOmniPrinter implements Printable {
     required double totalPayable,
     required ITransaction transaction,
     bool? autoPrint = false,
+    required double totalTaxA,
+    required double totalTaxB,
+    required double totalTaxC,
+    required double totalTaxD,
+    required String totalTax,
   }) async {
     // Calculate paper width in pixels
 
@@ -271,7 +270,7 @@ class SignableOmniPrinter implements Printable {
     headerRow.cells[3].value = 'Total';
     for (var item in items) {
       double total = item.price * item.qty;
-      String taxLabel = item.isTaxExempted ? "(EX)" : "(B)";
+      String taxLabel = item.taxTyCd != null ? "(${item.taxTyCd!})" : "(B)";
       PdfGridRow row = grid.rows.add();
       row.cells[0].value = item.name!;
       row.cells[1].value = item.price.toString();

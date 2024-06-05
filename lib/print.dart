@@ -1,7 +1,6 @@
 library receipt;
 
 import 'package:flipper_models/realm_model_export.dart';
-import 'package:flutter/material.dart';
 import 'package:receipt/omni_printer.dart';
 import 'package:receipt/printable.dart';
 
@@ -42,36 +41,38 @@ class Print {
   /// - items: The list of transaction items.
   /// - transaction: The transaction object.
   /// - autoPrint: Whether to automatically print.
-  print(
-      {required double grandTotal,
-      required String currencySymbol,
-      required String totalTax,
-      required double totalB,
-      required String totalB18,
-      required double totalAEx,
-      required double cash,
-      required double received,
-      required String sdcId,
-      required String sdcReceiptNum,
-      required int invoiceNum,
-      required String brandName,
-      required String brandAddress,
-      required String brandTel,
-      required String brandTIN,
-      required String brandDescription,
-      required String brandFooter,
-      required String cashierName,
-      required String payMode,
-      required String mrc,
-      required String internalData,
-      required String receiptSignature,
-      required String receiptQrCode,
-      required List<String> emails,
-      required String? customerTin,
-      required String receiptType,
-      required List<TransactionItem> items,
-      required ITransaction transaction,
-      bool? autoPrint = false}) {
+  print({
+    required double grandTotal,
+    required String currencySymbol,
+    required String totalTax,
+    required double cash,
+    required double received,
+    required String sdcId,
+    required String sdcReceiptNum,
+    required int invoiceNum,
+    required String brandName,
+    required String brandAddress,
+    required String brandTel,
+    required String brandTIN,
+    required String brandDescription,
+    required String brandFooter,
+    required String cashierName,
+    required String payMode,
+    required String mrc,
+    required String internalData,
+    required String receiptSignature,
+    required String receiptQrCode,
+    required List<String> emails,
+    required String? customerTin,
+    required String receiptType,
+    required List<TransactionItem> items,
+    required ITransaction transaction,
+    bool? autoPrint = false,
+    required double totalTaxA,
+    required double totalTaxB,
+    required double totalTaxC,
+    required double totalTaxD,
+  }) {
     receiptQr(receiptQrCode).then((qrCode) {
       Printable printer = OmniPrinter();
       printer.generatePdfAndPrint(
@@ -87,9 +88,6 @@ class Print {
         receiptType: receiptType,
         sdcReceiptNum: sdcReceiptNum,
         items: items,
-        totalAEx: totalAEx,
-        totalB18: totalB18,
-        totalB: totalB,
         totalTax: totalTax,
         cash: cash,
         cashierName: cashierName,
@@ -102,7 +100,11 @@ class Print {
         invoiceNum: invoiceNum,
         mrc: mrc,
         totalPayable: transaction.subTotal,
+        totalTaxA: totalTaxA,
         transaction: transaction,
+        totalTaxB: totalTaxB,
+        totalTaxC: totalTaxC,
+        totalTaxD: totalTaxD,
       );
     });
   }

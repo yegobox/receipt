@@ -6,7 +6,6 @@ import 'package:realm/realm.dart';
 import 'package:receipt/omni_printer.dart';
 import 'package:receipt/printable.dart';
 
-
 List<TransactionItem> generateDummyTransactionItems() {
   final random = Random();
 
@@ -214,10 +213,10 @@ class _MyHomePageState extends State<MyHomePage> {
       totalPayable: 3000,
       // totalPayable: 3000,
       transaction: transaction,
-      totalAEx: 0,
+      totalTaxA: 0,
       items: generateDummyTransactionItems(),
-      totalB18: (transaction.subTotal * 18 / 118).toStringAsFixed(2),
-      totalB: transaction.subTotal,
+      // totalB18: (transaction.subTotal * 18 / 118).toStringAsFixed(2),
+      // t: transaction.subTotal,
       totalTax: (transaction.subTotal * 18 / 118).toStringAsFixed(2),
       cash: transaction.subTotal,
       received: transaction.cashReceived,
@@ -238,7 +237,7 @@ class _MyHomePageState extends State<MyHomePage> {
       brandFooter: "Thank you",
       emails: ['info@yegobox.com'],
       customerTin: "0000000000",
-      receiptType: "NS",
+      receiptType: "NS", totalTaxB: 0, totalTaxC: 0, totalTaxD: 0,
     );
   }
 

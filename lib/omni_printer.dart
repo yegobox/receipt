@@ -175,7 +175,7 @@ class OmniPrinter implements Printable {
   _buildTaxB({required String totalTaxB}) async {
     final font =
         Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
-    if (totalTaxB != "0.0") {
+    if (double.parse(totalTaxB) != 0) {
       rows.add(
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -186,6 +186,50 @@ class OmniPrinter implements Printable {
             ),
             Text(
               totalTaxB,
+              style: _receiptTextStyle.copyWith(font: font),
+            )
+          ],
+        ),
+      );
+    }
+  }
+
+  _buildTaxC({required String totalTaxC}) async {
+    final font =
+        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
+    if (double.parse(totalTaxC) != 0) {
+      rows.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'TOTAL C:',
+              style: _receiptTextStyle.copyWith(font: font),
+            ),
+            Text(
+              totalTaxC,
+              style: _receiptTextStyle.copyWith(font: font),
+            )
+          ],
+        ),
+      );
+    }
+  }
+
+  _buildTaxD({required String totalTaxD}) async {
+    final font =
+        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
+    if (double.parse(totalTaxD) != 0) {
+      rows.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'TOTAL D:',
+              style: _receiptTextStyle.copyWith(font: font),
+            ),
+            Text(
+              totalTaxD,
               style: _receiptTextStyle.copyWith(font: font),
             )
           ],
@@ -214,10 +258,10 @@ class OmniPrinter implements Printable {
     );
   }
 
-  _buildAEx({required String totalAEx}) async {
+  _buildTaxA({required String totalAEx}) async {
     final font =
         Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
-    if (totalAEx != "0.0") {
+    if (double.parse(totalAEx) != 0) {
       rows.add(
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -240,9 +284,10 @@ class OmniPrinter implements Printable {
     required List<TransactionItem> items,
     required String receiptType,
     required String totalPayable,
-    required String totalAEx,
-    required String totalB18,
-    required String totalB,
+    required String totalTaxA,
+    required String totalTaxB,
+    required String totalTaxC,
+    required String totalTaxD,
     required String totalTax,
     required double received,
     required String cashierName,
@@ -260,8 +305,7 @@ class OmniPrinter implements Printable {
     for (var item in items) {
       double total = item.price * item.qty;
       // log(item.name, name: "in the loop");
-      String taxtype = item.taxTyCd ?? "B";
-      String taxLabel = item.isTaxExempted ? "(EX)" : taxtype;
+      String taxLabel = item.taxTyCd != null ? "(${item.taxTyCd!})" : "(B)";
       // Add a row for each item
       data.add(
         <String>[
@@ -319,8 +363,10 @@ class OmniPrinter implements Printable {
     }
     dashedLine();
     await _buildTotal(totalPayable: totalPayable);
-    await _buildAEx(totalAEx: totalAEx);
-    await _buildTaxB(totalTaxB: totalB18);
+    await _buildTaxA(totalAEx: totalTaxA);
+    await _buildTaxB(totalTaxB: totalTaxB);
+    await _buildTaxC(totalTaxC: totalTaxC);
+    await _buildTaxD(totalTaxD: totalTaxD);
     await _buildTotalTax(totalTax: totalTax);
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -690,9 +736,6 @@ class OmniPrinter implements Printable {
     required String receiptType,
     required String sdcReceiptNum,
     required String totalTax,
-    required double totalB,
-    required String totalB18,
-    required double totalAEx,
     required double cash,
     required String cashierName,
     required double received,
@@ -706,6 +749,10 @@ class OmniPrinter implements Printable {
     required double totalPayable,
     required ITransaction transaction,
     bool? autoPrint = false,
+    required double totalTaxA,
+    required double totalTaxB,
+    required double totalTaxC,
+    required double totalTaxD,
   }) async {
     final left = await _loadLogoImage(position: "left");
     final right = await _loadLogoImage(position: "right");
@@ -724,14 +771,15 @@ class OmniPrinter implements Printable {
     await _body(
       items: items,
       totalTax: totalTax,
-      totalB: totalB.toString(),
-      totalB18: totalB18,
-      totalAEx: totalAEx.toString(),
+      totalTaxA: totalTaxA.toStringAsFixed(2),
+      totalTaxB: totalTaxB.toStringAsFixed(2),
+      totalTaxC: totalTaxC.toStringAsFixed(2),
+      totalTaxD: totalTaxD.toStringAsFixed(2),
       cash: cash,
       cashierName: cashierName,
       received: received,
       payMode: payMode,
-      totalPayable: totalPayable.toString(),
+      totalPayable: totalPayable.toStringAsFixed(2),
       receiptType: receiptType,
     );
     await _footer(
