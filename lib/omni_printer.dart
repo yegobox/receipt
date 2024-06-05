@@ -158,24 +158,45 @@ class OmniPrinter implements Printable {
     ]));
   }
 
-  _buildTotalTax({required String totalTax}) async {
+  _buildTotalTax(
+      {required String totalTax, required String receiptType}) async {
     final font =
         Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
+
+    String displayTotalTax = totalTax;
+
+    if (receiptType == "NR") {
+      displayTotalTax = "-$totalTax";
+    }
+
     rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Text(
-          'TOTAL TAX:',
-          style: _receiptTextStyle.copyWith(font: font),
-        ),
-        Text(totalTax, style: _receiptTextStyle.copyWith(font: font))
-      ]),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'TOTAL TAX:',
+            style: _receiptTextStyle.copyWith(font: font),
+          ),
+          Text(
+            displayTotalTax,
+            style: _receiptTextStyle.copyWith(font: font),
+          ),
+        ],
+      ),
     );
   }
 
-  _buildTaxB({required String totalTaxB}) async {
+  _buildTaxB({required String totalTaxB, required String receiptType}) async {
     final font =
         Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
+
     if (double.parse(totalTaxB) != 0) {
+      String displayTotalTaxB = totalTaxB;
+
+      if (receiptType == "NR") {
+        displayTotalTaxB = "-$totalTaxB";
+      }
+
       rows.add(
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -185,7 +206,7 @@ class OmniPrinter implements Printable {
               style: _receiptTextStyle.copyWith(font: font),
             ),
             Text(
-              totalTaxB,
+              displayTotalTaxB,
               style: _receiptTextStyle.copyWith(font: font),
             )
           ],
@@ -194,10 +215,17 @@ class OmniPrinter implements Printable {
     }
   }
 
-  _buildTaxC({required String totalTaxC}) async {
+  _buildTaxC({required String totalTaxC, required String receiptType}) async {
     final font =
         Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
+
     if (double.parse(totalTaxC) != 0) {
+      String displayTotalTaxC = totalTaxC;
+
+      if (receiptType == "NR") {
+        displayTotalTaxC = "-$totalTaxC";
+      }
+
       rows.add(
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -207,7 +235,7 @@ class OmniPrinter implements Printable {
               style: _receiptTextStyle.copyWith(font: font),
             ),
             Text(
-              totalTaxC,
+              displayTotalTaxC,
               style: _receiptTextStyle.copyWith(font: font),
             )
           ],
@@ -216,10 +244,17 @@ class OmniPrinter implements Printable {
     }
   }
 
-  _buildTaxD({required String totalTaxD}) async {
+  _buildTaxD({required String totalTaxD, required String receiptType}) async {
     final font =
         Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
+
     if (double.parse(totalTaxD) != 0) {
+      String displayTotalTaxD = totalTaxD;
+
+      if (receiptType == "NR") {
+        displayTotalTaxD = "-$totalTaxD";
+      }
+
       rows.add(
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -229,7 +264,7 @@ class OmniPrinter implements Printable {
               style: _receiptTextStyle.copyWith(font: font),
             ),
             Text(
-              totalTaxD,
+              displayTotalTaxD,
               style: _receiptTextStyle.copyWith(font: font),
             )
           ],
@@ -238,9 +273,17 @@ class OmniPrinter implements Printable {
     }
   }
 
-  _buildTotal({required String totalPayable}) async {
+  _buildTotal(
+      {required String totalPayable, required String receiptType}) async {
     final font =
         Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
+
+    String total = totalPayable;
+
+    if (receiptType == "NR") {
+      total = "-$totalPayable";
+    }
+
     rows.add(
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -250,7 +293,7 @@ class OmniPrinter implements Printable {
             style: _receiptTextStyle.copyWith(font: font),
           ),
           Text(
-            totalPayable,
+            total,
             style: _receiptTextStyle.copyWith(font: font),
           )
         ],
@@ -258,10 +301,17 @@ class OmniPrinter implements Printable {
     );
   }
 
-  _buildTaxA({required String totalAEx}) async {
+  _buildTaxA({required String totalAEx, required String receiptType}) async {
     final font =
         Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
+
     if (double.parse(totalAEx) != 0) {
+      String displayTotalAEx = totalAEx;
+
+      if (receiptType == "NR") {
+        displayTotalAEx = "-$totalAEx";
+      }
+
       rows.add(
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -271,7 +321,7 @@ class OmniPrinter implements Printable {
               style: _receiptTextStyle.copyWith(font: font),
             ),
             Text(
-              totalAEx,
+              displayTotalAEx,
               style: _receiptTextStyle.copyWith(font: font),
             )
           ],
@@ -347,7 +397,11 @@ class OmniPrinter implements Printable {
         Column(children: [SizedBox(height: 12)]),
       );
     }
-    if (receiptType == "TS" || receiptType == "PS") {
+    dashedLine();
+    if (receiptType == "TS" ||
+        receiptType == "PS" ||
+        receiptType == "NR" ||
+        receiptType == "CS") {
       row = Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -362,12 +416,12 @@ class OmniPrinter implements Printable {
       rows.add(row);
     }
     dashedLine();
-    await _buildTotal(totalPayable: totalPayable);
-    await _buildTaxA(totalAEx: totalTaxA);
-    await _buildTaxB(totalTaxB: totalTaxB);
-    await _buildTaxC(totalTaxC: totalTaxC);
-    await _buildTaxD(totalTaxD: totalTaxD);
-    await _buildTotalTax(totalTax: totalTax);
+    await _buildTotal(totalPayable: totalPayable, receiptType: receiptType);
+    await _buildTaxA(totalAEx: totalTaxA, receiptType: receiptType);
+    await _buildTaxB(totalTaxB: totalTaxB, receiptType: receiptType);
+    await _buildTaxC(totalTaxC: totalTaxC, receiptType: receiptType);
+    await _buildTaxD(totalTaxD: totalTaxD, receiptType: receiptType);
+    await _buildTotalTax(totalTax: totalTax, receiptType: receiptType);
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         SizedBox(height: 1),
@@ -375,12 +429,16 @@ class OmniPrinter implements Printable {
     );
     dashedLine();
 
+    String total = received.toString();
+    if (receiptType == "NR") {
+      total = "-$total";
+    }
     rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(
         'CASH:',
         style: _receiptTextStyle.copyWith(font: font),
       ),
-      Text(received.toString(), style: _receiptTextStyle.copyWith(font: font))
+      Text(total.toString(), style: _receiptTextStyle.copyWith(font: font))
     ]));
     rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(
@@ -488,6 +546,20 @@ class OmniPrinter implements Printable {
   }) async {
     final font =
         Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
+    if (receiptType == "CS") {
+      rows.add(
+        Column(children: [
+          Text(
+            "COPY",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              font: font,
+            ),
+          ),
+        ]),
+      );
+      dashedLine();
+    }
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         SizedBox(height: 8),
@@ -663,6 +735,7 @@ class OmniPrinter implements Printable {
         ),
       ]),
     );
+    dashedLine();
     rows.add(
       Column(children: [
         SizedBox(height: 12),
