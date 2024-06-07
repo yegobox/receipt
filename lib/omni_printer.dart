@@ -415,7 +415,7 @@ class OmniPrinter implements Printable {
       );
       rows.add(row);
     }
-    dashedLine();
+  
     await _buildTotal(totalPayable: totalPayable, receiptType: receiptType);
     await _buildTaxA(totalAEx: totalTaxA, receiptType: receiptType);
     await _buildTaxB(totalTaxB: totalTaxB, receiptType: receiptType);
