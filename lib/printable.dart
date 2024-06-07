@@ -31,5 +31,6 @@ abstract class Printable {
     required double totalTaxB,
     required double totalTaxC,
     required double totalTaxD,
+    required String customerName,
   });
 }

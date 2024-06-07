@@ -72,11 +72,13 @@ class Print {
     required double totalTaxB,
     required double totalTaxC,
     required double totalTaxD,
+    required String customerName,
   }) {
     receiptQr(receiptQrCode).then((qrCode) {
       Printable printer = OmniPrinter();
       printer.generatePdfAndPrint(
         brandName: brandName,
+        customerName: customerName,
         brandAddress: brandAddress,
         brandDescription: brandDescription,
         brandTel: brandTel,

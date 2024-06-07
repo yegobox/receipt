@@ -55,6 +55,7 @@ class SignableOmniPrinter implements Printable {
   /// Generates a PDF receipt and handles saving or launching it.
   @override
   Future<void> generatePdfAndPrint({
+    required String customerName,
     String brandName = "Q Coffee Ltd",
     String brandAddress = "Kigali City",
     String brandTel = "0781968027",

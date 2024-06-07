@@ -79,6 +79,7 @@ class OmniPrinter implements Printable {
     required String customerTin,
     required String receiptType,
     required String sdcReceiptNum,
+    required String customerName,
   }) async {
     final font =
         Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
@@ -125,7 +126,8 @@ class OmniPrinter implements Printable {
       SizedBox(height: 4),
       Text(brandAddress, style: TextStyle(font: font, fontSize: 10)),
       SizedBox(height: 4),
-      Text("Email: $brandTel", style: TextStyle(font: font, fontSize: 10)),
+      Text("Phone number: $brandTel",
+          style: TextStyle(font: font, fontSize: 10)),
       SizedBox(height: 4),
       Text("TIN  : $brandTIN", style: TextStyle(font: font, fontSize: 10)),
       SizedBox(height: 4),
@@ -148,9 +150,10 @@ class OmniPrinter implements Printable {
         )
       ]),
       SizedBox(height: 4),
-      Text('Welcome to $brandName', style: TextStyle(font: font, fontSize: 12)),
       SizedBox(height: 4),
-      Text('Client ID: $customerTin',
+      Text('Customer Tin: $customerTin',
+          style: TextStyle(font: font, fontSize: 12)),
+      Text('Customer Name: $customerName',
           style: TextStyle(font: font, fontSize: 12)),
       SizedBox(height: 8),
       ...receiptTypeWidgets(receiptType),
@@ -415,7 +418,7 @@ class OmniPrinter implements Printable {
       );
       rows.add(row);
     }
-  
+
     await _buildTotal(totalPayable: totalPayable, receiptType: receiptType);
     await _buildTaxA(totalAEx: totalTaxA, receiptType: receiptType);
     await _buildTaxB(totalTaxB: totalTaxB, receiptType: receiptType);
@@ -433,13 +436,14 @@ class OmniPrinter implements Printable {
     if (receiptType == "NR") {
       total = "-$total";
     }
-    rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(
-        'CASH:',
-        style: _receiptTextStyle.copyWith(font: font),
-      ),
-      Text(total.toString(), style: _receiptTextStyle.copyWith(font: font))
-    ]));
+    // rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+    //   Text(
+    //     'CASH:',
+    //     style: _receiptTextStyle.copyWith(font: font),
+    //   ),
+    //   Text(totalPayable.toString(),
+    //       style: _receiptTextStyle.copyWith(font: font))
+    // ]));
     rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(
         'ITEMS NUMBER:',
@@ -648,7 +652,7 @@ class OmniPrinter implements Printable {
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Text(
-          "Internal Data:",
+          "Internal Data: ${internalData.toDashedString()}",
           style: TextStyle(
             font: font,
           ),
@@ -826,20 +830,21 @@ class OmniPrinter implements Printable {
     required double totalTaxB,
     required double totalTaxC,
     required double totalTaxD,
+    required String customerName,
   }) async {
     final left = await _loadLogoImage(position: "left");
     final right = await _loadLogoImage(position: "right");
     await _header(
-      leftImage: left,
-      rightImage: right,
-      brandAddress: brandAddress,
-      brandTel: brandTel,
-      brandTIN: brandTIN,
-      brandName: brandName,
-      customerTin: customerTin!,
-      receiptType: receiptType,
-      sdcReceiptNum: sdcReceiptNum,
-    );
+        leftImage: left,
+        rightImage: right,
+        brandAddress: brandAddress,
+        brandTel: brandTel,
+        brandTIN: brandTIN,
+        brandName: brandName,
+        customerTin: customerTin!,
+        receiptType: receiptType,
+        sdcReceiptNum: sdcReceiptNum,
+        customerName: customerName);
     dashedLine();
     await _body(
       items: items,
