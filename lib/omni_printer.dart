@@ -634,13 +634,11 @@ class OmniPrinter implements Printable {
       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
           "Receipt Signature:",
-          style: TextStyle(
-            font: font,
-          ),
+          style: TextStyle(font: font, fontBold: Font.courierBold()),
         ),
         Text(
           receiptSignature.toDashedString(),
-          style: TextStyle(font: font),
+          style: TextStyle(font: font, fontSize: 10),
         ),
       ]),
     );
@@ -650,20 +648,23 @@ class OmniPrinter implements Printable {
       ]),
     );
     rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Text(
-          "Internal Data: ${internalData.toDashedString()}",
-          style: TextStyle(
-            font: font,
-          ),
+          "Internal Data",
+          style:
+              TextStyle(font: font, fontSize: 10, fontBold: Font.courierBold()),
+        ),
+        Text(
+          internalData.toDashedString(),
+          style: TextStyle(font: font, fontSize: 10),
         ),
       ]),
     );
     rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           internalData.toDashedString(),
-          style: TextStyle(font: font),
+          style: TextStyle(font: font, fontSize: 10),
         ),
       ]),
     );
@@ -677,8 +678,8 @@ class OmniPrinter implements Printable {
         SizedBox(),
         Center(
           child: SizedBox(
-            width: 120,
-            height: 120,
+            width: 40,
+            height: 40,
             child: BarcodeWidget(
               barcode: Barcode.qrCode(
                 errorCorrectLevel: BarcodeQRCorrectionLevel.high,
@@ -690,15 +691,12 @@ class OmniPrinter implements Printable {
         SizedBox(),
       ]),
     );
-    rows.add(
-      Column(children: [
-        SizedBox(height: 4),
-      ]),
-    );
+    dashedLine();
+
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
-          'INVOICE NUMBER:',
+          'RECEIPT NUMBER:',
           style: TextStyle(
             font: font,
           ),
