@@ -409,14 +409,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.10"
-  decimal:
-    dependency: transitive
-    description:
-      name: decimal
-      sha256: "4140a688f9e443e2f4de3a1162387bf25e1ac6d51e24c9da263f245210f41440"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.2"
   desktop_webview_auth:
     dependency: transitive
     description:
@@ -1228,10 +1220,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_screen_lock
-      sha256: d63cf09bce05a991d19b231e8f8dd7a6da432215df7a6aa87a0f0114b3307b56
+      sha256: "07cb55016cf16b0374e6f79918964c65f2f722a461d1f56eb79cb88e1123b9a7"
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.4"
+    version: "9.1.0"
   flutter_settings_ui:
     dependency: transitive
     description:
@@ -1683,10 +1675,10 @@ packages:
     dependency: "direct main"
     description:
       name: intl
-      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
       url: "https://pub.dev"
     source: hosted
-    version: "0.18.1"
+    version: "0.19.0"
   io:
     dependency: transitive
     description:
@@ -1755,26 +1747,26 @@ packages:
     dependency: transitive
     description:
       name: leak_tracker
-      sha256: "78eb209deea09858f5269f5a5b02be4049535f568c07b275096836f01ea323fa"
+      sha256: "7f0df31977cb2c0b88585095d168e689669a2cc9b97c309665e3386f3e9d341a"
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.0"
+    version: "10.0.4"
   leak_tracker_flutter_testing:
     dependency: transitive
     description:
       name: leak_tracker_flutter_testing
-      sha256: b46c5e37c19120a8a01918cfaf293547f47269f7cb4b0058f21531c2465d6ef0
+      sha256: "06e98f569d004c1315b991ded39924b21af84cf14cc94791b8aea337d25b57f8"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "3.0.3"
   leak_tracker_testing:
     dependency: transitive
     description:
       name: leak_tracker_testing
-      sha256: a597f72a664dbd293f3bfc51f9ba69816f84dcd403cdac7066cb3f6003f3ab47
+      sha256: "6ba465d5d76e67ddf503e1161d1f4a6bc42306f9d66ca1e8f079a47290fb06d3"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "3.0.1"
   linkify:
     dependency: transitive
     description:
@@ -2324,46 +2316,38 @@ packages:
       relative: true
     source: path
     version: "4.0.2"
-  rational:
-    dependency: transitive
-    description:
-      name: rational
-      sha256: cb808fb6f1a839e6fc5f7d8cb3b0a10e1db48b3be102de73938c627f0b636336
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.3"
   realm:
     dependency: transitive
     description:
       name: realm
-      sha256: "1d750c7ba72a311f3241779b47c0590c486b0080014f4e6b45d0a34fcc998a3a"
+      sha256: "053b7a7adf3533cc9f507529d6b9ff948bc0270060dd58c502a9029413fcd2d6"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "2.3.0"
   realm_common:
     dependency: transitive
     description:
       name: realm_common
-      sha256: "6db42e97d88a2866521467faa409aca3b92605071e1eb56c9afee78518ed0721"
+      sha256: "1f36a224f35fd089691b631c0c9c92af274e00d524258203a937706d7d5e9d0c"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "2.3.0"
   realm_dart:
     dependency: transitive
     description:
       name: realm_dart
-      sha256: "1b5783b5ef88f7b7e34fe67ab7641ba1d0939052b5ad2c9391b0b2a9171a2a49"
+      sha256: ce2bd5dfb5eee142998fc7f395df34e349e1c179b78582d6d84bb4003c556c81
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "2.3.0"
   realm_generator:
     dependency: transitive
     description:
       name: realm_generator
-      sha256: "99e056fb6dab76679e9de8928bc7b87e95f162e4cbc569dca09727066d96d63a"
+      sha256: "183257f345ac5b01b424261dd6e3c400d414bec725d33d390b5b6942274f5a80"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "2.3.0"
   recase:
     dependency: transitive
     description:
@@ -2708,66 +2692,66 @@ packages:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_barcodes
-      sha256: "4652c1f8c45b3b85c2af191e98934f2cdd4803a3daf7885e5e3a1e507cd3a3c8"
+      sha256: "5ceeb1f2511a26f41ff3ab61725b034d0a61c5f6a8f919d6c05a4d9bbb3fd3d8"
       url: "https://pub.dev"
     source: hosted
-    version: "24.2.9"
+    version: "25.2.7"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
-      sha256: "7666506885ebc8f62bb928ad4588a73e20caaff2b2cf2b2b56f67d98f4113525"
+      sha256: e17dcc7a1d0701e84d0a83c0040503cdcc6c72e44db0d733ab4c706dd5b8b9f8
       url: "https://pub.dev"
     source: hosted
-    version: "24.2.9"
+    version: "25.2.7"
   syncfusion_flutter_datagrid:
     dependency: transitive
     description:
       name: syncfusion_flutter_datagrid
-      sha256: "0ac1c54467ef2c1099943207dfd95748da94c900104e37fbaa346668a120c02d"
+      sha256: "134838b7a35bd926c2ba9044f0d69524ce1acf0897f1bf40e9be31dca4a378f2"
       url: "https://pub.dev"
     source: hosted
-    version: "24.2.9"
+    version: "25.2.7"
   syncfusion_flutter_datagrid_export:
     dependency: transitive
     description:
       name: syncfusion_flutter_datagrid_export
-      sha256: ccd910df5f7c719d2619cd15ab8fc781383ba414802f64084f8510d4a6c54134
+      sha256: "10977a82bc398426a453e20bc5d90701fe553f785168f0b5059651519af7fb2b"
       url: "https://pub.dev"
     source: hosted
-    version: "24.2.9"
+    version: "25.2.7"
   syncfusion_flutter_datepicker:
     dependency: transitive
     description:
       name: syncfusion_flutter_datepicker
-      sha256: c010440ccef2beecb988684af3557c57ade8ea300d1177536f01059e3a16ce5d
+      sha256: ebe93b6b54937164ee8b19cd036f314f226a5d69c47da97d05ce07a0ecae4dee
       url: "https://pub.dev"
     source: hosted
-    version: "24.2.9"
+    version: "25.2.7"
   syncfusion_flutter_pdf:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_pdf
-      sha256: a9e85bbfd574bb262733b33494240fda38bfeb58553537560ba4b3f54a31418b
+      sha256: "9c201a65c5e680d8af9324aba88fa0f7d9248d6085eb7fb23dd8521d714a997f"
       url: "https://pub.dev"
     source: hosted
-    version: "24.2.9"
+    version: "25.2.7"
   syncfusion_flutter_xlsio:
     dependency: transitive
     description:
       name: syncfusion_flutter_xlsio
-      sha256: "6020dc5b4765e9850ddf0789fb247c03c10751869af1c888bf9cef2fbabc2389"
+      sha256: "75b100b958c197732e46ad5973abfbc62ef341bf9ecf36010e8c9afde4b7b65b"
       url: "https://pub.dev"
     source: hosted
-    version: "24.2.9"
+    version: "25.2.7"
   syncfusion_officecore:
     dependency: transitive
     description:
       name: syncfusion_officecore
-      sha256: "7d172ffe5b995788414faea199ed32fbca60297c9fc27a052711287bb710e3c4"
+      sha256: fdd1c99db424f78d952d20713607ed9f33e8cb428ab19871b8b1f49bdd757cb0
       url: "https://pub.dev"
     source: hosted
-    version: "24.2.9"
+    version: "25.2.7"
   synchronized:
     dependency: transitive
     description:
@@ -2828,10 +2812,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: "5c2f730018264d276c20e4f1503fd1308dfbbae39ec8ee63c5236311ac06954b"
+      sha256: "9955ae474176f7ac8ee4e989dadfb411a58c30415bcfb648fa04b2b8a03afa7f"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.1"
+    version: "0.7.0"
   timeago:
     dependency: transitive
     description:
@@ -3036,10 +3020,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: b3d56ff4341b8f182b96aceb2fa20e3dcb336b9f867bc0eafc0de10f1048e957
+      sha256: "3923c89304b715fb1eb6423f017651664a03bf5f4b29983627c4da791f74a4ec"
       url: "https://pub.dev"
     source: hosted
-    version: "13.0.0"
+    version: "14.2.1"
   watcher:
     dependency: transitive
     description:
@@ -3122,5 +3106,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.3.0 <3.4.0"
+  dart: ">=3.4.0 <4.0.0"
   flutter: ">=3.19.2"
