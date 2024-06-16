@@ -228,7 +228,6 @@ class _MyHomePageState extends State<MyHomePage> {
       receiptSignature: "receiptrcptSign",
       cashierName: "YEGOBOX",
       sdcId: "SDCID",
-      sdcReceiptNum: "30",
       invoiceNum: 30,
       brandName: "YEGOBOX",
       brandAddress: "Kigali,Rwanda",

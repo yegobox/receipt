@@ -66,7 +66,6 @@ class SignableOmniPrinter implements Printable {
     String? customerTin = "121898608",
     required List<TransactionItem> items,
     required String receiptType,
-    required String sdcReceiptNum,
     required double cash,
     required String cashierName,
     required double received,
@@ -116,8 +115,7 @@ class SignableOmniPrinter implements Printable {
         customerTin);
 
     // Draw the receipt type information.
-    _drawReceiptType(
-        page, contentFont, receiptType, sdcReceiptNum, customerTin);
+    _drawReceiptType(page, contentFont, receiptType, "NS", customerTin);
 
     // Create and draw the items grid.
     final PdfGrid grid = _createItemsGrid(items, gridStyle);
@@ -135,8 +133,8 @@ class SignableOmniPrinter implements Printable {
         cashierName, transaction);
 
     // Draw SDC information.
-    _drawSDCInfo(page, contentFont, sdcId, sdcReceiptNum, receiptType,
-        receiptSignature, internalData, receiptQrCode, transaction);
+    _drawSDCInfo(page, contentFont, sdcId, "NS", receiptType, receiptSignature,
+        internalData, receiptQrCode, transaction);
 
     // Draw Invoice Number and MRC.
     page.graphics.drawString('INVOICE NUMBER: $invoiceNum', contentFont,

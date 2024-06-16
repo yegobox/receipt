@@ -78,7 +78,6 @@ class OmniPrinter implements Printable {
     required String brandName,
     required String customerTin,
     required String receiptType,
-    required String sdcReceiptNum,
     required String customerName,
   }) async {
     final font =
@@ -89,7 +88,7 @@ class OmniPrinter implements Printable {
           return [
             Text('Refund', style: TextStyle(font: font, fontSize: 14)),
             SizedBox(height: 4),
-            Text('REF.NORMAL RECEIPT:# $sdcReceiptNum',
+            Text('REF.NORMAL RECEIPT:# $receiptType',
                 style: TextStyle(font: font)),
             SizedBox(height: 4),
             Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
@@ -99,7 +98,7 @@ class OmniPrinter implements Printable {
           return [
             Text('COPY', style: TextStyle(font: font, fontSize: 14)),
             SizedBox(height: 4),
-            Text('REF.NORMAL RECEIPT#:$sdcReceiptNum',
+            Text('REF.NORMAL RECEIPT#:$receiptType',
                 style: TextStyle(font: font, fontSize: 14)),
             SizedBox(height: 4),
             Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
@@ -809,7 +808,6 @@ class OmniPrinter implements Printable {
     String? customerTin = "000000000",
     required List<TransactionItem> items,
     required String receiptType,
-    required String sdcReceiptNum,
     required String totalTax,
     required double cash,
     required String cashierName,
@@ -841,7 +839,6 @@ class OmniPrinter implements Printable {
         brandName: brandName,
         customerTin: customerTin!,
         receiptType: receiptType,
-        sdcReceiptNum: sdcReceiptNum,
         customerName: customerName);
     dashedLine();
     await _body(
@@ -861,7 +858,7 @@ class OmniPrinter implements Printable {
     await _footer(
       transaction: transaction,
       sdcId: sdcId,
-      sdcReceiptNum: sdcReceiptNum,
+      sdcReceiptNum: receiptType,
       receiptType: receiptType,
       receiptSignature: receiptSignature,
       internalData: internalData,

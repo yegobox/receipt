@@ -12,7 +12,6 @@ abstract class Printable {
     String? customerTin = "000000000",
     required List<TransactionItem> items,
     required String receiptType,
-    required String sdcReceiptNum,
     required String totalTax,
     required double cash,
     required String cashierName,
