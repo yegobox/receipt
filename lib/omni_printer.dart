@@ -996,7 +996,7 @@ class OmniPrinter implements Printable {
       const defaultPrinter = Printer(url: "", isAvailable: false);
       final talker = TalkerFlutter.init();
       talker.info(printingInfo);
-      Sentry.captureMessage("available printers listing");
+
       if (printingInfo.canListPrinters) {
         final printers = await Printing.listPrinters();
 
@@ -1008,6 +1008,7 @@ class OmniPrinter implements Printable {
         talker.info('first available printer');
         talker.info(firstAvailablePrinter);
         if (firstAvailablePrinter.isAvailable) {
+          Sentry.captureMessage("PRINTER_AVAILABLE");
           // Print directly to the first available printer
           await Printing.directPrintPdf(
             printer: firstAvailablePrinter,
