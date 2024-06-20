@@ -992,6 +992,7 @@ class OmniPrinter implements Printable {
   Future<void> sharePdf(Uint8List pdfData, List<String>? emails) async {
     try {
       // Fetch printer information
+      await savePdfToDocumentDirectory(pdfData);
       final printingInfo = await Printing.info();
       const defaultPrinter = Printer(url: "", isAvailable: false);
       final talker = TalkerFlutter.init();
@@ -1012,8 +1013,15 @@ class OmniPrinter implements Printable {
           // Print directly to the first available printer
           await Printing.directPrintPdf(
             printer: firstAvailablePrinter,
+            format: PdfPageFormat.roll80,
             onLayout: (PdfPageFormat format) async => pdfData,
           );
+
+          //  await Printing.pickPrinter(
+          //   printer: firstAvailablePrinter,
+          //   format: PdfPageFormat.roll80,
+          //   onLayout: (PdfPageFormat format) async => pdfData,
+          // );
         } else {
           // No available printer found, share the PDF via email
           await sharePdfViaEmail(pdfData, emails);
@@ -1026,6 +1034,17 @@ class OmniPrinter implements Printable {
       // In case of any errors, share the PDF via email
       await sharePdfViaEmail(pdfData, emails);
     }
+  }
+
+  Future<String> savePdfToDocumentDirectory(Uint8List pdfData) async {
+    final directory = await getApplicationDocumentsDirectory();
+    final fileName = generateFileName();
+    final filePath = '${directory.path}/$fileName.pdf';
+
+    final file = File(filePath);
+    await file.writeAsBytes(pdfData);
+
+    return filePath;
   }
 
   Future<void> sharePdfViaEmail(Uint8List pdfData, List<String>? emails) async {
