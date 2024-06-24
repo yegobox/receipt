@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:flipper_models/realm/schemas.dart';
 
 abstract class Printable {
-  Future<Uint8List> generatePdfAndPrint({
+  Future<void> generatePdfAndPrint({
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
     String brandTel = "271311123",

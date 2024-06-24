@@ -43,7 +43,7 @@ class Print {
   /// - items: The list of transaction items.
   /// - transaction: The transaction object.
   /// - autoPrint: Whether to automatically print.
-  Future<Uint8List> print({
+  Future<void> print({
     required double grandTotal,
     required String currencySymbol,
     required String totalTax,
