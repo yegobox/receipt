@@ -74,7 +74,6 @@ class Print {
     required double totalTaxC,
     required double totalTaxD,
     required String customerName,
-    required Function(Uint8List bypes) handlePrint,
     required int rcptNo,
     required int totRcptNo,
   }) async {
