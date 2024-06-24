@@ -33,7 +33,6 @@ abstract class Printable {
     required double totalTaxC,
     required double totalTaxD,
     required String customerName,
-    required Function(Uint8List bytes) handlePrint,
     required int rcptNo,
     required int totRcptNo,
   });

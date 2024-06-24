@@ -804,7 +804,7 @@ class OmniPrinter implements Printable {
   ///
   /// Returns a Future that completes when the PDF is generated and handled.
   @override
-  Future<Uint8List> generatePdfAndPrint({
+  Future<void> generatePdfAndPrint({
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
     String brandTel = "271311123",
@@ -834,7 +834,6 @@ class OmniPrinter implements Printable {
     required double totalTaxC,
     required double totalTaxD,
     required String customerName,
-    required Function(Uint8List bytes) handlePrint,
     required int rcptNo,
     required int totRcptNo,
   }) async {
@@ -893,13 +892,11 @@ class OmniPrinter implements Printable {
     Uint8List pdfData = await doc.save();
     // FYI: https://stackoverflow.com/questions/68871880/do-not-use-buildcontexts-across-async-gaps
     handlePdfData(
-        pdfData: pdfData,
-        emails: emails,
-        autoPrint: autoPrint,
-        handlePrint: (bytes) {
-          return handlePrint(bytes);
-        });
-    return pdfData;
+      pdfData: pdfData,
+      emails: emails,
+      autoPrint: autoPrint,
+    );
+    // return pdfData;
   }
 
   /// Draws a dashed line separator on the PDF document.
@@ -945,16 +942,15 @@ class OmniPrinter implements Printable {
     required Uint8List pdfData,
     required List<String>? emails,
     bool? autoPrint = false,
-    required Function(Uint8List bytes) handlePrint,
   }) async {
     if (autoPrint!) {
       if (isDesktopOrWeb) {
-        await printPdf(pdfData, handlePrint: handlePrint);
+        await printPdf(pdfData);
       } else {
         await savePdfAsImage(pdfData);
       }
     } else {
-      await sharePdf(pdfData, emails, handlePrint: handlePrint);
+      await sharePdf(pdfData, emails);
     }
   }
 
@@ -964,8 +960,9 @@ class OmniPrinter implements Printable {
   ///
   /// The `name` parameter provides a suggested filename to use in the printing
   /// dialog.
-  Future<void> printPdf(Uint8List pdfData,
-      {required Function(Uint8List bytes) handlePrint}) async {
+  Future<void> printPdf(
+    Uint8List pdfData,
+  ) async {
     await Printing.layoutPdf(
       name: generateFileName(),
       onLayout: (PdfPageFormat format) async => pdfData,
@@ -1009,8 +1006,10 @@ class OmniPrinter implements Printable {
   /// The `emails` parameter optionally specifies email addresses to prefill
   /// in the share sheet.
 
-  Future<void> sharePdf(Uint8List pdfData, List<String>? emails,
-      {required Function(Uint8List bytes) handlePrint}) async {
+  Future<void> sharePdf(
+    Uint8List pdfData,
+    List<String>? emails,
+  ) async {
     try {
       // Fetch printer information
       await savePdfToDocumentDirectory(pdfData);
@@ -1057,11 +1056,11 @@ class OmniPrinter implements Printable {
         // Unable to list printers, share the PDF via email
         await sharePdfViaEmail(pdfData, emails);
       }
-      return handlePrint(pdfData);
+      // return handlePrint(pdfData);
     } catch (e) {
       // In case of any errors, share the PDF via email
       // await sharePdfViaEmail(pdfData, emails);
-      return handlePrint(pdfData);
+      // return handlePrint(pdfData);
     }
   }
 
