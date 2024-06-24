@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:flipper_models/realm_model_export.dart';
+import 'package:flipper_models/view_models/mixins/riverpod_states.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:flutter/services.dart';
 
 // import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
@@ -51,20 +53,23 @@ class OmniPrinter implements Printable {
   List<Widget> rows = [];
 
   // Define a style for the receipt
-  static const _receiptTextStyle = TextStyle(
-    fontSize: 10,
-  );
+  static final _receiptTextStyle =
+      TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
 
   _loadLogoImage({required String position}) async {
     ImageProvider? image;
     if (position == "left") {
       const imageLogo = c.AssetImage('assets/rra.jpg', package: 'receipt');
-      image = await flutterImageProvider(imageLogo);
+      image = await flutterImageProvider(imageLogo,
+          configuration:
+              const material.ImageConfiguration(size: Size(100, 100)));
       return image;
     } else {
       const imageLogo =
           c.AssetImage('assets/logo_right.png', package: 'receipt');
-      image = await flutterImageProvider(imageLogo);
+      image = await flutterImageProvider(imageLogo,
+          configuration:
+              const material.ImageConfiguration(size: Size(100, 100)));
       return image;
     }
   }
@@ -86,7 +91,9 @@ class OmniPrinter implements Printable {
       switch (receiptType) {
         case "NR":
           return [
-            Text('Refund', style: TextStyle(font: font, fontSize: 14)),
+            Text('Refund',
+                style: TextStyle(
+                    font: font, fontSize: 14, fontWeight: FontWeight.bold)),
             SizedBox(height: 4),
             Text('REF.NORMAL RECEIPT:# $receiptType',
                 style: TextStyle(font: font)),
@@ -96,17 +103,23 @@ class OmniPrinter implements Printable {
           ];
         case "CS":
           return [
-            Text('COPY', style: TextStyle(font: font, fontSize: 14)),
+            Text('COPY',
+                style: TextStyle(
+                    font: font, fontSize: 14, fontWeight: FontWeight.bold)),
             SizedBox(height: 4),
             Text('REF.NORMAL RECEIPT#:$receiptType',
-                style: TextStyle(font: font, fontSize: 14)),
+                style: TextStyle(
+                    font: font, fontSize: 14, fontWeight: FontWeight.bold)),
             SizedBox(height: 4),
             Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-                style: TextStyle(font: font, fontSize: 12)),
+                style: TextStyle(
+                    font: font, fontSize: 12, fontWeight: FontWeight.bold)),
           ];
         case "TS":
           return [
-            Text('TRAINING MODE', style: TextStyle(font: font, fontSize: 14))
+            Text('TRAINING MODE',
+                style: TextStyle(
+                    font: font, fontSize: 14, fontWeight: FontWeight.bold))
           ];
         default:
           return [];
@@ -121,14 +134,21 @@ class OmniPrinter implements Printable {
         Image(rightImage, width: 25, height: 25),
       ]),
       SizedBox(height: 8),
-      Text(brandName, style: TextStyle(font: font, fontSize: 16)),
+      Text(brandName,
+          style:
+              TextStyle(font: font, fontSize: 16, fontWeight: FontWeight.bold)),
       SizedBox(height: 4),
-      Text(brandAddress, style: TextStyle(font: font, fontSize: 10)),
+      Text(brandAddress,
+          style:
+              TextStyle(font: font, fontSize: 10, fontWeight: FontWeight.bold)),
       SizedBox(height: 4),
       Text("Phone number: $brandTel",
-          style: TextStyle(font: font, fontSize: 10)),
+          style:
+              TextStyle(font: font, fontSize: 10, fontWeight: FontWeight.bold)),
       SizedBox(height: 4),
-      Text("TIN  : $brandTIN", style: TextStyle(font: font, fontSize: 10)),
+      Text("TIN  : $brandTIN",
+          style:
+              TextStyle(font: font, fontSize: 10, fontWeight: FontWeight.bold)),
       SizedBox(height: 4),
       Column(children: [
         CustomPaint(
@@ -151,9 +171,11 @@ class OmniPrinter implements Printable {
       SizedBox(height: 4),
       SizedBox(height: 4),
       Text('Customer Tin: $customerTin',
-          style: TextStyle(font: font, fontSize: 12)),
+          style:
+              TextStyle(font: font, fontSize: 12, fontWeight: FontWeight.bold)),
       Text('Customer Name: $customerName',
-          style: TextStyle(font: font, fontSize: 12)),
+          style:
+              TextStyle(font: font, fontSize: 12, fontWeight: FontWeight.bold)),
       SizedBox(height: 8),
       ...receiptTypeWidgets(receiptType),
       SizedBox(height: 4),
@@ -372,7 +394,8 @@ class OmniPrinter implements Printable {
     bodyWidgets.add(
       TableHelper.fromTextArray(
         cellStyle: _receiptTextStyle.copyWith(font: font),
-        headerStyle: TextStyle(font: font, color: PdfColors.grey),
+        headerStyle: TextStyle(
+            font: font, color: PdfColors.grey, fontWeight: FontWeight.bold),
         border: null,
         cellPadding: EdgeInsets.zero,
         cellAlignments: {
@@ -539,13 +562,14 @@ class OmniPrinter implements Printable {
   _footer({
     required ITransaction transaction,
     required String sdcId,
-    required String sdcReceiptNum,
     required String receiptType,
     required String receiptSignature,
     required String internalData,
     required String receiptQrCode,
     required String invoiceNum,
     required String mrc,
+    required int rcptNo,
+    required int totRcptNo,
   }) async {
     final font =
         Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
@@ -555,9 +579,7 @@ class OmniPrinter implements Printable {
           Text(
             "COPY",
             textAlign: TextAlign.center,
-            style: TextStyle(
-              font: font,
-            ),
+            style: TextStyle(font: font, fontWeight: FontWeight.bold),
           ),
         ]),
       );
@@ -569,9 +591,7 @@ class OmniPrinter implements Printable {
         Text(
           "SDC INFORMATION",
           textAlign: TextAlign.center,
-          style: TextStyle(
-            font: font,
-          ),
+          style: TextStyle(font: font, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 8),
       ]),
@@ -587,9 +607,7 @@ class OmniPrinter implements Printable {
           width: 1120,
           child: Text(
             transaction.lastTouched?.toDateTimeString() ?? "",
-            style: TextStyle(
-              font: font,
-            ),
+            style: TextStyle(font: font, fontWeight: FontWeight.bold),
           ),
         ),
       ]),
@@ -602,10 +620,7 @@ class OmniPrinter implements Printable {
             font: font,
           ),
         ),
-        Text(sdcId,
-            style: TextStyle(
-              font: font,
-            )),
+        Text(sdcId, style: TextStyle(font: font, fontWeight: FontWeight.bold)),
       ]),
     );
     rows.add(
@@ -617,10 +632,8 @@ class OmniPrinter implements Printable {
           ),
         ),
         Text(
-          "$sdcReceiptNum $receiptType",
-          style: TextStyle(
-            font: font,
-          ),
+          "$rcptNo  / $totRcptNo $receiptType",
+          style: TextStyle(font: font, fontWeight: FontWeight.bold),
         ),
       ]),
     );
@@ -633,11 +646,15 @@ class OmniPrinter implements Printable {
       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
           "Receipt Signature:",
-          style: TextStyle(font: font, fontBold: Font.courierBold()),
+          style: TextStyle(
+              font: font,
+              fontBold: Font.courierBold(),
+              fontWeight: FontWeight.bold),
         ),
         Text(
           receiptSignature.toDashedString(),
-          style: TextStyle(font: font, fontSize: 10),
+          style:
+              TextStyle(font: font, fontSize: 10, fontWeight: FontWeight.bold),
         ),
       ]),
     );
@@ -650,12 +667,15 @@ class OmniPrinter implements Printable {
       Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Text(
           "Internal Data",
-          style:
-              TextStyle(font: font, fontSize: 10, fontBold: Font.courierBold()),
+          style: TextStyle(
+              font: font,
+              fontBold: Font.courierBold(),
+              fontWeight: FontWeight.bold),
         ),
         Text(
           internalData.toDashedString(),
-          style: TextStyle(font: font, fontSize: 10),
+          style:
+              TextStyle(font: font, fontSize: 10, fontWeight: FontWeight.bold),
         ),
       ]),
     );
@@ -663,7 +683,8 @@ class OmniPrinter implements Printable {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           internalData.toDashedString(),
-          style: TextStyle(font: font, fontSize: 10),
+          style:
+              TextStyle(font: font, fontSize: 10, fontWeight: FontWeight.bold),
         ),
       ]),
     );
@@ -696,15 +717,11 @@ class OmniPrinter implements Printable {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'RECEIPT NUMBER:',
-          style: TextStyle(
-            font: font,
-          ),
+          style: TextStyle(font: font, fontWeight: FontWeight.bold),
         ),
         Text(
           invoiceNum.toString(),
-          style: TextStyle(
-            font: font,
-          ),
+          style: TextStyle(font: font, fontWeight: FontWeight.bold),
         ),
       ]),
     );
@@ -713,9 +730,7 @@ class OmniPrinter implements Printable {
         SizedBox(
           child: Text(
             transaction.lastTouched?.toDateTimeString() ?? "",
-            style: TextStyle(
-              font: font,
-            ),
+            style: TextStyle(font: font, fontWeight: FontWeight.bold),
           ),
         ),
       ]),
@@ -724,15 +739,11 @@ class OmniPrinter implements Printable {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'MRC',
-          style: TextStyle(
-            font: font,
-          ),
+          style: TextStyle(font: font, fontWeight: FontWeight.bold),
         ),
         Text(
           mrc,
-          style: TextStyle(
-            font: font,
-          ),
+          style: TextStyle(font: font, fontWeight: FontWeight.bold),
         ),
       ]),
     );
@@ -742,10 +753,8 @@ class OmniPrinter implements Printable {
         SizedBox(height: 12),
         Text(
           'Thank you!',
-          style: TextStyle(
-            font: font,
-            fontSize: 10,
-          ),
+          style:
+              TextStyle(font: font, fontSize: 10, fontWeight: FontWeight.bold),
         ),
       ]),
     );
@@ -754,9 +763,7 @@ class OmniPrinter implements Printable {
         SizedBox(height: 12),
         Text(
           'EBM v2: v1.12',
-          style: TextStyle(
-            font: font,
-          ),
+          style: TextStyle(font: font, fontWeight: FontWeight.bold),
         ),
       ]),
     );
@@ -797,7 +804,7 @@ class OmniPrinter implements Printable {
   ///
   /// Returns a Future that completes when the PDF is generated and handled.
   @override
-  Future<void> generatePdfAndPrint({
+  Future<Uint8List> generatePdfAndPrint({
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
     String brandTel = "271311123",
@@ -827,6 +834,9 @@ class OmniPrinter implements Printable {
     required double totalTaxC,
     required double totalTaxD,
     required String customerName,
+    required Function(Uint8List bytes) handlePrint,
+    required int rcptNo,
+    required int totRcptNo,
   }) async {
     final left = await _loadLogoImage(position: "left");
     final right = await _loadLogoImage(position: "right");
@@ -858,12 +868,13 @@ class OmniPrinter implements Printable {
     await _footer(
       transaction: transaction,
       sdcId: sdcId,
-      sdcReceiptNum: receiptType,
       receiptType: receiptType,
       receiptSignature: receiptSignature,
       internalData: internalData,
       receiptQrCode: receiptQrCode,
       invoiceNum: invoiceNum.toString(),
+      rcptNo: rcptNo,
+      totRcptNo: totRcptNo,
       mrc: mrc,
     );
 
@@ -881,7 +892,14 @@ class OmniPrinter implements Printable {
     // experiment layout the pdf file
     Uint8List pdfData = await doc.save();
     // FYI: https://stackoverflow.com/questions/68871880/do-not-use-buildcontexts-across-async-gaps
-    handlePdfData(pdfData: pdfData, emails: emails, autoPrint: autoPrint);
+    handlePdfData(
+        pdfData: pdfData,
+        emails: emails,
+        autoPrint: autoPrint,
+        handlePrint: (bytes) {
+          return handlePrint(bytes);
+        });
+    return pdfData;
   }
 
   /// Draws a dashed line separator on the PDF document.
@@ -927,15 +945,16 @@ class OmniPrinter implements Printable {
     required Uint8List pdfData,
     required List<String>? emails,
     bool? autoPrint = false,
+    required Function(Uint8List bytes) handlePrint,
   }) async {
     if (autoPrint!) {
       if (isDesktopOrWeb) {
-        await printPdf(pdfData);
+        await printPdf(pdfData, handlePrint: handlePrint);
       } else {
         await savePdfAsImage(pdfData);
       }
     } else {
-      await sharePdf(pdfData, emails);
+      await sharePdf(pdfData, emails, handlePrint: handlePrint);
     }
   }
 
@@ -945,7 +964,8 @@ class OmniPrinter implements Printable {
   ///
   /// The `name` parameter provides a suggested filename to use in the printing
   /// dialog.
-  Future<void> printPdf(Uint8List pdfData) async {
+  Future<void> printPdf(Uint8List pdfData,
+      {required Function(Uint8List bytes) handlePrint}) async {
     await Printing.layoutPdf(
       name: generateFileName(),
       onLayout: (PdfPageFormat format) async => pdfData,
@@ -989,10 +1009,17 @@ class OmniPrinter implements Printable {
   /// The `emails` parameter optionally specifies email addresses to prefill
   /// in the share sheet.
 
-  Future<void> sharePdf(Uint8List pdfData, List<String>? emails) async {
+  Future<void> sharePdf(Uint8List pdfData, List<String>? emails,
+      {required Function(Uint8List bytes) handlePrint}) async {
     try {
       // Fetch printer information
       await savePdfToDocumentDirectory(pdfData);
+
+      /// because we are testing with real customer
+      /// we are taking a bet that if auto print does not work then we call
+      ///  handlePrint(pdfData); to print manually
+      /// but we are doing both now to see what is working or if it work both!
+
       final printingInfo = await Printing.info();
       const defaultPrinter = Printer(url: "", isAvailable: false);
       final talker = TalkerFlutter.init();
@@ -1030,9 +1057,11 @@ class OmniPrinter implements Printable {
         // Unable to list printers, share the PDF via email
         await sharePdfViaEmail(pdfData, emails);
       }
+      return handlePrint(pdfData);
     } catch (e) {
       // In case of any errors, share the PDF via email
-      await sharePdfViaEmail(pdfData, emails);
+      // await sharePdfViaEmail(pdfData, emails);
+      return handlePrint(pdfData);
     }
   }
 
@@ -1040,6 +1069,7 @@ class OmniPrinter implements Printable {
     final directory = await getApplicationDocumentsDirectory();
     final fileName = generateFileName();
     final filePath = '${directory.path}/$fileName.pdf';
+    talker.warning("Files saved at: $filePath");
 
     final file = File(filePath);
     await file.writeAsBytes(pdfData);

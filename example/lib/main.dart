@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:flipper_models/realm_model_export.dart';
 import 'package:flutter/material.dart';
@@ -236,8 +237,11 @@ class _MyHomePageState extends State<MyHomePage> {
       brandDescription: "Description",
       brandFooter: "Thank you",
       emails: ['info@yegobox.com'],
+      totRcptNo: 111,
+      rcptNo: 1111,
       customerTin: "0000000000",
       receiptType: "NS", totalTaxB: 0, totalTaxC: 0, totalTaxD: 0,
+      handlePrint: (Uint8List bytes) {},
     );
   }
 

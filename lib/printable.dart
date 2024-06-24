@@ -1,7 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:flipper_models/realm/schemas.dart';
 
 abstract class Printable {
-  Future<void> generatePdfAndPrint({
+  Future<Uint8List> generatePdfAndPrint({
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
     String brandTel = "271311123",
@@ -31,5 +33,8 @@ abstract class Printable {
     required double totalTaxC,
     required double totalTaxD,
     required String customerName,
+    required Function(Uint8List bytes) handlePrint,
+    required int rcptNo,
+    required int totRcptNo,
   });
 }

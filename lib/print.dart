@@ -1,5 +1,7 @@
 library receipt;
 
+import 'dart:typed_data';
+
 import 'package:flipper_models/realm_model_export.dart';
 import 'package:receipt/omni_printer.dart';
 import 'package:receipt/printable.dart';
@@ -41,7 +43,7 @@ class Print {
   /// - items: The list of transaction items.
   /// - transaction: The transaction object.
   /// - autoPrint: Whether to automatically print.
-  print({
+  Future<Uint8List> print({
     required double grandTotal,
     required String currencySymbol,
     required String totalTax,
@@ -72,10 +74,12 @@ class Print {
     required double totalTaxC,
     required double totalTaxD,
     required String customerName,
-  }) {
-    receiptQr(receiptQrCode).then((qrCode) {
-      Printable printer = OmniPrinter();
-      printer.generatePdfAndPrint(
+    required Function(Uint8List bypes) handlePrint,
+    required int rcptNo,
+    required int totRcptNo,
+  }) async {
+    Printable printer = OmniPrinter();
+    return await printer.generatePdfAndPrint(
         brandName: brandName,
         customerName: customerName,
         brandAddress: brandAddress,
@@ -90,13 +94,15 @@ class Print {
         items: items,
         totalTax: totalTax,
         cash: cash,
+        rcptNo: rcptNo,
+        totRcptNo: totRcptNo,
         cashierName: cashierName,
         received: received,
         payMode: payMode,
         sdcId: sdcId,
         internalData: internalData,
         receiptSignature: receiptSignature,
-        receiptQrCode: qrCode,
+        receiptQrCode: receiptQrCode,
         invoiceNum: invoiceNum,
         mrc: mrc,
         totalPayable: transaction.subTotal,
@@ -105,7 +111,8 @@ class Print {
         totalTaxB: totalTaxB,
         totalTaxC: totalTaxC,
         totalTaxD: totalTaxD,
-      );
-    });
+        handlePrint: (bytes) {
+          return handlePrint(bytes);
+        });
   }
 }
