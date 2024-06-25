@@ -1,6 +1,6 @@
 library receipt;
 
-import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 
 import 'package:flipper_models/realm_model_export.dart';
 import 'package:receipt/omni_printer.dart';

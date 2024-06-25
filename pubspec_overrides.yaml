@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: flipper_actionable,flipper_dashboard,flipper_loading,flipper_localize,flipper_login,flipper_models,flipper_routing,flipper_services,flipper_socials,flipper_ui,flutter_datetime_picker,flutter_form_bloc,flutter_luban,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,pdf,printing,qr_code_scanner,qr_flutter,scrollable_positioned_list,http,meta,intl
+# melos_managed_dependency_overrides: flipper_actionable,flipper_dashboard,flipper_loading,flipper_localize,flipper_login,flipper_models,flipper_routing,flipper_services,flipper_socials,flipper_ui,flutter_datetime_picker,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,pdf,printing,qr_code_scanner,qr_flutter,scrollable_positioned_list,http,meta,intl
 dependency_overrides:
   flipper_actionable:
     path: ../../packages/flipper_actionable
@@ -24,8 +24,6 @@ dependency_overrides:
     path: ../flutter_datetime_picker
   flutter_form_bloc:
     path: ../form_bloc/packages/flutter_form_bloc
-  flutter_luban:
-    path: ../flutter_luban
   flutter_slidable:
     path: ../flutter_slidable
   flutter_statusbarcolor_ns:
