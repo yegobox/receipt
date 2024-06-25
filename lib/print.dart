@@ -76,6 +76,7 @@ class Print {
     required String customerName,
     required int rcptNo,
     required int totRcptNo,
+    required Function(Uint8List bytes) printCallback,
   }) async {
     Printable printer = OmniPrinter();
     return await printer.generatePdfAndPrint(
@@ -110,6 +111,9 @@ class Print {
       totalTaxB: totalTaxB,
       totalTaxC: totalTaxC,
       totalTaxD: totalTaxD,
+      printCallback: (Uint8List bytes) {
+        printCallback(bytes);
+      },
     );
   }
 }

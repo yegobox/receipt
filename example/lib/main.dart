@@ -241,6 +241,7 @@ class _MyHomePageState extends State<MyHomePage> {
       rcptNo: 1111,
       customerTin: "0000000000",
       receiptType: "NS", totalTaxB: 0, totalTaxC: 0, totalTaxD: 0,
+      printCallback: (Uint8List bytes) {},
     );
   }
 

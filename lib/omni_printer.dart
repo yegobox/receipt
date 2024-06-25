@@ -836,6 +836,7 @@ class OmniPrinter implements Printable {
     required String customerName,
     required int rcptNo,
     required int totRcptNo,
+    required Function(Uint8List bytes) printCallback,
   }) async {
     final left = await _loadLogoImage(position: "left");
     final right = await _loadLogoImage(position: "right");
@@ -896,7 +897,7 @@ class OmniPrinter implements Printable {
       emails: emails,
       autoPrint: autoPrint,
     );
-    // return pdfData;
+    return printCallback(pdfData);
   }
 
   /// Draws a dashed line separator on the PDF document.

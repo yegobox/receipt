@@ -35,5 +35,6 @@ abstract class Printable {
     required String customerName,
     required int rcptNo,
     required int totRcptNo,
+    required Function(Uint8List bytes) printCallback,
   });
 }
