@@ -2578,7 +2578,7 @@ packages:
     source: hosted
     version: "0.27.7"
   sane_uuid:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: sane_uuid
       sha256: "5e83f796a7d19d38d3ba3a940642998fdd8c4a4049be135ed25404e37f76a18c"
