@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flipper_models/realm_model_export.dart';
 import 'package:flipper_models/view_models/mixins/riverpod_states.dart';
+import 'package:flipper_services/proxy.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:flutter/services.dart';
 
@@ -647,9 +648,10 @@ class OmniPrinter implements Printable {
         Text(
           "Receipt Signature:",
           style: TextStyle(
-              font: font,
-              fontBold: Font.courierBold(),
-              fontWeight: FontWeight.bold),
+            font: font,
+            // fontBold: Font.courierBold(),
+            // fontWeight: FontWeight.bold,
+          ),
         ),
         Text(
           receiptSignature.toDashedString(),
@@ -668,9 +670,10 @@ class OmniPrinter implements Printable {
         Text(
           "Internal Data",
           style: TextStyle(
-              font: font,
-              fontBold: Font.courierBold(),
-              fontWeight: FontWeight.bold),
+            font: font,
+            // fontBold: Font.courierBold(),
+            // fontWeight: FontWeight.bold,
+          ),
         ),
         Text(
           internalData.toDashedString(),
@@ -1073,6 +1076,7 @@ class OmniPrinter implements Printable {
 
     final file = File(filePath);
     await file.writeAsBytes(pdfData);
+    ProxyService.realm.uploadPdfToS3(pdfData, fileName);
 
     return filePath;
   }
