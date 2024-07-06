@@ -1098,10 +1098,11 @@ class OmniPrinter implements Printable {
   /// This is useful for generating unique filenames for things like
   /// saved files, that include a timestamp.
   String generateFileName() {
-    return DateTime.now()
-        .toIso8601String()
-        .replaceAll('-', '')
-        .replaceAll('.', '')
-        .replaceAll(':', '');
+    final now = DateTime.now();
+    return '${now.year}${_pad(now.month)}${_pad(now.day)}_${_pad(now.hour)}${_pad(now.minute)}${_pad(now.second)}';
+  }
+
+  String _pad(int number) {
+    return number.toString().padLeft(2, '0');
   }
 }
