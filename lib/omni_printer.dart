@@ -920,7 +920,7 @@ class OmniPrinter implements Printable {
               canvas
                 ..moveTo(startX, 0)
                 ..lineTo(startX + dashWidth, 0)
-                ..setColor(PdfColors.lightBlueAccent)
+                ..setColor(PdfColors.black)
                 ..setLineWidth(dashThickness)
                 ..strokePath();
               startX += dashWidth + dashSpace;
