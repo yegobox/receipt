@@ -1,3 +1,45 @@
-# melos_managed_dependency_overrides: sane_uuid,flipper_actionable,flipper_dashboard,flipper_loading,flipper_localize,flipper_login,flipper_models,flipper_routing,flipper_services,flipper_socials,flipper_ui,flutter_datetime_picker,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,pdf,printing,qr_code_scanner,qr_flutter,scrollable_positioned_list,http,meta,intl
-{dependency_overrides: {flipper_actionable: {path: ../../packages/flipper_actionable}, flipper_dashboard: {path: ../../packages/flipper_dashboard}, flipper_loading: {path: ../../packages/flipper_loading}, flipper_localize: {path: ../../packages/flipper_localize}, flipper_login: {path: ../../packages/flipper_login}, flipper_models: {path: ../../packages/flipper_models}, flipper_routing: {path: ../../packages/flipper_routing}, flipper_services: {path: ../../packages/flipper_services}, flipper_socials: {path: ../../packages/flipper_socials}, flipper_ui: {path: ../../packages/flipper_ui}, flutter_datetime_picker: {path: ../flutter_datetime_picker}, flutter_form_bloc: {path: ../form_bloc/packages/flutter_form_bloc}, flutter_slidable: {path: ../flutter_slidable}, flutter_statusbarcolor_ns: {path: ../../packages/flutter_statusbarcolor}, form_bloc: {path: ../form_bloc/packages/form_bloc}, pdf: {path: ../dart_pdf/pdf}, printing: {path: ../dart_pdf/printing}, qr_code_scanner: {path: ../qr_code_scanner}, qr_flutter: {path: ../qr.flutter}, scrollable_positioned_list: {path: ../flutter.widgets/packages/scrollable_positioned_list}, http: ^1.1.2, meta: ^1.11.0, intl: ^0.19.0}}
-  
+# melos_managed_dependency_overrides: flipper_actionable,flipper_dashboard,flipper_loading,flipper_localize,flipper_login,flipper_models,flipper_routing,flipper_services,flipper_socials,flipper_ui,flutter_datetime_picker,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,pdf,printing,qr_code_scanner,qr_flutter,scrollable_positioned_list,http,meta,intl
+dependency_overrides:
+  flipper_actionable:
+    path: ../../packages/flipper_actionable
+  flipper_dashboard:
+    path: ../../packages/flipper_dashboard
+  flipper_loading:
+    path: ../../packages/flipper_loading
+  flipper_localize:
+    path: ../../packages/flipper_localize
+  flipper_login:
+    path: ../../packages/flipper_login
+  flipper_models:
+    path: ../../packages/flipper_models
+  flipper_routing:
+    path: ../../packages/flipper_routing
+  flipper_services:
+    path: ../../packages/flipper_services
+  flipper_socials:
+    path: ../../packages/flipper_socials
+  flipper_ui:
+    path: ../../packages/flipper_ui
+  flutter_datetime_picker:
+    path: ../flutter_datetime_picker
+  flutter_form_bloc:
+    path: ../form_bloc/packages/flutter_form_bloc
+  flutter_slidable:
+    path: ../flutter_slidable
+  flutter_statusbarcolor_ns:
+    path: ../../packages/flutter_statusbarcolor
+  form_bloc:
+    path: ../form_bloc/packages/form_bloc
+  pdf:
+    path: ../dart_pdf/pdf
+  printing:
+    path: ../dart_pdf/printing
+  qr_code_scanner:
+    path: ../qr_code_scanner
+  qr_flutter:
+    path: ../qr.flutter
+  scrollable_positioned_list:
+    path: ../flutter.widgets/packages/scrollable_positioned_list
+  http: ^1.1.2
+  meta: ^1.11.0
+  intl: ^0.19.0
