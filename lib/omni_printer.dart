@@ -86,41 +86,33 @@ class OmniPrinter implements Printable {
     required String receiptType,
     required String customerName,
   }) async {
-    final font =
-        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
     List<Widget> receiptTypeWidgets(String receiptType) {
       switch (receiptType) {
         case "NR":
           return [
             Text('Refund',
-                style: TextStyle(
-                    font: font, fontSize: 14, fontWeight: FontWeight.bold)),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
             SizedBox(height: 4),
-            Text('REF.NORMAL RECEIPT:# $receiptType',
-                style: TextStyle(font: font)),
+            Text('REF.NORMAL RECEIPT:# $receiptType', style: const TextStyle()),
             SizedBox(height: 4),
             Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-                style: TextStyle(font: font)),
+                style: const TextStyle()),
           ];
         case "CS":
           return [
             Text('COPY',
-                style: TextStyle(
-                    font: font, fontSize: 14, fontWeight: FontWeight.bold)),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
             SizedBox(height: 4),
             Text('REF.NORMAL RECEIPT#:$receiptType',
-                style: TextStyle(
-                    font: font, fontSize: 14, fontWeight: FontWeight.bold)),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
             SizedBox(height: 4),
             Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-                style: TextStyle(
-                    font: font, fontSize: 12, fontWeight: FontWeight.bold)),
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
           ];
         case "TS":
           return [
             Text('TRAINING MODE',
-                style: TextStyle(
-                    font: font, fontSize: 14, fontWeight: FontWeight.bold))
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold))
           ];
         default:
           return [];
@@ -136,20 +128,16 @@ class OmniPrinter implements Printable {
       ]),
       SizedBox(height: 8),
       Text(brandName,
-          style:
-              TextStyle(font: font, fontSize: 16, fontWeight: FontWeight.bold)),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
       SizedBox(height: 4),
       Text(brandAddress,
-          style:
-              TextStyle(font: font, fontSize: 10, fontWeight: FontWeight.bold)),
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
       SizedBox(height: 4),
       Text("Phone number: $brandTel",
-          style:
-              TextStyle(font: font, fontSize: 10, fontWeight: FontWeight.bold)),
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
       SizedBox(height: 4),
       Text("TIN  : $brandTIN",
-          style:
-              TextStyle(font: font, fontSize: 10, fontWeight: FontWeight.bold)),
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
       SizedBox(height: 4),
       Column(children: [
         CustomPaint(
@@ -172,11 +160,9 @@ class OmniPrinter implements Printable {
       SizedBox(height: 4),
       SizedBox(height: 4),
       Text('Customer Tin: $customerTin',
-          style:
-              TextStyle(font: font, fontSize: 12, fontWeight: FontWeight.bold)),
+          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       Text('Customer Name: $customerName',
-          style:
-              TextStyle(font: font, fontSize: 12, fontWeight: FontWeight.bold)),
+          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       SizedBox(height: 8),
       ...receiptTypeWidgets(receiptType),
       SizedBox(height: 4),
@@ -185,9 +171,6 @@ class OmniPrinter implements Printable {
 
   _buildTotalTax(
       {required String totalTax, required String receiptType}) async {
-    final font =
-        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
-
     String displayTotalTax = totalTax;
 
     if (receiptType == "NR") {
@@ -200,11 +183,11 @@ class OmniPrinter implements Printable {
         children: [
           Text(
             'TOTAL TAX:',
-            style: _receiptTextStyle.copyWith(font: font),
+            style: _receiptTextStyle.copyWith(),
           ),
           Text(
             displayTotalTax,
-            style: _receiptTextStyle.copyWith(font: font),
+            style: _receiptTextStyle.copyWith(),
           ),
         ],
       ),
@@ -212,9 +195,6 @@ class OmniPrinter implements Printable {
   }
 
   _buildTaxB({required String totalTaxB, required String receiptType}) async {
-    final font =
-        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
-
     if (double.parse(totalTaxB) != 0) {
       String displayTotalTaxB = totalTaxB;
 
@@ -228,11 +208,11 @@ class OmniPrinter implements Printable {
           children: [
             Text(
               'TOTAL B-18%:',
-              style: _receiptTextStyle.copyWith(font: font),
+              style: _receiptTextStyle.copyWith(),
             ),
             Text(
               displayTotalTaxB,
-              style: _receiptTextStyle.copyWith(font: font),
+              style: _receiptTextStyle.copyWith(),
             )
           ],
         ),
@@ -241,9 +221,6 @@ class OmniPrinter implements Printable {
   }
 
   _buildTaxC({required String totalTaxC, required String receiptType}) async {
-    final font =
-        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
-
     if (double.parse(totalTaxC) != 0) {
       String displayTotalTaxC = totalTaxC;
 
@@ -257,11 +234,11 @@ class OmniPrinter implements Printable {
           children: [
             Text(
               'TOTAL C:',
-              style: _receiptTextStyle.copyWith(font: font),
+              style: _receiptTextStyle.copyWith(),
             ),
             Text(
               displayTotalTaxC,
-              style: _receiptTextStyle.copyWith(font: font),
+              style: _receiptTextStyle.copyWith(),
             )
           ],
         ),
@@ -270,9 +247,6 @@ class OmniPrinter implements Printable {
   }
 
   _buildTaxD({required String totalTaxD, required String receiptType}) async {
-    final font =
-        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
-
     if (double.parse(totalTaxD) != 0) {
       String displayTotalTaxD = totalTaxD;
 
@@ -286,11 +260,11 @@ class OmniPrinter implements Printable {
           children: [
             Text(
               'TOTAL D:',
-              style: _receiptTextStyle.copyWith(font: font),
+              style: _receiptTextStyle.copyWith(),
             ),
             Text(
               displayTotalTaxD,
-              style: _receiptTextStyle.copyWith(font: font),
+              style: _receiptTextStyle.copyWith(),
             )
           ],
         ),
@@ -300,9 +274,6 @@ class OmniPrinter implements Printable {
 
   _buildTotal(
       {required String totalPayable, required String receiptType}) async {
-    final font =
-        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
-
     String total = totalPayable;
 
     if (receiptType == "NR") {
@@ -315,11 +286,11 @@ class OmniPrinter implements Printable {
         children: [
           Text(
             'TOTAL:',
-            style: _receiptTextStyle.copyWith(font: font),
+            style: _receiptTextStyle.copyWith(),
           ),
           Text(
             total,
-            style: _receiptTextStyle.copyWith(font: font),
+            style: _receiptTextStyle.copyWith(),
           )
         ],
       ),
@@ -327,9 +298,6 @@ class OmniPrinter implements Printable {
   }
 
   _buildTaxA({required String totalAEx, required String receiptType}) async {
-    final font =
-        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
-
     if (double.parse(totalAEx) != 0) {
       String displayTotalAEx = totalAEx;
 
@@ -343,11 +311,11 @@ class OmniPrinter implements Printable {
           children: [
             Text(
               'TOTAL A-EX:',
-              style: _receiptTextStyle.copyWith(font: font),
+              style: _receiptTextStyle.copyWith(),
             ),
             Text(
               displayTotalAEx,
-              style: _receiptTextStyle.copyWith(font: font),
+              style: _receiptTextStyle.copyWith(),
             )
           ],
         ),
@@ -369,8 +337,6 @@ class OmniPrinter implements Printable {
     required double cash,
     required String payMode,
   }) async {
-    final font =
-        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
     var bodyWidgets = <Widget>[];
     // Add the table headers
     List<List<String>> data = <List<String>>[];
@@ -394,9 +360,9 @@ class OmniPrinter implements Printable {
     // Add the table to bodyWidgets
     bodyWidgets.add(
       TableHelper.fromTextArray(
-        cellStyle: _receiptTextStyle.copyWith(font: font),
-        headerStyle: TextStyle(
-            font: font, color: PdfColors.grey, fontWeight: FontWeight.bold),
+        cellStyle: _receiptTextStyle.copyWith(),
+        headerStyle:
+            TextStyle(color: PdfColors.grey, fontWeight: FontWeight.bold),
         border: null,
         cellPadding: EdgeInsets.zero,
         cellAlignments: {
@@ -434,7 +400,7 @@ class OmniPrinter implements Printable {
           SizedBox(height: 8),
           Text(
             'THIS IS NOT AN OFFICIAL RECEIPT',
-            style: _receiptTextStyle.copyWith(font: font),
+            style: _receiptTextStyle.copyWith(),
           ),
           SizedBox(height: 8),
         ],
@@ -462,26 +428,24 @@ class OmniPrinter implements Printable {
     // rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
     //   Text(
     //     'CASH:',
-    //     style: _receiptTextStyle.copyWith(font: font),
+    //     style: _receiptTextStyle.copyWith(),
     //   ),
     //   Text(totalPayable.toString(),
-    //       style: _receiptTextStyle.copyWith(font: font))
+    //       style: _receiptTextStyle.copyWith())
     // ]));
     rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(
         'ITEMS NUMBER:',
-        style: _receiptTextStyle.copyWith(font: font),
+        style: _receiptTextStyle.copyWith(),
       ),
-      Text(items.length.toString(),
-          style: _receiptTextStyle.copyWith(font: font))
+      Text(items.length.toString(), style: _receiptTextStyle.copyWith())
     ]));
     rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(
         'Cashier Name:',
-        style: _receiptTextStyle.copyWith(font: font),
+        style: _receiptTextStyle.copyWith(),
       ),
-      Text(cashierName.toString(),
-          style: _receiptTextStyle.copyWith(font: font))
+      Text(cashierName.toString(), style: _receiptTextStyle.copyWith())
     ]));
     rows.add(
       Column(children: [
@@ -497,9 +461,9 @@ class OmniPrinter implements Printable {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Received Amount: $received',
-                style: _receiptTextStyle.copyWith(font: font)),
+                style: _receiptTextStyle.copyWith()),
             Text("Change: ${cash - received}",
-                style: _receiptTextStyle.copyWith(font: font))
+                style: _receiptTextStyle.copyWith())
           ],
         ),
       ),
@@ -517,10 +481,10 @@ class OmniPrinter implements Printable {
     );
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Text('Pay Mode:', style: _receiptTextStyle.copyWith(font: font)),
+        Text('Pay Mode:', style: _receiptTextStyle.copyWith()),
         Text(
           payMode,
-          style: _receiptTextStyle.copyWith(font: font),
+          style: _receiptTextStyle.copyWith(),
         ),
       ]),
     );
@@ -537,7 +501,7 @@ class OmniPrinter implements Printable {
           SizedBox(height: 8),
           Text(
             'TRAINING MODE',
-            style: _receiptTextStyle.copyWith(font: font),
+            style: _receiptTextStyle.copyWith(),
           ),
           SizedBox(height: 8),
         ],
@@ -551,7 +515,7 @@ class OmniPrinter implements Printable {
           SizedBox(height: 8),
           Text(
             'PROFORMA',
-            style: _receiptTextStyle.copyWith(font: font),
+            style: _receiptTextStyle.copyWith(),
           ),
           SizedBox(height: 8),
         ],
@@ -572,15 +536,13 @@ class OmniPrinter implements Printable {
     required int rcptNo,
     required int totRcptNo,
   }) async {
-    final font =
-        Font.ttf(await rootBundle.load("google_fonts/Poppins-Thin.ttf"));
     if (receiptType == "CS") {
       rows.add(
         Column(children: [
           Text(
             "COPY",
             textAlign: TextAlign.center,
-            style: TextStyle(font: font, fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ]),
       );
@@ -592,7 +554,7 @@ class OmniPrinter implements Printable {
         Text(
           "SDC INFORMATION",
           textAlign: TextAlign.center,
-          style: TextStyle(font: font, fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 8),
       ]),
@@ -608,7 +570,7 @@ class OmniPrinter implements Printable {
           width: 1120,
           child: Text(
             transaction.lastTouched?.toDateTimeString() ?? "",
-            style: TextStyle(font: font, fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
       ]),
@@ -617,24 +579,20 @@ class OmniPrinter implements Printable {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'SDC ID:',
-          style: TextStyle(
-            font: font,
-          ),
+          style: const TextStyle(),
         ),
-        Text(sdcId, style: TextStyle(font: font, fontWeight: FontWeight.bold)),
+        Text(sdcId, style: TextStyle(fontWeight: FontWeight.bold)),
       ]),
     );
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'RECEIPT NUMBER:',
-          style: TextStyle(
-            font: font,
-          ),
+          style: const TextStyle(),
         ),
         Text(
           "$rcptNo  / $totRcptNo $receiptType",
-          style: TextStyle(font: font, fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ]),
     );
@@ -647,16 +605,15 @@ class OmniPrinter implements Printable {
       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
           "Receipt Signature:",
-          style: TextStyle(
-            font: font,
-            // fontBold: Font.courierBold(),
-            // fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(
+
+              // fontBold: Font.courierBold(),
+              // fontWeight: FontWeight.bold,
+              ),
         ),
         Text(
           receiptSignature.toDashedString(),
-          style:
-              TextStyle(font: font, fontSize: 10, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
         ),
       ]),
     );
@@ -669,16 +626,15 @@ class OmniPrinter implements Printable {
       Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Text(
           "Internal Data",
-          style: TextStyle(
-            font: font,
-            // fontBold: Font.courierBold(),
-            // fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(
+
+              // fontBold: Font.courierBold(),
+              // fontWeight: FontWeight.bold,
+              ),
         ),
         Text(
           internalData.toDashedString(),
-          style:
-              TextStyle(font: font, fontSize: 10, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
         ),
       ]),
     );
@@ -686,8 +642,7 @@ class OmniPrinter implements Printable {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           internalData.toDashedString(),
-          style:
-              TextStyle(font: font, fontSize: 10, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
         ),
       ]),
     );
@@ -720,11 +675,11 @@ class OmniPrinter implements Printable {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'RECEIPT NUMBER:',
-          style: TextStyle(font: font, fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         Text(
           invoiceNum.toString(),
-          style: TextStyle(font: font, fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ]),
     );
@@ -733,7 +688,7 @@ class OmniPrinter implements Printable {
         SizedBox(
           child: Text(
             transaction.lastTouched?.toDateTimeString() ?? "",
-            style: TextStyle(font: font, fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
       ]),
@@ -742,11 +697,11 @@ class OmniPrinter implements Printable {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'MRC',
-          style: TextStyle(font: font, fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         Text(
           mrc,
-          style: TextStyle(font: font, fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ]),
     );
@@ -756,8 +711,7 @@ class OmniPrinter implements Printable {
         SizedBox(height: 12),
         Text(
           'Thank you!',
-          style:
-              TextStyle(font: font, fontSize: 10, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
         ),
       ]),
     );
@@ -766,7 +720,7 @@ class OmniPrinter implements Printable {
         SizedBox(height: 12),
         Text(
           'EBM v2: v1.12',
-          style: TextStyle(font: font, fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ]),
     );
