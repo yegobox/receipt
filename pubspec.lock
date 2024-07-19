@@ -206,6 +206,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  auto_size_text:
+    dependency: transitive
+    description:
+      name: auto_size_text
+      sha256: "3f5261cd3fb5f2a9ab4e2fc3fba84fd9fcaac8821f20a1d4e71f557521b22599"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   aws_common:
     dependency: transitive
     description:
@@ -630,15 +638,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.6"
-  easy_sidemenu:
-    dependency: transitive
-    description:
-      path: "."
-      ref: master
-      resolved-ref: "5f9a0f22b7143e7fef6848e1e3ea43c8eb9781f2"
-      url: "https://github.com/Jamalianpour/easy_sidemenu.git"
-    source: git
-    version: "0.6.0"
   ejson:
     dependency: transitive
     description:
@@ -1390,6 +1389,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.2"
+  flutter_side_menu:
+    dependency: transitive
+    description:
+      name: flutter_side_menu
+      sha256: "60a20aab560d170c70084a6007aa8d2087649c7d2b75cc887c17f3ba4ea6372f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.3"
   flutter_slidable:
     dependency: "direct overridden"
     description:
@@ -2939,6 +2946,14 @@ packages:
     description:
       name: syncfusion_flutter_xlsio
       sha256: "75b100b958c197732e46ad5973abfbc62ef341bf9ecf36010e8c9afde4b7b65b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "25.2.7"
+  syncfusion_officechart:
+    dependency: transitive
+    description:
+      name: syncfusion_officechart
+      sha256: "4f8e51aa4ef5bc984519d74cfd84d2f4c37e9aac096041d96d02e32845db7b57"
       url: "https://pub.dev"
     source: hosted
     version: "25.2.7"
