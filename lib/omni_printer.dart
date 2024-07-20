@@ -159,10 +159,15 @@ class OmniPrinter implements Printable {
       ]),
       SizedBox(height: 4),
       SizedBox(height: 4),
-      Text('Customer Tin: $customerTin',
+      Text('Welcome to our shop',
           style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-      Text('Customer Name: $customerName',
+
+      Text('Client ID: $customerTin',
           style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+      // Text('Customer Tin: $customerTin',
+      //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+      // Text('Customer Name: $customerName',
+      //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       SizedBox(height: 8),
       ...receiptTypeWidgets(receiptType),
       SizedBox(height: 4),
@@ -710,20 +715,24 @@ class OmniPrinter implements Printable {
       Column(children: [
         SizedBox(height: 12),
         Text(
-          'Thank you!',
+          'THANK YOU',
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          'COME BACK AGAIN',
           style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
         ),
       ]),
     );
-    rows.add(
-      Column(children: [
-        SizedBox(height: 12),
-        Text(
-          'EBM v2: v1.12',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ]),
-    );
+    // rows.add(
+    //   Column(children: [
+    //     SizedBox(height: 12),
+    //     Text(
+    //       'EBM v2: v1.12',
+    //       style: TextStyle(fontWeight: FontWeight.bold),
+    //     ),
+    //   ]),
+    // );
     // end of footer
   }
 

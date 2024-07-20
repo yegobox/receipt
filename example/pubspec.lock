@@ -990,6 +990,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  flagsmith:
+    dependency: transitive
+    description:
+      name: flagsmith
+      sha256: "49ff69e5dfd6485b5f252b6600f8b282dc85825067de229042db153a7342f3ec"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.1"
+  flagsmith_flutter_core:
+    dependency: transitive
+    description:
+      name: flagsmith_flutter_core
+      sha256: "4e025cb80c7dbc31fbc4f0789e0fde6dd7e779fe6da328322afccdabc87d510e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   flex_color_scheme:
     dependency: transitive
     description:
@@ -1145,6 +1161,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.6.14"
+  flutter_client_sse:
+    dependency: transitive
+    description:
+      name: flutter_client_sse
+      sha256: "2204f182dd22b859f98e30572fa8318176556eba4da8513c3bbc0632f2b79b8c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   flutter_colorpicker:
     dependency: transitive
     description:
