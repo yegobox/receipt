@@ -15,7 +15,6 @@ import 'package:receipt/printable.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as p;
-import 'package:intl/intl.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -24,30 +23,9 @@ final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 
 /// [generatePdfAndPrint] example
 /// an extension on DateTime that return a string of date time separated by space
-extension DateTimeToDateTimeString on DateTime {
-  String toDateTimeString() {
-    final dateFormat = DateFormat('dd/MM/yyyy');
-    final timeFormat = DateFormat('HH:mm:ss');
-    final dateString = dateFormat.format(this);
-    final timeString = timeFormat.format(this);
-    return '$dateString $timeString';
-  }
-}
 
 /// given a string E2P2VANEFD7PWY3COLUULSL3JU as a string, I want an extension that take
 /// this string and apply dashed dashes come after 4 char
-extension StringToDashedString on String {
-  String toDashedString() {
-    if (isEmpty) {
-      return '';
-    }
-    var x = 0;
-    final dashesInternalData = {2, 3, 4, 12, 6, 7};
-    final replacedInternalData = splitMapJoin(RegExp('....'),
-        onNonMatch: (s) => dashesInternalData.contains(x++) ? '-' : '');
-    return replacedInternalData;
-  }
-}
 
 class OmniPrinter implements Printable {
   final doc = Document(version: PdfVersion.pdf_1_5, compress: true);
@@ -689,12 +667,14 @@ class OmniPrinter implements Printable {
       ]),
     );
     rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        SizedBox(
-          child: Text(
-            transaction.lastTouched?.toDateTimeString() ?? "",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Text(
+          "DATE:${transaction.lastTouched?.formattedDate}",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        Text(
+          "TIME:${transaction.lastTouched?.formattedTime}",
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ]),
     );
