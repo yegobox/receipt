@@ -144,8 +144,10 @@ class OmniPrinter implements Printable {
           style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       // Text('Customer Tin: $customerTin',
       //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-      // Text('Customer Name: $customerName',
-      //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+      if (customerName != "N/A")
+        Text('Customer Name: $customerName',
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+
       SizedBox(height: 8),
       ...receiptTypeWidgets(receiptType),
       SizedBox(height: 4),
@@ -443,8 +445,8 @@ class OmniPrinter implements Printable {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Received Amount: $received',
-                style: _receiptTextStyle.copyWith()),
+            // Text('Received Amount: $received',
+            //     style: _receiptTextStyle.copyWith()),
             Text("Change: ${cash - received}",
                 style: _receiptTextStyle.copyWith())
           ],
@@ -685,7 +687,7 @@ class OmniPrinter implements Printable {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         Text(
-          mrc,
+          ProxyService.box.mrc() ?? mrc,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ]),
