@@ -566,6 +566,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  demo_ui_components:
+    dependency: "direct overridden"
+    description:
+      path: "../../../packages/demo_ui_components"
+      relative: true
+    source: path
+    version: "1.0.0"
   desktop_webview_auth:
     dependency: transitive
     description:
@@ -1260,10 +1267,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_keyboard_visibility
-      sha256: "4983655c26ab5b959252ee204c2fffa4afeb4413cd030455194ec0caa3b8e7cb"
+      sha256: "98664be7be0e3ffca00de50f7f6a287ab62c763fc8c762e0a21584584a3ff4f8"
       url: "https://pub.dev"
     source: hosted
-    version: "5.4.1"
+    version: "6.0.0"
   flutter_keyboard_visibility_linux:
     dependency: transitive
     description:
@@ -3341,6 +3348,22 @@ packages:
       url: "https://github.com/google/flutter-desktop-embedding.git"
     source: git
     version: "0.1.0"
+  wolt_modal_sheet:
+    dependency: transitive
+    description:
+      name: wolt_modal_sheet
+      sha256: "1c88e982f0b8c3b8b46b53aee207489572d813b5fde780fb5012131049a29e11"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.0"
+  wolt_responsive_layout_grid:
+    dependency: transitive
+    description:
+      name: wolt_responsive_layout_grid
+      sha256: bfcc215af79e7afc5e6370c1a242662a1f80e1144ac3f364bc650cdce65c6e66
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   worker_bee:
     dependency: transitive
     description:
