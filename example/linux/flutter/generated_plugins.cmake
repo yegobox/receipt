@@ -6,7 +6,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   amplify_db_common
   desktop_webview_auth
   file_selector_linux
-  flutter_window_close
   local_notifier
   printing
   realm
@@ -16,7 +15,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   tray_manager
   url_launcher_linux
   window_manager
-  window_size
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
