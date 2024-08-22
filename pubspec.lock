@@ -645,22 +645,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.6"
+  easy_sidemenu:
+    dependency: transitive
+    description:
+      name: easy_sidemenu
+      sha256: "946e6846094a1be39a53065329ff54661b600f1769d9095c62e4c8c3ca4ffd58"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.0"
   ejson:
     dependency: transitive
     description:
       name: ejson
-      sha256: "42bdc6f57444e8c9cbf2c8dc8044424c27890a1d8cf64953b95f02d289afd88b"
+      sha256: "0e9c87b97c003995d1ff8cbc9da68ba4a2a61f2634d511068cc753922fcf3712"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.1"
+    version: "0.4.0"
   ejson_annotation:
     dependency: transitive
     description:
       name: ejson_annotation
-      sha256: "7053cff1b6acf375b8e76270d576915fe434701f1f25b5751c8f9e1e73e50bcf"
+      sha256: cf09cf916839c4b10686f15d3eadb0d398d935e718e6d3c0703af6132ce48002
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.1"
+    version: "0.4.0"
   email_validator:
     dependency: transitive
     description:
@@ -1038,6 +1046,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1-dev.3"
+  flipper_rw:
+    dependency: "direct overridden"
+    description:
+      path: "../../apps/flipper"
+      relative: true
+    source: path
+    version: "1.170.4252223232313+1724093574"
   flipper_services:
     dependency: "direct main"
     description:
@@ -1302,6 +1317,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.2.0"
+  flutter_localization:
+    dependency: transitive
+    description:
+      name: flutter_localization
+      sha256: a65ae241b865f2780f2ef624a4cdd019ca894d0b7df0a0b77190746ef0b9c8fa
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.14"
   flutter_localizations:
     dependency: transitive
     description: flutter
@@ -1530,6 +1553,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.7.0"
+  get_storage:
+    dependency: transitive
+    description:
+      name: get_storage
+      sha256: "39db1fffe779d0c22b3a744376e86febe4ade43bf65e06eab5af707dc84185a2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
   getwidget:
     dependency: transitive
     description:
@@ -1682,6 +1713,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  htmltopdfwidgets:
+    dependency: transitive
+    description:
+      name: htmltopdfwidgets
+      sha256: "990e3002fbbfaf307555f1991bed61b6228d7053b7e1945815c7a68f56bbda81"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   http:
     dependency: "direct overridden"
     description:
@@ -2019,6 +2058,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.2-main.4"
+  markdown:
+    dependency: transitive
+    description:
+      name: markdown
+      sha256: ef2a1298144e3f985cc736b22e0ccdaf188b5b3970648f2d9dc13efd1d9df051
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.2.2"
   matcher:
     dependency: transitive
     description:
@@ -2475,34 +2522,34 @@ packages:
     dependency: transitive
     description:
       name: realm
-      sha256: "939e27315fc5f5c6dc52ee87d9b1d5e44936718b6c0f9fd7d9d0a96d8e025ac1"
+      sha256: f1bb19bfb7a498a17fafa0f5743f450093dc754024c1ef7e1370ce76162f19fe
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.0"
+    version: "3.4.1"
   realm_common:
     dependency: transitive
     description:
       name: realm_common
-      sha256: "73919ec7a92cca6d6889cbf2688cca53e92779a115f5bba5bc69eb341c29581f"
+      sha256: "5c0106cdd33c0e538694c48a9f6ae35d28df84ad9192ff191b71e8b8f004f0d8"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.0"
+    version: "3.4.1"
   realm_dart:
     dependency: transitive
     description:
       name: realm_dart
-      sha256: "5ba69ba9a7533beedb23b64ea16291728c1cff2143f699f82bcfae958fcec50b"
+      sha256: "1ee7bb6c0b41352d9c5b5c9102748250a681478fcc4c8aa87f13bd040b63d9ee"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.0"
+    version: "3.4.1"
   realm_generator:
     dependency: transitive
     description:
       name: realm_generator
-      sha256: ab1743027815a543faf348b12361662a2bf8ec7b9bcc0d9847276db70430c79e
+      sha256: e50e0c8fbafe5b719ebe69808419293615dd779e940aa7d2e0a3ff67c009e4a2
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.0"
+    version: "3.4.1"
   responsive_builder:
     dependency: transitive
     description:
