@@ -1052,7 +1052,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223232313+1724093574"
+    version: "1.170.4252223232334+1724640785"
   flipper_services:
     dependency: "direct overridden"
     description:
@@ -1078,10 +1078,10 @@ packages:
     dependency: transitive
     description:
       name: fluentui_system_icons
-      sha256: "7eb9efc7e6d572c37138b149c74332e8289a805933cd261acb15af089aba1ae5"
+      sha256: af92e0abc8a4060ffdcae2ad31a050cd242bf9eff121769b9cfb11fe05d08d6c
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.251"
+    version: "1.1.252"
   flutter:
     dependency: "direct main"
     description: flutter

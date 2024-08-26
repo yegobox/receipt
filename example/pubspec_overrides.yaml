@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: demo_ui_components,flipper_actionable,flipper_dashboard,flipper_loading,flipper_localize,flipper_login,flipper_models,flipper_routing,flipper_services,flipper_socials,flipper_ui,flutter_datetime_picker,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,pdf,printing,qr_code_scanner,qr_flutter,receipt,scrollable_positioned_list,http,meta,intl,flipper_rw
+# melos_managed_dependency_overrides: demo_ui_components,flipper_actionable,flipper_dashboard,flipper_loading,flipper_localize,flipper_login,flipper_models,flipper_routing,flipper_rw,flipper_services,flipper_socials,flipper_ui,flutter_datetime_picker,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,pdf,printing,qr_code_scanner,qr_flutter,receipt,scrollable_positioned_list,http,meta,intl
 dependency_overrides:
   demo_ui_components:
     path: ../../../packages/demo_ui_components
@@ -16,6 +16,8 @@ dependency_overrides:
     path: ../../../packages/flipper_models
   flipper_routing:
     path: ../../../packages/flipper_routing
+  flipper_rw:
+    path: ../../../apps/flipper
   flipper_services:
     path: ../../../packages/flipper_services
   flipper_socials:
@@ -47,5 +49,3 @@ dependency_overrides:
   http: ^1.2.1
   meta: ^1.12.0
   intl: ^0.19.0
-  flipper_rw:
-    path: ../../../apps/flipper
