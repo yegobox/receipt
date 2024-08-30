@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: demo_ui_components,flipper_actionable,flipper_dashboard,flipper_loading,flipper_localize,flipper_login,flipper_models,flipper_routing,flipper_rw,flipper_services,flipper_socials,flipper_ui,flutter_datetime_picker,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,pdf,printing,qr_code_scanner,qr_flutter,scrollable_positioned_list,http,meta,intl
+# melos_managed_dependency_overrides: demo_ui_components,flipper_actionable,flipper_dashboard,flipper_infra,flipper_loading,flipper_localize,flipper_login,flipper_models,flipper_routing,flipper_rw,flipper_services,flipper_socials,flipper_ui,flowy_svg,flutter_datetime_picker,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,pdf,printing,qr_code_scanner,qr_flutter,scrollable_positioned_list,http,meta,intl
 dependency_overrides:
   demo_ui_components:
     path: ../../packages/demo_ui_components
@@ -6,6 +6,8 @@ dependency_overrides:
     path: ../../packages/flipper_actionable
   flipper_dashboard:
     path: ../../packages/flipper_dashboard
+  flipper_infra:
+    path: ../../packages/flipper_infra
   flipper_loading:
     path: ../../packages/flipper_loading
   flipper_localize:
@@ -24,6 +26,8 @@ dependency_overrides:
     path: ../../packages/flipper_socials
   flipper_ui:
     path: ../../packages/flipper_ui
+  flowy_svg:
+    path: ../../packages/flowy_svg
   flutter_datetime_picker:
     path: ../flutter_datetime_picker
   flutter_form_bloc:
