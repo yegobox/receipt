@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 
 // import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
 import 'package:flutter/material.dart' as c;
+import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
@@ -961,7 +962,7 @@ class OmniPrinter implements Printable {
   ) async {
     try {
       // Fetch printer information
-      await savePdfToDocumentDirectory(pdfData);
+      String filePath = await savePdfToDocumentDirectory(pdfData);
 
       /// because we are testing with real customer
       /// we are taking a bet that if auto print does not work then we call
@@ -999,11 +1000,19 @@ class OmniPrinter implements Printable {
           // );
         } else {
           // No available printer found, share the PDF via email
-          await sharePdfViaEmail(pdfData, emails);
+          if (Platform.isAndroid || Platform.isIOS) {
+            await sharePdfViaEmail(pdfData, emails);
+          } else {
+            _openOrShareFile(filePath);
+          }
         }
       } else {
         // Unable to list printers, share the PDF via email
-        await sharePdfViaEmail(pdfData, emails);
+        if (Platform.isAndroid || Platform.isIOS) {
+          await sharePdfViaEmail(pdfData, emails);
+        } else {
+          _openOrShareFile(filePath);
+        }
       }
       // return handlePrint(pdfData);
     } catch (e) {
@@ -1011,6 +1020,10 @@ class OmniPrinter implements Printable {
       // await sharePdfViaEmail(pdfData, emails);
       // return handlePrint(pdfData);
     }
+  }
+
+  Future<void> _openOrShareFile(String filePath) async {
+    await OpenFilex.open(filePath);
   }
 
   Future<String> savePdfToDocumentDirectory(Uint8List pdfData) async {
