@@ -426,13 +426,14 @@ class OmniPrinter implements Printable {
       ),
       Text(items.length.toString(), style: _receiptTextStyle.copyWith())
     ]));
-    rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(
-        'Cashier Name:',
-        style: _receiptTextStyle.copyWith(),
-      ),
-      Text(cashierName.toString(), style: _receiptTextStyle.copyWith())
-    ]));
+    //
+    // rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+    //   Text(
+    //     'Cashier Name:',
+    //     style: _receiptTextStyle.copyWith(),
+    //   ),
+    //   Text(cashierName.toString(), style: _receiptTextStyle.copyWith())
+    // ]));
     rows.add(
       Column(children: [
         SizedBox(height: 1),
