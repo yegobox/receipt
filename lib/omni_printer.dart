@@ -207,55 +207,51 @@ class OmniPrinter implements Printable {
   }
 
   _buildTaxC({required String totalTaxC, required String receiptType}) async {
-    if (double.parse(totalTaxC) != 0) {
-      String displayTotalTaxC = totalTaxC;
+    String displayTotalTaxC = totalTaxC;
 
-      if (receiptType == "NR") {
-        displayTotalTaxC = "-$totalTaxC";
-      }
-
-      rows.add(
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'TOTAL C:',
-              style: _receiptTextStyle.copyWith(),
-            ),
-            Text(
-              displayTotalTaxC,
-              style: _receiptTextStyle.copyWith(),
-            )
-          ],
-        ),
-      );
+    if (receiptType == "NR") {
+      displayTotalTaxC = "-$totalTaxC";
     }
+
+    rows.add(
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'TOTAL C:',
+            style: _receiptTextStyle.copyWith(),
+          ),
+          Text(
+            displayTotalTaxC,
+            style: _receiptTextStyle.copyWith(),
+          )
+        ],
+      ),
+    );
   }
 
   _buildTaxD({required String totalTaxD, required String receiptType}) async {
-    if (double.parse(totalTaxD) != 0) {
-      String displayTotalTaxD = totalTaxD;
+    String displayTotalTaxD = totalTaxD;
 
-      if (receiptType == "NR") {
-        displayTotalTaxD = "-$totalTaxD";
-      }
-
-      rows.add(
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'TOTAL D:',
-              style: _receiptTextStyle.copyWith(),
-            ),
-            Text(
-              displayTotalTaxD,
-              style: _receiptTextStyle.copyWith(),
-            )
-          ],
-        ),
-      );
+    if (receiptType == "NR") {
+      displayTotalTaxD = "-$totalTaxD";
     }
+
+    rows.add(
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'TOTAL D:',
+            style: _receiptTextStyle.copyWith(),
+          ),
+          Text(
+            displayTotalTaxD,
+            style: _receiptTextStyle.copyWith(),
+          )
+        ],
+      ),
+    );
   }
 
   _buildTotal(
@@ -284,29 +280,27 @@ class OmniPrinter implements Printable {
   }
 
   _buildTaxA({required String totalAEx, required String receiptType}) async {
-    if (double.parse(totalAEx) != 0) {
-      String displayTotalAEx = totalAEx;
+    String displayTotalAEx = totalAEx;
 
-      if (receiptType == "NR") {
-        displayTotalAEx = "-$totalAEx";
-      }
-
-      rows.add(
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'TOTAL A-EX:',
-              style: _receiptTextStyle.copyWith(),
-            ),
-            Text(
-              displayTotalAEx,
-              style: _receiptTextStyle.copyWith(),
-            )
-          ],
-        ),
-      );
+    if (receiptType == "NR") {
+      displayTotalAEx = "-$totalAEx";
     }
+
+    rows.add(
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'TOTAL A-EX:',
+            style: _receiptTextStyle.copyWith(),
+          ),
+          Text(
+            displayTotalAEx,
+            style: _receiptTextStyle.copyWith(),
+          )
+        ],
+      ),
+    );
   }
 
   _body({
@@ -441,20 +435,20 @@ class OmniPrinter implements Printable {
     );
 
     // Improve display of payment info
-    rows.add(
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // Text('Received Amount: $received',
-            //     style: _receiptTextStyle.copyWith()),
-            Text("Change: ${cash - received}",
-                style: _receiptTextStyle.copyWith())
-          ],
-        ),
-      ),
-    );
+    // rows.add(
+    //   Padding(
+    //     padding: const EdgeInsets.symmetric(vertical: 4),
+    //     child: Row(
+    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //       children: [
+    //         // Text('Received Amount: $received',
+    //         //     style: _receiptTextStyle.copyWith()),
+    //         Text("Change: ${cash - received}",
+    //             style: _receiptTextStyle.copyWith())
+    //       ],
+    //     ),
+    //   ),
+    // );
 
     rows.add(
       Column(children: [
