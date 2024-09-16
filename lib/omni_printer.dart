@@ -315,34 +315,39 @@ class OmniPrinter implements Printable {
     required double received,
     required String cashierName,
     required double cash,
-    required String payMode,
   }) async {
     var bodyWidgets = <Widget>[];
     // Add the table headers
     List<List<String>> data = <List<String>>[];
-    // Add the table headers
-    data.add(<String>['Items', 'Price', 'Qty', 'Total']);
-    // Iterate over the items
+
     for (var item in items) {
       double total = item.price * item.qty;
-      // log(item.name, name: "in the loop");
       String taxLabel = item.taxTyCd != null ? "(${item.taxTyCd!})" : "(B)";
-      // Add a row for each item
+
+      // First row: Item name
       data.add(
         <String>[
           item.name!.length > 12 ? item.name!.substring(0, 12) : item.name!,
-          item.price.toString(),
-          item.qty.toString(),
-          '$total $taxLabel',
+          '', // Empty spaces for the other columns
+          '',
+          '',
+        ],
+      );
+
+      // Second row: Quantity x Price, total price with tax type
+      data.add(
+        <String>[
+          '${item.qty.toStringAsFixed(1)}x', // Quantity with 1 decimal place
+          item.price.toStringAsFixed(1), // Price with 1 decimal place
+          '', // Empty space for alignment
+          '${total.toStringAsFixed(2)}$taxLabel', // Total price with tax label
         ],
       );
     }
+
     // Add the table to bodyWidgets
     bodyWidgets.add(
       TableHelper.fromTextArray(
-        cellStyle: _receiptTextStyle.copyWith(),
-        headerStyle:
-            TextStyle(color: PdfColors.grey, fontWeight: FontWeight.bold),
         border: null,
         cellPadding: EdgeInsets.zero,
         cellAlignments: {
@@ -364,12 +369,15 @@ class OmniPrinter implements Printable {
     Column row = Column(
       children: [],
     );
+
     if (receiptType != "CS") {
       rows.add(
         Column(children: [SizedBox(height: 12)]),
       );
     }
+
     dashedLine();
+
     if (receiptType == "TS" ||
         receiptType == "PS" ||
         receiptType == "NR" ||
@@ -394,87 +402,43 @@ class OmniPrinter implements Printable {
     await _buildTaxC(totalTaxC: totalTaxC, receiptType: receiptType);
     await _buildTaxD(totalTaxD: totalTaxD, receiptType: receiptType);
     await _buildTotalTax(totalTax: totalTax, receiptType: receiptType);
+
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         SizedBox(height: 1),
       ]),
     );
+
     dashedLine();
 
     String total = received.toString();
     if (receiptType == "NR") {
       total = "-$total";
     }
-    // rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-    //   Text(
-    //     'CASH:',
-    //     style: _receiptTextStyle.copyWith(),
-    //   ),
-    //   Text(totalPayable.toString(),
-    //       style: _receiptTextStyle.copyWith())
-    // ]));
-    rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(
-        'ITEMS NUMBER:',
-        style: _receiptTextStyle.copyWith(),
-      ),
-      Text(items.length.toString(), style: _receiptTextStyle.copyWith())
-    ]));
-    //
-    // rows.add(Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-    //   Text(
-    //     'Cashier Name:',
-    //     style: _receiptTextStyle.copyWith(),
-    //   ),
-    //   Text(cashierName.toString(), style: _receiptTextStyle.copyWith())
-    // ]));
-    rows.add(
-      Column(children: [
-        SizedBox(height: 1),
-      ]),
-    );
 
-    // Improve display of payment info
-    // rows.add(
-    //   Padding(
-    //     padding: const EdgeInsets.symmetric(vertical: 4),
-    //     child: Row(
-    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //       children: [
-    //         // Text('Received Amount: $received',
-    //         //     style: _receiptTextStyle.copyWith()),
-    //         Text("Change: ${cash - received}",
-    //             style: _receiptTextStyle.copyWith())
-    //       ],
-    //     ),
-    //   ),
-    // );
-
-    rows.add(
-      Column(children: [
-        SizedBox(height: 1),
-      ]),
-    );
-    rows.add(
-      Column(children: [
-        SizedBox(height: 12),
-      ]),
-    );
+    // Format for ITEMS NUMBER and CASH
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Text('Pay Mode:', style: _receiptTextStyle.copyWith()),
-        Text(
-          payMode,
-          style: _receiptTextStyle.copyWith(),
-        ),
+        Text('CASH:', style: _receiptTextStyle.copyWith()),
+        Text(cash.toStringAsFixed(2), style: _receiptTextStyle.copyWith()),
       ]),
     );
+
+    rows.add(
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Text('ITEMS NUMBER:', style: _receiptTextStyle.copyWith()),
+        Text(items.length.toString(), style: _receiptTextStyle.copyWith()),
+      ]),
+    );
+
     dashedLine();
+
     rows.add(
       Column(children: [
         SizedBox(height: 12),
       ]),
     );
+
     if (receiptType == "TS") {
       row = Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -489,6 +453,7 @@ class OmniPrinter implements Printable {
       );
       rows.add(row);
     }
+
     if (receiptType == "PS") {
       row = Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -805,7 +770,7 @@ class OmniPrinter implements Printable {
       cash: cash,
       cashierName: cashierName,
       received: received,
-      payMode: payMode,
+      // payMode: payMode,
       totalPayable: totalPayable.toStringAsFixed(2),
       receiptType: receiptType,
     );
