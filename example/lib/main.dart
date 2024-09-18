@@ -209,6 +209,10 @@ class _MyHomePageState extends State<MyHomePage> {
     ITransaction transaction = generateDummyTransaction();
     Printable print = OmniPrinter();
     print.generatePdfAndPrint(
+      taxB: 0,
+      taxA: 0,
+      taxC: 0,
+      taxD: 0,
       customerName: "",
       // grandTotal: transaction.subTotal,
       // currencySymbol: "RW",

@@ -180,6 +180,32 @@ class OmniPrinter implements Printable {
     );
   }
 
+  _buildTaxBB({required String totalTaxB, required String receiptType}) async {
+    if (double.parse(totalTaxB) != 0) {
+      String displayTotalTaxB = totalTaxB;
+
+      if (receiptType == "NR") {
+        displayTotalTaxB = "-$totalTaxB";
+      }
+
+      rows.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'TOTAL TAX B',
+              style: _receiptTextStyle.copyWith(),
+            ),
+            Text(
+              displayTotalTaxB,
+              style: _receiptTextStyle.copyWith(),
+            )
+          ],
+        ),
+      );
+    }
+  }
+
   _buildTaxB({required String totalTaxB, required String receiptType}) async {
     if (double.parse(totalTaxB) != 0) {
       String displayTotalTaxB = totalTaxB;
@@ -193,7 +219,7 @@ class OmniPrinter implements Printable {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'TOTAL B-18%:',
+              'TOTAL B-18%',
               style: _receiptTextStyle.copyWith(),
             ),
             Text(
@@ -306,6 +332,10 @@ class OmniPrinter implements Printable {
   _body({
     required List<TransactionItem> items,
     required String receiptType,
+    required double taxA,
+    required double taxB,
+    required double taxC,
+    required double taxD,
     required String totalPayable,
     required String totalTaxA,
     required String totalTaxB,
@@ -397,10 +427,11 @@ class OmniPrinter implements Printable {
     }
 
     await _buildTotal(totalPayable: totalPayable, receiptType: receiptType);
-    await _buildTaxA(totalAEx: totalTaxA, receiptType: receiptType);
+    await _buildTaxA(totalAEx: taxA.toString(), receiptType: receiptType);
     await _buildTaxB(totalTaxB: totalTaxB, receiptType: receiptType);
-    await _buildTaxC(totalTaxC: totalTaxC, receiptType: receiptType);
-    await _buildTaxD(totalTaxD: totalTaxD, receiptType: receiptType);
+    await _buildTaxBB(totalTaxB: taxB.toString(), receiptType: receiptType);
+    await _buildTaxC(totalTaxC: taxC.toString(), receiptType: receiptType);
+    await _buildTaxD(totalTaxD: taxD.toString(), receiptType: receiptType);
     await _buildTotalTax(totalTax: totalTax, receiptType: receiptType);
 
     rows.add(
@@ -714,6 +745,10 @@ class OmniPrinter implements Printable {
   /// Returns a Future that completes when the PDF is generated and handled.
   @override
   Future<void> generatePdfAndPrint({
+    required double taxA,
+    required double taxB,
+    required double taxC,
+    required double taxD,
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
     String brandTel = "271311123",
@@ -763,6 +798,10 @@ class OmniPrinter implements Printable {
     await _body(
       items: items,
       totalTax: totalTax,
+      taxB: taxB,
+      taxA: taxA,
+      taxC: taxC,
+      taxD: taxD,
       totalTaxA: totalTaxA.toStringAsFixed(2),
       totalTaxB: totalTaxB.toStringAsFixed(2),
       totalTaxC: totalTaxC.toStringAsFixed(2),

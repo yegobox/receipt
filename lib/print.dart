@@ -51,6 +51,10 @@ class Print {
     required double received,
     required String sdcId,
     required int invoiceNum,
+    required double taxA,
+    required double taxB,
+    required double taxC,
+    required double taxD,
     required String brandName,
     required String brandAddress,
     required String brandTel,
@@ -80,6 +84,10 @@ class Print {
   }) async {
     Printable printer = OmniPrinter();
     return await printer.generatePdfAndPrint(
+      taxB: taxB,
+      taxA: taxA,
+      taxC: taxC,
+      taxD: taxD,
       brandName: brandName,
       customerName: customerName,
       brandAddress: brandAddress,
