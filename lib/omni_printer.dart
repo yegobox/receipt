@@ -235,49 +235,52 @@ class OmniPrinter implements Printable {
   _buildTaxC({required String totalTaxC, required String receiptType}) async {
     String displayTotalTaxC = totalTaxC;
 
-    if (receiptType == "NR") {
-      displayTotalTaxC = "-$totalTaxC";
-    }
+    if (double.parse(displayTotalTaxC) != 0) {
+      if (receiptType == "NR") {
+        displayTotalTaxC = "-$totalTaxC";
+      }
 
-    rows.add(
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'TOTAL C:',
-            style: _receiptTextStyle.copyWith(),
-          ),
-          Text(
-            displayTotalTaxC,
-            style: _receiptTextStyle.copyWith(),
-          )
-        ],
-      ),
-    );
+      rows.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'TOTAL C:',
+              style: _receiptTextStyle.copyWith(),
+            ),
+            Text(
+              displayTotalTaxC,
+              style: _receiptTextStyle.copyWith(),
+            )
+          ],
+        ),
+      );
+    }
   }
 
   _buildTaxD({required String totalTaxD, required String receiptType}) async {
     String displayTotalTaxD = totalTaxD;
+    if (double.parse(displayTotalTaxD) != 0) {
+      if (receiptType == "NR") {
+        displayTotalTaxD = "-$totalTaxD";
+      }
 
-    if (receiptType == "NR") {
-      displayTotalTaxD = "-$totalTaxD";
+      rows.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'TOTAL D:',
+              style: _receiptTextStyle.copyWith(),
+            ),
+            Text(
+              displayTotalTaxD,
+              style: _receiptTextStyle.copyWith(),
+            )
+          ],
+        ),
+      );
     }
-
-    rows.add(
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'TOTAL D:',
-            style: _receiptTextStyle.copyWith(),
-          ),
-          Text(
-            displayTotalTaxD,
-            style: _receiptTextStyle.copyWith(),
-          )
-        ],
-      ),
-    );
   }
 
   _buildTotal(
