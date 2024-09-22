@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: demo_ui_components,flipper_actionable,flipper_dashboard,flipper_infra,flipper_loading,flipper_localize,flipper_login,flipper_mocks,flipper_models,flipper_routing,flipper_rw,flipper_services,flipper_socials,flipper_ui,flowy_svg,flutter_datetime_picker,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,qr_code_scanner,qr_flutter,scrollable_positioned_list,http,meta,amplify_db_common,sqlite3,web,aws_common,json_annotation
+# melos_managed_dependency_overrides: demo_ui_components,flipper_actionable,flipper_dashboard,flipper_infra,flipper_loading,flipper_localize,flipper_login,flipper_mocks,flipper_models,flipper_routing,flipper_rw,flipper_services,flipper_socials,flipper_ui,flowy_svg,flutter_datetime_picker,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,pdf,pdf_widget_wrapper,printing,qr_code_scanner,qr_flutter,scrollable_positioned_list,http,meta
 dependency_overrides:
   demo_ui_components:
     path: ../../packages/demo_ui_components
@@ -40,6 +40,12 @@ dependency_overrides:
     path: ../../packages/flutter_statusbarcolor
   form_bloc:
     path: ../form_bloc/packages/form_bloc
+  pdf:
+    path: ../dart_pdf/pdf
+  pdf_widget_wrapper:
+    path: ../dart_pdf/widget_wrapper
+  printing:
+    path: ../dart_pdf/printing
   qr_code_scanner:
     path: ../qr_code_scanner
   qr_flutter:
@@ -48,8 +54,3 @@ dependency_overrides:
     path: ../flutter.widgets/packages/scrollable_positioned_list
   http: ^1.2.1
   meta: ^1.12.0
-  amplify_db_common: ^0.4.4-flipper
-  sqlite3: ^2.4.6
-  web: ^1.0.0
-  aws_common: any
-  json_annotation: any
