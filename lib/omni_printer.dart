@@ -1036,7 +1036,7 @@ class OmniPrinter implements Printable {
 
     final file = File(filePath);
     await file.writeAsBytes(pdfData);
-    ProxyService.local.uploadPdfToS3(pdfData, fileName);
+    ProxyService.realm.uploadPdfToS3(pdfData, fileName);
 
     return filePath;
   }
