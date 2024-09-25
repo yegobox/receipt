@@ -64,6 +64,7 @@ class OmniPrinter implements Printable {
     required String customerTin,
     required String receiptType,
     required String customerName,
+    required String receiptNumber,
   }) async {
     List<Widget> receiptTypeWidgets(String receiptType) {
       switch (receiptType) {
@@ -72,7 +73,8 @@ class OmniPrinter implements Printable {
             Text('Refund',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
             SizedBox(height: 4),
-            Text('REF.NORMAL RECEIPT:# $receiptType', style: const TextStyle()),
+            Text('REF.NORMAL RECEIPT:# $receiptNumber',
+                style: const TextStyle()),
             SizedBox(height: 4),
             Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
                 style: const TextStyle()),
@@ -82,7 +84,7 @@ class OmniPrinter implements Printable {
             Text('COPY',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
             SizedBox(height: 4),
-            Text('REF.NORMAL RECEIPT#:$receiptType',
+            Text('REF.NORMAL RECEIPT#:$receiptNumber',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
             SizedBox(height: 4),
             Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
@@ -138,11 +140,12 @@ class OmniPrinter implements Printable {
       ]),
       SizedBox(height: 4),
       SizedBox(height: 4),
-      Text('Welcome to our shop',
-          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-
-      Text('Client ID: $customerTin',
-          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+      if (receiptType != "NR")
+        Text('Welcome to our shop',
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+      if (receiptType != "NR")
+        Text('Client ID: $customerTin',
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       // Text('Customer Tin: $customerTin',
       //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       if (customerName != "N/A")
@@ -454,7 +457,11 @@ class OmniPrinter implements Printable {
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text('CASH:', style: _receiptTextStyle.copyWith()),
-        Text(cash.toStringAsFixed(2), style: _receiptTextStyle.copyWith()),
+        Text(
+            receiptType == "NR"
+                ? "-${cash.toStringAsFixed(2)}"
+                : cash.toStringAsFixed(2),
+            style: _receiptTextStyle.copyWith()),
       ]),
     );
 
@@ -796,6 +803,7 @@ class OmniPrinter implements Printable {
         brandName: brandName,
         customerTin: customerTin!,
         receiptType: receiptType,
+        receiptNumber: rcptNo.toString(),
         customerName: customerName);
     dashedLine();
     await _body(
