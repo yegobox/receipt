@@ -376,7 +376,7 @@ class OmniPrinter implements Printable {
           '${item.qty.toStringAsFixed(1)}x', // Quantity with 1 decimal place
           item.price.toStringAsFixed(1), // Price with 1 decimal place
           '', // Empty space for alignment
-          '${total.toStringAsFixed(2)}$taxLabel', // Total price with tax label
+          '${receiptType == "NR" ? '-' : ''}${total.toStringAsFixed(2)}$taxLabel', // Total price with tax label, // Total price with tax label
         ],
       );
     }
