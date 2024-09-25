@@ -142,16 +142,14 @@ class OmniPrinter implements Printable {
       SizedBox(height: 4),
       if (receiptType != "NR")
         Text('Welcome to our shop',
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal)),
       if (receiptType != "NR")
         Text('Client ID: $customerTin',
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-      // Text('Customer Tin: $customerTin',
-      //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-      if (customerName != "N/A")
-        Text('Customer Name: $customerName',
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-
+      Text('Customer Tin: $customerTin',
+          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+      Text('Customer Name: $customerName',
+          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       SizedBox(height: 8),
       ...receiptTypeWidgets(receiptType),
       SizedBox(height: 4),
@@ -334,6 +332,11 @@ class OmniPrinter implements Printable {
       ),
     );
   }
+//   TOTAL:                     410.0
+// TOTAL A-EX                 400.0
+// TOTAL B-18%               10.0
+// TOTAL TAX-B                1.53
+// TOTAL TAX              401.53
 
   _body({
     required List<TransactionItem> items,
@@ -433,8 +436,9 @@ class OmniPrinter implements Printable {
     }
 
     await _buildTotal(totalPayable: totalPayable, receiptType: receiptType);
-    await _buildTaxA(totalAEx: taxA.toString(), receiptType: receiptType);
     await _buildTaxB(totalTaxB: totalTaxB, receiptType: receiptType);
+    await _buildTaxA(totalAEx: taxA.toString(), receiptType: receiptType);
+
     await _buildTaxBB(totalTaxB: taxB.toString(), receiptType: receiptType);
     await _buildTaxC(totalTaxC: taxC.toString(), receiptType: receiptType);
     await _buildTaxD(totalTaxD: taxD.toString(), receiptType: receiptType);
