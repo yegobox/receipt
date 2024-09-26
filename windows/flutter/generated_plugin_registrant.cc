@@ -7,7 +7,7 @@
 #include "generated_plugin_registrant.h"
 
 #include <amplify_db_common/amplify_db_common_plugin.h>
-#include <cloud_firestore/cloud_firestore_plugin_c_api.h>
+#include <app_links/app_links_plugin_c_api.h>
 #include <connectivity_plus/connectivity_plus_windows_plugin.h>
 #include <desktop_webview_auth/desktop_webview_auth_plugin.h>
 #include <file_selector_windows/file_selector_windows.h>
@@ -18,11 +18,13 @@
 #include <local_auth_windows/local_auth_plugin.h>
 #include <local_notifier/local_notifier_plugin.h>
 #include <permission_handler_windows/permission_handler_windows_plugin.h>
+#include <powersync_flutter_libs/powersync_flutter_libs_plugin.h>
 #include <printing/printing_plugin.h>
 #include <realm/realm_plugin.h>
 #include <screen_retriever/screen_retriever_plugin.h>
 #include <share_plus/share_plus_windows_plugin_c_api.h>
 #include <smart_auth/smart_auth_plugin.h>
+#include <sqlite3_flutter_libs/sqlite3_flutter_libs_plugin.h>
 #include <tray_manager/tray_manager_plugin.h>
 #include <url_launcher_windows/url_launcher_windows.h>
 #include <window_manager/window_manager_plugin.h>
@@ -30,8 +32,8 @@
 void RegisterPlugins(flutter::PluginRegistry* registry) {
   AmplifyDbCommonPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("AmplifyDbCommonPlugin"));
-  CloudFirestorePluginCApiRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("CloudFirestorePluginCApi"));
+  AppLinksPluginCApiRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("AppLinksPluginCApi"));
   ConnectivityPlusWindowsPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("ConnectivityPlusWindowsPlugin"));
   DesktopWebviewAuthPluginRegisterWithRegistrar(
@@ -52,6 +54,8 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("LocalNotifierPlugin"));
   PermissionHandlerWindowsPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("PermissionHandlerWindowsPlugin"));
+  PowersyncFlutterLibsPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("PowersyncFlutterLibsPlugin"));
   PrintingPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("PrintingPlugin"));
   RealmPluginRegisterWithRegistrar(
@@ -62,6 +66,8 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("SharePlusWindowsPluginCApi"));
   SmartAuthPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("SmartAuthPlugin"));
+  Sqlite3FlutterLibsPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("Sqlite3FlutterLibsPlugin"));
   TrayManagerPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("TrayManagerPlugin"));
   UrlLauncherWindowsRegisterWithRegistrar(
