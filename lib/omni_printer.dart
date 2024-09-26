@@ -109,16 +109,16 @@ class OmniPrinter implements Printable {
       ]),
       SizedBox(height: 8),
       Text(brandName,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       SizedBox(height: 4),
       Text(brandAddress,
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.normal)),
       SizedBox(height: 4),
       Text("Phone number: $brandTel",
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.normal)),
       SizedBox(height: 4),
       Text("TIN  : $brandTIN",
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.normal)),
       SizedBox(height: 4),
       Column(children: [
         CustomPaint(
@@ -613,6 +613,15 @@ class OmniPrinter implements Printable {
         SizedBox(height: 1),
       ]),
     );
+
+    rows.add(
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Text(
+          internalData.toDashedString(),
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+        ),
+      ]),
+    );
     rows.add(
       Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Text(
@@ -623,14 +632,6 @@ class OmniPrinter implements Printable {
               // fontWeight: FontWeight.bold,
               ),
         ),
-        Text(
-          internalData.toDashedString(),
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-        ),
-      ]),
-    );
-    rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           internalData.toDashedString(),
           style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
