@@ -593,23 +593,23 @@ class OmniPrinter implements Printable {
       ]),
     );
     rows.add(
-      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(
-          "Receipt Signature:",
-        ),
-        Text(
-          receiptSignature.toDashedString(),
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-        ),
-      ]),
-    );
-    rows.add(
       Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Text(
           "Internal Data",
         ),
         Text(
           internalData.toDashedString(),
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+        ),
+      ]),
+    );
+    rows.add(
+      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(
+          "Receipt Signature:",
+        ),
+        Text(
+          receiptSignature.toDashedString(),
           style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
         ),
       ]),
