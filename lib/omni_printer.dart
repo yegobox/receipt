@@ -596,11 +596,6 @@ class OmniPrinter implements Printable {
       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
           "Receipt Signature:",
-          style: const TextStyle(
-
-              // fontBold: Font.courierBold(),
-              // fontWeight: FontWeight.bold,
-              ),
         ),
         Text(
           receiptSignature.toDashedString(),
@@ -609,33 +604,20 @@ class OmniPrinter implements Printable {
       ]),
     );
     rows.add(
-      Column(children: [
-        SizedBox(height: 1),
-      ]),
-    );
-
-    rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Text(
-          internalData.toDashedString(),
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-        ),
-      ]),
-    );
-    rows.add(
       Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Text(
           "Internal Data",
-          style: const TextStyle(
-
-              // fontBold: Font.courierBold(),
-              // fontWeight: FontWeight.bold,
-              ),
         ),
         Text(
           internalData.toDashedString(),
           style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
         ),
+      ]),
+    );
+
+    rows.add(
+      Column(children: [
+        SizedBox(height: 1),
       ]),
     );
     rows.add(
