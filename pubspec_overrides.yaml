@@ -52,6 +52,6 @@ dependency_overrides:
     path: ../qr.flutter
   scrollable_positioned_list:
     path: ../flutter.widgets/packages/scrollable_positioned_list
-  http: ^1.2.1
+  http: ^1.2.2
   meta: ^1.12.0
   web: ^0.5.1

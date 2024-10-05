@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  printing: ^5.13.2
+  printing: ^5.13.3
   pdf: ^3.10.3
   open_filex: ^4.5.0
   gap: ^2.0.0
@@ -28,7 +28,7 @@ dependencies:
   # syncfusion_flutter_barcodes: ^26.2.11
   
 dependency_overrides:
-  http: ^1.2.1
+  http: ^1.2.2
   meta: ^1.12.0
   web: ^0.5.1
 dev_dependencies:
