@@ -144,7 +144,7 @@ class OmniPrinter implements Printable {
         Text('Welcome to our shop',
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal)),
       if (receiptType != "NR")
-        Text('Client ID: $customerTin',
+        Text('Client ID: $brandTIN',
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       Text('Customer Tin: $customerTin',
           style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
