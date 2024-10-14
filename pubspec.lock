@@ -1162,7 +1162,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223232578+1728472980"
+    version: "1.170.4252223232591+1728883948"
   flipper_services:
     dependency: "direct main"
     description:
@@ -1914,10 +1914,10 @@ packages:
     dependency: transitive
     description:
       name: injectable
-      sha256: "69874ba3ec10e3a0de3f519a184442878291d928f3299d718813f24642585198"
+      sha256: "5e1556ea1d374fe44cbe846414d9bab346285d3d8a1da5877c01ad0774006068"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.4"
+    version: "2.5.0"
   internet_connection_checker:
     dependency: transitive
     description:
@@ -2215,6 +2215,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+  mobile_scanner:
+    dependency: transitive
+    description:
+      name: mobile_scanner
+      sha256: e93461298494a3e5475dd2b41068012823b8fe2caf8d47ba545faca2aa3767d6
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.1"
   modal_bottom_sheet:
     dependency: transitive
     description:
