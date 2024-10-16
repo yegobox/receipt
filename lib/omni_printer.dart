@@ -598,7 +598,7 @@ class OmniPrinter implements Printable {
           "Internal Data",
         ),
         Text(
-          internalData.toDashedString(),
+          internalData.toDashedStringInternalData(),
           style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
         ),
       ]),
@@ -609,7 +609,7 @@ class OmniPrinter implements Printable {
           "Receipt Signature:",
         ),
         Text(
-          receiptSignature.toDashedString(),
+          receiptSignature.toDashedStringRcptSign(),
           style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
         ),
       ]),
