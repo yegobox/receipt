@@ -1,12 +1,8 @@
 import 'dart:io';
 import 'package:flipper_models/helperModels/talker.dart';
 import 'package:flipper_models/realm_model_export.dart';
-import 'package:flipper_models/view_models/mixins/riverpod_states.dart';
 import 'package:flipper_services/proxy.dart';
-import 'package:flutter/material.dart' as material;
 import 'package:flutter/services.dart';
-
-// import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
 import 'package:flutter/material.dart' as c;
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
@@ -37,27 +33,36 @@ class OmniPrinter implements Printable {
   static final _receiptTextStyle =
       TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
 
-  _loadLogoImage({required String position}) async {
+  Future<ImageProvider?> _loadLogoImage({required String position}) async {
     ImageProvider? image;
-    if (position == "left") {
-      const imageLogo = c.AssetImage('assets/rra.jpg', package: 'receipt');
-      image = await flutterImageProvider(imageLogo,
-          configuration:
-              const material.ImageConfiguration(size: Size(100, 100)));
-      return image;
-    } else {
-      const imageLogo =
-          c.AssetImage('assets/logo_right.png', package: 'receipt');
-      image = await flutterImageProvider(imageLogo,
-          configuration:
-              const material.ImageConfiguration(size: Size(100, 100)));
-      return image;
+    switch (position) {
+      case "left":
+        const imageLogo = c.AssetImage('assets/rra.jpg', package: 'receipt');
+        image = await flutterImageProvider(imageLogo,
+            configuration: const c.ImageConfiguration(size: Size(100, 100)));
+        break;
+      case "middle":
+        const imageLogo =
+            c.AssetImage('assets/flipper_logo.png', package: 'receipt');
+        image = await flutterImageProvider(imageLogo,
+            configuration: const c.ImageConfiguration(size: Size(100, 100)));
+        break;
+      case "right":
+        const imageLogo =
+            c.AssetImage('assets/logo_right.png', package: 'receipt');
+        image = await flutterImageProvider(imageLogo,
+            configuration: const c.ImageConfiguration(size: Size(100, 100)));
+        break;
+      default:
+        throw ArgumentError('Invalid position: $position');
     }
+    return image;
   }
 
   Future<void> _header({
     required ImageProvider leftImage,
     required ImageProvider rightImage,
+    required ImageProvider middleImage,
     required String brandAddress,
     required String brandTel,
     required String brandTIN,
@@ -73,23 +78,23 @@ class OmniPrinter implements Printable {
           return [
             Text('Refund',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-            SizedBox(height: 4),
-            Text('REF.NORMAL RECEIPT:# $receiptNumber',
-                style: const TextStyle()),
-            SizedBox(height: 4),
-            Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-                style: const TextStyle()),
+
+            // Text('REF.NORMAL RECEIPT:# $receiptNumber',
+            //     style: const TextStyle()),
+            // SizedBox(height: 4),
+            // Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
+            //     style: const TextStyle()),
           ];
         case "CS":
           return [
             Text('COPY',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-            SizedBox(height: 4),
-            Text('REF.NORMAL RECEIPT#:$receiptNumber',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-            SizedBox(height: 4),
-            Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+
+            // Text('REF.NORMAL RECEIPT#:$receiptNumber',
+            //     style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+            // SizedBox(height: 4),
+            // Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
+            //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
           ];
         case "TS":
           return [
@@ -102,10 +107,10 @@ class OmniPrinter implements Printable {
     }
 
     rows.add(Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-      SizedBox(height: 12),
-      Row(children: [
+      // SizedBox(height: 12),
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Image(leftImage, width: 25, height: 25),
-        Spacer(),
+        Image(middleImage, width: 25, height: 25),
         Image(rightImage, width: 25, height: 25),
       ]),
       SizedBox(height: 8),
@@ -140,7 +145,6 @@ class OmniPrinter implements Printable {
         )
       ]),
       SizedBox(height: 4),
-      SizedBox(height: 4),
       if (receiptType != "NR")
         Text('Welcome to our shop',
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal)),
@@ -153,7 +157,6 @@ class OmniPrinter implements Printable {
           style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       SizedBox(height: 8),
       ...receiptTypeWidgets(receiptType),
-      SizedBox(height: 4),
     ]));
   }
 
@@ -438,11 +441,15 @@ class OmniPrinter implements Printable {
 
     await _buildTotal(totalPayable: totalPayable, receiptType: receiptType);
     await _buildTaxB(totalTaxB: totalTaxB, receiptType: receiptType);
-    await _buildTaxA(totalAEx: taxA.toString(), receiptType: receiptType);
+    await _buildTaxA(
+        totalAEx: taxA.toStringAsFixed(2), receiptType: receiptType);
 
-    await _buildTaxBB(totalTaxB: taxB.toString(), receiptType: receiptType);
-    await _buildTaxC(totalTaxC: taxC.toString(), receiptType: receiptType);
-    await _buildTaxD(totalTaxD: taxD.toString(), receiptType: receiptType);
+    await _buildTaxBB(
+        totalTaxB: taxB.toStringAsFixed(2), receiptType: receiptType);
+    await _buildTaxC(
+        totalTaxC: taxC.toStringAsFixed(2), receiptType: receiptType);
+    await _buildTaxD(
+        totalTaxD: taxD.toStringAsFixed(2), receiptType: receiptType);
     await _buildTotalTax(totalTax: totalTax, receiptType: receiptType);
 
     rows.add(
@@ -527,6 +534,7 @@ class OmniPrinter implements Printable {
     required String mrc,
     required int rcptNo,
     required int totRcptNo,
+    required DateTime whenCreated,
   }) async {
     if (receiptType == "CS") {
       rows.add(
@@ -561,7 +569,7 @@ class OmniPrinter implements Printable {
         SizedBox(
           width: 1120,
           child: Text(
-            transaction.lastTouched?.toDateTimeString() ?? "",
+            whenCreated.toDateTimeString(),
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
@@ -778,20 +786,24 @@ class OmniPrinter implements Printable {
     required String customerName,
     required int rcptNo,
     required int totRcptNo,
+    required DateTime whenCreated,
     required Function(Uint8List bytes) printCallback,
   }) async {
+    talker.warning("ReceiptNo: $rcptNo: totRcptNo: $totRcptNo");
     final left = await _loadLogoImage(position: "left");
     final right = await _loadLogoImage(position: "right");
+    final middle = await _loadLogoImage(position: "middle");
     await _header(
-        leftImage: left,
-        rightImage: right,
+        middleImage: middle!,
+        leftImage: left!,
+        rightImage: right!,
         brandAddress: brandAddress,
         brandTel: brandTel,
         brandTIN: brandTIN,
         brandName: brandName,
         customerTin: customerTin!,
         receiptType: receiptType,
-        receiptNumber: rcptNo.toString(),
+        receiptNumber: invoiceNum.toString(),
         customerName: customerName);
     dashedLine();
     await _body(
@@ -818,6 +830,7 @@ class OmniPrinter implements Printable {
       receiptType: receiptType,
       receiptSignature: receiptSignature,
       internalData: internalData,
+      whenCreated: whenCreated,
       receiptQrCode: receiptQrCode,
       invoiceNum: invoiceNum.toString(),
       rcptNo: rcptNo,

@@ -80,6 +80,7 @@ class Print {
     required String customerName,
     required int rcptNo,
     required int totRcptNo,
+    required DateTime whenCreated,
     required Function(Uint8List bytes) printCallback,
   }) async {
     Printable printer = OmniPrinter();
@@ -87,6 +88,7 @@ class Print {
       taxB: taxB,
       taxA: taxA,
       taxC: taxC,
+      whenCreated: whenCreated,
       taxD: taxD,
       brandName: brandName,
       customerName: customerName,

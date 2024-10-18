@@ -4,7 +4,7 @@ import 'package:flipper_models/realm/schemas.dart';
 
 abstract class Printable {
   Future<void> generatePdfAndPrint({
-      required double taxA,
+    required double taxA,
     required double taxB,
     required double taxC,
     required double taxD,
@@ -39,6 +39,7 @@ abstract class Printable {
     required String customerName,
     required int rcptNo,
     required int totRcptNo,
+    required DateTime whenCreated,
     required Function(Uint8List bytes) printCallback,
   });
 }
