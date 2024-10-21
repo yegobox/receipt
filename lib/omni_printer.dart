@@ -37,9 +37,10 @@ class OmniPrinter implements Printable {
     ImageProvider? image;
     switch (position) {
       case "left":
-        const imageLogo = c.AssetImage('assets/rra.jpg', package: 'receipt');
+        const imageLogo =
+            c.AssetImage('assets/logo_left.png', package: 'receipt');
         image = await flutterImageProvider(imageLogo,
-            configuration: const c.ImageConfiguration(size: Size(100, 100)));
+            configuration: const c.ImageConfiguration(size: Size(600, 600)));
         break;
       case "middle":
         const imageLogo =
