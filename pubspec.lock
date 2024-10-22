@@ -446,6 +446,46 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  cbl:
+    dependency: transitive
+    description:
+      name: cbl
+      sha256: "96735f789ffdadcfdb43308a899906cf249abc10164b55352c59e4c8687388ca"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.1"
+  cbl_flutter:
+    dependency: transitive
+    description:
+      name: cbl_flutter
+      sha256: "5d3e46b2de08fe4c2d10d3e4f51566eb890600c837d815c9c9f3dd2431583efc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.3"
+  cbl_flutter_platform_interface:
+    dependency: transitive
+    description:
+      name: cbl_flutter_platform_interface
+      sha256: e148b66cdf3f0e64316ab6c4a15aa4855dd0a929470d0c500b045aec1c3aa855
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.2"
+  cbl_libcblite_api:
+    dependency: transitive
+    description:
+      name: cbl_libcblite_api
+      sha256: a7ce720190ea31990cc0d6a8c93993839d32d77fb0af3edc5d4bb7258fce1645
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.0"
+  cbl_libcblitedart_api:
+    dependency: transitive
+    description:
+      name: cbl_libcblitedart_api
+      sha256: "6477244c23464cde3dce752aa39ba054fac4047c398f539b77bfbb0aaf55bd17"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.1.0"
   cbor:
     dependency: transitive
     description:
@@ -1241,7 +1281,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223232662+1729484814"
+    version: "1.170.4252223232665+1729511163"
   flipper_services:
     dependency: "direct main"
     description:
@@ -2210,10 +2250,10 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "551475ca5c95d7c0aa0ac542cdf37e2da1ff728e"
+      resolved-ref: "6410dc511bb386814d1045d10c0416dad7816664"
       url: "https://github.com/yegobox/local_notifier.git"
     source: git
-    version: "0.1.5"
+    version: "0.1.6"
   location:
     dependency: transitive
     description:
