@@ -80,11 +80,13 @@ class OmniPrinter implements Printable {
             Text('Refund',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
 
-            // Text('REF.NORMAL RECEIPT:# $receiptNumber',
-            //     style: const TextStyle()),
-            // SizedBox(height: 4),
-            // Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-            //     style: const TextStyle()),
+            /// here we take the existing receipt number -1 to get the receipt number of the refund
+            /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
+            Text('REF.NORMAL RECEIPT:# ${int.parse(receiptNumber) - 1}',
+                style: const TextStyle()),
+            SizedBox(height: 4),
+            Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
+                style: const TextStyle()),
           ];
         case "CS":
           return [
@@ -149,11 +151,11 @@ class OmniPrinter implements Printable {
       if (receiptType != "NR")
         Text('Welcome to our shop',
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal)),
-      if (receiptType != "NR")
-        Text('Client ID: $brandTIN',
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-      Text('Customer Tin: $customerTin',
+      // if (receiptType != "NR")
+      Text('Client ID: $customerTin',
           style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+      // Text('Customer Tin: $customerTin',
+      //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       Text('Customer Name: $customerName',
           style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       SizedBox(height: 8),
