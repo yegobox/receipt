@@ -363,32 +363,33 @@ class OmniPrinter implements Printable {
     required double cash,
   }) async {
     var bodyWidgets = <Widget>[];
-    // Add the table headers
     List<List<String>> data = <List<String>>[];
 
     for (var item in items) {
       double total = item.price * item.qty;
       String taxLabel = item.taxTyCd != null ? "(${item.taxTyCd!})" : "(B)";
 
-      // First row: Item name
+      // First row: Item name, quantity, price, and total
       data.add(
         <String>[
           item.name!.length > 12 ? item.name!.substring(0, 12) : item.name!,
-          '', // Empty spaces for the other columns
-          '',
-          '',
+          '${item.qty.toStringAsFixed(1)}x',
+          item.price.toStringAsFixed(1),
+          '${receiptType == "NR" ? '-' : ''}${total.toStringAsFixed(2)}$taxLabel',
         ],
       );
 
-      // Second row: Quantity x Price, total price with tax type
-      data.add(
-        <String>[
-          '${item.qty.toStringAsFixed(1)}x', // Quantity with 1 decimal place
-          item.price.toStringAsFixed(1), // Price with 1 decimal place
-          '', // Empty space for alignment
-          '${receiptType == "NR" ? '-' : ''}${total.toStringAsFixed(2)}$taxLabel', // Total price with tax label, // Total price with tax label
-        ],
-      );
+      // Second row: Discount information (if exists)
+      if (item.dcRt != 0) {
+        data.add(
+          <String>[
+            'Discount -${item.dcRt}%',
+            '',
+            '',
+            '${(total - (total * item.dcRt / 100)).toStringAsFixed(2)}',
+          ],
+        );
+      }
     }
 
     // Add the table to bodyWidgets
@@ -412,6 +413,7 @@ class OmniPrinter implements Printable {
       ),
     );
 
+    // Rest of the code remains the same...
     Column row = Column(
       children: [],
     );
