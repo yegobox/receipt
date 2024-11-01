@@ -1305,7 +1305,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223232690+1730464380"
+    version: "1.170.4252223232692+1730465802"
   flipper_services:
     dependency: "direct main"
     description:
@@ -2129,10 +2129,10 @@ packages:
     dependency: transitive
     description:
       name: js
-      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
+      sha256: c1b2e9b5ea78c45e1a0788d29606ba27dc5f71f019f32ca5140f61ef071838cf
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.7"
+    version: "0.7.1"
   json_annotation:
     dependency: transitive
     description:
@@ -2298,10 +2298,10 @@ packages:
     dependency: transitive
     description:
       name: location_web
-      sha256: "49dda13d415c4603c5775a33fb22f575e0aa3f0ec2916644ddcd722db31ee884"
+      sha256: "924da8436db7ded5eef92a7ef3ae6aa3715831a93965376c91738f586302350e"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.2"
+    version: "5.0.0"
   logger:
     dependency: transitive
     description:
@@ -2744,10 +2744,10 @@ packages:
     dependency: transitive
     description:
       name: powersync
-      sha256: "4e5d6add6602d9a891ede698f7c9ab8c9ce01ef445d9c0679802e637aa9734cd"
+      sha256: "42c8c641f4b9ad0547ad7eafeff14aefa79deaae75b1f05bd9db02c5424ba7de"
       url: "https://pub.dev"
     source: hosted
-    version: "1.8.8"
+    version: "1.9.0"
   powersync_flutter_libs:
     dependency: transitive
     description:
@@ -3151,13 +3151,13 @@ packages:
     source: hosted
     version: "2.5.4+3"
   sqlite3:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: sqlite3
-      sha256: "45f168ae2213201b54e09429ed0c593dc2c88c924a1488d6f9c523a255d567cb"
+      sha256: bb174b3ec2527f9c5f680f73a89af8149dd99782fbb56ea88ad0807c5638f2ed
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.6"
+    version: "2.4.7"
   sqlite3_flutter_libs:
     dependency: transitive
     description:
@@ -3170,18 +3170,18 @@ packages:
     dependency: transitive
     description:
       name: sqlite3_web
-      sha256: b4043336e74cac54d3ca44c90434a3c310550b9a80851b09ad1af282af0df6d4
+      sha256: f22d1dda7a40be0867984f55cdf5c2d599e5f05d3be4a642d78f38b38983f554
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.3"
+    version: "0.2.0"
   sqlite_async:
     dependency: transitive
     description:
       name: sqlite_async
-      sha256: c5c57b025133d0869cce6a647f99b378ab42cc26488ff22ff942ae9588201af0
+      sha256: "4a921c53f12b850c5c7337aa7b2c7a0249efd07696180c1ee6de9750632543c7"
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.0"
+    version: "0.10.1"
   stack_trace:
     dependency: transitive
     description:
