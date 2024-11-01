@@ -1305,7 +1305,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223232688+1730365400"
+    version: "1.170.4252223232690+1730464380"
   flipper_services:
     dependency: "direct main"
     description:
