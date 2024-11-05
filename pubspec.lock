@@ -342,6 +342,62 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.4"
+  brick_core:
+    dependency: transitive
+    description:
+      name: brick_core
+      sha256: "86a1d5f69f24304781ec870220a3d65be42fddd7de19b92e88ff26e0e7ab2177"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.1"
+  brick_offline_first:
+    dependency: transitive
+    description:
+      name: brick_offline_first
+      sha256: "95ab127c19c4856c86453171589956d5163be770cb0b21015d476901523d45af"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.0"
+  brick_offline_first_with_rest:
+    dependency: transitive
+    description:
+      name: brick_offline_first_with_rest
+      sha256: "142731111e6e202dd666f00e91b7527edc4da3a95b14cb4275f08e71d5db3aea"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.0"
+  brick_offline_first_with_supabase:
+    dependency: transitive
+    description:
+      name: brick_offline_first_with_supabase
+      sha256: "45379cb980362e682a9d706192e125635936160bf60827ed8b6132bc41fc1b26"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
+  brick_rest:
+    dependency: transitive
+    description:
+      name: brick_rest
+      sha256: ff6a4039ff9420d0ec55ae55de32e73f13631a32abb3968421fa6655179ac985
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.4"
+  brick_sqlite:
+    dependency: transitive
+    description:
+      name: brick_sqlite
+      sha256: d4fbdfd9ceda7582b6612786059a77da73472250af66a1fa5a876377285a4baf
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.1+1"
+  brick_supabase:
+    dependency: transitive
+    description:
+      name: brick_supabase
+      sha256: fcddec04f1fb41054a819438f521f71d2d3c3a33d9a2075c7e4449112a72fa54
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2"
   build:
     dependency: transitive
     description:
@@ -1289,7 +1345,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223232697+1730528178"
+    version: "1.170.4252223232702+1730723648"
   flipper_services:
     dependency: "direct main"
     description:
