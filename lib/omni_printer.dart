@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:flipper_models/helperModels/talker.dart';
 import 'package:flipper_models/realm_model_export.dart';
 import 'package:flipper_services/proxy.dart';
@@ -84,8 +85,24 @@ class OmniPrinter implements Printable {
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
             Text('REF.NORMAL RECEIPT:# ${int.parse(receiptNumber) - 1}',
                 style: const TextStyle()),
-            SizedBox(height: 4),
-            Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
+            CustomPaint(
+              size: const PdfPoint(double.infinity, 10),
+              painter: (PdfGraphics canvas, PdfPoint size) {
+                const double dashWidth = 2.0, dashSpace = 2.0;
+                double startX = 0.0;
+                while (startX < size.x) {
+                  canvas
+                    ..moveTo(startX, 0)
+                    ..lineTo(startX + dashWidth, 0)
+                    ..setColor(PdfColors.black)
+                    ..setLineWidth(1.0)
+                    ..strokePath();
+                  startX += dashWidth + dashSpace;
+                }
+              },
+            ),
+            Text(
+                'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
                 style: const TextStyle()),
           ];
         case "CS":
@@ -151,15 +168,17 @@ class OmniPrinter implements Printable {
       if (receiptType != "NR")
         Text('Welcome to our shop',
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal)),
-      // if (receiptType != "NR")
-      Text('Client ID: $customerTin',
-          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+      ...receiptTypeWidgets(receiptType),
+
+      if (receiptType != "NR")
+        Text('Client ID: $customerTin',
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       // Text('Customer Tin: $customerTin',
       //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-      Text('Customer Name: $customerName',
-          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+      if (receiptType != "NR")
+        Text('Customer Name: $customerName',
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       SizedBox(height: 8),
-      ...receiptTypeWidgets(receiptType),
     ]));
   }
 
@@ -373,12 +392,12 @@ class OmniPrinter implements Printable {
       data.add(
         <String>[
           item.name!.length > 12 ? item.name!.substring(0, 12) : item.name!,
-          '${item.qty.toStringAsFixed(1)}x',
-          item.price.toStringAsFixed(1),
-          '${receiptType == "NR" ? '-' : ''}${total.toStringAsFixed(2)}$taxLabel',
+          '${item.qty.toStringAsFixed(0)}x',
+          item.price.toStringAsFixed(0),
+          '${receiptType == "NR" ? '-' : ''}${total.toStringAsFixed(0)}$taxLabel',
         ],
       );
-
+      //
       // Second row: Discount information (if exists)
       if (item.dcRt != 0) {
         data.add(
@@ -386,7 +405,7 @@ class OmniPrinter implements Printable {
             'Discount -${item.dcRt}%',
             '',
             '',
-            '${(total - (total * item.dcRt / 100)).toStringAsFixed(2)}',
+            '${(total).toStringAsFixed(0)}',
           ],
         );
       }
@@ -428,7 +447,7 @@ class OmniPrinter implements Printable {
 
     if (receiptType == "TS" ||
         receiptType == "PS" ||
-        receiptType == "NR" ||
+        // receiptType == "NR" ||
         receiptType == "CS") {
       row = Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -707,6 +726,10 @@ class OmniPrinter implements Printable {
           'COME BACK AGAIN',
           style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
         ),
+        Text(
+          'EBM v2',
+          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+        ),
       ]),
     );
     // rows.add(
@@ -822,11 +845,15 @@ class OmniPrinter implements Printable {
       totalTaxB: totalTaxB.toStringAsFixed(2),
       totalTaxC: totalTaxC.toStringAsFixed(2),
       totalTaxD: totalTaxD.toStringAsFixed(2),
-      cash: cash,
+      cash:
+          items.map((e) => e.price * e.qty).reduce((sum, value) => sum + value),
       cashierName: cashierName,
       received: received,
       // payMode: payMode,
-      totalPayable: totalPayable.toStringAsFixed(2),
+      totalPayable: items
+          .map((e) => e.price * e.qty)
+          .reduce((sum, value) => sum + value)
+          .toString(),
       receiptType: receiptType,
     );
     await _footer(
