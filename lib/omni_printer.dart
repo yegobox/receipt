@@ -727,7 +727,7 @@ class OmniPrinter implements Printable {
           style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
         ),
         Text(
-          'EBM v2',
+          'POWERED BY RRA VSDC EBM2.1',
           style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
         ),
       ]),
