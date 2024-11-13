@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 import 'package:flipper_models/helperModels/talker.dart';
 import 'package:flipper_models/realm_model_export.dart';
 import 'package:flipper_services/proxy.dart';
@@ -105,17 +104,60 @@ class OmniPrinter implements Printable {
                 'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
                 style: const TextStyle()),
           ];
+        case "CR":
+          return [
+            if (receiptType == "CR" || receiptType == "CS")
+              Text('COPY',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+            Text('Refund',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+            CustomPaint(
+              size: const PdfPoint(double.infinity, 10),
+              painter: (PdfGraphics canvas, PdfPoint size) {
+                const double dashWidth = 2.0, dashSpace = 2.0;
+                double startX = 0.0;
+                while (startX < size.x) {
+                  canvas
+                    ..moveTo(startX, 0)
+                    ..lineTo(startX + dashWidth, 0)
+                    ..setColor(PdfColors.black)
+                    ..setLineWidth(1.0)
+                    ..strokePath();
+                  startX += dashWidth + dashSpace;
+                }
+              },
+            ),
+
+            /// here we take the existing receipt number -1 to get the receipt number of the refund
+            /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
+            Text('REF.NORMAL RECEIPT:# ${int.parse(receiptNumber) - 1}',
+                style: const TextStyle()),
+            CustomPaint(
+              size: const PdfPoint(double.infinity, 10),
+              painter: (PdfGraphics canvas, PdfPoint size) {
+                const double dashWidth = 2.0, dashSpace = 2.0;
+                double startX = 0.0;
+                while (startX < size.x) {
+                  canvas
+                    ..moveTo(startX, 0)
+                    ..lineTo(startX + dashWidth, 0)
+                    ..setColor(PdfColors.black)
+                    ..setLineWidth(1.0)
+                    ..strokePath();
+                  startX += dashWidth + dashSpace;
+                }
+              },
+            ),
+            Text(
+                'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
+                style: const TextStyle()),
+          ];
         case "CS":
           return [
             Text('COPY',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-
-            // Text('REF.NORMAL RECEIPT#:$receiptNumber',
-            //     style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-            // SizedBox(height: 4),
-            // Text('REFUND IS APPROVED FOR CLIENT ID:$customerTin',
-            //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
           ];
+
         case "TS":
           return [
             Text('TRAINING MODE',
@@ -186,7 +228,7 @@ class OmniPrinter implements Printable {
       {required String totalTax, required String receiptType}) async {
     String displayTotalTax = totalTax;
 
-    if (receiptType == "NR") {
+    if (receiptType == "NR" || receiptType == "CR") {
       displayTotalTax = "-$totalTax";
     }
 
@@ -211,7 +253,7 @@ class OmniPrinter implements Printable {
     if (double.parse(totalTaxB) != 0) {
       String displayTotalTaxB = totalTaxB;
 
-      if (receiptType == "NR") {
+      if (receiptType == "NR" || receiptType == "CR") {
         displayTotalTaxB = "-$totalTaxB";
       }
 
@@ -237,7 +279,7 @@ class OmniPrinter implements Printable {
     if (double.parse(totalTaxB) != 0) {
       String displayTotalTaxB = totalTaxB;
 
-      if (receiptType == "NR") {
+      if (receiptType == "NR" || receiptType == "CR") {
         displayTotalTaxB = "-$totalTaxB";
       }
 
@@ -263,7 +305,7 @@ class OmniPrinter implements Printable {
     String displayTotalTaxC = totalTaxC;
 
     if (double.parse(displayTotalTaxC) != 0) {
-      if (receiptType == "NR") {
+      if (receiptType == "NR" || receiptType == "CR") {
         displayTotalTaxC = "-$totalTaxC";
       }
 
@@ -288,7 +330,7 @@ class OmniPrinter implements Printable {
   _buildTaxD({required String totalTaxD, required String receiptType}) async {
     String displayTotalTaxD = totalTaxD;
     if (double.parse(displayTotalTaxD) != 0) {
-      if (receiptType == "NR") {
+      if (receiptType == "NR" || receiptType == "CR") {
         displayTotalTaxD = "-$totalTaxD";
       }
 
@@ -314,7 +356,7 @@ class OmniPrinter implements Printable {
       {required String totalPayable, required String receiptType}) async {
     String total = totalPayable;
 
-    if (receiptType == "NR") {
+    if (receiptType == "NR" || receiptType == "CR") {
       total = "-$totalPayable";
     }
 
@@ -338,7 +380,7 @@ class OmniPrinter implements Printable {
   _buildTaxA({required String totalAEx, required String receiptType}) async {
     String displayTotalAEx = totalAEx;
 
-    if (receiptType == "NR") {
+    if (receiptType == "NR" || receiptType == "CR") {
       displayTotalAEx = "-$totalAEx";
     }
 
@@ -394,7 +436,7 @@ class OmniPrinter implements Printable {
           item.name!.length > 12 ? item.name!.substring(0, 12) : item.name!,
           '${item.qty.toStringAsFixed(0)}x',
           item.price.toStringAsFixed(0),
-          '${receiptType == "NR" ? '-' : ''}${total.toStringAsFixed(0)}$taxLabel',
+          '${receiptType == "NR" || receiptType == "CR" ? '-' : ''}${total.toStringAsFixed(0)}$taxLabel',
         ],
       );
       //
@@ -447,8 +489,8 @@ class OmniPrinter implements Printable {
 
     if (receiptType == "TS" ||
         receiptType == "PS" ||
-        // receiptType == "NR" ||
-        receiptType == "CS") {
+        receiptType == "CS" ||
+        receiptType == "CR") {
       row = Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -494,19 +536,38 @@ class OmniPrinter implements Printable {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text('CASH:', style: _receiptTextStyle.copyWith()),
         Text(
-            receiptType == "NR"
+            receiptType == "NR" || receiptType == "CR"
                 ? "-${cash.toStringAsFixed(2)}"
                 : cash.toStringAsFixed(2),
             style: _receiptTextStyle.copyWith()),
       ]),
     );
-
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text('ITEMS NUMBER:', style: _receiptTextStyle.copyWith()),
         Text(items.length.toString(), style: _receiptTextStyle.copyWith()),
       ]),
     );
+    if (receiptType == "CS" || receiptType == "CR" ) {
+      rows.add(CustomPaint(
+        size: const PdfPoint(double.infinity, 10),
+        painter: (PdfGraphics canvas, PdfPoint size) {
+          const double dashWidth = 2.0, dashSpace = 2.0;
+          double startX = 0.0;
+          while (startX < size.x) {
+            canvas
+              ..moveTo(startX, 0)
+              ..lineTo(startX + dashWidth, 0)
+              ..setColor(PdfColors.black)
+              ..setLineWidth(1.0)
+              ..strokePath();
+            startX += dashWidth + dashSpace;
+          }
+        },
+      ));
+      rows.add(Text('COPY',
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)));
+    }
 
     dashedLine();
 
@@ -560,18 +621,6 @@ class OmniPrinter implements Printable {
     required int totRcptNo,
     required DateTime whenCreated,
   }) async {
-    if (receiptType == "CS") {
-      rows.add(
-        Column(children: [
-          Text(
-            "COPY",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ]),
-      );
-      dashedLine();
-    }
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         SizedBox(height: 8),
