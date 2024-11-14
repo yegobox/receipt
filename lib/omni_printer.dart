@@ -84,22 +84,7 @@ class OmniPrinter implements Printable {
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
             Text('REF.NORMAL RECEIPT:# ${int.parse(receiptNumber) - 1}',
                 style: const TextStyle()),
-            CustomPaint(
-              size: const PdfPoint(double.infinity, 10),
-              painter: (PdfGraphics canvas, PdfPoint size) {
-                const double dashWidth = 2.0, dashSpace = 2.0;
-                double startX = 0.0;
-                while (startX < size.x) {
-                  canvas
-                    ..moveTo(startX, 0)
-                    ..lineTo(startX + dashWidth, 0)
-                    ..setColor(PdfColors.black)
-                    ..setLineWidth(1.0)
-                    ..strokePath();
-                  startX += dashWidth + dashSpace;
-                }
-              },
-            ),
+            dashWidget(),
             Text(
                 'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
                 style: const TextStyle()),
@@ -111,43 +96,13 @@ class OmniPrinter implements Printable {
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
             Text('Refund',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-            CustomPaint(
-              size: const PdfPoint(double.infinity, 10),
-              painter: (PdfGraphics canvas, PdfPoint size) {
-                const double dashWidth = 2.0, dashSpace = 2.0;
-                double startX = 0.0;
-                while (startX < size.x) {
-                  canvas
-                    ..moveTo(startX, 0)
-                    ..lineTo(startX + dashWidth, 0)
-                    ..setColor(PdfColors.black)
-                    ..setLineWidth(1.0)
-                    ..strokePath();
-                  startX += dashWidth + dashSpace;
-                }
-              },
-            ),
+            dashWidget(),
 
             /// here we take the existing receipt number -1 to get the receipt number of the refund
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
             Text('REF.NORMAL RECEIPT:# ${int.parse(receiptNumber) - 1}',
                 style: const TextStyle()),
-            CustomPaint(
-              size: const PdfPoint(double.infinity, 10),
-              painter: (PdfGraphics canvas, PdfPoint size) {
-                const double dashWidth = 2.0, dashSpace = 2.0;
-                double startX = 0.0;
-                while (startX < size.x) {
-                  canvas
-                    ..moveTo(startX, 0)
-                    ..lineTo(startX + dashWidth, 0)
-                    ..setColor(PdfColors.black)
-                    ..setLineWidth(1.0)
-                    ..strokePath();
-                  startX += dashWidth + dashSpace;
-                }
-              },
-            ),
+            dashWidget(),
             Text(
                 'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
                 style: const TextStyle()),
@@ -158,18 +113,12 @@ class OmniPrinter implements Printable {
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
           ];
 
-        case "TS":
-          return [
-            Text('TRAINING MODE',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold))
-          ];
         default:
           return [];
       }
     }
 
     rows.add(Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-      // SizedBox(height: 12),
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Image(leftImage, width: 25, height: 25),
         Image(middleImage, width: 25, height: 25),
@@ -187,25 +136,23 @@ class OmniPrinter implements Printable {
       SizedBox(height: 4),
       Text("TIN  : $brandTIN",
           style: TextStyle(fontSize: 10, fontWeight: FontWeight.normal)),
-      SizedBox(height: 4),
-      Column(children: [
-        CustomPaint(
-          size: const PdfPoint(double.infinity, 10),
-          painter: (PdfGraphics canvas, PdfPoint size) {
-            const double dashWidth = 2.0, dashSpace = 2.0;
-            double startX = 0.0;
-            while (startX < size.x) {
-              canvas
-                ..moveTo(startX, 0)
-                ..lineTo(startX + dashWidth, 0)
-                ..setColor(PdfColors.black)
-                ..setLineWidth(1.0)
-                ..strokePath();
-              startX += dashWidth + dashSpace;
-            }
-          },
-        )
-      ]),
+
+      if (receiptType == "TS") SizedBox(height: 4),
+      if (receiptType == "TS")
+        Text("TRAINING MODE",
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+            )),
+      if (receiptType == "PS") SizedBox(height: 4),
+      if (receiptType == "PS")
+        Text("PROFORMA",
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+            )),
+
+      Column(children: [dashWidget()]),
       SizedBox(height: 4),
       if (receiptType != "NR")
         Text('Welcome to our shop',
@@ -220,7 +167,6 @@ class OmniPrinter implements Printable {
       if (receiptType != "NR")
         Text('Customer Name: $customerName',
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-      SizedBox(height: 8),
     ]));
   }
 
@@ -499,6 +445,8 @@ class OmniPrinter implements Printable {
             'THIS IS NOT AN OFFICIAL RECEIPT',
             style: _receiptTextStyle.copyWith(),
           ),
+          // dashLine(),
+          dashWidget(),
           SizedBox(height: 8),
         ],
       );
@@ -548,23 +496,10 @@ class OmniPrinter implements Printable {
         Text(items.length.toString(), style: _receiptTextStyle.copyWith()),
       ]),
     );
-    if (receiptType == "CS" || receiptType == "CR" ) {
-      rows.add(CustomPaint(
-        size: const PdfPoint(double.infinity, 10),
-        painter: (PdfGraphics canvas, PdfPoint size) {
-          const double dashWidth = 2.0, dashSpace = 2.0;
-          double startX = 0.0;
-          while (startX < size.x) {
-            canvas
-              ..moveTo(startX, 0)
-              ..lineTo(startX + dashWidth, 0)
-              ..setColor(PdfColors.black)
-              ..setLineWidth(1.0)
-              ..strokePath();
-            startX += dashWidth + dashSpace;
-          }
-        },
-      ));
+    if (receiptType == "CS" || receiptType == "CR") {
+      rows.add(
+        dashWidget(),
+      );
       rows.add(Text('COPY',
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)));
     }
@@ -581,11 +516,14 @@ class OmniPrinter implements Printable {
       row = Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 8),
           Text(
             'TRAINING MODE',
-            style: _receiptTextStyle.copyWith(),
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          dashWidget(),
           SizedBox(height: 8),
         ],
       );
@@ -596,16 +534,38 @@ class OmniPrinter implements Printable {
       row = Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 8),
           Text(
             'PROFORMA',
-            style: _receiptTextStyle.copyWith(),
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          dashWidget(),
           SizedBox(height: 8),
         ],
       );
       rows.add(row);
     }
+  }
+
+  CustomPaint dashWidget() {
+    return CustomPaint(
+      size: const PdfPoint(double.infinity, 10),
+      painter: (PdfGraphics canvas, PdfPoint size) {
+        const double dashWidth = 2.0, dashSpace = 2.0;
+        double startX = 0.0;
+        while (startX < size.x) {
+          canvas
+            ..moveTo(startX, 0)
+            ..lineTo(startX + dashWidth, 0)
+            ..setColor(PdfColors.black)
+            ..setLineWidth(1.0)
+            ..strokePath();
+          startX += dashWidth + dashSpace;
+        }
+      },
+    );
   }
 
   _footer({
@@ -949,22 +909,7 @@ class OmniPrinter implements Printable {
   void dashedLine({double dashThickness = 1.0}) {
     rows.add(
       Column(children: [
-        CustomPaint(
-          size: const PdfPoint(double.infinity, 10),
-          painter: (PdfGraphics canvas, PdfPoint size) {
-            const double dashWidth = 2.0, dashSpace = 2.0;
-            double startX = 0.0;
-            while (startX < size.x) {
-              canvas
-                ..moveTo(startX, 0)
-                ..lineTo(startX + dashWidth, 0)
-                ..setColor(PdfColors.black)
-                ..setLineWidth(dashThickness)
-                ..strokePath();
-              startX += dashWidth + dashSpace;
-            }
-          },
-        )
+        dashWidget(),
       ]),
     );
   }
