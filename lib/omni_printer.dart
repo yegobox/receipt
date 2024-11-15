@@ -89,6 +89,20 @@ class OmniPrinter implements Printable {
                 'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
                 style: const TextStyle()),
           ];
+        case "TR":
+          return [
+            Text('Refund',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+
+            /// here we take the existing receipt number -1 to get the receipt number of the refund
+            /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
+            Text('REF.NORMAL RECEIPT:# ${int.parse(receiptNumber) - 1}',
+                style: const TextStyle()),
+            dashWidget(),
+            Text(
+                'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
+                style: const TextStyle()),
+          ];
         case "CR":
           return [
             if (receiptType == "CR" || receiptType == "CS")
@@ -174,7 +188,7 @@ class OmniPrinter implements Printable {
       {required String totalTax, required String receiptType}) async {
     String displayTotalTax = totalTax;
 
-    if (receiptType == "NR" || receiptType == "CR") {
+    if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
       displayTotalTax = "-$totalTax";
     }
 
@@ -199,7 +213,7 @@ class OmniPrinter implements Printable {
     if (double.parse(totalTaxB) != 0) {
       String displayTotalTaxB = totalTaxB;
 
-      if (receiptType == "NR" || receiptType == "CR") {
+      if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
         displayTotalTaxB = "-$totalTaxB";
       }
 
@@ -225,7 +239,7 @@ class OmniPrinter implements Printable {
     if (double.parse(totalTaxB) != 0) {
       String displayTotalTaxB = totalTaxB;
 
-      if (receiptType == "NR" || receiptType == "CR") {
+      if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
         displayTotalTaxB = "-$totalTaxB";
       }
 
@@ -251,7 +265,7 @@ class OmniPrinter implements Printable {
     String displayTotalTaxC = totalTaxC;
 
     if (double.parse(displayTotalTaxC) != 0) {
-      if (receiptType == "NR" || receiptType == "CR") {
+      if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
         displayTotalTaxC = "-$totalTaxC";
       }
 
@@ -276,7 +290,7 @@ class OmniPrinter implements Printable {
   _buildTaxD({required String totalTaxD, required String receiptType}) async {
     String displayTotalTaxD = totalTaxD;
     if (double.parse(displayTotalTaxD) != 0) {
-      if (receiptType == "NR" || receiptType == "CR") {
+      if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
         displayTotalTaxD = "-$totalTaxD";
       }
 
@@ -302,7 +316,7 @@ class OmniPrinter implements Printable {
       {required String totalPayable, required String receiptType}) async {
     String total = totalPayable;
 
-    if (receiptType == "NR" || receiptType == "CR") {
+    if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
       total = "-$totalPayable";
     }
 
@@ -326,7 +340,7 @@ class OmniPrinter implements Printable {
   _buildTaxA({required String totalAEx, required String receiptType}) async {
     String displayTotalAEx = totalAEx;
 
-    if (receiptType == "NR" || receiptType == "CR") {
+    if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
       displayTotalAEx = "-$totalAEx";
     }
 
@@ -370,30 +384,55 @@ class OmniPrinter implements Printable {
     required double cash,
   }) async {
     var bodyWidgets = <Widget>[];
-    List<List<String>> data = <List<String>>[];
-
+    List<List<Widget>> data = <List<Widget>>[];
+    const TextStyle smallTextStyle = TextStyle(fontSize: 10);
     for (var item in items) {
       double total = item.price * item.qty;
       String taxLabel = item.taxTyCd != null ? "(${item.taxTyCd!})" : "(B)";
 
+      talker.warning("item.Price: ${item.price}");
+
       // First row: Item name, quantity, price, and total
       data.add(
-        <String>[
-          item.name!.length > 12 ? item.name!.substring(0, 12) : item.name!,
-          '${item.qty.toStringAsFixed(0)}x',
-          item.price.toStringAsFixed(0),
-          '${receiptType == "NR" || receiptType == "CR" ? '-' : ''}${total.toStringAsFixed(0)}$taxLabel',
+        <Widget>[
+          Text(
+            item.name!.length > 12 ? item.name!.substring(0, 12) : item.name!,
+            style: smallTextStyle,
+          ),
+          Text(
+            '${item.qty.toStringAsFixed(0)}x',
+            style: smallTextStyle,
+          ),
+          Text(
+            item.price.toNoCurrency(),
+            style: smallTextStyle,
+          ),
+          Text(
+            '${receiptType == "NR" || receiptType == "CR" || receiptType == "TR" ? '-' : ''}${total.toNoCurrencyFormatted()}$taxLabel',
+            style: smallTextStyle,
+          ),
         ],
       );
-      //
-      // Second row: Discount information (if exists)
+
       if (item.dcRt != 0) {
         data.add(
-          <String>[
-            'Discount -${item.dcRt}%',
-            '',
-            '',
-            '${(total).toStringAsFixed(0)}',
+          <Widget>[
+            Text(
+              'Discount -${item.dcRt}%',
+              style: smallTextStyle,
+            ),
+            Text(
+              '',
+              style: smallTextStyle,
+            ),
+            Text(
+              '',
+              style: smallTextStyle,
+            ),
+            Text(
+              ((total).toStringAsFixed(0)),
+              style: smallTextStyle,
+            ),
           ],
         );
       }
@@ -436,7 +475,8 @@ class OmniPrinter implements Printable {
     if (receiptType == "TS" ||
         receiptType == "PS" ||
         receiptType == "CS" ||
-        receiptType == "CR") {
+        receiptType == "CR" ||
+        receiptType == "TR") {
       row = Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -475,7 +515,7 @@ class OmniPrinter implements Printable {
     dashedLine();
 
     String total = received.toString();
-    if (receiptType == "NR") {
+    if (receiptType == "NR" || receiptType == "TR") {
       total = "-$total";
     }
 
@@ -484,7 +524,7 @@ class OmniPrinter implements Printable {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text('CASH:', style: _receiptTextStyle.copyWith()),
         Text(
-            receiptType == "NR" || receiptType == "CR"
+            receiptType == "NR" || receiptType == "CR" || receiptType == "TR"
                 ? "-${cash.toStringAsFixed(2)}"
                 : cash.toStringAsFixed(2),
             style: _receiptTextStyle.copyWith()),
@@ -500,6 +540,7 @@ class OmniPrinter implements Printable {
       rows.add(
         dashWidget(),
       );
+
       rows.add(Text('COPY',
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)));
     }
@@ -631,60 +672,59 @@ class OmniPrinter implements Printable {
     );
     rows.add(
       Column(children: [
-        SizedBox(height: 12),
+        SizedBox(height: 4),
       ]),
     );
-    rows.add(
-      Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        Text(
-          "Internal Data",
-        ),
-        Text(
-          internalData.toDashedStringInternalData(),
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-        ),
-      ]),
-    );
-    rows.add(
-      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(
-          "Receipt Signature:",
-        ),
-        Text(
-          receiptSignature.toDashedStringRcptSign(),
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-        ),
-      ]),
-    );
+    if (receiptType != "PS" && receiptType != "TS") {
+      rows.add(
+        Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          Text(
+            "Internal Data",
+          ),
+          Text(
+            internalData.toDashedStringInternalData(),
+            style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+          ),
+        ]),
+      );
+      rows.add(
+        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(
+            "Receipt Signature:",
+          ),
+          Text(
+            receiptSignature.toDashedStringRcptSign(),
+            style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+          ),
+        ]),
+      );
+    }
 
     rows.add(
       Column(children: [
         SizedBox(height: 1),
       ]),
     );
-    rows.add(
-      Column(children: [
-        SizedBox(height: 4),
-      ]),
-    );
-    rows.add(
-      Column(children: [
-        SizedBox(),
-        Center(
-          child: SizedBox(
-            width: 40,
-            height: 40,
-            child: BarcodeWidget(
-              barcode: Barcode.qrCode(
-                errorCorrectLevel: BarcodeQRCorrectionLevel.high,
+    if (receiptType != "PS" && receiptType != "TS") {
+      rows.add(
+        Column(children: [
+          SizedBox(),
+          Center(
+            child: SizedBox(
+              width: 40,
+              height: 40,
+              child: BarcodeWidget(
+                barcode: Barcode.qrCode(
+                  errorCorrectLevel: BarcodeQRCorrectionLevel.high,
+                ),
+                data: receiptQrCode,
               ),
-              data: receiptQrCode,
             ),
           ),
-        ),
-        SizedBox(),
-      ]),
-    );
+          SizedBox(),
+        ]),
+      );
+    }
     dashedLine();
 
     rows.add(
