@@ -143,7 +143,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
                       pw.Container(
-                        width: 250,
+                        // width: 250,
                         decoration: pw.BoxDecoration(
                           border: pw.Border.all(
                             color: PdfColors.black,
@@ -164,7 +164,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                       ),
                       pw.SizedBox(width: 10),
                       pw.Container(
-                        width: 250,
+                        // width: 250,
                         decoration: pw.BoxDecoration(
                           border: pw.Border.all(
                             color: PdfColors.black,
@@ -176,7 +176,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                           child: pw.Column(
                             crossAxisAlignment: pw.CrossAxisAlignment.start,
                             children: [
-                              pw.Text('INVOICE NO: $invoiceNum'),
+                              pw.Text('INVOICE NO: $rcptNo'),
                               pw.SizedBox(height: 5),
                               pw.Text('Date: $whenCreated'),
                             ],
@@ -205,7 +205,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                       item.itemCd,
                       item.name,
                       '${item.qty}',
-                      'D',
+                      '${item.taxTyCd}',
                       '${item.price}',
                       '${item.qty * item.price}'
                     ],
@@ -215,14 +215,18 @@ class OmniPrinterA4 with SaveFile implements Printable {
                 cellStyle: const pw.TextStyle(fontSize: 10),
                 cellAlignment: pw.Alignment.center,
                 columnWidths: {
-                  0: const pw.FixedColumnWidth(
-                      60), // Adjust column width as needed
-                  1: const pw.FlexColumnWidth(), // Make description flexible
+                  // Adjust column width as needed
+                  0: const pw.FixedColumnWidth(60),
+                  // Make description flexible
+                  1: const pw.FlexColumnWidth(),
                   2: const pw.FixedColumnWidth(30),
                   3: const pw.FixedColumnWidth(30),
                   4: const pw.FixedColumnWidth(60),
                   5: const pw.FixedColumnWidth(60),
                 },
+                rowDecoration: const pw.BoxDecoration(
+                    border: pw.Border(left: pw.BorderSide.none)),
+                border: pw.TableBorder.all(width: 0),
               ),
 
               pw.SizedBox(height: 20),
@@ -320,18 +324,19 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 ),
                               ],
                             ),
-                            pw.TableRow(
-                              children: [
-                                pw.Padding(
-                                  padding: const pw.EdgeInsets.all(4),
-                                  child: pw.Text('Total A-EX Rwf:'),
-                                ),
-                                pw.Padding(
-                                  padding: const pw.EdgeInsets.all(4),
-                                  child: pw.Text(totalTaxA.toNoCurrency()),
-                                ),
-                              ],
-                            ),
+                            if (totalTaxA != 0)
+                              pw.TableRow(
+                                children: [
+                                  pw.Padding(
+                                    padding: const pw.EdgeInsets.all(4),
+                                    child: pw.Text('Total A-EX Rwf:'),
+                                  ),
+                                  pw.Padding(
+                                    padding: const pw.EdgeInsets.all(4),
+                                    child: pw.Text(totalTaxA.toNoCurrency()),
+                                  ),
+                                ],
+                              ),
                             pw.TableRow(
                               children: [
                                 pw.Padding(
@@ -344,18 +349,19 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 ),
                               ],
                             ),
-                            pw.TableRow(
-                              children: [
-                                pw.Padding(
-                                  padding: const pw.EdgeInsets.all(4),
-                                  child: pw.Text('Total D:'),
-                                ),
-                                pw.Padding(
-                                  padding: const pw.EdgeInsets.all(4),
-                                  child: pw.Text(totalTaxD.toNoCurrency()),
-                                ),
-                              ],
-                            ),
+                            if (totalTaxD != 0)
+                              pw.TableRow(
+                                children: [
+                                  pw.Padding(
+                                    padding: const pw.EdgeInsets.all(4),
+                                    child: pw.Text('Total D:'),
+                                  ),
+                                  pw.Padding(
+                                    padding: const pw.EdgeInsets.all(4),
+                                    child: pw.Text(totalTaxD.toNoCurrency()),
+                                  ),
+                                ],
+                              ),
                             pw.TableRow(
                               children: [
                                 pw.Padding(
