@@ -583,25 +583,6 @@ class OmniPrinter with SaveFile implements Printable {
     }
   }
 
-  CustomPaint dashWidget() {
-    return CustomPaint(
-      size: const PdfPoint(double.infinity, 10),
-      painter: (PdfGraphics canvas, PdfPoint size) {
-        const double dashWidth = 2.0, dashSpace = 2.0;
-        double startX = 0.0;
-        while (startX < size.x) {
-          canvas
-            ..moveTo(startX, 0)
-            ..lineTo(startX + dashWidth, 0)
-            ..setColor(PdfColors.black)
-            ..setLineWidth(1.0)
-            ..strokePath();
-          startX += dashWidth + dashSpace;
-        }
-      },
-    );
-  }
-
   _footer({
     required ITransaction transaction,
     required String sdcId,

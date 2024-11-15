@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -16,6 +17,25 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 
 mixin SaveFile {
+  CustomPaint dashWidget() {
+    return CustomPaint(
+      size: const PdfPoint(double.infinity, 10),
+      painter: (PdfGraphics canvas, PdfPoint size) {
+        const double dashWidth = 2.0, dashSpace = 2.0;
+        double startX = 0.0;
+        while (startX < size.x) {
+          canvas
+            ..moveTo(startX, 0)
+            ..lineTo(startX + dashWidth, 0)
+            ..setColor(PdfColors.black)
+            ..setLineWidth(1.0)
+            ..strokePath();
+          startX += dashWidth + dashSpace;
+        }
+      },
+    );
+  }
+
   /// Prints the provided PDF data by sending it to the system printing dialog.
   ///
   /// The `pdfData` parameter contains the raw bytes of the PDF file to print.
