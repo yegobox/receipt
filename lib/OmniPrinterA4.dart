@@ -206,8 +206,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
                       item.name,
                       '${item.qty}',
                       '${item.taxTyCd}',
-                      '${item.price}',
-                      '${item.qty * item.price}'
+                      ((item.price).toNoCurrencyFormatted()),
+                      ((item.qty * item.price).toNoCurrencyFormatted())
                     ],
                 ],
                 headerStyle:
@@ -252,17 +252,19 @@ class OmniPrinterA4 with SaveFile implements Printable {
                           'Receipt Number: $rcptNo/$totRcptNo ($receiptType)',
                           style: const pw.TextStyle(fontSize: 10),
                         ),
-                        pw.Text(
-                          'Internal Data: ${internalData.toDashedStringInternalData()}',
-                          style: const pw.TextStyle(fontSize: 10),
-                        ),
-                        pw.Text(
-                          'Receipt Signature: ${receiptSignature.toDashedStringRcptSign()}',
-                          style: const pw.TextStyle(fontSize: 10),
-                        ),
+                        if (receiptType != "PS" && receiptType != "TS")
+                          pw.Text(
+                            'Internal Data: ${internalData.toDashedStringInternalData()}',
+                            style: const pw.TextStyle(fontSize: 10),
+                          ),
+                        if (receiptType != "PS" && receiptType != "TS")
+                          pw.Text(
+                            'Receipt Signature: ${receiptSignature.toDashedStringRcptSign()}',
+                            style: const pw.TextStyle(fontSize: 10),
+                          ),
                         dashWidget(),
                         pw.Text(
-                          'Receipt Number: ${receiptSignature.toDashedStringRcptSign()}',
+                          'Receipt Number: $rcptNo/$totRcptNo ($receiptType)',
                           style: const pw.TextStyle(fontSize: 10),
                         ),
                         pw.Text('Date: $whenCreated',
@@ -273,19 +275,21 @@ class OmniPrinterA4 with SaveFile implements Printable {
                       ],
                     ),
                   ),
-                  pw.SizedBox(width: 20),
-                  pw.Center(
-                    child: pw.SizedBox(
-                      width: 60,
-                      height: 60,
-                      child: BarcodeWidget(
-                        barcode: Barcode.qrCode(
-                          errorCorrectLevel: BarcodeQRCorrectionLevel.high,
+                  if (receiptType != "PS" && receiptType != "TS")
+                    pw.SizedBox(width: 20),
+                  if (receiptType != "PS" && receiptType != "TS")
+                    pw.Center(
+                      child: pw.SizedBox(
+                        width: 60,
+                        height: 60,
+                        child: BarcodeWidget(
+                          barcode: Barcode.qrCode(
+                            errorCorrectLevel: BarcodeQRCorrectionLevel.high,
+                          ),
+                          data: receiptQrCode,
                         ),
-                        data: receiptQrCode,
                       ),
                     ),
-                  ),
 
                   pw.SizedBox(width: 20), // Space between columns
 
@@ -320,7 +324,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 ),
                                 pw.Padding(
                                   padding: const pw.EdgeInsets.all(4),
-                                  child: pw.Text(totalPayable.toNoCurrency()),
+                                  child: pw.Text(
+                                      totalPayable.toNoCurrencyFormatted()),
                                 ),
                               ],
                             ),
@@ -333,7 +338,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   ),
                                   pw.Padding(
                                     padding: const pw.EdgeInsets.all(4),
-                                    child: pw.Text(totalTaxA.toNoCurrency()),
+                                    child: pw.Text(
+                                        totalTaxA.toNoCurrencyFormatted()),
                                   ),
                                 ],
                               ),
@@ -345,7 +351,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 ),
                                 pw.Padding(
                                   padding: const pw.EdgeInsets.all(4),
-                                  child: pw.Text(totalTaxB.toNoCurrency()),
+                                  child: pw.Text(
+                                      totalTaxB.toNoCurrencyFormatted()),
                                 ),
                               ],
                             ),
@@ -358,7 +365,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   ),
                                   pw.Padding(
                                     padding: const pw.EdgeInsets.all(4),
-                                    child: pw.Text(totalTaxD.toNoCurrency()),
+                                    child: pw.Text(
+                                        totalTaxD.toNoCurrencyFormatted()),
                                   ),
                                 ],
                               ),
@@ -370,7 +378,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 ),
                                 pw.Padding(
                                   padding: const pw.EdgeInsets.all(4),
-                                  child: pw.Text(totalTax),
+                                  child: pw.Text(double.parse(totalTax)
+                                      .toNoCurrencyFormatted()),
                                 ),
                               ],
                             ),
