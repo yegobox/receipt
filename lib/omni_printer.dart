@@ -202,7 +202,8 @@ class OmniPrinter with SaveFile implements Printable {
     );
   }
 
-  _buildTaxBB({required String totalTaxB, required String receiptType}) async {
+  _buildTotalTaxB(
+      {required String totalTaxB, required String receiptType}) async {
     if (double.parse(totalTaxB) != 0) {
       String displayTotalTaxB = totalTaxB;
 
@@ -228,7 +229,7 @@ class OmniPrinter with SaveFile implements Printable {
     }
   }
 
-  _buildTaxB({required String totalTaxB, required String receiptType}) async {
+  _buildTaxB18({required String totalTaxB, required String receiptType}) async {
     if (double.parse(totalTaxB) != 0) {
       String displayTotalTaxB = totalTaxB;
 
@@ -353,11 +354,6 @@ class OmniPrinter with SaveFile implements Printable {
       ),
     );
   }
-//   TOTAL:                     410.0
-// TOTAL A-EX                 400.0
-// TOTAL B-18%               10.0
-// TOTAL TAX-B                1.53
-// TOTAL TAX              401.53
 
   _body({
     required List<TransactionItem> items,
@@ -375,8 +371,10 @@ class OmniPrinter with SaveFile implements Printable {
     required double received,
     required String cashierName,
     required double cash,
+    required double totalDiscount,
   }) async {
     var bodyWidgets = <Widget>[];
+
     List<List<Widget>> data = <List<Widget>>[];
     const TextStyle smallTextStyle = TextStyle(fontSize: 10);
     for (var item in items) {
@@ -411,7 +409,7 @@ class OmniPrinter with SaveFile implements Printable {
         data.add(
           <Widget>[
             Text(
-              'Discount -${item.dcRt}%',
+              'Discount - ${item.dcRt} %',
               style: smallTextStyle,
             ),
             Text(
@@ -423,7 +421,7 @@ class OmniPrinter with SaveFile implements Printable {
               style: smallTextStyle,
             ),
             Text(
-              ((total).toStringAsFixed(0)),
+              (total - ((total * item.dcRt) / 100)).toStringAsFixed(2),
               style: smallTextStyle,
             ),
           ],
@@ -485,13 +483,15 @@ class OmniPrinter with SaveFile implements Printable {
       );
       rows.add(row);
     }
-
-    await _buildTotal(totalPayable: totalPayable, receiptType: receiptType);
-    await _buildTaxB(totalTaxB: totalTaxB, receiptType: receiptType);
+    final totalWithDiscount =
+        (double.tryParse(totalPayable) ?? 0.0) - totalDiscount;
+    await _buildTotal(
+        totalPayable: totalWithDiscount.toString(), receiptType: receiptType);
+    await _buildTaxB18(totalTaxB: totalTaxB, receiptType: receiptType);
     await _buildTaxA(
         totalAEx: taxA.toStringAsFixed(2), receiptType: receiptType);
 
-    await _buildTaxBB(
+    await _buildTotalTaxB(
         totalTaxB: taxB.toStringAsFixed(2), receiptType: receiptType);
     await _buildTaxC(
         totalTaxC: taxC.toStringAsFixed(2), receiptType: receiptType);
@@ -805,6 +805,7 @@ class OmniPrinter with SaveFile implements Printable {
     required double taxA,
     required double taxB,
     required double taxC,
+    required double totalDiscount,
     required double taxD,
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
@@ -857,9 +858,13 @@ class OmniPrinter with SaveFile implements Printable {
         receiptNumber: invoiceNum.toString(),
         customerName: customerName);
     dashedLine();
+    final cash =
+        items.map((e) => e.price * e.qty).reduce((sum, value) => sum + value) -
+            totalDiscount;
     await _body(
       items: items,
       totalTax: totalTax,
+      totalDiscount: totalDiscount,
       taxB: taxB,
       taxA: taxA,
       taxC: taxC,
@@ -868,8 +873,7 @@ class OmniPrinter with SaveFile implements Printable {
       totalTaxB: totalTaxB.toStringAsFixed(2),
       totalTaxC: totalTaxC.toStringAsFixed(2),
       totalTaxD: totalTaxD.toStringAsFixed(2),
-      cash:
-          items.map((e) => e.price * e.qty).reduce((sum, value) => sum + value),
+      cash: cash,
       cashierName: cashierName,
       received: received,
       // payMode: payMode,

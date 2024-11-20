@@ -26,6 +26,7 @@ dependencies:
   dotted_line: ^3.2.2
   talker_flutter: ^4.1.5
   sentry_flutter: ^8.9.0
+  syncfusion_flutter_pdf: ^26.2.14
   
 dependency_overrides:
   http: ^1.2.2
@@ -42,4 +43,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/
+    - assets/logo_left.png
+    - assets/flipper_logo.png
+    - assets/logo_right.png

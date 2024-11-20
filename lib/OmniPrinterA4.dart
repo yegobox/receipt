@@ -43,6 +43,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     required double taxB,
     required double taxC,
     required double taxD,
+    required double totalDiscount,
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
     String brandTel = "271311123",
@@ -190,43 +191,60 @@ class OmniPrinterA4 with SaveFile implements Printable {
               pw.SizedBox(height: 15),
 
               // Item Table Header
-              pw.TableHelper.fromTextArray(
-                headers: [
-                  'Item Code',
-                  'Description',
-                  'Qty',
-                  'Tax',
-                  'Unit Price',
-                  'Total Price'
-                ],
-                data: [
-                  for (var item in items)
-                    [
-                      item.itemCd,
-                      item.name,
-                      '${item.qty}',
-                      '${item.taxTyCd}',
-                      ((item.price).toNoCurrencyFormatted()),
-                      ((item.qty * item.price).toNoCurrencyFormatted())
-                    ],
-                ],
-                headerStyle:
-                    pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 10),
-                cellStyle: const pw.TextStyle(fontSize: 10),
-                cellAlignment: pw.Alignment.center,
-                columnWidths: {
-                  // Adjust column width as needed
-                  0: const pw.FixedColumnWidth(60),
-                  // Make description flexible
-                  1: const pw.FlexColumnWidth(),
-                  2: const pw.FixedColumnWidth(30),
-                  3: const pw.FixedColumnWidth(30),
-                  4: const pw.FixedColumnWidth(60),
-                  5: const pw.FixedColumnWidth(60),
-                },
-                rowDecoration: const pw.BoxDecoration(
-                    border: pw.Border(left: pw.BorderSide.none)),
-                border: pw.TableBorder.all(width: 0),
+              pw.Container(
+                height: 200, // Minimum height for the table
+                child: pw.TableHelper.fromTextArray(
+                  headers: [
+                    'Item Code',
+                    'Description',
+                    'Qty',
+                    'Tax',
+                    'Unit Price',
+                    'Total Price'
+                  ],
+                  data: [
+                    for (var item in items)
+                      [
+                        item.itemCd,
+                        item.name,
+                        '${item.qty}',
+                        '${item.taxTyCd}',
+                        ((item.price).toNoCurrencyFormatted()),
+                        ((item.qty * item.price).toNoCurrencyFormatted())
+                      ],
+                  ],
+                  headerStyle: pw.TextStyle(
+                      fontWeight: pw.FontWeight.bold, fontSize: 10),
+                  cellStyle: const pw.TextStyle(fontSize: 10),
+                  cellAlignment: pw.Alignment.center,
+                  columnWidths: {
+                    0: const pw.FixedColumnWidth(60),
+                    1: const pw.FlexColumnWidth(),
+                    2: const pw.FixedColumnWidth(30),
+                    3: const pw.FixedColumnWidth(30),
+                    4: const pw.FixedColumnWidth(60),
+                    5: const pw.FixedColumnWidth(60),
+                  },
+                  headerDecoration: const pw.BoxDecoration(
+                    border: pw.Border(
+                      top: pw.BorderSide(width: 0.5),
+                      bottom: pw.BorderSide(width: 0.5),
+                      left: pw.BorderSide(width: 0.5),
+                      right: pw.BorderSide(width: 0.5),
+                    ),
+                  ),
+                  // Apply bottom border to the last row only
+                  rowDecoration: const pw.BoxDecoration(
+                    border: pw.Border(
+                      bottom: pw.BorderSide.none, // Border for the last row
+                    ),
+                  ),
+                  border: const pw.TableBorder(
+                    right: pw.BorderSide(width: 0.5),
+                    left: pw.BorderSide(width: 0.5),
+                    bottom: pw.BorderSide(width: 0.5),
+                  ),
+                ),
               ),
 
               pw.SizedBox(height: 20),

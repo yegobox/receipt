@@ -28,7 +28,7 @@ mixin SaveFile {
             ..moveTo(startX, 0)
             ..lineTo(startX + dashWidth, 0)
             ..setColor(PdfColors.black)
-            ..setLineWidth(1.0)
+            ..setLineWidth(0.5)
             ..strokePath();
           startX += dashWidth + dashSpace;
         }
