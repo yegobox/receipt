@@ -1,13 +1,11 @@
 import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
+import 'package:pdf/widgets.dart';
 import 'package:receipt/SaveFile.dart';
 import 'package:receipt/printable.dart';
 import 'package:flipper_models/realm_model_export.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart' as c;
 import 'package:printing/printing.dart';
-import 'package:pdf/widgets.dart';
-import 'package:pdf/widgets.dart' as pw;
 
 class OmniPrinterA4 with SaveFile implements Printable {
   Future<ImageProvider?> _loadLogoImage({required String position}) async {
@@ -78,108 +76,97 @@ class OmniPrinterA4 with SaveFile implements Printable {
     required DateTime whenCreated,
     required Function(Uint8List bytes) printCallback,
   }) async {
-    final pdf = pw.Document();
+    final pdf = Document();
     final left = await _loadLogoImage(position: "left");
     final middle = await _loadLogoImage(position: "middle");
     final right = await _loadLogoImage(position: "right");
     pdf.addPage(
-      pw.Page(
+      Page(
         pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) {
-          return pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
+        build: (Context context) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Header Section
-              pw.Row(
-                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  if (left != null)
-                    pw.Image(left, width: 40, height: 40)
-                  else
-                    // Ensures consistent space if image is absent
-                    pw.SizedBox(width: 100),
-                  pw.Column(
-                    crossAxisAlignment: pw.CrossAxisAlignment.center,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (middle != null)
-                        pw.Image(middle, width: 40, height: 40)
-                      else
-                        // Ensures consistent space if image is absent
-                        pw.SizedBox(width: 100),
-                      pw.Text(
-                        brandName.substring(
-                            0, brandName.length > 20 ? 20 : brandName.length),
-                        style: pw.TextStyle(
-                          fontSize: 20,
-                          fontWeight: pw.FontWeight.bold,
-                        ),
-                      ),
-                      pw.SizedBox(height: 4),
-                      // pw.Text(brandName),
-                      pw.SizedBox(height: 2),
-                      pw.Text('TEL: $brandTel'),
-                      pw.SizedBox(height: 2),
-                      // pw.Text('EMAIL: ntiginamajm@gmail.com'),
-                      pw.SizedBox(height: 2),
-                      pw.Text('TIN: $brandTIN'),
+                      if (left != null) Image(left, width: 40, height: 40),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            brandName.substring(0,
+                                brandName.length > 20 ? 20 : brandName.length),
+                          ),
+                          SizedBox(height: 4),
+                          Text('TEL: $brandTel'),
+                          SizedBox(height: 2),
+                          Text('TIN: $brandTIN'),
+                        ],
+                      )
                     ],
                   ),
+                  SizedBox(width: 100),
                   if (right != null)
-                    pw.Image(right, width: 40, height: 40)
+                    Image(right, width: 40, height: 40)
                   else
-                    pw.SizedBox(width: 100), // Consistent space
+                    SizedBox(width: 100),
                 ],
               ),
-              pw.SizedBox(height: 20),
+              SizedBox(height: 20),
 
               // Invoice Information
-              pw.Column(
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  pw.Text('INVOICE TO',
-                      style: pw.TextStyle(
-                          fontSize: 12, fontWeight: pw.FontWeight.bold)),
-                  pw.SizedBox(height: 5),
-                  pw.Row(
-                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  Text('INVOICE TO',
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                  SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      pw.Container(
+                      Container(
                         // width: 250,
-                        decoration: pw.BoxDecoration(
-                          border: pw.Border.all(
+                        decoration: BoxDecoration(
+                          border: Border.all(
                             color: PdfColors.black,
                             width: 0.5,
                           ),
                         ),
-                        child: pw.Padding(
-                          padding: const pw.EdgeInsets.all(8),
-                          child: pw.Column(
-                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              pw.Text('TIN: $customerTin'),
-                              pw.SizedBox(height: 5),
-                              pw.Text('Name: $customerName'),
+                              Text('TIN: $customerTin'),
+                              SizedBox(height: 5),
+                              Text('Name: $customerName'),
                             ],
                           ),
                         ),
                       ),
-                      pw.SizedBox(width: 10),
-                      pw.Container(
+                      SizedBox(width: 10),
+                      Container(
                         // width: 250,
-                        decoration: pw.BoxDecoration(
-                          border: pw.Border.all(
+                        decoration: BoxDecoration(
+                          border: Border.all(
                             color: PdfColors.black,
                             width: 0.5,
                           ),
                         ),
-                        child: pw.Padding(
-                          padding: const pw.EdgeInsets.all(8),
-                          child: pw.Column(
-                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              pw.Text('INVOICE NO: $rcptNo'),
-                              pw.SizedBox(height: 5),
-                              pw.Text('Date: $whenCreated'),
+                              Text('INVOICE NO: $rcptNo'),
+                              SizedBox(height: 5),
+                              Text('Date: $whenCreated'),
                             ],
                           ),
                         ),
@@ -188,116 +175,128 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   )
                 ],
               ),
-              pw.SizedBox(height: 15),
+              SizedBox(height: 15),
 
               // Item Table Header
-              pw.Container(
-                height: 200, // Minimum height for the table
-                child: pw.TableHelper.fromTextArray(
-                  headers: [
-                    'Item Code',
-                    'Description',
-                    'Qty',
-                    'Tax',
-                    'Unit Price',
-                    'Total Price'
-                  ],
-                  data: [
-                    for (var item in items)
-                      [
-                        item.itemCd,
-                        item.name,
-                        '${item.qty}',
-                        '${item.taxTyCd}',
-                        ((item.price).toNoCurrencyFormatted()),
-                        ((item.qty * item.price).toNoCurrencyFormatted())
-                      ],
-                  ],
-                  headerStyle: pw.TextStyle(
-                      fontWeight: pw.FontWeight.bold, fontSize: 10),
-                  cellStyle: const pw.TextStyle(fontSize: 10),
-                  cellAlignment: pw.Alignment.center,
-                  columnWidths: {
-                    0: const pw.FixedColumnWidth(60),
-                    1: const pw.FlexColumnWidth(),
-                    2: const pw.FixedColumnWidth(30),
-                    3: const pw.FixedColumnWidth(30),
-                    4: const pw.FixedColumnWidth(60),
-                    5: const pw.FixedColumnWidth(60),
-                  },
-                  headerDecoration: const pw.BoxDecoration(
-                    border: pw.Border(
-                      top: pw.BorderSide(width: 0.5),
-                      bottom: pw.BorderSide(width: 0.5),
-                      left: pw.BorderSide(width: 0.5),
-                      right: pw.BorderSide(width: 0.5),
-                    ),
-                  ),
-                  // Apply bottom border to the last row only
-                  rowDecoration: const pw.BoxDecoration(
-                    border: pw.Border(
-                      bottom: pw.BorderSide.none, // Border for the last row
-                    ),
-                  ),
-                  border: const pw.TableBorder(
-                    right: pw.BorderSide(width: 0.5),
-                    left: pw.BorderSide(width: 0.5),
-                    bottom: pw.BorderSide(width: 0.5),
+              TableHelper.fromTextArray(
+                headers: [
+                  'Item Code',
+                  'Description',
+                  'Qty',
+                  'Tax',
+                  'Unit Price',
+                  'Total Price'
+                ],
+                data: [
+                  for (var item in items)
+                    [
+                      item.itemCd,
+                      Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(item.name ?? ""),
+                            if (item.dcRt != 0)
+                              Text("Discount - ${item.dcRt}%"),
+                          ]),
+                      '${item.qty}',
+                      '${item.taxTyCd}',
+                      ((item.price).toNoCurrencyFormatted()),
+                      Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(((item.qty * item.price)
+                                .toNoCurrencyFormatted())),
+                            Text(((item.qty * item.price) -
+                                    (item.qty * item.price * item.dcRt / 100))
+                                .toNoCurrencyFormatted()),
+                          ]),
+                    ],
+                ],
+                headerStyle:
+                    TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+                cellStyle: const TextStyle(fontSize: 10),
+                cellAlignment: Alignment.topLeft,
+                headerHeight: 40,
+                columnWidths: {
+                  0: const FixedColumnWidth(60),
+                  1: const FlexColumnWidth(),
+                  2: const FixedColumnWidth(30),
+                  3: const FixedColumnWidth(30),
+                  4: const FixedColumnWidth(60),
+                  5: const FixedColumnWidth(60),
+                },
+                headerDecoration: const BoxDecoration(
+                  border: Border(
+                    top: BorderSide(width: 0.5),
+                    bottom: BorderSide(width: 0.5),
+                    left: BorderSide(width: 0.5),
+                    right: BorderSide(width: 0.5),
                   ),
                 ),
+                border: const TableBorder(
+                  right: BorderSide(width: 0.5),
+                  left: BorderSide(width: 0.5),
+                  bottom: BorderSide(width: 0.5),
+                  horizontalInside: BorderSide.none,
+                  verticalInside: BorderSide(width: 0.5),
+                ),
+                cellPadding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
               ),
 
-              pw.SizedBox(height: 20),
+              SizedBox(height: 20),
 
-              pw.Row(
-                mainAxisAlignment: pw.MainAxisAlignment.start,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   // SDC Information
-                  pw.Expanded(
-                    child: pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        pw.Text('SDC INFORMATION',
-                            style: pw.TextStyle(
-                                fontSize: 10, fontWeight: pw.FontWeight.bold)),
+                        Text('SDC INFORMATION',
+                            style: TextStyle(
+                                fontSize: 10, fontWeight: FontWeight.bold)),
                         dashWidget(),
-                        pw.SizedBox(height: 5),
-                        pw.Text('Date: $whenCreated',
-                            style: const pw.TextStyle(fontSize: 10)),
-                        pw.Text('SDC ID: $sdcId',
-                            style: const pw.TextStyle(fontSize: 10)),
-                        pw.Text(
+                        SizedBox(height: 5),
+                        Text('Date: $whenCreated',
+                            style: const TextStyle(fontSize: 10)),
+                        Text('SDC ID: $sdcId',
+                            style: const TextStyle(fontSize: 10)),
+                        Text(
                           'Receipt Number: $rcptNo/$totRcptNo ($receiptType)',
-                          style: const pw.TextStyle(fontSize: 10),
+                          style: const TextStyle(fontSize: 10),
                         ),
                         if (receiptType != "PS" && receiptType != "TS")
-                          pw.Text(
+                          Text(
                             'Internal Data: ${internalData.toDashedStringInternalData()}',
-                            style: const pw.TextStyle(fontSize: 10),
+                            style: const TextStyle(fontSize: 10),
                           ),
                         if (receiptType != "PS" && receiptType != "TS")
-                          pw.Text(
+                          Text(
                             'Receipt Signature: ${receiptSignature.toDashedStringRcptSign()}',
-                            style: const pw.TextStyle(fontSize: 10),
+                            style: const TextStyle(fontSize: 10),
                           ),
+                        SizedBox(height: 5),
                         dashWidget(),
-                        pw.Text(
+                        SizedBox(height: 5),
+                        Text(
                           'Receipt Number: $rcptNo/$totRcptNo ($receiptType)',
-                          style: const pw.TextStyle(fontSize: 10),
+                          style: const TextStyle(fontSize: 10),
                         ),
-                        pw.Text('Date: $whenCreated',
-                            style: const pw.TextStyle(fontSize: 10)),
-                        pw.Text('MRC: $mrc',
-                            style: const pw.TextStyle(fontSize: 10)),
+                        Text('Date: $whenCreated',
+                            style: const TextStyle(fontSize: 10)),
+                        Text('MRC: $mrc', style: const TextStyle(fontSize: 10)),
                         dashWidget(),
                       ],
                     ),
                   ),
                   if (receiptType != "PS" && receiptType != "TS")
-                    pw.SizedBox(width: 20),
+                    SizedBox(width: 20),
                   if (receiptType != "PS" && receiptType != "TS")
-                    pw.Center(
-                      child: pw.SizedBox(
+                    Center(
+                      child: SizedBox(
                         width: 60,
                         height: 60,
                         child: BarcodeWidget(
@@ -309,94 +308,78 @@ class OmniPrinterA4 with SaveFile implements Printable {
                       ),
                     ),
 
-                  pw.SizedBox(width: 20), // Space between columns
+                  SizedBox(width: 20), // Space between columns
 
                   // Summary Table
-                  pw.Expanded(
-                    child: pw.Column(
+                  Expanded(
+                    child: Column(
                       children: [
-                        pw.Table(
-                          border: pw.TableBorder.all(width: 0.5),
+                        Table(
+                          border: TableBorder.all(width: 0.5),
                           children: [
-                            pw.TableRow(
+                            TableRow(
                               children: [
-                                pw.Padding(
-                                  padding: const pw.EdgeInsets.all(4),
-                                  child: pw.Text('Description',
-                                      style: pw.TextStyle(
-                                          fontWeight: pw.FontWeight.bold)),
+                                Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child: Text('Total Rwf'),
                                 ),
-                                pw.Padding(
-                                  padding: const pw.EdgeInsets.all(4),
-                                  child: pw.Text('Amount',
-                                      style: pw.TextStyle(
-                                          fontWeight: pw.FontWeight.bold)),
-                                ),
-                              ],
-                            ),
-                            pw.TableRow(
-                              children: [
-                                pw.Padding(
-                                  padding: const pw.EdgeInsets.all(4),
-                                  child: pw.Text('Total Rwf:'),
-                                ),
-                                pw.Padding(
-                                  padding: const pw.EdgeInsets.all(4),
-                                  child: pw.Text(
+                                Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child: Text(
                                       totalPayable.toNoCurrencyFormatted()),
                                 ),
                               ],
                             ),
                             if (totalTaxA != 0)
-                              pw.TableRow(
+                              TableRow(
                                 children: [
-                                  pw.Padding(
-                                    padding: const pw.EdgeInsets.all(4),
-                                    child: pw.Text('Total A-EX Rwf:'),
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: Text('Total A-EX Rwf'),
                                   ),
-                                  pw.Padding(
-                                    padding: const pw.EdgeInsets.all(4),
-                                    child: pw.Text(
-                                        totalTaxA.toNoCurrencyFormatted()),
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child:
+                                        Text(totalTaxA.toNoCurrencyFormatted()),
                                   ),
                                 ],
                               ),
-                            pw.TableRow(
+                            TableRow(
                               children: [
-                                pw.Padding(
-                                  padding: const pw.EdgeInsets.all(4),
-                                  child: pw.Text('Total B-18% Rwf:'),
+                                Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child: Text('Total B-18% Rwf'),
                                 ),
-                                pw.Padding(
-                                  padding: const pw.EdgeInsets.all(4),
-                                  child: pw.Text(
-                                      totalTaxB.toNoCurrencyFormatted()),
+                                Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child:
+                                      Text(totalTaxB.toNoCurrencyFormatted()),
                                 ),
                               ],
                             ),
                             if (totalTaxD != 0)
-                              pw.TableRow(
+                              TableRow(
                                 children: [
-                                  pw.Padding(
-                                    padding: const pw.EdgeInsets.all(4),
-                                    child: pw.Text('Total D:'),
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: Text('Total D'),
                                   ),
-                                  pw.Padding(
-                                    padding: const pw.EdgeInsets.all(4),
-                                    child: pw.Text(
-                                        totalTaxD.toNoCurrencyFormatted()),
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child:
+                                        Text(totalTaxD.toNoCurrencyFormatted()),
                                   ),
                                 ],
                               ),
-                            pw.TableRow(
+                            TableRow(
                               children: [
-                                pw.Padding(
-                                  padding: const pw.EdgeInsets.all(4),
-                                  child: pw.Text('Total Tax Rwf:'),
+                                Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child: Text('Total Tax Rwf'),
                                 ),
-                                pw.Padding(
-                                  padding: const pw.EdgeInsets.all(4),
-                                  child: pw.Text(double.parse(totalTax)
+                                Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child: Text(double.parse(totalTax)
                                       .toNoCurrencyFormatted()),
                                 ),
                               ],
@@ -409,9 +392,15 @@ class OmniPrinterA4 with SaveFile implements Printable {
                 ],
               ),
 
+              SizedBox(height: 30),
               // Footer
-              pw.Text('POWERED BY RRA VSDC EBM2.1',
-                  style: pw.TextStyle(fontStyle: pw.FontStyle.normal)),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text('POWERED BY RRA VSDC EBM2.1',
+                    style:
+                        TextStyle(fontStyle: FontStyle.normal, fontSize: 10)),
+                SizedBox(width: 30),
+                if (middle != null) Image(middle, width: 20, height: 40),
+              ])
             ],
           );
         },

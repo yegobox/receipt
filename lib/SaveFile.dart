@@ -176,12 +176,13 @@ mixin SaveFile {
     final directory = await getApplicationDocumentsDirectory();
     final fileName = generateFileName();
     final filePath = '${directory.path}/$fileName.pdf';
-    talker.warning("Files saved at: $filePath");
-
     final file = File(filePath);
     await file.writeAsBytes(pdfData);
-    ProxyService.local.uploadPdfToS3(pdfData, fileName);
-
+    try {
+      ProxyService.local.uploadPdfToS3(pdfData, fileName);
+    } catch (e) {
+      print(e);
+    }
     return filePath;
   }
 
