@@ -212,6 +212,73 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 .toNoCurrencyFormatted()),
                           ]),
                     ],
+                  // Adding an extra row after all items are rendered
+                  if (items.length < 10) ...[
+                    [
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                    ],
+                    [
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                    ],
+                    [
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                    ],
+                    [
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                    ],
+                    [
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                    ],
+                    [
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                    ],
+                    [
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                    ],
+                    [
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                      '',
+                    ],
+                  ],
                 ],
                 headerStyle:
                     TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
@@ -307,13 +374,13 @@ class OmniPrinterA4 with SaveFile implements Printable {
                         ),
                       ),
                     ),
-
                   SizedBox(width: 20), // Space between columns
 
                   // Summary Table
                   Expanded(
                     child: Column(
                       children: [
+                        SizedBox(height: 5),
                         Table(
                           border: TableBorder.all(width: 0.5),
                           children: [

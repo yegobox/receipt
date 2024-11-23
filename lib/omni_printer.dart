@@ -755,16 +755,7 @@ class OmniPrinter with SaveFile implements Printable {
         ),
       ]),
     );
-    // rows.add(
-    //   Column(children: [
-    //     SizedBox(height: 12),
-    //     Text(
-    //       'EBM v2: v1.12',
-    //       style: TextStyle(fontWeight: FontWeight.bold),
-    //     ),
-    //   ]),
-    // );
-    // end of footer
+   
   }
 
   /// Generates a PDF receipt and prints it.
