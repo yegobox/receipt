@@ -35,10 +35,10 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
-  flipper_models: ^0.0.1-dev.5
+  flipper_models: any
 
   qr_flutter: ^4.0.0
-  flipper_services: ^1.0.0-dev
+  flipper_services: any
   universal_platform: ^1.0.0+1
   path_provider: ^2.1.4
   path: ^1.8.1
