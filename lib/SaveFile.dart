@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:flipper_models/helperModels/talker.dart';
 import 'package:flipper_services/proxy.dart';
 import 'package:flutter/services.dart';
 import 'package:open_filex/open_filex.dart';
