@@ -188,97 +188,39 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   'Total Price'
                 ],
                 data: [
-                  for (var item in items)
-                    [
-                      item.itemCd,
-                      Column(
+                  ...items.map((item) => [
+                        item.itemCd,
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(item.name ?? ""),
                             if (item.dcRt != 0)
                               Text("Discount - ${item.dcRt}%"),
-                          ]),
-                      '${item.qty}',
-                      '${item.taxTyCd}',
-                      ((item.price).toNoCurrencyFormatted()),
-                      Column(
+                          ],
+                        ),
+                        '${item.qty}',
+                        '${item.taxTyCd}',
+                        item.price.toNoCurrencyFormatted(),
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(((item.qty * item.price)
-                                .toNoCurrencyFormatted())),
-                            Text(((item.qty * item.price) -
-                                    (item.qty * item.price * item.dcRt / 100))
+                            Text((item.qty * item.price)
                                 .toNoCurrencyFormatted()),
-                          ]),
-                    ],
-                  // Adding an extra row after all items are rendered
-                  if (items.length < 10) ...[
-                    [
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                    ],
-                    [
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                    ],
-                    [
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                    ],
-                    [
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                    ],
-                    [
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                    ],
-                    [
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                    ],
-                    [
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                    ],
-                    [
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                      '',
-                    ],
-                  ],
+                            Text(
+                              ((item.qty * item.price) -
+                                      (item.qty * item.price * item.dcRt / 100))
+                                  .toNoCurrencyFormatted(),
+                            ),
+                          ],
+                        ),
+                      ]),
+                  // Padding the table with empty rows to maintain a minimum of 10 rows
+                  if (items.length < 10)
+                    ...List.generate(
+                      110 - items.length,
+                      (_) => ['', '', '', '', '', ''],
+                    ),
                 ],
                 headerStyle:
                     TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
@@ -309,10 +251,10 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   verticalInside: BorderSide(width: 0.5),
                 ),
                 cellPadding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                    const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
               ),
 
-              SizedBox(height: 20),
+              SizedBox(height: 30),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,

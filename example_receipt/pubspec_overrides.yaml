@@ -42,15 +42,15 @@ dependency_overrides:
     path: ../../../packages/flutter_statusbarcolor
   form_bloc:
     path: ../../form_bloc/packages/form_bloc
-  http: ^1.2.2
-  meta: ^1.12.0
   qr_flutter:
     path: ../../qr.flutter
   receipt:
     path: ..
   scrollable_positioned_list:
     path: ../../flutter.widgets/packages/scrollable_positioned_list
-  sqlite3: ^2.4.7
   supabase_models:
     path: ../../../packages/supabase_models
+  http: ^1.2.2
+  meta: ^1.12.0
   web: ^0.5.1
+  sqlite3: ^2.4.7
