@@ -4,7 +4,8 @@ version: 1.0.0-dev.2
 repository: "https://github.com/yegobox/receipt"
 
 environment:
-  sdk: ">=3.0.0"
+  sdk: ">=3.5.3 <4.0.0"
+
 
 dependencies:
   flutter:
