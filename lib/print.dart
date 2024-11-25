@@ -83,14 +83,15 @@ class Print {
     required int rcptNo,
     required int totRcptNo,
     required DateTime whenCreated,
-    required Function(Uint8List bytes) printCallback, required double totalDiscount,
+    required Function(Uint8List bytes) printCallback,
+    required double totalDiscount,
   }) async {
     Printable printer = OmniPrinter();
     Printable printerA4 = OmniPrinterA4();
     if (ProxyService.box.A4()) {
       return await printerA4.generatePdfAndPrint(
         taxB: taxB,
-        totalDiscount:totalDiscount,
+        totalDiscount: totalDiscount,
         taxA: taxA,
         taxC: taxC,
         whenCreated: whenCreated,
@@ -133,7 +134,7 @@ class Print {
     } else {
       return await printer.generatePdfAndPrint(
         taxB: taxB,
-        totalDiscount:totalDiscount,
+        totalDiscount: totalDiscount,
         taxA: taxA,
         taxC: taxC,
         whenCreated: whenCreated,

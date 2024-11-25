@@ -755,7 +755,6 @@ class OmniPrinter with SaveFile implements Printable {
         ),
       ]),
     );
-   
   }
 
   /// Generates a PDF receipt and prints it.
