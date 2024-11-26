@@ -1345,7 +1345,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223232769+1732534924"
+    version: "1.170.4252223232785+1732549034"
   flipper_services:
     dependency: "direct main"
     description:
@@ -3816,5 +3816,5 @@ packages:
     source: hosted
     version: "2.0.3"
 sdks:
-  dart: ">=3.5.4 <4.0.0"
+  dart: ">=3.5.3 <4.0.0"
   flutter: ">=3.24.0"
