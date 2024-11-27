@@ -395,7 +395,7 @@ class OmniPrinter with SaveFile implements Printable {
             style: smallTextStyle,
           ),
           Text(
-            item.price.toNoCurrency(),
+            item.price.toNoCurrencyFormatted(),
             style: smallTextStyle,
           ),
           Text(

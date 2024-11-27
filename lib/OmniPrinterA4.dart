@@ -166,7 +166,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                             children: [
                               Text('INVOICE NO: $rcptNo'),
                               SizedBox(height: 5),
-                              Text('Date: $whenCreated'),
+                              Text('Date: ${whenCreated.shortDate}'),
                             ],
                           ),
                         ),
@@ -207,11 +207,15 @@ class OmniPrinterA4 with SaveFile implements Printable {
                           children: [
                             Text((item.qty * item.price)
                                 .toNoCurrencyFormatted()),
-                            Text(
-                              ((item.qty * item.price) -
-                                      (item.qty * item.price * item.dcRt / 100))
-                                  .toNoCurrencyFormatted(),
-                            ),
+                            if (item.dcRt != 0)
+                              Text(
+                                ((item.qty * item.price) -
+                                        (item.qty *
+                                            item.price *
+                                            item.dcRt /
+                                            100))
+                                    .toNoCurrencyFormatted(),
+                              ),
                           ],
                         ),
                       ]),
@@ -269,7 +273,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 fontSize: 10, fontWeight: FontWeight.bold)),
                         dashWidget(),
                         SizedBox(height: 5),
-                        Text('Date: $whenCreated',
+                        Text('Date: ${whenCreated.isoDateTime}',
                             style: const TextStyle(fontSize: 10)),
                         Text('SDC ID: $sdcId',
                             style: const TextStyle(fontSize: 10)),
@@ -291,10 +295,10 @@ class OmniPrinterA4 with SaveFile implements Printable {
                         dashWidget(),
                         SizedBox(height: 5),
                         Text(
-                          'Receipt Number: $rcptNo/$totRcptNo ($receiptType)',
+                          'Receipt Number: $invoiceNum',
                           style: const TextStyle(fontSize: 10),
                         ),
-                        Text('Date: $whenCreated',
+                        Text('Date: ${whenCreated.shortDate}',
                             style: const TextStyle(fontSize: 10)),
                         Text('MRC: $mrc', style: const TextStyle(fontSize: 10)),
                         dashWidget(),
@@ -334,8 +338,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(4),
-                                  child: Text(
-                                      totalPayable.toNoCurrencyFormatted()),
+                                  child: Text((totalPayable - totalDiscount)
+                                      .toNoCurrencyFormatted()),
                                 ),
                               ],
                             ),
