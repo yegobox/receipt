@@ -403,7 +403,7 @@ class OmniPrinter with SaveFile implements Printable {
     List<List<Widget>> data = <List<Widget>>[];
 
     // Define consistent styles
-    final TextStyle smallTextStyle = TextStyle(fontSize: 8);
+    const TextStyle smallTextStyle = TextStyle(fontSize: 10);
     final TextStyle boldStyle =
         TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
 
@@ -417,40 +417,40 @@ class OmniPrinter with SaveFile implements Printable {
               : '';
 
       talker.warning("item.Price: ${item.price}");
-
+      // Add vertical space before each new block, except the first one
+      if (rows.isNotEmpty) {
+        rows.add(SizedBox(height: 8)); // Add spacing
+      }
       // Item row
-      data.add([
-        Expanded(
-          flex: 4,
-          child: Text(
-              item.name!.length > 8 ? item.name!.substring(0, 8) : item.name!,
-              style: smallTextStyle),
+      rows.add(
+        Row(
+          children: [
+            Text(item.name ?? '', style: smallTextStyle), // Item name
+          ],
         ),
-        Expanded(
-          flex: 2,
-          child: Text(
-            item.price.toNoCurrencyFormatted(),
-            style: smallTextStyle,
-            textAlign: TextAlign.right,
-          ),
+      );
+
+      // Add price, qty, and total on the second row
+      rows.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "${item.price.toStringAsFixed(2)}x ",
+              style: smallTextStyle,
+            ),
+            Text(
+              "  ${item.qty}  ",
+              style: smallTextStyle,
+            ),
+            Text(
+              '$totalPrefix${total.toNoCurrencyFormatted()}$taxLabel',
+              style: smallTextStyle,
+              textAlign: TextAlign.right,
+            ),
+          ],
         ),
-        Expanded(
-          flex: 1,
-          child: Text(
-            'x ${item.qty.toStringAsFixed(0)}',
-            style: smallTextStyle,
-            textAlign: TextAlign.center,
-          ),
-        ),
-        Expanded(
-          flex: 3,
-          child: Text(
-            '$totalPrefix${total.toNoCurrencyFormatted()}$taxLabel',
-            style: smallTextStyle,
-            textAlign: TextAlign.right,
-          ),
-        ),
-      ]);
+      );
 
       // Discount row if applicable
       if (item.dcRt != 0) {
@@ -488,7 +488,7 @@ class OmniPrinter with SaveFile implements Printable {
       Table(
         border: null,
         columnWidths: {
-          0: const FlexColumnWidth(2), // Item name
+          0: const FlexColumnWidth(6), // Item name
           1: const FlexColumnWidth(4), // Price
           2: const FlexColumnWidth(1), // Quantity
           3: const FlexColumnWidth(4), // Total
