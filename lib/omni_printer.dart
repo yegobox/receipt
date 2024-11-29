@@ -455,7 +455,7 @@ class OmniPrinter with SaveFile implements Printable {
       // Discount row if applicable
       if (item.dcRt != 0) {
         double discountedAmount = total - ((total * item.dcRt) / 100);
-        data.add([
+        rows.add(Row(children: [
           Expanded(
             flex: 4,
             child: Text(
@@ -479,7 +479,7 @@ class OmniPrinter with SaveFile implements Printable {
               textAlign: TextAlign.right,
             ),
           ),
-        ]);
+        ]));
       }
     }
 
