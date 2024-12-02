@@ -1345,7 +1345,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223232785+1732549034"
+    version: "1.170.4252223232805+1732978012"
   flipper_services:
     dependency: "direct main"
     description:
@@ -3216,6 +3216,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.5.4+6"
+  sqflite_common_ffi:
+    dependency: transitive
+    description:
+      name: sqflite_common_ffi
+      sha256: b8ba78c1b72a9ee6c2323b06af95d43fd13e03d90c8369cb454fd7f629a72588
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.4+3"
   sqflite_darwin:
     dependency: transitive
     description:
