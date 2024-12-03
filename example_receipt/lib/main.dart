@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flipper_models/realm_model_export.dart';
+import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:flutter/services.dart';
 import 'package:receipt/OmniPrinterA4.dart';
 import 'package:receipt/omni_printer.dart';
 import 'package:receipt/printable.dart';
-import 'package:realm/realm.dart';
 // import 'package:flipper_rw/dependencyInitializer.dart';
 
 Future<void> main() async {
@@ -139,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
       receiptQrCode: receiptQrCode,
       invoiceNum: invoiceNum,
       mrc: mrc,
-      totalPayable: transaction.subTotal,
+      totalPayable: transaction.subTotal!.toDouble(),
       totalTaxA: totalTaxA,
       transaction: transaction,
       totalTaxB: totalTaxB,
@@ -155,7 +154,19 @@ class _MyHomePageState extends State<MyHomePage> {
     print(
       totalDiscount: 10,
       whenCreated: DateTime.now(),
-      transaction: ITransaction(ObjectId(), id: 2, subTotal: 400),
+      transaction: ITransaction(
+          id: 2,
+          isIncome: true,
+          isExpense: false,
+          subTotal: 400,
+          cashReceived: 1,
+          customerChangeDue: 0,
+          branchId: 1,
+          status: "PENDING",
+          createdAt: DateTime.now().toIso8601String(),
+          updatedAt: DateTime.now().toIso8601String(),
+          transactionType: "Sale",
+          paymentType: "Cash"),
       currencySymbol: "RW",
       grandTotal: 100,
       taxA: 10,
@@ -176,8 +187,11 @@ class _MyHomePageState extends State<MyHomePage> {
       items: List.from(
         [
           TransactionItem(
-            ObjectId(),
             id: 1,
+            splyAmt: 1,
+            itemNm: "1",
+            discount: 0,
+            prc: 1,
             itemCd: "002",
             name: 'Item 1',
             qty: 2,
@@ -186,8 +200,11 @@ class _MyHomePageState extends State<MyHomePage> {
             price: 10.0,
           ),
           TransactionItem(
-            ObjectId(),
             id: 1,
+            splyAmt: 1,
+            itemNm: "1",
+            discount: 0,
+            prc: 1,
             itemCd: "002",
             name: 'Item 1',
             qty: 2,
@@ -196,8 +213,11 @@ class _MyHomePageState extends State<MyHomePage> {
             price: 10.0,
           ),
           TransactionItem(
-            ObjectId(),
             id: 1,
+            splyAmt: 1,
+            itemNm: "1",
+            discount: 0,
+            prc: 1,
             itemCd: "002",
             name: 'Item 1',
             qty: 2,
@@ -206,7 +226,7 @@ class _MyHomePageState extends State<MyHomePage> {
             price: 10.0,
           ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',
@@ -216,7 +236,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   price: 10.0,
           // ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',
@@ -226,7 +246,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   price: 10.0,
           // ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',
@@ -236,7 +256,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   price: 10.0,
           // ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',
@@ -246,7 +266,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   price: 10.0,
           // ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',
@@ -256,7 +276,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   price: 10.0,
           // ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',
@@ -266,7 +286,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   price: 10.0,
           // ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',
@@ -276,7 +296,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   price: 10.0,
           // ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',
@@ -286,7 +306,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   price: 10.0,
           // ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',
@@ -296,7 +316,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   price: 10.0,
           // ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',
@@ -306,7 +326,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   price: 10.0,
           // ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',
@@ -316,7 +336,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   price: 10.0,
           // ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',
@@ -326,7 +346,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   price: 10.0,
           // ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',
@@ -336,7 +356,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   price: 10.0,
           // ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',
@@ -346,7 +366,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   price: 10.0,
           // ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',
@@ -356,7 +376,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   price: 10.0,
           // ),
           // TransactionItem(
-          //   ObjectId(),
+          //
           //   id: 1,
           //   itemCd: "002",
           //   name: 'Item 1',

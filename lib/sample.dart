@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:receipt/SaveFile.dart';
 import 'package:receipt/printable.dart';
-import 'package:flipper_models/realm_model_export.dart';
+import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 

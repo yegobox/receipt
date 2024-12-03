@@ -1,7 +1,7 @@
 // import 'dart:io';
 // import 'dart:typed_data';
 // import 'package:flipper_models/helperModels/random.dart';
-// import 'package:flipper_models/realm_model_export.dart';
+// import 'package:supabase_models/brick/models/all_models.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart' show rootBundle;
 // import 'package:intl/intl.dart';

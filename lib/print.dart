@@ -3,7 +3,7 @@ library receipt;
 import 'package:flipper_services/proxy.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:flipper_models/realm_model_export.dart';
+import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:receipt/OmniPrinterA4.dart';
 import 'package:receipt/omni_printer.dart';
 import 'package:receipt/printable.dart';
@@ -121,7 +121,7 @@ class Print {
         receiptQrCode: receiptQrCode,
         invoiceNum: invoiceNum,
         mrc: mrc,
-        totalPayable: transaction.subTotal,
+        totalPayable: transaction.subTotal?.toDouble() ?? 0.0,
         totalTaxA: totalTaxA,
         transaction: transaction,
         totalTaxB: totalTaxB,
@@ -164,7 +164,7 @@ class Print {
         receiptQrCode: receiptQrCode,
         invoiceNum: invoiceNum,
         mrc: mrc,
-        totalPayable: transaction.subTotal,
+        totalPayable: transaction.subTotal?.toDouble() ?? 0.0,
         totalTaxA: totalTaxA,
         transaction: transaction,
         totalTaxB: totalTaxB,

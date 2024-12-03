@@ -1,5 +1,6 @@
 import 'package:flipper_models/helperModels/talker.dart';
-import 'package:flipper_models/realm_model_export.dart';
+import 'package:supabase_models/brick/models/all_models.dart';
+import 'package:flipper_models/helperModels/extensions.dart';
 import 'package:flipper_services/proxy.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart' as c;
@@ -425,7 +426,7 @@ class OmniPrinter with SaveFile implements Printable {
       rows.add(
         Row(
           children: [
-            Text(item.name ?? '', style: smallTextStyle), // Item name
+            Text(item.name, style: smallTextStyle), // Item name
           ],
         ),
       );
@@ -454,7 +455,7 @@ class OmniPrinter with SaveFile implements Printable {
 
       // Discount row if applicable
       if (item.dcRt != 0) {
-        double discountedAmount = total - ((total * item.dcRt) / 100);
+        double discountedAmount = total - ((total * item.dcRt!) / 100);
         rows.add(Row(children: [
           Expanded(
             flex: 4,

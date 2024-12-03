@@ -1345,7 +1345,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223232805+1732978012"
+    version: "1.170.4252223232814+1733215138"
   flipper_services:
     dependency: "direct main"
     description:
@@ -3338,7 +3338,7 @@ packages:
     source: hosted
     version: "2.8.1"
   supabase_models:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../../packages/supabase_models"
       relative: true

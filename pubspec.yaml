@@ -28,6 +28,7 @@ dependencies:
   talker_flutter: ^4.1.5
   sentry_flutter: ^8.10.1
   syncfusion_flutter_pdf: ^26.2.14
+  supabase_models: any
   
 dependency_overrides:
   http: ^1.2.2

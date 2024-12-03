@@ -2,10 +2,11 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:receipt/SaveFile.dart';
 import 'package:receipt/printable.dart';
-import 'package:flipper_models/realm_model_export.dart';
+import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart' as c;
 import 'package:printing/printing.dart';
+import 'package:flipper_models/helperModels/extensions.dart';
 
 class OmniPrinterA4 with SaveFile implements Printable {
   Future<ImageProvider?> _loadLogoImage({required String position}) async {
@@ -194,7 +195,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(item.name ?? ""),
+                            Text(item.name),
                             if (item.dcRt != 0)
                               Text("Discount - ${item.dcRt}%"),
                           ],
@@ -212,7 +213,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 ((item.qty * item.price) -
                                         (item.qty *
                                             item.price *
-                                            item.dcRt /
+                                            item.dcRt! /
                                             100))
                                     .toNoCurrencyFormatted(),
                               ),

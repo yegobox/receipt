@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:flipper_models/realm/schemas.dart';
+import 'package:supabase_models/brick/models/all_models.dart';
 
 abstract class Printable {
   Future<void> generatePdfAndPrint({
