@@ -355,30 +355,32 @@ class OmniPrinter with SaveFile implements Printable {
 
   _buildTaxA({required String totalAEx, required String receiptType}) async {
     String displayTotalAEx = totalAEx;
+    double value = double.parse(displayTotalAEx.replaceAll(',', ''));
+    if (value != 0) {
+      if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
+        displayTotalAEx =
+            "-${double.parse(totalAEx.replaceAll(",", "")).toNoCurrencyFormatted()}";
+      } else {
+        displayTotalAEx =
+            double.parse(totalAEx.replaceAll(",", "")).toNoCurrencyFormatted();
+      }
 
-    if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
-      displayTotalAEx =
-          "-${double.parse(totalAEx.replaceAll(",", "")).toNoCurrencyFormatted()}";
-    } else {
-      displayTotalAEx =
-          double.parse(totalAEx.replaceAll(",", "")).toNoCurrencyFormatted();
+      rows.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'TOTAL A-EX:',
+              style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
+            ),
+            Text(
+              displayTotalAEx,
+              style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
+            )
+          ],
+        ),
+      );
     }
-
-    rows.add(
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'TOTAL A-EX:',
-            style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
-          ),
-          Text(
-            displayTotalAEx,
-            style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
-          )
-        ],
-      ),
-    );
   }
 
   _body({
