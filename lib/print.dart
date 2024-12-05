@@ -1,8 +1,10 @@
 library receipt;
 
+import 'package:flipper_services/proxy.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:flipper_models/realm_model_export.dart';
+import 'package:receipt/OmniPrinterA4.dart';
 import 'package:receipt/omni_printer.dart';
 import 'package:receipt/printable.dart';
 
@@ -82,48 +84,96 @@ class Print {
     required int totRcptNo,
     required DateTime whenCreated,
     required Function(Uint8List bytes) printCallback,
+    required double totalDiscount,
   }) async {
     Printable printer = OmniPrinter();
-    return await printer.generatePdfAndPrint(
-      taxB: taxB,
-      taxA: taxA,
-      taxC: taxC,
-      whenCreated: whenCreated,
-      taxD: taxD,
-      brandName: brandName,
-      customerName: customerName,
-      brandAddress: brandAddress,
-      brandDescription: brandDescription,
-      brandTel: brandTel,
-      brandTIN: brandTIN,
-      autoPrint: autoPrint,
-      brandFooter: brandFooter,
-      emails: emails,
-      customerTin: customerTin.toString(),
-      receiptType: receiptType,
-      items: items,
-      totalTax: totalTax,
-      cash: cash,
-      rcptNo: rcptNo,
-      totRcptNo: totRcptNo,
-      cashierName: cashierName,
-      received: received,
-      payMode: payMode,
-      sdcId: sdcId,
-      internalData: internalData,
-      receiptSignature: receiptSignature,
-      receiptQrCode: receiptQrCode,
-      invoiceNum: invoiceNum,
-      mrc: mrc,
-      totalPayable: transaction.subTotal,
-      totalTaxA: totalTaxA,
-      transaction: transaction,
-      totalTaxB: totalTaxB,
-      totalTaxC: totalTaxC,
-      totalTaxD: totalTaxD,
-      printCallback: (Uint8List bytes) {
-        printCallback(bytes);
-      },
-    );
+    Printable printerA4 = OmniPrinterA4();
+    if (ProxyService.box.A4()) {
+      return await printerA4.generatePdfAndPrint(
+        taxB: taxB,
+        totalDiscount: totalDiscount,
+        taxA: taxA,
+        taxC: taxC,
+        whenCreated: whenCreated,
+        taxD: taxD,
+        brandName: brandName,
+        customerName: customerName,
+        brandAddress: brandAddress,
+        brandDescription: brandDescription,
+        brandTel: brandTel,
+        brandTIN: brandTIN,
+        autoPrint: autoPrint,
+        brandFooter: brandFooter,
+        emails: emails,
+        customerTin: customerTin.toString(),
+        receiptType: receiptType,
+        items: items,
+        totalTax: totalTax,
+        cash: cash,
+        rcptNo: rcptNo,
+        totRcptNo: totRcptNo,
+        cashierName: cashierName,
+        received: received,
+        payMode: payMode,
+        sdcId: sdcId,
+        internalData: internalData,
+        receiptSignature: receiptSignature,
+        receiptQrCode: receiptQrCode,
+        invoiceNum: invoiceNum,
+        mrc: mrc,
+        totalPayable: transaction.subTotal,
+        totalTaxA: totalTaxA,
+        transaction: transaction,
+        totalTaxB: totalTaxB,
+        totalTaxC: totalTaxC,
+        totalTaxD: totalTaxD,
+        printCallback: (Uint8List bytes) {
+          printCallback(bytes);
+        },
+      );
+    } else {
+      return await printer.generatePdfAndPrint(
+        taxB: taxB,
+        totalDiscount: totalDiscount,
+        taxA: taxA,
+        taxC: taxC,
+        whenCreated: whenCreated,
+        taxD: taxD,
+        brandName: brandName,
+        customerName: customerName,
+        brandAddress: brandAddress,
+        brandDescription: brandDescription,
+        brandTel: brandTel,
+        brandTIN: brandTIN,
+        autoPrint: autoPrint,
+        brandFooter: brandFooter,
+        emails: emails,
+        customerTin: customerTin.toString(),
+        receiptType: receiptType,
+        items: items,
+        totalTax: totalTax,
+        cash: cash,
+        rcptNo: rcptNo,
+        totRcptNo: totRcptNo,
+        cashierName: cashierName,
+        received: received,
+        payMode: payMode,
+        sdcId: sdcId,
+        internalData: internalData,
+        receiptSignature: receiptSignature,
+        receiptQrCode: receiptQrCode,
+        invoiceNum: invoiceNum,
+        mrc: mrc,
+        totalPayable: transaction.subTotal,
+        totalTaxA: totalTaxA,
+        transaction: transaction,
+        totalTaxB: totalTaxB,
+        totalTaxC: totalTaxC,
+        totalTaxD: totalTaxD,
+        printCallback: (Uint8List bytes) {
+          printCallback(bytes);
+        },
+      );
+    }
   }
 }

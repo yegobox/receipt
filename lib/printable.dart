@@ -41,5 +41,6 @@ abstract class Printable {
     required int totRcptNo,
     required DateTime whenCreated,
     required Function(Uint8List bytes) printCallback,
+    required double totalDiscount,
   });
 }
