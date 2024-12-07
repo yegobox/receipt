@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: demo_ui_components,firestore_models,flipper_actionable,flipper_dashboard,flipper_infra,flipper_loading,flipper_localize,flipper_login,flipper_mocks,flipper_models,flipper_routing,flipper_rw,flipper_services,flipper_socials,flipper_ui,flowy_svg,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,pdf,pdf_widget_wrapper,printing,qr_flutter,receipt,scrollable_positioned_list,supabase_models,http,meta,web,sqlite3
+# melos_managed_dependency_overrides: demo_ui_components,firestore_models,flipper_actionable,flipper_dashboard,flipper_infra,flipper_loading,flipper_localize,flipper_login,flipper_mocks,flipper_models,flipper_routing,flipper_rw,flipper_services,flipper_socials,flipper_ui,flowy_svg,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,qr_flutter,receipt,scrollable_positioned_list,supabase_models,http,meta,web,sqlite3
 dependency_overrides:
   demo_ui_components:
     path: ..\\..\\..\\packages\\demo_ui_components
@@ -40,12 +40,6 @@ dependency_overrides:
     path: ..\\..\\..\\packages\\flutter_statusbarcolor
   form_bloc:
     path: ..\\..\\form_bloc\\packages\\form_bloc
-  pdf:
-    path: ..\\..\\dart_pdf\\pdf
-  pdf_widget_wrapper:
-    path: ..\\..\\dart_pdf\\widget_wrapper
-  printing:
-    path: ..\\..\\dart_pdf\\printing
   qr_flutter:
     path: ..\\..\\qr.flutter
   receipt:
