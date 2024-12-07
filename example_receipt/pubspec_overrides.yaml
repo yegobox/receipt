@@ -39,7 +39,11 @@ dependency_overrides:
   flutter_statusbarcolor_ns:
     path: ../../../packages/flutter_statusbarcolor
   form_bloc:
+<<<<<<< HEAD
     path: ../../form_bloc/packages/form_bloc
+=======
+    path: ..\\..\\form_bloc\\packages\\form_bloc
+>>>>>>> refs/remotes/origin/main
   qr_flutter:
     path: ../../qr.flutter
   receipt:

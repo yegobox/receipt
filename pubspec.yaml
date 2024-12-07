@@ -10,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  printing: ^5.13.3
-  pdf: ^3.10.3
+  printing: ^5.13.4
+  pdf: ^3.11.1
   open_filex: ^4.5.0
   gap: ^2.0.0
   flipper_models: any
