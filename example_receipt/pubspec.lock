@@ -1346,14 +1346,14 @@ packages:
       path: "../../../packages/flipper_routing"
       relative: true
     source: path
-    version: "0.0.1-dev.3"
+    version: "1.0.0"
   flipper_rw:
     dependency: "direct main"
     description:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223232842+1733595701"
+    version: "1.170.4252223232847+1733611316"
   flipper_services:
     dependency: "direct main"
     description:
