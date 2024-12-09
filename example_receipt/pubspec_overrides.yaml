@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: demo_ui_components,firestore_models,flipper_actionable,flipper_dashboard,flipper_infra,flipper_loading,flipper_localize,flipper_login,flipper_mocks,flipper_models,flipper_routing,flipper_rw,flipper_services,flipper_socials,flipper_ui,flowy_svg,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,qr_flutter,receipt,scrollable_positioned_list,supabase_models,http,meta,web,sqlite3
+# melos_managed_dependency_overrides: demo_ui_components,firestore_models,flipper_actionable,flipper_dashboard,flipper_infra,flipper_loading,flipper_localize,flipper_login,flipper_mocks,flipper_models,flipper_routing,flipper_rw,flipper_services,flipper_socials,flipper_ui,flowy_svg,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,qr_flutter,receipt,scrollable_positioned_list,supabase_models,http,meta,web,sqlite3,brick_offline_first_with_supabase
 dependency_overrides:
   demo_ui_components:
     path: ../../../packages/demo_ui_components
@@ -52,3 +52,5 @@ dependency_overrides:
   meta: ^1.12.0
   web: ^0.5.1
   sqlite3: ^2.4.7
+  brick_offline_first_with_supabase:
+    path: ../../../packages/brick_offline_first_with_supabase
