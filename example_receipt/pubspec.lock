@@ -367,12 +367,13 @@ packages:
     source: hosted
     version: "3.2.0"
   brick_offline_first_with_supabase:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../../../packages/brick_offline_first_with_supabase"
-      relative: true
-    source: path
-    version: "1.1.0-fix"
+      name: brick_offline_first_with_supabase
+      sha256: "6373d17584d905f83401c6cd4c8334c52b65f6df2fe61aac5b4218330b8ddc3a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2"
   brick_rest:
     dependency: transitive
     description:
@@ -1352,7 +1353,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223232857+1733720528"
+    version: "1.170.4252223232856+1733683922"
   flipper_services:
     dependency: "direct main"
     description:
