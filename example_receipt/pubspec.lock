@@ -1353,7 +1353,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223232875+1734495768"
+    version: "1.170.4252223232879+1734502145"
   flipper_services:
     dependency: "direct main"
     description:
@@ -1451,15 +1451,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
-  flutter_datetime_picker:
-    dependency: transitive
-    description:
-      path: "."
-      ref: "32ea47240c10469ad31db0084f5d9b7a12d16e01"
-      resolved-ref: "32ea47240c10469ad31db0084f5d9b7a12d16e01"
-      url: "https://github.com/ryojiro/flutter_datetime_picker.git"
-    source: git
-    version: "1.5.1"
   flutter_form_bloc:
     dependency: "direct overridden"
     description:
