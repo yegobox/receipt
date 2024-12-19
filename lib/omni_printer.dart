@@ -179,10 +179,10 @@ class OmniPrinter with SaveFile implements Printable {
 
     if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
       displayTotalTax =
-          "-${double.parse(totalTax.replaceAll(",", "")).toFormattedPercentage()}";
+          "-${double.parse(totalTax.replaceAll(",", "")).toNoCurrencyFormatted()}";
     } else {
       displayTotalTax =
-          double.parse(totalTax.replaceAll(",", "")).toFormattedPercentage();
+          double.parse(totalTax.replaceAll(",", "")).toNoCurrencyFormatted();
     }
 
     rows.add(
@@ -400,6 +400,7 @@ class OmniPrinter with SaveFile implements Printable {
     required String cashierName,
     required double cash,
     required double totalDiscount,
+    required String payMode,
   }) async {
     var bodyWidgets = <Widget>[];
     List<List<Widget>> data = <List<Widget>>[];
@@ -557,7 +558,7 @@ class OmniPrinter with SaveFile implements Printable {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('CASH:',
+          Text(payMode.toUpperCase(),
               style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal)),
           Text(formattedCash,
               style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal)),
@@ -898,7 +899,7 @@ class OmniPrinter with SaveFile implements Printable {
       cash: cash,
       cashierName: cashierName,
       received: received,
-      // payMode: payMode,
+      payMode: payMode,
       totalPayable: items
           .map((e) => e.price * e.qty)
           .reduce((sum, value) => sum + value)
