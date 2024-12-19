@@ -21,10 +21,10 @@ packages:
     dependency: transitive
     description:
       name: _flutterfire_internals
-      sha256: eae3133cbb06de9205899b822e3897fc6a8bc278ad4c944b4ce612689369694b
+      sha256: daa1d780fdecf8af925680c06c86563cdd445deea995d5c9176f1302a2b10bbe
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.47"
+    version: "1.3.48"
   _macros:
     dependency: transitive
     description: dart
@@ -610,10 +610,10 @@ packages:
     dependency: transitive
     description:
       name: cloud_firestore
-      sha256: "852c1a14399be76c71a881d2475392393f2ceef77c0859405a6bcac5ec8c0221"
+      sha256: ba89d4ae6ddaea0241f50a2dc1ffe36f32891f1a6bc78540f55d79c7f8ed536a
       url: "https://pub.dev"
     source: hosted
-    version: "5.5.1"
+    version: "5.6.0"
   cloud_firestore_odm:
     dependency: transitive
     description:
@@ -634,18 +634,18 @@ packages:
     dependency: transitive
     description:
       name: cloud_firestore_platform_interface
-      sha256: "69f0baeb7ac0577946f82991075b18133fd81441aeda487e41fb5692958117cd"
+      sha256: "966cfd6beb2e943f3363a7bced4476533caa55d2338ffd876855c07e5296d1d7"
       url: "https://pub.dev"
     source: hosted
-    version: "6.5.1"
+    version: "6.6.0"
   cloud_firestore_web:
     dependency: transitive
     description:
       name: cloud_firestore_web
-      sha256: ff65ee2f8caafb1bcba3133666d5ee00848f94c677900a368cad593982ef8ba8
+      sha256: "110ba7ff3322c239527e5be3c0d471a3e14fd0a870b2feff96d1e527a2eae2bb"
       url: "https://pub.dev"
     source: hosted
-    version: "4.3.5"
+    version: "4.4.0"
   code_builder:
     dependency: transitive
     description:
@@ -1105,26 +1105,26 @@ packages:
     dependency: transitive
     description:
       name: firebase_core
-      sha256: fef81a53ba1ca618def1f8bef4361df07968434e62cb204c1fb90bb880a03da2
+      sha256: "15d761b95dfa2906dfcc31b7fc6fe293188533d1a3ffe78389ba9e69bd7fdbde"
       url: "https://pub.dev"
     source: hosted
-    version: "3.8.1"
+    version: "3.9.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
       name: firebase_core_platform_interface
-      sha256: b94b217e3ad745e784960603d33d99471621ecca151c99c670869b76e50ad2a6
+      sha256: d7253d255ff10f85cfd2adaba9ac17bae878fa3ba577462451163bd9f1d1f0bf
       url: "https://pub.dev"
     source: hosted
-    version: "5.3.1"
+    version: "5.4.0"
   firebase_core_web:
     dependency: transitive
     description:
       name: firebase_core_web
-      sha256: "9e69806bb3d905aeec3c1242e0e1475de6ea6d48f456af29d598fb229a2b4e5e"
+      sha256: fbc008cf390d909b823763064b63afefe9f02d8afdb13eb3f485b871afee956b
       url: "https://pub.dev"
     source: hosted
-    version: "2.18.2"
+    version: "2.19.0"
   firebase_crashlytics:
     dependency: transitive
     description:
@@ -1353,7 +1353,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223232864+1734452045"
+    version: "1.170.4252223232909+1734618669"
   flipper_services:
     dependency: "direct main"
     description:
@@ -1451,15 +1451,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
-  flutter_datetime_picker:
-    dependency: transitive
-    description:
-      path: "."
-      ref: "32ea47240c10469ad31db0084f5d9b7a12d16e01"
-      resolved-ref: "32ea47240c10469ad31db0084f5d9b7a12d16e01"
-      url: "https://github.com/ryojiro/flutter_datetime_picker.git"
-    source: git
-    version: "1.5.1"
   flutter_form_bloc:
     dependency: "direct overridden"
     description:
@@ -1551,26 +1542,34 @@ packages:
     dependency: transitive
     description:
       name: flutter_local_notifications
-      sha256: "674173fd3c9eda9d4c8528da2ce0ea69f161577495a9cc835a2a4ecd7eadeb35"
+      sha256: dbbfc185f0d7be9ebe4009dd405571cfdb4c07563ec382dfca84fa018431bcfa
       url: "https://pub.dev"
     source: hosted
-    version: "17.2.4"
+    version: "19.0.0-dev.3"
   flutter_local_notifications_linux:
     dependency: transitive
     description:
       name: flutter_local_notifications_linux
-      sha256: c49bd06165cad9beeb79090b18cd1eb0296f4bf4b23b84426e37dd7c027fc3af
+      sha256: "265340ee321634e7cc11c740252cf8ba71dc5ffaf33e8c5da0ee4d1465d5a3eb"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.1"
+    version: "5.0.1-dev.1"
   flutter_local_notifications_platform_interface:
     dependency: transitive
     description:
       name: flutter_local_notifications_platform_interface
-      sha256: "85f8d07fe708c1bdcf45037f2c0109753b26ae077e9d9e899d55971711a4ea66"
+      sha256: "2e387899e2bf22a6e5de22c719701a067521c6f7a810d3b0fbb8bfaf5a2771c7"
       url: "https://pub.dev"
     source: hosted
-    version: "7.2.0"
+    version: "8.1.0-dev.1"
+  flutter_local_notifications_windows:
+    dependency: transitive
+    description:
+      name: flutter_local_notifications_windows
+      sha256: "181b45d250e468f1bed6a9b7bbd43e2438c3b71be206fa15d6e27ae4444b8212"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0-dev.2"
   flutter_localization:
     dependency: transitive
     description:
@@ -2319,15 +2318,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.11"
-  local_notifier:
-    dependency: transitive
-    description:
-      path: "."
-      ref: main
-      resolved-ref: "6410dc511bb386814d1045d10c0416dad7816664"
-      url: "https://github.com/yegobox/local_notifier.git"
-    source: git
-    version: "0.1.6"
   location:
     dependency: transitive
     description:
@@ -3251,6 +3241,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.5.0"
+  sqlite3_flutter_libs:
+    dependency: transitive
+    description:
+      name: sqlite3_flutter_libs
+      sha256: "636b0fe8a2de894e5455572f6cbbc458f4ffecfe9f860b79439e27041ea4f0b9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.27"
   stack_trace:
     dependency: transitive
     description:
@@ -3518,10 +3516,10 @@ packages:
     dependency: transitive
     description:
       name: timezone
-      sha256: "2236ec079a174ce07434e89fcd3fcda430025eb7692244139a9cf54fdcf1fc7d"
+      sha256: ffc9d5f4d1193534ef051f9254063fa53d588609418c84299956c3db9383587d
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.4"
+    version: "0.10.0"
   timing:
     dependency: transitive
     description:
