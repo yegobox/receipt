@@ -1353,7 +1353,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223232916+1734676181"
+    version: "1.170.4252223232912+1734637533"
   flipper_services:
     dependency: "direct main"
     description:
@@ -3241,14 +3241,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.5.0"
-  sqlite3_flutter_libs:
-    dependency: transitive
-    description:
-      name: sqlite3_flutter_libs
-      sha256: "73016db8419f019e807b7a5e5fbf2a7bd45c165fed403b8e7681230f3a102785"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.5.28"
   stack_trace:
     dependency: transitive
     description:
