@@ -1,6 +1,5 @@
+import 'package:flipper_models/realm_model_export.dart';
 import 'package:flutter/foundation.dart';
-
-import 'package:flipper_models/realm/schemas.dart';
 
 abstract class Printable {
   Future<void> generatePdfAndPrint({

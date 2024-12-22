@@ -322,7 +322,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
       'Total A-EX Rwf ${totalTaxA.toStringAsFixed(2)}',
       'Total B-18% Rwf ${totalTaxB.toStringAsFixed(2)}',
       'Total D ${totalTaxD.toStringAsFixed(2)}',
-      'Total Tax Rwf ${totalTax}',
+      'Total Tax Rwf $totalTax',
     ];
 
     for (var total in totals) {

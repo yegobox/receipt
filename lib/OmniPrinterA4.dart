@@ -194,7 +194,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(item.name ?? ""),
+                            Text(item.name),
                             if (item.dcRt != 0)
                               Text("Discount - ${item.dcRt}%"),
                           ],
@@ -212,7 +212,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 ((item.qty * item.price) -
                                         (item.qty *
                                             item.price *
-                                            item.dcRt /
+                                            item.dcRt! /
                                             100))
                                     .toNoCurrencyFormatted(),
                               ),

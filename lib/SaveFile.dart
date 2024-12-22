@@ -178,7 +178,7 @@ mixin SaveFile {
     final file = File(filePath);
     await file.writeAsBytes(pdfData);
     try {
-      ProxyService.local.uploadPdfToS3(pdfData, fileName);
+      ProxyService.strategy.uploadPdfToS3(pdfData, fileName);
     } catch (e) {
       print(e);
     }

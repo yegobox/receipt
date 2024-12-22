@@ -211,7 +211,7 @@ class OmniPrinter with SaveFile implements Printable {
       if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
         displayTotalTaxB = "-${value.toNoCurrencyFormatted()}";
       } else {
-        displayTotalTaxB = "${value.toNoCurrencyFormatted()}";
+        displayTotalTaxB = value.toNoCurrencyFormatted();
       }
 
       rows.add(
@@ -428,7 +428,7 @@ class OmniPrinter with SaveFile implements Printable {
       rows.add(
         Row(
           children: [
-            Text(item.name ?? '', style: smallTextStyle), // Item name
+            Text(item.name, style: smallTextStyle), // Item name
           ],
         ),
       );
@@ -457,7 +457,7 @@ class OmniPrinter with SaveFile implements Printable {
 
       // Discount row if applicable
       if (item.dcRt != 0) {
-        double discountedAmount = total - ((total * item.dcRt) / 100);
+        double discountedAmount = total - ((total * item.dcRt!) / 100);
         rows.add(Row(children: [
           Expanded(
             flex: 4,

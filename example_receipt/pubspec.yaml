@@ -51,7 +51,7 @@ dependencies:
   syncfusion_flutter_pdf: ^26.2.14
   receipt: 
     path: "../"
-  realm: ^20.0.0
+  # realm: ^20.0.0
   flipper_rw: any
 dependency_overrides:
   http: ^1.2.2
