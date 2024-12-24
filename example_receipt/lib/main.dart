@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:flutter/services.dart';
 import 'package:receipt/OmniPrinterA4.dart';
 import 'package:receipt/omni_printer.dart';
