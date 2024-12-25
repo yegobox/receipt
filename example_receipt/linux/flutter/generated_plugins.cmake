@@ -9,12 +9,12 @@ list(APPEND FLUTTER_PLUGIN_LIST
   file_selector_linux
   flutter_localization
   gtk
-  local_notifier
   printing
   realm
   screen_retriever_linux
   sentry_flutter
   smart_auth
+  sqlite3_flutter_libs
   tray_manager
   url_launcher_linux
   window_manager
