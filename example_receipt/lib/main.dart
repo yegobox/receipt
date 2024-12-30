@@ -154,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
       totalDiscount: 10,
       whenCreated: DateTime.now(),
       transaction: ITransaction(
-          id: 2,
+          id: "2",
           isIncome: true,
           isExpense: false,
           subTotal: 400,
@@ -186,7 +186,6 @@ class _MyHomePageState extends State<MyHomePage> {
       items: List.from(
         [
           TransactionItem(
-            id: 1,
             splyAmt: 1,
             itemNm: "1",
             discount: 0,
@@ -199,7 +198,6 @@ class _MyHomePageState extends State<MyHomePage> {
             price: 10.0,
           ),
           TransactionItem(
-            id: 1,
             splyAmt: 1,
             itemNm: "1",
             discount: 0,
@@ -212,7 +210,6 @@ class _MyHomePageState extends State<MyHomePage> {
             price: 10.0,
           ),
           TransactionItem(
-            id: 1,
             splyAmt: 1,
             itemNm: "1",
             discount: 0,
