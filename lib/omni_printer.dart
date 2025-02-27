@@ -234,8 +234,8 @@ class OmniPrinter with SaveFile implements Printable {
   }
 
   _buildTaxB18({required String totalTaxB, required String receiptType}) async {
-    double value = double.parse(totalTaxB.replaceAll(',', ''));
-    if (value != 0) {
+    double? value = double.tryParse(totalTaxB.replaceAll(',', ''));
+    if (value != null && value != 0) {
       String displayTotalTaxB = totalTaxB;
 
       if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
