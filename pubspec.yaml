@@ -12,7 +12,9 @@ dependencies:
     sdk: flutter
   printing: ^5.13.3
   pdf: ^3.10.3
-  open_filex: ^4.5.0
+  open_filex:
+    git:
+      url: https://github.com/mufassalhussain/open_filex
   gap: ^2.0.0
   flipper_models: any
 
