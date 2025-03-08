@@ -142,6 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
       transaction: transaction,
       totalTaxB: totalTaxB,
       totalTaxC: totalTaxC,
+      transactionId: transaction.id,
       totalTaxD: totalTaxD,
       printCallback: (Uint8List bytes) {
         printCallback(bytes);

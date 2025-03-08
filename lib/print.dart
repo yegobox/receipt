@@ -127,6 +127,7 @@ class Print {
         totalTaxB: totalTaxB,
         totalTaxC: totalTaxC,
         totalTaxD: totalTaxD,
+        transactionId: transaction.id,
         printCallback: (Uint8List bytes) {
           printCallback(bytes);
         },
@@ -154,6 +155,7 @@ class Print {
         totalTax: totalTax,
         cash: cash,
         rcptNo: rcptNo,
+        transactionId: transaction.id,
         totRcptNo: totRcptNo,
         cashierName: cashierName,
         received: received,

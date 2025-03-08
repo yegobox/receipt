@@ -40,9 +40,8 @@ mixin SaveFile {
   ///
   /// The `name` parameter provides a suggested filename to use in the printing
   /// dialog.
-  Future<void> printPdf(
-    Uint8List pdfData,
-  ) async {
+  Future<void> printPdf(Uint8List pdfData,
+      {required String transactionId}) async {
     await Printing.layoutPdf(
       name: generateFileName(),
       onLayout: (PdfPageFormat format) async => pdfData,
@@ -57,21 +56,18 @@ mixin SaveFile {
   /// This handles requesting permissions, finding the downloads directory,
   /// rasterizing each page, generating a filename, writing the PNG data,
   /// and incrementing the page count.
-  Future<void> savePdfAsImage(Uint8List pdfData) async {
-    // Map<Permission, PermissionStatus> statuses =
-    //     await [Permission.storage, Permission.manageExternalStorage].request();
-    // if (statuses[Permission.storage]?.isGranted ?? false) {
-      Directory? dir = await getApplicationSupportDirectory();
-      final path = dir.path;
-      var i = 0;
-      await for (final page in Printing.raster(pdfData, dpi: 1120)) {
-        final png = await page.toPng();
-        final file = File(p.normalize(
-            '$path/page-${i.toString().padLeft(3, generateFileName())}.png'));
-        await file.writeAsBytes(png);
-        i++;
-      }
-    // }
+  Future<void> savePdfAsImage(Uint8List pdfData,
+      {required String transactionId}) async {
+    Directory? dir = await getApplicationSupportDirectory();
+    final path = dir.path;
+    var i = 0;
+    await for (final page in Printing.raster(pdfData, dpi: 1120)) {
+      final png = await page.toPng();
+      final file = File(p.normalize(
+          '$path/page-${i.toString().padLeft(3, generateFileName())}.png'));
+      await file.writeAsBytes(png);
+      i++;
+    }
   }
 
   /// Shares the provided PDF data by opening the system share sheet.
@@ -86,13 +82,12 @@ mixin SaveFile {
   /// The `emails` parameter optionally specifies email addresses to prefill
   /// in the share sheet.
 
-  Future<void> sharePdf(
-    Uint8List pdfData,
-    List<String>? emails,
-  ) async {
+  Future<void> sharePdf(Uint8List pdfData, List<String>? emails,
+      {required String transactionId}) async {
     try {
       // Fetch printer information
-      String filePath = await savePdfToDocumentDirectory(pdfData);
+      String filePath = await savePdfToDocumentDirectory(pdfData,
+          transactionId: transactionId);
 
       /// because we are testing with real customer
       /// we are taking a bet that if auto print does not work then we call
@@ -170,14 +165,16 @@ mixin SaveFile {
     return number.toString().padLeft(2, '0');
   }
 
-  Future<String> savePdfToDocumentDirectory(Uint8List pdfData) async {
+  Future<String> savePdfToDocumentDirectory(Uint8List pdfData,
+      {required String transactionId}) async {
     final directory = await getApplicationDocumentsDirectory();
     final fileName = generateFileName();
     final filePath = '${directory.path}/$fileName.pdf';
     final file = File(filePath);
     await file.writeAsBytes(pdfData);
     try {
-      ProxyService.strategy.uploadPdfToS3(pdfData, fileName);
+      ProxyService.strategy
+          .uploadPdfToS3(pdfData, fileName, transactionId: transactionId);
     } catch (e) {
       print(e);
     }
@@ -210,15 +207,16 @@ mixin SaveFile {
     required Uint8List pdfData,
     required List<String>? emails,
     bool? autoPrint = false,
+    required String transactionId,
   }) async {
     if (autoPrint!) {
       if (isDesktopOrWeb) {
-        await printPdf(pdfData);
+        await printPdf(pdfData, transactionId: transactionId);
       } else {
-        await savePdfAsImage(pdfData);
+        await savePdfAsImage(pdfData, transactionId: transactionId);
       }
     } else {
-      await sharePdf(pdfData, emails);
+      await sharePdf(pdfData, emails, transactionId: transactionId);
     }
   }
 }

@@ -75,6 +75,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     required int rcptNo,
     required int totRcptNo,
     required DateTime whenCreated,
+    required String transactionId,
     required Function(Uint8List bytes) printCallback,
   }) async {
     final pdf = Document();
@@ -426,6 +427,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
       pdfData: pdfData,
       emails: emails,
       autoPrint: autoPrint,
+      transactionId: transactionId,
     );
     return printCallback(pdfData);
   }

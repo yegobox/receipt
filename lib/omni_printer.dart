@@ -861,6 +861,7 @@ class OmniPrinter with SaveFile implements Printable {
     required int totRcptNo,
     required DateTime whenCreated,
     required Function(Uint8List bytes) printCallback,
+    required String transactionId,
   }) async {
     talker.warning("ReceiptNo: $rcptNo: totRcptNo: $totRcptNo");
     final left = await _loadLogoImage(position: "left");
@@ -936,6 +937,7 @@ class OmniPrinter with SaveFile implements Printable {
       pdfData: pdfData,
       emails: emails,
       autoPrint: autoPrint,
+      transactionId: transactionId,
     );
     return printCallback(pdfData);
   }

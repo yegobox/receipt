@@ -44,6 +44,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     required String customerName,
     required int rcptNo,
     required int totRcptNo,
+    required String transactionId,
     required DateTime whenCreated,
     required Function(Uint8List bytes) printCallback,
   }) async {
@@ -344,6 +345,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
       pdfData: pdfData,
       emails: emails,
       autoPrint: autoPrint,
+      transactionId: transactionId,
     );
     return printCallback(pdfData);
   }
