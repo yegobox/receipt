@@ -56,7 +56,7 @@ dependency_overrides:
   http: ^1.2.2
   meta: ^1.12.0
   web: ^1.1.0
-  sqlite3: ^2.7.2
+  sqlite3: ^2.7.5
   device_info_plus: ^11.2.2
   
   collection: ^1.19.0
