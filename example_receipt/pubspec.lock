@@ -1213,7 +1213,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223233367+1741415403"
+    version: "1.170.4252223233400+1741679632"
   flipper_services:
     dependency: "direct main"
     description:
@@ -2333,11 +2333,10 @@ packages:
   open_filex:
     dependency: transitive
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: b4277d266207ef17b141d740cdfa59982a008c0f
-      url: "https://github.com/mufassalhussain/open_filex"
-    source: git
+      name: open_filex
+      sha256: "9976da61b6a72302cf3b1efbce259200cd40232643a467aac7370addf94d6900"
+      url: "https://pub.dev"
+    source: hosted
     version: "4.7.0"
   os_detect:
     dependency: transitive
