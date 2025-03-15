@@ -84,7 +84,7 @@ class ZReport extends OmniPrinter {
         ),
       ),
     );
-    Uint8List pdfData = await doc.save();
+    await doc.save();
     // handlePdfData(
     //     pdfData: pdfData, emails: ['info@yegobox.com'], autoPrint: false,context: context);
   }
