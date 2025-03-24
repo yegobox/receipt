@@ -36,6 +36,7 @@ dependency_overrides:
   web: ^1.1.0
   sqlite3: ^2.7.5
   device_info_plus: ^11.2.2
+  drift: ^2.26.0
   
 
 dev_dependencies:
