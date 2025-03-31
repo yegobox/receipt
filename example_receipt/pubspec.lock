@@ -1221,7 +1221,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223233492+1743242425"
+    version: "1.170.4252223233500+1743366693"
   flipper_services:
     dependency: "direct main"
     description:
@@ -2254,10 +2254,10 @@ packages:
     dependency: transitive
     description:
       name: mobile_scanner
-      sha256: "9cb9e371ee9b5b548714f9ab5fd33b530d799745c83d5729ecd1e8ab2935dbd1"
+      sha256: e301258be23b8aa06ecbf77609e3cba0ad40b19940392206b9f7a4ba9346f09c
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.7"
+    version: "7.0.0-beta.8"
   mock_supabase_http_client:
     dependency: transitive
     description:
