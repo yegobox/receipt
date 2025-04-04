@@ -355,14 +355,17 @@ class OmniPrinter with SaveFile implements Printable {
   }
 
   _buildTaxA({required String totalAEx, required String receiptType}) async {
-    String displayTotalAEx = totalAEx;
+    // Skip adding the row if the value is zero
+    double taxAValue = double.parse(totalAEx.replaceAll(",", ""));
+    if (taxAValue == 0) {
+      return; // Don't add anything to rows if there's no value
+    }
 
+    String displayTotalAEx;
     if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
-      displayTotalAEx =
-          "-${double.parse(totalAEx.replaceAll(",", "")).toNoCurrencyFormatted()}";
+      displayTotalAEx = "-${taxAValue.toNoCurrencyFormatted()}";
     } else {
-      displayTotalAEx =
-          double.parse(totalAEx.replaceAll(",", "")).toNoCurrencyFormatted();
+      displayTotalAEx = taxAValue.toNoCurrencyFormatted();
     }
 
     rows.add(
@@ -710,7 +713,7 @@ class OmniPrinter with SaveFile implements Printable {
         SizedBox(height: 1),
       ]),
     );
-    if (receiptType != "PS" && receiptType != "TS") {
+    if (receiptType != "PS" && receiptType != "TS" && receiptType != "CR") {
       rows.add(
         Column(children: [
           SizedBox(),
@@ -751,7 +754,7 @@ class OmniPrinter with SaveFile implements Printable {
           style: TextStyle(fontWeight: FontWeight.normal),
         ),
         Text(
-          "TIME:${transaction.lastTouched?.formattedTime}",
+          "TIME:${whenCreated.formattedTime}",
           style: TextStyle(fontWeight: FontWeight.normal),
         ),
       ]),
