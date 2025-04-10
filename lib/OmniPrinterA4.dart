@@ -355,23 +355,40 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   Padding(
                                     padding: const EdgeInsets.all(4),
                                     child:
-                                        Text(totalTaxA.toNoCurrencyFormatted()),
+                                        // Format with exactly 2 decimal places without rounding
+                                        Text(totalTaxA.toStringAsFixed(2)),
                                   ),
                                 ],
                               ),
-                            TableRow(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(4),
-                                  child: Text('Total B-18% Rwf'),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(4),
-                                  child:
-                                      Text(totalTaxB.toNoCurrencyFormatted()),
-                                ),
-                              ],
-                            ),
+                            if (totalTaxB != 0)
+                              TableRow(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: Text('Total B-18% Rwf'),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child:
+                                        // Format with exactly 2 decimal places without rounding
+                                        Text(totalTaxB.toStringAsFixed(2)),
+                                  ),
+                                ],
+                              ),
+                            // Only show Tax C if value is non-zero, exactly matching omni_printer.dart
+                            if (totalTaxC != 0)
+                              TableRow(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: Text('TOTAL C:'),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: Text(totalTaxC.toStringAsFixed(2)),
+                                  ),
+                                ],
+                              ),
                             if (totalTaxD != 0)
                               TableRow(
                                 children: [
@@ -382,20 +399,56 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   Padding(
                                     padding: const EdgeInsets.all(4),
                                     child:
-                                        Text(totalTaxD.toNoCurrencyFormatted()),
+                                        // Format with exactly 2 decimal places without rounding
+                                        Text(totalTaxD.toStringAsFixed(2)),
                                   ),
                                 ],
                               ),
+                            // Only show total tax if it's not zero
+                            if (double.parse(totalTax) != 0)
+                              TableRow(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: Text('TOTAL TAX:'),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    // Format with exactly 2 decimal places without rounding
+                                    // to match the implementation in omni_printer.dart
+                                    child: Text(double.parse(totalTax)
+                                        .toStringAsFixed(2)),
+                                  ),
+                                ],
+                              ),
+                          ],
+                        ),
+                        // Payment Method and Items Number table - placed directly below tax table
+                        SizedBox(height: 5),
+                        Table(
+                          border: TableBorder.all(width: 0.5),
+                          children: [
                             TableRow(
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(4),
-                                  child: Text('Total Tax Rwf'),
+                                  child: Text('PAYMENT METHOD:'),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(4),
-                                  child: Text(double.parse(totalTax)
-                                      .toNoCurrencyFormatted()),
+                                  child: Text(payMode),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child: Text('ITEMS NUMBER:'),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child: Text(items.length.toString()),
                                 ),
                               ],
                             ),

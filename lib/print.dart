@@ -91,6 +91,7 @@ class Print {
     if (ProxyService.box.A4()) {
       return await printerA4.generatePdfAndPrint(
         taxB: taxB,
+        totalTaxC: taxC,
         totalDiscount: totalDiscount,
         taxA: taxA,
         taxC: taxC,
@@ -125,7 +126,6 @@ class Print {
         totalTaxA: totalTaxA,
         transaction: transaction,
         totalTaxB: totalTaxB,
-        totalTaxC: totalTaxC,
         totalTaxD: totalTaxD,
         transactionId: transaction.id,
         printCallback: (Uint8List bytes) {

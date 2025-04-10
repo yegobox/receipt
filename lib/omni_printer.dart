@@ -176,15 +176,18 @@ class OmniPrinter with SaveFile implements Printable {
 
   _buildTotalTax(
       {required String totalTax, required String receiptType}) async {
-    String displayTotalTax = totalTax;
+    // Parse the tax value from the string
+    double taxValue = double.parse(totalTax.replaceAll(",", ""));
 
-    if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
-      displayTotalTax =
-          "-${double.parse(totalTax.replaceAll(",", "")).toFormattedPercentage()}";
-    } else {
-      displayTotalTax =
-          double.parse(totalTax.replaceAll(",", "")).toFormattedPercentage();
-    }
+    // Format with exactly 2 decimal places without rounding
+    // We truncate to 2 decimal places by converting to string with fixed decimal places
+    String formattedTax = taxValue.toStringAsFixed(2);
+
+    // Add negative sign for returns and credits
+    String displayTotalTax =
+        (receiptType == "NR" || receiptType == "CR" || receiptType == "TR")
+            ? "-$formattedTax"
+            : formattedTax;
 
     rows.add(
       Row(
@@ -195,7 +198,7 @@ class OmniPrinter with SaveFile implements Printable {
             style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
           ),
           Text(
-            displayTotalTax.replaceAll("%", ""),
+            displayTotalTax,
             style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
           ),
         ],
