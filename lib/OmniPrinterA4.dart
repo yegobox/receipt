@@ -8,6 +8,7 @@ import 'package:flutter/material.dart' as c;
 import 'package:printing/printing.dart';
 import 'package:flipper_models/helperModels/extensions.dart';
 
+//
 class OmniPrinterA4 with SaveFile implements Printable {
   Future<ImageProvider?> _loadLogoImage({required String position}) async {
     ImageProvider? image;
