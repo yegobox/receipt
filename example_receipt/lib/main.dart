@@ -153,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
     print(
       totalDiscount: 10,
-      whenCreated: DateTime.now(),
+      whenCreated: DateTime.now().toUtc(),
       transaction: ITransaction(
           id: "2",
           isIncome: true,
@@ -163,8 +163,8 @@ class _MyHomePageState extends State<MyHomePage> {
           customerChangeDue: 0,
           branchId: 1,
           status: "PENDING",
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
+          createdAt: DateTime.now().toUtc(),
+          updatedAt: DateTime.now().toUtc(),
           transactionType: "Sale",
           paymentType: "Cash"),
       currencySymbol: "RW",
@@ -187,7 +187,7 @@ class _MyHomePageState extends State<MyHomePage> {
       items: List.from(
         [
           TransactionItem(
-            lastTouched: DateTime.now(),
+            lastTouched: DateTime.now().toUtc(),
             splyAmt: 1,
             itemNm: "1",
             discount: 0,
@@ -200,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
             price: 10.0,
           ),
           TransactionItem(
-            lastTouched: DateTime.now(),
+            lastTouched: DateTime.now().toUtc(),
             splyAmt: 1,
             itemNm: "1",
             discount: 0,
@@ -213,7 +213,7 @@ class _MyHomePageState extends State<MyHomePage> {
             price: 10.0,
           ),
           TransactionItem(
-            lastTouched: DateTime.now(),
+            lastTouched: DateTime.now().toUtc(),
             splyAmt: 1,
             itemNm: "1",
             discount: 0,
