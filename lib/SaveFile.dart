@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flipper_rw/printer_service.dart';
 import 'package:flipper_services/proxy.dart';
 import 'package:flutter/services.dart';
 import 'package:open_filex/open_filex.dart';
@@ -9,6 +10,7 @@ import 'package:printing/printing.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:path/path.dart' as p;
 import 'package:talker_flutter/talker_flutter.dart';
+import 'package:jni/jni.dart';
 
 import 'package:sentry_flutter/sentry_flutter.dart';
 
@@ -148,6 +150,10 @@ mixin SaveFile {
   }
 
   Future<void> _openOrShareFile(String filePath) async {
+    if (Platform.isAndroid) {
+      final printer = PrinterService();
+      printer.printNow(filePath.toJString());
+    }
     await OpenFilex.open(filePath);
   }
 

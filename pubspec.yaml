@@ -29,6 +29,8 @@ dependencies:
   sentry_flutter: ^8.14.1
   syncfusion_flutter_pdf: ^29.1.37
   supabase_models: any
+  flipper_rw: any
+  jni: ^0.14.1
   
 dependency_overrides:
   http: ^1.2.2
