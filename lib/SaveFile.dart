@@ -99,47 +99,58 @@ mixin SaveFile {
       const defaultPrinter = Printer(url: "", isAvailable: false);
       final talker = TalkerFlutter.init();
       talker.info(printingInfo);
+      if (!Platform.isAndroid && !Platform.isIOS) {
+        if (printingInfo.canListPrinters) {
+          final printers = await Printing.listPrinters();
 
-      if (printingInfo.canListPrinters) {
-        final printers = await Printing.listPrinters();
-
-        // Pick the first available printer
-        final firstAvailablePrinter = printers.firstWhere(
-          (printer) => printer.isAvailable,
-          orElse: () => defaultPrinter,
-        );
-        talker.info('first available printer');
-        talker.info(firstAvailablePrinter);
-        if (firstAvailablePrinter.isAvailable) {
-          Sentry.captureMessage("PRINTER_AVAILABLE");
-          // Print directly to the first available printer
-          await Printing.directPrintPdf(
-            printer: firstAvailablePrinter,
-            format: PdfPageFormat.roll80,
-            onLayout: (PdfPageFormat format) async => pdfData,
+          // Pick the first available printer
+          final firstAvailablePrinter = printers.firstWhere(
+            (printer) => printer.isAvailable,
+            orElse: () => defaultPrinter,
           );
+          talker.info('first available printer');
+          talker.info(firstAvailablePrinter);
+          if (firstAvailablePrinter.isAvailable) {
+            Sentry.captureMessage("PRINTER_AVAILABLE");
+            // Print directly to the first available printer
+            await Printing.directPrintPdf(
+              printer: firstAvailablePrinter,
+              format: PdfPageFormat.roll80,
+              onLayout: (PdfPageFormat format) async => pdfData,
+            );
 
-          //  await Printing.pickPrinter(
-          //   printer: firstAvailablePrinter,
-          //   format: PdfPageFormat.roll80,
-          //   onLayout: (PdfPageFormat format) async => pdfData,
-          // );
+            //  await Printing.pickPrinter(
+            //   printer: firstAvailablePrinter,
+            //   format: PdfPageFormat.roll80,
+            //   onLayout: (PdfPageFormat format) async => pdfData,
+            // );
+          } else {
+            // No available printer found, share the PDF via email
+            if (Platform.isAndroid || Platform.isIOS) {
+              // await sharePdfViaEmail(pdfData, emails);
+              _openOrShareFile(filePath);
+            } else {
+              _openOrShareFile(filePath);
+            }
+          }
         } else {
-          // No available printer found, share the PDF via email
+          // Unable to list printers, share the PDF via email
           if (Platform.isAndroid || Platform.isIOS) {
-            await sharePdfViaEmail(pdfData, emails);
+            // await sharePdfViaEmail(pdfData, emails);
+            _openOrShareFile(filePath);
           } else {
             _openOrShareFile(filePath);
           }
         }
       } else {
-        // Unable to list printers, share the PDF via email
         if (Platform.isAndroid || Platform.isIOS) {
-          await sharePdfViaEmail(pdfData, emails);
+          // await sharePdfViaEmail(pdfData, emails);
+          _openOrShareFile(filePath);
         } else {
           _openOrShareFile(filePath);
         }
       }
+
       // return handlePrint(pdfData);
     } catch (e) {
       // In case of any errors, share the PDF via email
