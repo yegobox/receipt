@@ -416,7 +416,7 @@ class OmniPrinter with SaveFile implements Printable {
 
     // Process items
     for (var item in items) {
-      double total = (item.price * item.qty!).toDouble();
+      double total = (item.price * item.qty).toDouble();
       String taxLabel = item.taxTyCd != null ? "(${item.taxTyCd!})" : "(B)";
       String totalPrefix =
           receiptType == "NR" || receiptType == "CR" || receiptType == "TR"
@@ -887,7 +887,7 @@ class OmniPrinter with SaveFile implements Printable {
         customerName: customerName);
     dashedLine();
     final cash =
-        items.map((e) => e.price * e.qty!).reduce((sum, value) => sum + value) -
+        items.map((e) => e.price * e.qty).reduce((sum, value) => sum + value) -
             totalDiscount;
     await _body(
       items: items,
@@ -906,7 +906,7 @@ class OmniPrinter with SaveFile implements Printable {
       received: received,
       // payMode: payMode,
       totalPayable: items
-          .map((e) => e.price * e.qty!)
+          .map((e) => e.price * e.qty)
           .reduce((sum, value) => sum + value)
           .toString(),
       receiptType: receiptType,
