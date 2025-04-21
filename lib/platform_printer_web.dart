@@ -1,5 +1,5 @@
 class PlatformPrinter {
-  void printFile(String filePath) {
+  void printFile(dynamic filePath) {
     // No-op on web - printing not supported
   }
 }

@@ -5,6 +5,7 @@ import 'package:flipper_services/proxy.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart' as c;
 import 'package:pdf/pdf.dart';
+import 'dart:ui' as ui;
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 import 'package:receipt/SaveFile.dart';
@@ -936,11 +937,17 @@ class OmniPrinter with SaveFile implements Printable {
       ),
     );
 
-    // experiment layout the pdf file
+    // Convert the first page of the PDF to an image using the printing package
     Uint8List pdfData = await doc.save();
-    // FYI: https://stackoverflow.com/questions/68871880/do-not-use-buildcontexts-across-async-gaps
+    Uint8List? image;
+    await for (var page in Printing.raster(pdfData, pages: [0], dpi: 72)) {
+      image = await page.toPng();
+      break; // Only need the first page
+    }
+
     handlePdfData(
       pdfData: pdfData,
+      image: image!,
       emails: emails,
       autoPrint: autoPrint,
       transactionId: transactionId,

@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart' as c;
 import 'package:printing/printing.dart';
 import 'package:flipper_models/helperModels/extensions.dart';
+import 'dart:ui' as ui;
 
 //
 class OmniPrinterA4 with SaveFile implements Printable {
@@ -477,8 +478,14 @@ class OmniPrinterA4 with SaveFile implements Printable {
     );
 
     Uint8List pdfData = await pdf.save();
+    Uint8List? image;
+    await for (var page in Printing.raster(pdfData, pages: [0], dpi: 72)) {
+      image = await page.toPng();
+      break; // Only need the first page
+    }
     handlePdfData(
       pdfData: pdfData,
+      image: image!,
       emails: emails,
       autoPrint: autoPrint,
       transactionId: transactionId,

@@ -4,6 +4,8 @@ import 'package:receipt/printable.dart';
 import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
+import 'dart:ui' as ui;
+import 'package:printing/printing.dart';
 
 class OmniPrinterA4 with SaveFile implements Printable {
   @override
@@ -341,8 +343,14 @@ class OmniPrinterA4 with SaveFile implements Printable {
     document.dispose();
 
     Uint8List pdfData = Uint8List.fromList(bytes);
+    Uint8List? image;
+    await for (var page in Printing.raster(pdfData, pages: [0], dpi: 72)) {
+      image = await page.toPng();
+      break; // Only need the first page
+    }
     handlePdfData(
       pdfData: pdfData,
+      image: image!,
       emails: emails,
       autoPrint: autoPrint,
       transactionId: transactionId,

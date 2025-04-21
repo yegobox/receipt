@@ -10,7 +10,7 @@ import 'package:universal_platform/universal_platform.dart';
 import 'package:path/path.dart' as p;
 import 'package:talker_flutter/talker_flutter.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-
+import 'dart:ui' as ui;
 import 'platform_printer.dart';
 
 final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
@@ -58,7 +58,7 @@ mixin SaveFile {
   /// rasterizing each page, generating a filename, writing the PNG data,
   /// and incrementing the page count.
   Future<void> savePdfAsImage(Uint8List pdfData,
-      {required String transactionId}) async {
+      {required String transactionId, required Uint8List image}) async {
     Directory? dir = await getApplicationSupportDirectory();
     final path = dir.path;
     var i = 0;
@@ -84,7 +84,7 @@ mixin SaveFile {
   /// in the share sheet.
 
   Future<void> sharePdf(Uint8List pdfData, List<String>? emails,
-      {required String transactionId}) async {
+      {required String transactionId, required Uint8List image}) async {
     try {
       // Fetch printer information
       String filePath = await savePdfToDocumentDirectory(pdfData,
@@ -128,26 +128,26 @@ mixin SaveFile {
             // No available printer found, share the PDF via email
             if (Platform.isAndroid || Platform.isIOS) {
               // await sharePdfViaEmail(pdfData, emails);
-              _openOrShareFile(filePath);
+              _openOrShareFile(filePath, bytes: pdfData, image: image);
             } else {
-              _openOrShareFile(filePath);
+              _openOrShareFile(filePath, bytes: pdfData, image: image);
             }
           }
         } else {
           // Unable to list printers, share the PDF via email
           if (Platform.isAndroid || Platform.isIOS) {
             // await sharePdfViaEmail(pdfData, emails);
-            _openOrShareFile(filePath);
+            _openOrShareFile(filePath, bytes: pdfData, image: image);
           } else {
-            _openOrShareFile(filePath);
+            _openOrShareFile(filePath, bytes: pdfData, image: image);
           }
         }
       } else {
         if (Platform.isAndroid || Platform.isIOS) {
           // await sharePdfViaEmail(pdfData, emails);
-          _openOrShareFile(filePath);
+          _openOrShareFile(filePath, bytes: pdfData, image: image);
         } else {
-          _openOrShareFile(filePath);
+          _openOrShareFile(filePath, bytes: pdfData, image: image);
         }
       }
 
@@ -159,10 +159,11 @@ mixin SaveFile {
     }
   }
 
-  Future<void> _openOrShareFile(String filePath) async {
+  Future<void> _openOrShareFile(String filePath,
+      {required Uint8List bytes, required Uint8List image}) async {
     if (Platform.isAndroid && !kIsWeb) {
       final printer = PlatformPrinter();
-      printer.printFile(filePath);
+      printer.printFile(image);
     }
     await OpenFilex.open(filePath);
   }
@@ -224,15 +225,18 @@ mixin SaveFile {
     required List<String>? emails,
     bool? autoPrint = false,
     required String transactionId,
+    required Uint8List image,
   }) async {
     if (autoPrint!) {
       if (isDesktopOrWeb) {
         await printPdf(pdfData, transactionId: transactionId);
       } else {
-        await savePdfAsImage(pdfData, transactionId: transactionId);
+        await savePdfAsImage(pdfData,
+            transactionId: transactionId, image: image);
       }
     } else {
-      await sharePdf(pdfData, emails, transactionId: transactionId);
+      await sharePdf(pdfData, emails,
+          transactionId: transactionId, image: image);
     }
   }
 }
