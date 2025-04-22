@@ -123,6 +123,27 @@ class OmniPrinterA4 with SaveFile implements Printable {
               ),
               SizedBox(height: 20),
 
+              // Refund Title - Added to match omni_printer.dart implementation
+              if (receiptType == "NR" ||
+                  receiptType == "TR" ||
+                  receiptType == "CR")
+                Center(
+                  child: Column(
+                    children: [
+                      Text('Refund',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold)),
+                      if (receiptType == "NR" || receiptType == "TR")
+                        Text('REF.NORMAL RECEIPT:# ${invoiceNum - 1}',
+                            style: const TextStyle(fontSize: 10)),
+                      dashWidget(),
+                      Text('REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT',
+                          style: const TextStyle(fontSize: 10)),
+                      SizedBox(height: 10),
+                    ],
+                  ),
+                ),
+
               // Invoice Information
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,9 +189,9 @@ class OmniPrinterA4 with SaveFile implements Printable {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('INVOICE NO: $rcptNo'),
+                              Text('INVOICE NO: $invoiceNum'),
                               SizedBox(height: 5),
-                              Text('Date: ${whenCreated.shortDate}'),
+                              Text('Date: ${whenCreated.isoDateTime}'),
                             ],
                           ),
                         ),
@@ -209,16 +230,27 @@ class OmniPrinterA4 with SaveFile implements Printable {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text((item.qty * item.price)
-                                .toNoCurrencyFormatted()),
+                            Text(
+                                // Add negative sign for refunds
+                                (receiptType == "NR" ||
+                                        receiptType == "CR" ||
+                                        receiptType == "TR")
+                                    ? "-${(item.qty * item.price).toNoCurrencyFormatted()}"
+                                    : (item.qty * item.price)
+                                        .toNoCurrencyFormatted()),
                             if (item.dcRt != 0)
                               Text(
-                                ((item.qty * item.price) -
-                                        (item.qty *
-                                            item.price *
-                                            item.dcRt! /
-                                            100))
-                                    .toNoCurrencyFormatted(),
+                                // Add negative sign for refunds
+                                (receiptType == "NR" ||
+                                        receiptType == "CR" ||
+                                        receiptType == "TR")
+                                    ? "-${((item.qty * item.price) - (item.qty * item.price * item.dcRt! / 100)).toNoCurrencyFormatted()}"
+                                    : ((item.qty * item.price) -
+                                            (item.qty *
+                                                item.price *
+                                                item.dcRt! /
+                                                100))
+                                        .toNoCurrencyFormatted(),
                               ),
                           ],
                         ),
@@ -302,7 +334,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                           'Receipt Number: $invoiceNum',
                           style: const TextStyle(fontSize: 10),
                         ),
-                        Text('Date: ${whenCreated.shortDate}',
+                        Text('Date: ${whenCreated.isoDateTime}',
                             style: const TextStyle(fontSize: 10)),
                         Text('MRC: $mrc', style: const TextStyle(fontSize: 10)),
                         dashWidget(),
@@ -342,8 +374,14 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(4),
-                                  child: Text((totalPayable - totalDiscount)
-                                      .toNoCurrencyFormatted()),
+                                  child: Text(
+                                      // Add negative sign for refunds
+                                      (receiptType == "NR" ||
+                                              receiptType == "CR" ||
+                                              receiptType == "TR")
+                                          ? "-${(totalPayable - totalDiscount).toNoCurrencyFormatted()}"
+                                          : (totalPayable - totalDiscount)
+                                              .toNoCurrencyFormatted()),
                                 ),
                               ],
                             ),
@@ -358,7 +396,12 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                     padding: const EdgeInsets.all(4),
                                     child:
                                         // Format with exactly 2 decimal places without rounding
-                                        Text(totalTaxA.toStringAsFixed(2)),
+                                        // Add negative sign for refunds
+                                        Text((receiptType == "NR" ||
+                                                receiptType == "CR" ||
+                                                receiptType == "TR")
+                                            ? "-${totalTaxA.toStringAsFixed(2)}"
+                                            : totalTaxA.toStringAsFixed(2)),
                                   ),
                                 ],
                               ),
@@ -373,7 +416,12 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                     padding: const EdgeInsets.all(4),
                                     child:
                                         // Format with exactly 2 decimal places without rounding
-                                        Text(totalTaxB.toStringAsFixed(2)),
+                                        // Add negative sign for refunds
+                                        Text((receiptType == "NR" ||
+                                                receiptType == "CR" ||
+                                                receiptType == "TR")
+                                            ? "-${totalTaxB.toStringAsFixed(2)}"
+                                            : totalTaxB.toStringAsFixed(2)),
                                   ),
                                 ],
                               ),
@@ -387,7 +435,12 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(4),
-                                    child: Text(totalTaxC.toStringAsFixed(2)),
+                                    // Add negative sign for refunds
+                                    child: Text((receiptType == "NR" ||
+                                            receiptType == "CR" ||
+                                            receiptType == "TR")
+                                        ? "-${totalTaxC.toStringAsFixed(2)}"
+                                        : totalTaxC.toStringAsFixed(2)),
                                   ),
                                 ],
                               ),
@@ -402,7 +455,12 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                     padding: const EdgeInsets.all(4),
                                     child:
                                         // Format with exactly 2 decimal places without rounding
-                                        Text(totalTaxD.toStringAsFixed(2)),
+                                        // Add negative sign for refunds
+                                        Text((receiptType == "NR" ||
+                                                receiptType == "CR" ||
+                                                receiptType == "TR")
+                                            ? "-${totalTaxD.toStringAsFixed(2)}"
+                                            : totalTaxD.toStringAsFixed(2)),
                                   ),
                                 ],
                               ),
@@ -418,8 +476,13 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                     padding: const EdgeInsets.all(4),
                                     // Format with exactly 2 decimal places without rounding
                                     // to match the implementation in omni_printer.dart
-                                    child: Text(double.parse(totalTax)
-                                        .toStringAsFixed(2)),
+                                    // Add negative sign for refunds
+                                    child: Text((receiptType == "NR" ||
+                                            receiptType == "CR" ||
+                                            receiptType == "TR")
+                                        ? "-${double.parse(totalTax).toStringAsFixed(2)}"
+                                        : double.parse(totalTax)
+                                            .toStringAsFixed(2)),
                                   ),
                                 ],
                               ),

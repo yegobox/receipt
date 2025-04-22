@@ -77,7 +77,7 @@ class OmniPrinter with SaveFile implements Printable {
                 style: const TextStyle()),
             dashWidget(),
             Text(
-                'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
+                'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID: $customerTin',
                 style: const TextStyle()),
           ];
         case "TR":
