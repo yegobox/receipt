@@ -101,6 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
     required DateTime whenCreated,
     required Function(Uint8List bytes) printCallback,
     required double totalDiscount,
+    required DateTime timeFromServer,
   }) async {
     Printable printer = OmniPrinter();
     Printable printerA4 = OmniPrinterA4();
@@ -110,6 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
       totalDiscount: totalDiscount,
       taxA: taxA,
       taxC: taxC,
+      timeFromServer: timeFromServer,
       whenCreated: whenCreated,
       taxD: taxD,
       brandName: brandName,
@@ -152,6 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     print(
+      timeFromServer: DateTime.now(),
       totalDiscount: 10,
       whenCreated: DateTime.now().toUtc(),
       transaction: ITransaction(

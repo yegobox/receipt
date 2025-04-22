@@ -43,5 +43,6 @@ abstract class Printable {
     required Function(Uint8List bytes) printCallback,
     required double totalDiscount,
     required String transactionId,
+    required DateTime timeFromServer,
   });
 }

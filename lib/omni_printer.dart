@@ -633,6 +633,7 @@ class OmniPrinter with SaveFile implements Printable {
     required int rcptNo,
     required int totRcptNo,
     required DateTime whenCreated,
+    required DateTime timeFromServer,
   }) async {
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -655,7 +656,7 @@ class OmniPrinter with SaveFile implements Printable {
         SizedBox(
           width: 1120,
           child: Text(
-            whenCreated.toDateTimeString(),
+            timeFromServer.toDateTimeString(),
             style: TextStyle(fontWeight: FontWeight.normal),
           ),
         ),
@@ -869,6 +870,7 @@ class OmniPrinter with SaveFile implements Printable {
     required DateTime whenCreated,
     required Function(Uint8List bytes) printCallback,
     required String transactionId,
+    required DateTime timeFromServer,
   }) async {
     talker.warning("ReceiptNo: $rcptNo: totRcptNo: $totRcptNo");
     final left = await _loadLogoImage(position: "left");
@@ -924,6 +926,7 @@ class OmniPrinter with SaveFile implements Printable {
       rcptNo: rcptNo,
       totRcptNo: totRcptNo,
       mrc: mrc,
+      timeFromServer: timeFromServer,
     );
 
     // Add a page to the document

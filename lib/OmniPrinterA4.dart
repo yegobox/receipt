@@ -79,6 +79,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     required DateTime whenCreated,
     required String transactionId,
     required Function(Uint8List bytes) printCallback,
+    required DateTime timeFromServer,
   }) async {
     final pdf = Document();
     final left = await _loadLogoImage(position: "left");
@@ -309,7 +310,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 fontSize: 10, fontWeight: FontWeight.bold)),
                         dashWidget(),
                         SizedBox(height: 5),
-                        Text('Date: ${whenCreated.isoDateTime}',
+                        Text('Date: ${timeFromServer.isoDateTime}',
                             style: const TextStyle(fontSize: 10)),
                         Text('SDC ID: $sdcId',
                             style: const TextStyle(fontSize: 10)),

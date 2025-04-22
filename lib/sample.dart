@@ -10,6 +10,7 @@ import 'package:printing/printing.dart';
 class OmniPrinterA4 with SaveFile implements Printable {
   @override
   Future<void> generatePdfAndPrint({
+    required DateTime timeFromServer,
     required double taxA,
     required double taxB,
     required double taxC,
