@@ -124,6 +124,51 @@ class OmniPrinterA4 with SaveFile implements Printable {
               ),
               SizedBox(height: 20),
 
+              // Training and Proforma Labels - Added to match omni_printer.dart implementation
+              if (receiptType == "TS")
+                Center(
+                  child: Column(
+                    children: [
+                      Text("TRAINING MODE",
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      SizedBox(height: 2),
+                      Text(
+                        "THIS IS NOT AN OFFICIAL RECEIPT",
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: PdfColors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              if (receiptType == "PS")
+                Center(
+                  child: Column(
+                    children: [
+                      Text("PROFORMA",
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      SizedBox(height: 2),
+                      Text(
+                        "THIS IS NOT AN OFFICIAL RECEIPT",
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: PdfColors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              SizedBox(height: 4),
+
               // Refund Title - Added to match omni_printer.dart implementation
               if (receiptType == "NR" ||
                   receiptType == "TR" ||
