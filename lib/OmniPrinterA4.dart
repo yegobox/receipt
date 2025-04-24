@@ -93,32 +93,67 @@ class OmniPrinterA4 with SaveFile implements Printable {
             children: [
               // Header Section
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (left != null) Image(left, width: 40, height: 40),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            brandName.substring(0,
-                                brandName.length > 20 ? 20 : brandName.length),
-                          ),
-                          SizedBox(height: 4),
-                          Text('TEL: $brandTel'),
-                          SizedBox(height: 2),
-                          Text('TIN: $brandTIN'),
-                        ],
-                      )
-                    ],
+                  // Left: RRA Logo
+                  Expanded(
+                    flex: 2,
+                    child: left != null
+                        ? Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 8, right: 8, top: 8),
+                              child: Image(left, width: 60, height: 60),
+                            ),
+                          )
+                        : SizedBox(),
                   ),
-                  SizedBox(width: 100),
-                  if (right != null)
-                    Image(right, width: 40, height: 40)
-                  else
-                    SizedBox(width: 100),
+                  // Center: Company Info
+                  Expanded(
+                    flex: 3,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(height: 6),
+                        Text(
+                          'COMPANY ADDRESS',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 11),
+                        ),
+                        Text(
+                          brandAddress,
+                          style: TextStyle(fontSize: 10),
+                        ),
+                        Text(
+                          'TEL: $brandTel',
+                          style: TextStyle(fontSize: 10),
+                        ),
+                        Text(
+                          'EMAIL:',
+                          style: TextStyle(fontSize: 10),
+                        ),
+                        Text(
+                          'TIN: $brandTIN',
+                          style: TextStyle(fontSize: 10),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Right: Rwanda Seal/Logo
+                  Expanded(
+                    flex: 2,
+                    child: right != null
+                        ? Align(
+                            alignment: Alignment.topRight,
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 16, top: 8),
+                              child: Image(right, width: 60, height: 60),
+                            ),
+                          )
+                        : SizedBox(),
+                  ),
                 ],
               ),
               SizedBox(height: 20),
