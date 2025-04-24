@@ -169,14 +169,6 @@ class OmniPrinterA4 with SaveFile implements Printable {
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 2),
-                      Text(
-                        "THIS IS NOT AN OFFICIAL RECEIPT",
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          color: PdfColors.black,
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -190,14 +182,6 @@ class OmniPrinterA4 with SaveFile implements Printable {
                             fontWeight: FontWeight.bold,
                           )),
                       SizedBox(height: 2),
-                      Text(
-                        "THIS IS NOT AN OFFICIAL RECEIPT",
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          color: PdfColors.black,
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -214,11 +198,6 @@ class OmniPrinterA4 with SaveFile implements Printable {
                           style: TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold)),
                       dashWidget(),
-                      Text('THIS IS NOT AN OFFICIAL RECEIPT',
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              color: PdfColors.black)),
                       SizedBox(height: 10),
                     ],
                   ),
@@ -394,7 +373,20 @@ class OmniPrinterA4 with SaveFile implements Printable {
                 cellPadding:
                     const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
               ),
-
+              SizedBox(height: 10),
+              if (receiptType == "TS" ||
+                  receiptType == "PS" ||
+                  receiptType == "CS" ||
+                  receiptType == "CR" ||
+                  receiptType == "CP")
+                Text(
+                  "THIS IS NOT AN OFFICIAL RECEIPT",
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: PdfColors.black,
+                  ),
+                ),
               SizedBox(height: 30),
 
               Row(
