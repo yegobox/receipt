@@ -80,7 +80,11 @@ class OmniPrinterA4 with SaveFile implements Printable {
     required Function(Uint8List bytes) printCallback,
     required DateTime timeFromServer,
   }) async {
-    final pdf = Document();
+    final pdf = Document(
+      compress: true,
+      // Ensures all content fits on a single page (no multipage)
+      pageMode: PdfPageMode.none,
+    );
     final left = await _loadLogoImage(position: "left");
     final middle = await _loadLogoImage(position: "middle");
     final right = await _loadLogoImage(position: "right");
@@ -219,7 +223,6 @@ class OmniPrinterA4 with SaveFile implements Printable {
                       dashWidget(),
                       Text('REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT',
                           style: const TextStyle(fontSize: 10)),
-                      SizedBox(height: 10),
                     ],
                   ),
                 ),
@@ -378,6 +381,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   receiptType == "PS" ||
                   receiptType == "CS" ||
                   receiptType == "CR" ||
+                  receiptType == "NR" ||
+                  receiptType == "TR" ||
                   receiptType == "CP")
                 Text(
                   "THIS IS NOT AN OFFICIAL RECEIPT",
@@ -387,53 +392,53 @@ class OmniPrinterA4 with SaveFile implements Printable {
                     color: PdfColors.black,
                   ),
                 ),
-              SizedBox(height: 30),
+              SizedBox(height: 5),
 
+              // SDC Information
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // SDC Information
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('SDC INFORMATION',
-                            style: TextStyle(
-                                fontSize: 10, fontWeight: FontWeight.bold)),
-                        dashWidget(),
-                        SizedBox(height: 5),
-                        Text('Date: ${timeFromServer.isoDateTime}',
-                            style: const TextStyle(fontSize: 10)),
-                        Text('SDC ID: $sdcId',
-                            style: const TextStyle(fontSize: 10)),
-                        Text(
-                          'Receipt Number: $rcptNo/$totRcptNo ($receiptType)',
-                          style: const TextStyle(fontSize: 10),
-                        ),
-                        if (receiptType != "PS" && receiptType != "TS")
+                  if (receiptType != "PS" && receiptType != "TS")
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('SDC INFORMATION',
+                              style: TextStyle(
+                                  fontSize: 10, fontWeight: FontWeight.bold)),
+                          dashWidget(),
+                          SizedBox(height: 5),
+                          Text('Date: ${timeFromServer.isoDateTime}',
+                              style: const TextStyle(fontSize: 10)),
+                          Text('SDC ID: $sdcId',
+                              style: const TextStyle(fontSize: 10)),
+                          Text(
+                            'Receipt Number: $rcptNo/$totRcptNo ($receiptType)',
+                            style: const TextStyle(fontSize: 10),
+                          ),
                           Text(
                             'Internal Data: ${internalData.toDashedStringInternalData()}',
                             style: const TextStyle(fontSize: 10),
                           ),
-                        if (receiptType != "PS" && receiptType != "TS")
                           Text(
                             'Receipt Signature: ${receiptSignature.toDashedStringRcptSign()}',
                             style: const TextStyle(fontSize: 10),
                           ),
-                        SizedBox(height: 5),
-                        dashWidget(),
-                        SizedBox(height: 5),
-                        Text(
-                          'Receipt Number: $invoiceNum',
-                          style: const TextStyle(fontSize: 10),
-                        ),
-                        Text('Date: ${whenCreated.isoDateTime}',
-                            style: const TextStyle(fontSize: 10)),
-                        Text('MRC: $mrc', style: const TextStyle(fontSize: 10)),
-                        dashWidget(),
-                      ],
+                          SizedBox(height: 5),
+                          dashWidget(),
+                          SizedBox(height: 5),
+                          Text(
+                            'Receipt Number: $invoiceNum',
+                            style: const TextStyle(fontSize: 10),
+                          ),
+                          Text('Date: ${whenCreated.isoDateTime}',
+                              style: const TextStyle(fontSize: 10)),
+                          Text('MRC: $mrc',
+                              style: const TextStyle(fontSize: 10)),
+                          dashWidget(),
+                        ],
+                      ),
                     ),
-                  ),
                   if (receiptType != "PS" && receiptType != "TS")
                     SizedBox(width: 20),
                   if (receiptType != "PS" && receiptType != "TS")
@@ -617,11 +622,10 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   ),
                 ],
               ),
-
               SizedBox(height: 30),
               // Footer
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text('POWERED BY RRA VSDC EBM2.1',
+                Text('flipper v1.0.0',
                     style:
                         TextStyle(fontStyle: FontStyle.normal, fontSize: 10)),
                 SizedBox(width: 30),
@@ -630,6 +634,9 @@ class OmniPrinterA4 with SaveFile implements Printable {
             ],
           );
         },
+        // Try to keep everything on a single page
+        margin: EdgeInsets.all(8),
+        clip: true,
       ),
     );
 
