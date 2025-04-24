@@ -534,11 +534,16 @@ class OmniPrinter with SaveFile implements Printable {
 
     await _buildTotal(
         totalPayable: totalWithDiscount.toString(), receiptType: receiptType);
-    await _buildTaxB18(totalTaxB: totalTaxB, receiptType: receiptType);
+    await _buildTaxB18(
+        totalTaxB: taxB.toStringAsFixed(2), receiptType: receiptType);
+
+    await _buildTotalTaxB(
+        totalTaxB: double.parse(totalTaxB).toStringAsFixed(2),
+        receiptType: receiptType);
+
     await _buildTaxA(
         totalAEx: taxA.toStringAsFixed(2), receiptType: receiptType);
-    await _buildTotalTaxB(
-        totalTaxB: taxB.toStringAsFixed(2), receiptType: receiptType);
+
     await _buildTaxC(
         totalTaxC: taxC.toStringAsFixed(2), receiptType: receiptType);
     await _buildTaxD(

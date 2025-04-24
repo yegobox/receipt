@@ -168,6 +168,27 @@ class OmniPrinterA4 with SaveFile implements Printable {
                 ),
               SizedBox(height: 4),
 
+              // Copy Title - Added to match omni_printer.dart implementation
+              if (receiptType == "CS" ||
+                  receiptType == "CR" ||
+                  receiptType == "CP")
+                Center(
+                  child: Column(
+                    children: [
+                      Text('COPY',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold)),
+                      dashWidget(),
+                      Text('THIS IS NOT AN OFFICIAL RECEIPT',
+                          style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: PdfColors.black)),
+                      SizedBox(height: 10),
+                    ],
+                  ),
+                ),
+
               // Refund Title - Added to match omni_printer.dart implementation
               if (receiptType == "NR" ||
                   receiptType == "TR" ||
@@ -465,8 +486,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                         Text((receiptType == "NR" ||
                                                 receiptType == "CR" ||
                                                 receiptType == "TR")
-                                            ? "-${totalTaxB.toStringAsFixed(2)}"
-                                            : totalTaxB.toStringAsFixed(2)),
+                                            ? "-${taxB.toStringAsFixed(2)}"
+                                            : taxB.toStringAsFixed(2)),
                                   ),
                                 ],
                               ),
