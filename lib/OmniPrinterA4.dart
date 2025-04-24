@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart' as c;
 import 'package:printing/printing.dart';
 import 'package:flipper_models/helperModels/extensions.dart';
-import 'dart:ui' as ui;
 
 //
 class OmniPrinterA4 with SaveFile implements Printable {

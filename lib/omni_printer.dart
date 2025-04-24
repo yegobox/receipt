@@ -5,7 +5,6 @@ import 'package:flipper_services/proxy.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart' as c;
 import 'package:pdf/pdf.dart';
-import 'dart:ui' as ui;
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 import 'package:receipt/SaveFile.dart';
