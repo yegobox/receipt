@@ -1197,7 +1197,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223233824+1745505475"
+    version: "1.170.4252223233825+1745507946"
   flipper_services:
     dependency: "direct main"
     description:
@@ -2634,6 +2634,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.1"
+  posthog_flutter:
+    dependency: transitive
+    description:
+      name: posthog_flutter
+      sha256: "2a74b86306b3e1b27ad227aeeb5d63374afb03aa50e87af5062fec1341824b3b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.11.0"
   printing:
     dependency: transitive
     description:
