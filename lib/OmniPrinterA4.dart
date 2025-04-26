@@ -37,6 +37,23 @@ class OmniPrinterA4 with SaveFile implements Printable {
     return image;
   }
 
+  // Utility: Safe double parsing to avoid invalid double errors everywhere
+  double safeParseDouble(dynamic value) {
+    if (value == null) return 0.0;
+    if (value is double) {
+      if (value.isNaN || value.isInfinite) return 0.0;
+      return value;
+    }
+    if (value is int) return value.toDouble();
+    if (value is String) {
+      final cleaned = value.replaceAll(',', '').trim();
+      final parsed = double.tryParse(cleaned);
+      if (parsed == null || parsed.isNaN || parsed.isInfinite) return 0.0;
+      return parsed;
+    }
+    return 0.0;
+  }
+
   @override
   Future<void> generatePdfAndPrint({
     required double taxA,
@@ -477,13 +494,13 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                       (receiptType == "NR" ||
                                               receiptType == "CR" ||
                                               receiptType == "TR")
-                                          ? "-${(totalPayable - totalDiscount).toNoCurrencyFormatted()}"
-                                          : (totalPayable - totalDiscount)
-                                              .toNoCurrencyFormatted()),
+                                          ? "-${safeParseDouble(totalPayable - totalDiscount).toStringAsFixed(2)}"
+                                          : safeParseDouble(totalPayable - totalDiscount)
+                                              .toStringAsFixed(2)),
                                 ),
                               ],
                             ),
-                            if (totalTaxA != 0)
+                            if (safeParseDouble(totalTaxA) != 0)
                               TableRow(
                                 children: [
                                   Padding(
@@ -492,18 +509,19 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(4),
-                                    child:
+                                    child: Text(
                                         // Format with exactly 2 decimal places without rounding
                                         // Add negative sign for refunds
-                                        Text((receiptType == "NR" ||
+                                        (receiptType == "NR" ||
                                                 receiptType == "CR" ||
                                                 receiptType == "TR")
-                                            ? "-${totalTaxA.toStringAsFixed(2)}"
-                                            : totalTaxA.toStringAsFixed(2)),
+                                            ? "-${safeParseDouble(totalTaxA).toStringAsFixed(2)}"
+                                            : safeParseDouble(totalTaxA)
+                                                .toStringAsFixed(2)),
                                   ),
                                 ],
                               ),
-                            if (totalTaxB != 0)
+                            if (safeParseDouble(totalTaxB) != 0)
                               TableRow(
                                 children: [
                                   Padding(
@@ -512,19 +530,20 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(4),
-                                    child:
+                                    child: Text(
                                         // Format with exactly 2 decimal places without rounding
                                         // Add negative sign for refunds
-                                        Text((receiptType == "NR" ||
+                                        (receiptType == "NR" ||
                                                 receiptType == "CR" ||
                                                 receiptType == "TR")
-                                            ? "-${taxB.toStringAsFixed(2)}"
-                                            : taxB.toStringAsFixed(2)),
+                                            ? "-${safeParseDouble(totalTaxB).toStringAsFixed(2)}"
+                                            : safeParseDouble(totalTaxB)
+                                                .toStringAsFixed(2)),
                                   ),
                                 ],
                               ),
                             // Only show Tax C if value is non-zero, exactly matching omni_printer.dart
-                            if (totalTaxC != 0)
+                            if (safeParseDouble(totalTaxC) != 0)
                               TableRow(
                                 children: [
                                   Padding(
@@ -537,12 +556,13 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                     child: Text((receiptType == "NR" ||
                                             receiptType == "CR" ||
                                             receiptType == "TR")
-                                        ? "-${totalTaxC.toStringAsFixed(2)}"
-                                        : totalTaxC.toStringAsFixed(2)),
+                                        ? "-${safeParseDouble(totalTaxC).toStringAsFixed(2)}"
+                                        : safeParseDouble(totalTaxC)
+                                            .toStringAsFixed(2)),
                                   ),
                                 ],
                               ),
-                            if (totalTaxD != 0)
+                            if (safeParseDouble(totalTaxD) != 0)
                               TableRow(
                                 children: [
                                   Padding(
@@ -551,19 +571,20 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(4),
-                                    child:
+                                    child: Text(
                                         // Format with exactly 2 decimal places without rounding
                                         // Add negative sign for refunds
-                                        Text((receiptType == "NR" ||
+                                        (receiptType == "NR" ||
                                                 receiptType == "CR" ||
                                                 receiptType == "TR")
-                                            ? "-${totalTaxD.toStringAsFixed(2)}"
-                                            : totalTaxD.toStringAsFixed(2)),
+                                            ? "-${safeParseDouble(totalTaxD).toStringAsFixed(2)}"
+                                            : safeParseDouble(totalTaxD)
+                                                .toStringAsFixed(2)),
                                   ),
                                 ],
                               ),
                             // Only show total tax if it's not zero
-                            if (double.parse(totalTax) != 0)
+                            if (safeParseDouble(totalTax) != 0)
                               TableRow(
                                 children: [
                                   Padding(
@@ -578,8 +599,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                     child: Text((receiptType == "NR" ||
                                             receiptType == "CR" ||
                                             receiptType == "TR")
-                                        ? "-${double.parse(totalTax).toStringAsFixed(2)}"
-                                        : double.parse(totalTax)
+                                        ? "-${safeParseDouble(totalTax).toStringAsFixed(2)}"
+                                        : safeParseDouble(totalTax)
                                             .toStringAsFixed(2)),
                                   ),
                                 ],

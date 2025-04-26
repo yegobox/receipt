@@ -50,6 +50,22 @@ class OmniPrinter with SaveFile implements Printable {
     return image;
   }
 
+  double safeParseDouble(dynamic value) {
+    if (value == null) return 0.0;
+    if (value is double) {
+      if (value.isNaN || value.isInfinite) return 0.0;
+      return value;
+    }
+    if (value is int) return value.toDouble();
+    if (value is String) {
+      final cleaned = value.replaceAll(',', '').trim();
+      final parsed = double.tryParse(cleaned);
+      if (parsed == null || parsed.isNaN || parsed.isInfinite) return 0.0;
+      return parsed;
+    }
+    return 0.0;
+  }
+
   Future<void> _header({
     required ImageProvider leftImage,
     required ImageProvider rightImage,
@@ -177,7 +193,7 @@ class OmniPrinter with SaveFile implements Printable {
   _buildTotalTax(
       {required String totalTax, required String receiptType}) async {
     // Parse the tax value from the string
-    double taxValue = double.parse(totalTax.replaceAll(",", ""));
+    double taxValue = safeParseDouble(totalTax);
 
     // Format with exactly 2 decimal places without rounding
     // We truncate to 2 decimal places by converting to string with fixed decimal places
@@ -208,7 +224,7 @@ class OmniPrinter with SaveFile implements Printable {
 
   _buildTotalTaxB(
       {required String totalTaxB, required String receiptType}) async {
-    double value = double.parse(totalTaxB.replaceAll(',', ''));
+    double value = safeParseDouble(totalTaxB);
     if (value != 0) {
       String displayTotalTaxB = totalTaxB;
 
@@ -237,16 +253,14 @@ class OmniPrinter with SaveFile implements Printable {
   }
 
   _buildTaxB18({required String totalTaxB, required String receiptType}) async {
-    double? value = double.tryParse(totalTaxB.replaceAll(',', ''));
-    if (value != null && value != 0) {
+    double value = safeParseDouble(totalTaxB);
+    if (value != 0) {
       String displayTotalTaxB = totalTaxB;
 
       if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
-        displayTotalTaxB =
-            "-${double.parse(totalTaxB.replaceAll(",", "")).toNoCurrencyFormatted()}";
+        displayTotalTaxB = "-${value.toNoCurrencyFormatted()}";
       } else {
-        displayTotalTaxB =
-            double.parse(totalTaxB.replaceAll(",", "")).toNoCurrencyFormatted();
+        displayTotalTaxB = value.toNoCurrencyFormatted();
       }
 
       rows.add(
@@ -268,16 +282,14 @@ class OmniPrinter with SaveFile implements Printable {
   }
 
   _buildTaxC({required String totalTaxC, required String receiptType}) async {
-    String displayTotalTaxC = totalTaxC;
-
-    double value = double.parse(totalTaxC.replaceAll(',', ''));
+    double value = safeParseDouble(totalTaxC);
     if (value != 0) {
+      String displayTotalTaxC = totalTaxC;
+
       if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
-        displayTotalTaxC =
-            "-${double.parse(totalTaxC.replaceAll(",", "")).toNoCurrencyFormatted()}";
+        displayTotalTaxC = "-${value.toNoCurrencyFormatted()}";
       } else {
-        displayTotalTaxC =
-            double.parse(totalTaxC.replaceAll(",", "")).toNoCurrencyFormatted();
+        displayTotalTaxC = value.toNoCurrencyFormatted();
       }
 
       rows.add(
@@ -299,15 +311,14 @@ class OmniPrinter with SaveFile implements Printable {
   }
 
   _buildTaxD({required String totalTaxD, required String receiptType}) async {
-    String displayTotalTaxD = totalTaxD;
-    double value = double.parse(displayTotalTaxD.replaceAll(',', ''));
+    double value = safeParseDouble(totalTaxD);
     if (value != 0) {
+      String displayTotalTaxD = totalTaxD;
+
       if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
-        displayTotalTaxD =
-            "-${double.parse(totalTaxD.replaceAll(",", "")).toNoCurrencyFormatted()}";
+        displayTotalTaxD = "-${value.toNoCurrencyFormatted()}";
       } else {
-        displayTotalTaxD =
-            double.parse(totalTaxD.replaceAll(",", "")).toNoCurrencyFormatted();
+        displayTotalTaxD = value.toNoCurrencyFormatted();
       }
 
       rows.add(
@@ -330,14 +341,10 @@ class OmniPrinter with SaveFile implements Printable {
 
   _buildTotal(
       {required String totalPayable, required String receiptType}) async {
-    String total = totalPayable;
+    double total = safeParseDouble(totalPayable);
 
     if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
-      total =
-          "-${double.parse(totalPayable.replaceAll(",", "")).toFormattedPercentage()}";
-    } else {
-      total = double.parse(totalPayable.replaceAll(",", ""))
-          .toFormattedPercentage();
+      total = -total;
     }
 
     rows.add(
@@ -349,7 +356,7 @@ class OmniPrinter with SaveFile implements Printable {
             style: _receiptTextStyle.copyWith(),
           ),
           Text(
-            total.replaceAll("%", ""),
+            total.toNoCurrencyFormatted(),
             style: _receiptTextStyle.copyWith(),
           )
         ],
@@ -359,7 +366,7 @@ class OmniPrinter with SaveFile implements Printable {
 
   _buildTaxA({required String totalAEx, required String receiptType}) async {
     // Skip adding the row if the value is zero
-    double taxAValue = double.parse(totalAEx.replaceAll(",", ""));
+    double taxAValue = safeParseDouble(totalAEx);
     if (taxAValue == 0) {
       return; // Don't add anything to rows if there's no value
     }
@@ -416,7 +423,7 @@ class OmniPrinter with SaveFile implements Printable {
 
     // Process items
     for (var item in items) {
-      double total = (item.price * item.qty).toDouble();
+      double total = safeParseDouble(item.price) * safeParseDouble(item.qty);
       String taxLabel = item.taxTyCd != null ? "(${item.taxTyCd!})" : "(B)";
       String totalPrefix =
           receiptType == "NR" || receiptType == "CR" || receiptType == "TR"
@@ -443,11 +450,11 @@ class OmniPrinter with SaveFile implements Printable {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "${item.price.toStringAsFixed(2)}x ",
+              "${safeParseDouble(item.price).toStringAsFixed(2)}x ",
               style: smallTextStyle,
             ),
             Text(
-              "  ${item.qty}  ",
+              "  ${safeParseDouble(item.qty)}  ",
               style: smallTextStyle,
             ),
             Text(
@@ -460,13 +467,14 @@ class OmniPrinter with SaveFile implements Printable {
       );
 
       // Discount row if applicable
-      if (item.dcRt != 0) {
-        double discountedAmount = total - ((total * item.dcRt!) / 100);
+      if (safeParseDouble(item.dcRt) != 0) {
+        double discountedAmount =
+            total - ((total * safeParseDouble(item.dcRt)) / 100);
         rows.add(Row(children: [
           Expanded(
             flex: 4,
             child: Text(
-              'Discount - ${item.dcRt} %',
+              'Discount - ${safeParseDouble(item.dcRt)} %',
               style: smallTextStyle,
             ),
           ),
@@ -530,24 +538,28 @@ class OmniPrinter with SaveFile implements Printable {
 
     // Calculate and build totals
     final totalWithDiscount =
-        (double.tryParse(totalPayable) ?? 0.0) - totalDiscount;
+        safeParseDouble(totalPayable) - safeParseDouble(totalDiscount);
 
     await _buildTotal(
         totalPayable: totalWithDiscount.toString(), receiptType: receiptType);
     await _buildTaxB18(
-        totalTaxB: taxB.toStringAsFixed(2), receiptType: receiptType);
+        totalTaxB: safeParseDouble(taxB).toStringAsFixed(2),
+        receiptType: receiptType);
 
     await _buildTotalTaxB(
-        totalTaxB: double.parse(totalTaxB).toStringAsFixed(2),
+        totalTaxB: safeParseDouble(totalTaxB).toStringAsFixed(2),
         receiptType: receiptType);
 
     await _buildTaxA(
-        totalAEx: taxA.toStringAsFixed(2), receiptType: receiptType);
+        totalAEx: safeParseDouble(taxA).toStringAsFixed(2),
+        receiptType: receiptType);
 
     await _buildTaxC(
-        totalTaxC: taxC.toStringAsFixed(2), receiptType: receiptType);
+        totalTaxC: safeParseDouble(taxC).toStringAsFixed(2),
+        receiptType: receiptType);
     await _buildTaxD(
-        totalTaxD: taxD.toStringAsFixed(2), receiptType: receiptType);
+        totalTaxD: safeParseDouble(taxD).toStringAsFixed(2),
+        receiptType: receiptType);
     await _buildTotalTax(totalTax: totalTax, receiptType: receiptType);
 
     rows.add(Row(
@@ -560,8 +572,8 @@ class OmniPrinter with SaveFile implements Printable {
     // Format cash and items number
     String formattedCash =
         receiptType == "NR" || receiptType == "CR" || receiptType == "TR"
-            ? "-${cash.toNoCurrencyFormatted()}"
-            : cash.toNoCurrencyFormatted();
+            ? "-${safeParseDouble(cash).toNoCurrencyFormatted()}"
+            : safeParseDouble(cash).toNoCurrencyFormatted();
 
     rows.add(
       Row(
@@ -893,9 +905,10 @@ class OmniPrinter with SaveFile implements Printable {
         receiptNumber: invoiceNum.toString(),
         customerName: customerName);
     dashedLine();
-    final cash =
-        items.map((e) => e.price * e.qty).reduce((sum, value) => sum + value) -
-            totalDiscount;
+    final cash = items
+            .map((e) => safeParseDouble(e.price) * safeParseDouble(e.qty))
+            .reduce((sum, value) => sum + value) -
+        safeParseDouble(totalDiscount);
     await _body(
       items: items,
       totalTax: totalTax,
@@ -913,7 +926,7 @@ class OmniPrinter with SaveFile implements Printable {
       received: received,
       // payMode: payMode,
       totalPayable: items
-          .map((e) => e.price * e.qty)
+          .map((e) => safeParseDouble(e.price) * safeParseDouble(e.qty))
           .reduce((sum, value) => sum + value)
           .toString(),
       receiptType: receiptType,
@@ -947,7 +960,7 @@ class OmniPrinter with SaveFile implements Printable {
     // Convert the first page of the PDF to an image using the printing package
     Uint8List pdfData = await doc.save();
     Uint8List? image;
-    await for (var page in Printing.raster(pdfData, pages: [0], dpi: 72)) {
+    await for (var page in Printing.raster(pdfData, pages: [0], dpi: 300)) {
       image = await page.toPng();
       break; // Only need the first page
     }
