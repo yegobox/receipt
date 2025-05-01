@@ -134,19 +134,7 @@ mixin SaveFile {
   void _printInBackground(Uint8List image) {
     // Add debug print to verify this is being called
     print('Starting background printing on Android');
-
-    Future(() async {
-      try {
-        print('Creating PlatformPrinter instance');
-        final printer = PlatformPrinter();
-        print(
-            'Calling printer.printFile with image size: ${image.length} bytes');
-        printer.printFile(image);
-        print('Print job submitted successfully');
-      } catch (e) {
-        print('Background printing error: $e');
-      }
-    });
+    PlatformPrinter().printFile(image);
   }
 
   void _checkPrintersInBackground(
