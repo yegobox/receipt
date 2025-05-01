@@ -86,85 +86,150 @@ mixin SaveFile {
   Future<void> sharePdf(Uint8List pdfData, List<String>? emails,
       {required String transactionId, required Uint8List image}) async {
     try {
-      // Fetch printer information
+      // Save PDF to document directory first (this is fast)
       String filePath = await savePdfToDocumentDirectory(pdfData,
           transactionId: transactionId);
 
-      /// because we are testing with real customer
-      /// we are taking a bet that if auto print does not work then we call
-      ///  handlePrint(pdfData); to print manually
-      /// but we are doing both now to see what is working or if it work both!
+      // For Android, always trigger printing immediately
+      if (Platform.isAndroid && !kIsWeb) {
+        // This ensures printing happens regardless of path
+        _printInBackground(image);
+      }
 
-      final printingInfo = await Printing.info();
-      const defaultPrinter = Printer(url: "", isAvailable: false);
-      final talker = TalkerFlutter.init();
-      talker.info(printingInfo);
-      if (!Platform.isAndroid && !Platform.isIOS) {
-        if (printingInfo.canListPrinters) {
-          final printers = await Printing.listPrinters();
+      // Immediately open/share file without waiting for printer checks
+      if (Platform.isAndroid && !kIsWeb) {
+        // Open file immediately
+        await OpenFilex.open(filePath);
+      } else {
+        await OpenFilex.open(filePath);
+      }
 
-          // Pick the first available printer
-          final firstAvailablePrinter = printers.firstWhere(
-            (printer) => printer.isAvailable,
-            orElse: () => defaultPrinter,
-          );
-          talker.info('first available printer');
-          talker.info(firstAvailablePrinter);
-          if (firstAvailablePrinter.isAvailable) {
-            Sentry.captureMessage("PRINTER_AVAILABLE");
-            // Print directly to the first available printer
-            await Printing.directPrintPdf(
-              printer: firstAvailablePrinter,
-              format: PdfPageFormat.roll80,
-              onLayout: (PdfPageFormat format) async => pdfData,
+      // The rest of the printer detection logic can run in background
+      // We're removing the call to _openOrShareFile from _checkPrintersInBackground
+      // to avoid opening the file twice
+      _checkPrintersInBackground(filePath, pdfData, image, emails,
+          skipFileOpen: true);
+    } catch (e) {
+      print('Error in sharePdf: $e');
+      // Fallback to direct file opening if anything fails
+      try {
+        final directory = await getApplicationDocumentsDirectory();
+        final fileName = generateFileName();
+        final filePath = '${directory.path}/$fileName.pdf';
+        final file = File(filePath);
+        await file.writeAsBytes(pdfData);
+
+        // For Android, ensure printing happens even in fallback path
+        if (Platform.isAndroid && !kIsWeb) {
+          _printInBackground(image);
+        }
+
+        await OpenFilex.open(filePath);
+      } catch (e) {
+        print('Fallback error: $e');
+      }
+    }
+  }
+
+  void _printInBackground(Uint8List image) {
+    // Add debug print to verify this is being called
+    print('Starting background printing on Android');
+
+    Future(() async {
+      try {
+        print('Creating PlatformPrinter instance');
+        final printer = PlatformPrinter();
+        print(
+            'Calling printer.printFile with image size: ${image.length} bytes');
+        printer.printFile(image);
+        print('Print job submitted successfully');
+      } catch (e) {
+        print('Background printing error: $e');
+      }
+    });
+  }
+
+  void _checkPrintersInBackground(
+      String filePath, Uint8List pdfData, Uint8List image, List<String>? emails,
+      {bool skipFileOpen = false}) {
+    Future(() async {
+      try {
+        final printingInfo = await Printing.info();
+        const defaultPrinter = Printer(url: "", isAvailable: false);
+        final talker = TalkerFlutter.init();
+        talker.info(printingInfo);
+
+        if (!Platform.isAndroid && !Platform.isIOS) {
+          if (printingInfo.canListPrinters) {
+            final printers = await Printing.listPrinters();
+
+            // Pick the first available printer
+            final firstAvailablePrinter = printers.firstWhere(
+              (printer) => printer.isAvailable,
+              orElse: () => defaultPrinter,
             );
+            talker.info('first available printer');
+            talker.info(firstAvailablePrinter);
+            if (firstAvailablePrinter.isAvailable) {
+              Sentry.captureMessage("PRINTER_AVAILABLE");
+              // Print directly to the first available printer
+              await Printing.directPrintPdf(
+                printer: firstAvailablePrinter,
+                format: PdfPageFormat.roll80,
+                onLayout: (PdfPageFormat format) async => pdfData,
+              );
 
-            //  await Printing.pickPrinter(
-            //   printer: firstAvailablePrinter,
-            //   format: PdfPageFormat.roll80,
-            //   onLayout: (PdfPageFormat format) async => pdfData,
-            // );
+              //  await Printing.pickPrinter(
+              //   printer: firstAvailablePrinter,
+              //   format: PdfPageFormat.roll80,
+              //   onLayout: (PdfPageFormat format) async => pdfData,
+              // );
+            } else {
+              // No available printer found, share the PDF via email
+              if (Platform.isAndroid || Platform.isIOS) {
+                // await sharePdfViaEmail(pdfData, emails);
+                if (!skipFileOpen)
+                  _openOrShareFile(filePath, bytes: pdfData, image: image);
+              } else {
+                if (!skipFileOpen)
+                  _openOrShareFile(filePath, bytes: pdfData, image: image);
+              }
+            }
           } else {
-            // No available printer found, share the PDF via email
+            // Unable to list printers, share the PDF via email
             if (Platform.isAndroid || Platform.isIOS) {
               // await sharePdfViaEmail(pdfData, emails);
-              _openOrShareFile(filePath, bytes: pdfData, image: image);
+              if (!skipFileOpen)
+                _openOrShareFile(filePath, bytes: pdfData, image: image);
             } else {
-              _openOrShareFile(filePath, bytes: pdfData, image: image);
+              if (!skipFileOpen)
+                _openOrShareFile(filePath, bytes: pdfData, image: image);
             }
           }
         } else {
-          // Unable to list printers, share the PDF via email
+          // For Android and iOS devices
           if (Platform.isAndroid || Platform.isIOS) {
             // await sharePdfViaEmail(pdfData, emails);
-            _openOrShareFile(filePath, bytes: pdfData, image: image);
+            if (!skipFileOpen)
+              _openOrShareFile(filePath, bytes: pdfData, image: image);
           } else {
-            _openOrShareFile(filePath, bytes: pdfData, image: image);
+            if (!skipFileOpen)
+              _openOrShareFile(filePath, bytes: pdfData, image: image);
           }
         }
-      } else {
-        if (Platform.isAndroid || Platform.isIOS) {
-          // await sharePdfViaEmail(pdfData, emails);
-          _openOrShareFile(filePath, bytes: pdfData, image: image);
-        } else {
-          _openOrShareFile(filePath, bytes: pdfData, image: image);
-        }
+      } catch (e) {
+        print('Printer check error: $e');
       }
-
-      // return handlePrint(pdfData);
-    } catch (e) {
-      // In case of any errors, share the PDF via email
-      // await sharePdfViaEmail(pdfData, emails);
-      // return handlePrint(pdfData);
-    }
+    });
   }
 
   Future<void> _openOrShareFile(String filePath,
       {required Uint8List bytes, required Uint8List image}) async {
     if (Platform.isAndroid && !kIsWeb) {
-      final printer = PlatformPrinter();
-      printer.printFile(image);
+      // Start printing in background
+      _printInBackground(image);
     }
+    // Open file immediately
     await OpenFilex.open(filePath);
   }
 
@@ -189,13 +254,24 @@ mixin SaveFile {
     final filePath = '${directory.path}/$fileName.pdf';
     final file = File(filePath);
     await file.writeAsBytes(pdfData);
-    try {
-      ProxyService.strategy
-          .uploadPdfToS3(pdfData, fileName, transactionId: transactionId);
-    } catch (e) {
-      print(e);
-    }
+
+    // Run S3 upload in the background to avoid blocking UI
+    _uploadToS3InBackground(pdfData, fileName, transactionId);
+
     return filePath;
+  }
+
+  void _uploadToS3InBackground(
+      Uint8List pdfData, String fileName, String transactionId) {
+    // Fire and forget - don't await this
+    Future(() async {
+      try {
+        await ProxyService.strategy
+            .uploadPdfToS3(pdfData, fileName, transactionId: transactionId);
+      } catch (e) {
+        print('S3 upload error: $e');
+      }
+    });
   }
 
   Future<void> sharePdfViaEmail(Uint8List pdfData, List<String>? emails) async {

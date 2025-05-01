@@ -10,6 +10,7 @@ import 'package:printing/printing.dart';
 import 'package:receipt/SaveFile.dart';
 import 'package:receipt/printable.dart';
 import 'package:universal_platform/universal_platform.dart';
+import 'dart:async';
 
 final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 
@@ -20,8 +21,19 @@ class OmniPrinter with SaveFile implements Printable {
   List<Widget> rows = [];
 
   // Define a style for the receipt
-  static final _receiptTextStyle =
+  static TextStyle _receiptTextStyle =
       TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
+  static Font? _unicodeFont;
+
+  static Future<void> loadUnicodeFont() async {
+    if (_unicodeFont == null) {
+      final fontData = await rootBundle
+          .load('packages/receipt/assets/fonts/NotoSans-Regular.ttf');
+      _unicodeFont = Font.ttf(fontData);
+      _receiptTextStyle = TextStyle(
+          fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont);
+    }
+  }
 
   Future<ImageProvider?> _loadLogoImage({required String position}) async {
     ImageProvider? image;
@@ -84,53 +96,68 @@ class OmniPrinter with SaveFile implements Printable {
         case "NR":
           return [
             Text('Refund',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    font: _unicodeFont)),
 
             /// here we take the existing receipt number -1 to get the receipt number of the refund
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
             Text('REF.NORMAL RECEIPT:# ${int.parse(receiptNumber) - 1}',
-                style: const TextStyle()),
+                style: TextStyle(fontSize: 10, font: _unicodeFont)),
             dashWidget(),
             Text(
                 'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID: $customerTin',
-                style: const TextStyle()),
+                style: TextStyle(fontSize: 10, font: _unicodeFont)),
           ];
         case "TR":
           return [
             Text('Refund',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    font: _unicodeFont)),
 
             /// here we take the existing receipt number -1 to get the receipt number of the refund
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
             Text('REF.NORMAL RECEIPT:# ${int.parse(receiptNumber) - 1}',
-                style: const TextStyle()),
+                style: TextStyle(fontSize: 10, font: _unicodeFont)),
             dashWidget(),
             Text(
                 'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
-                style: const TextStyle()),
+                style: TextStyle(fontSize: 10, font: _unicodeFont)),
           ];
         case "CR":
           return [
             if (receiptType == "CR" || receiptType == "CS")
               Text('COPY',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      font: _unicodeFont)),
             Text('Refund',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    font: _unicodeFont)),
             dashWidget(),
 
             /// here we take the existing receipt number -1 to get the receipt number of the refund
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
             Text('REF.NORMAL RECEIPT:# ${int.parse(receiptNumber) - 1}',
-                style: const TextStyle()),
+                style: TextStyle(fontSize: 10, font: _unicodeFont)),
             dashWidget(),
             Text(
                 'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
-                style: const TextStyle()),
+                style: TextStyle(fontSize: 10, font: _unicodeFont)),
           ];
         case "CS":
           return [
             Text('COPY',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    font: _unicodeFont)),
           ];
 
         default:
@@ -146,16 +173,20 @@ class OmniPrinter with SaveFile implements Printable {
       ]),
       SizedBox(height: 8),
       Text(brandName,
-          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+          style: TextStyle(
+              fontSize: 12, fontWeight: FontWeight.bold, font: _unicodeFont)),
       SizedBox(height: 4),
       Text(brandAddress,
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.normal)),
+          style: TextStyle(
+              fontSize: 10, fontWeight: FontWeight.normal, font: _unicodeFont)),
       SizedBox(height: 4),
       Text("Phone number: $brandTel",
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.normal)),
+          style: TextStyle(
+              fontSize: 10, fontWeight: FontWeight.normal, font: _unicodeFont)),
       SizedBox(height: 4),
       Text("TIN  : $brandTIN",
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.normal)),
+          style: TextStyle(
+              fontSize: 10, fontWeight: FontWeight.normal, font: _unicodeFont)),
 
       if (receiptType == "TS") SizedBox(height: 4),
       if (receiptType == "TS")
@@ -163,6 +194,7 @@ class OmniPrinter with SaveFile implements Printable {
             style: TextStyle(
               fontSize: 10,
               fontWeight: FontWeight.bold,
+              font: _unicodeFont,
             )),
       if (receiptType == "PS") SizedBox(height: 4),
       if (receiptType == "PS")
@@ -170,23 +202,29 @@ class OmniPrinter with SaveFile implements Printable {
             style: TextStyle(
               fontSize: 10,
               fontWeight: FontWeight.bold,
+              font: _unicodeFont,
             )),
 
       Column(children: [dashWidget()]),
       SizedBox(height: 4),
       if (receiptType != "NR")
         Text('Welcome to our shop',
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal)),
+            style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.normal,
+                font: _unicodeFont)),
       ...receiptTypeWidgets(receiptType),
 
       if (receiptType != "NR")
         Text('Client ID: $customerTin',
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+            style: TextStyle(
+                fontSize: 12, fontWeight: FontWeight.bold, font: _unicodeFont)),
       // Text('Customer Tin: $customerTin',
       //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       if (receiptType != "NR")
         Text('Customer Name: $customerName',
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+            style: TextStyle(
+                fontSize: 12, fontWeight: FontWeight.bold, font: _unicodeFont)),
     ]));
   }
 
@@ -417,9 +455,9 @@ class OmniPrinter with SaveFile implements Printable {
     List<List<Widget>> data = <List<Widget>>[];
 
     // Define consistent styles
-    const TextStyle smallTextStyle = TextStyle(fontSize: 10);
-    final TextStyle boldStyle =
-        TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
+    TextStyle smallTextStyle = TextStyle(fontSize: 10, font: _unicodeFont);
+    final TextStyle boldStyle = TextStyle(
+        fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont);
 
     // Process items
     for (var item in items) {
@@ -603,7 +641,10 @@ class OmniPrinter with SaveFile implements Printable {
     if (receiptType == "CS" || receiptType == "CR") {
       rows.add(dashWidget());
       rows.add(Text('COPY',
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal)));
+          style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.normal,
+              font: _unicodeFont)));
     }
 
     dashedLine();
@@ -657,7 +698,7 @@ class OmniPrinter with SaveFile implements Printable {
         Text(
           "SDC INFORMATION",
           textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.normal),
+          style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
         ),
         SizedBox(height: 8),
       ]),
@@ -673,7 +714,7 @@ class OmniPrinter with SaveFile implements Printable {
           width: 1120,
           child: Text(
             timeFromServer.toDateTimeString(),
-            style: TextStyle(fontWeight: FontWeight.normal),
+            style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
           ),
         ),
       ]),
@@ -682,20 +723,22 @@ class OmniPrinter with SaveFile implements Printable {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'SDC ID:',
-          style: const TextStyle(),
+          style: TextStyle(font: _unicodeFont),
         ),
-        Text(sdcId, style: TextStyle(fontWeight: FontWeight.normal)),
+        Text(sdcId,
+            style:
+                TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont)),
       ]),
     );
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'RECEIPT NUMBER:',
-          style: TextStyle(fontWeight: FontWeight.normal),
+          style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
         ),
         Text(
           "$rcptNo  / $totRcptNo $receiptType",
-          style: TextStyle(fontWeight: FontWeight.normal),
+          style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
         ),
       ]),
     );
@@ -709,10 +752,14 @@ class OmniPrinter with SaveFile implements Printable {
         Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Text(
             "Internal Data",
+            style: TextStyle(font: _unicodeFont),
           ),
           Text(
             internalData.toDashedStringInternalData(),
-            style: TextStyle(fontSize: 10, fontWeight: FontWeight.normal),
+            style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.normal,
+                font: _unicodeFont),
           ),
         ]),
       );
@@ -720,10 +767,14 @@ class OmniPrinter with SaveFile implements Printable {
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
             "Receipt Signature:",
+            style: TextStyle(font: _unicodeFont),
           ),
           Text(
             receiptSignature.toDashedStringRcptSign(),
-            style: TextStyle(fontSize: 10, fontWeight: FontWeight.normal),
+            style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.normal,
+                font: _unicodeFont),
           ),
         ]),
       );
@@ -760,11 +811,11 @@ class OmniPrinter with SaveFile implements Printable {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'RECEIPT NUMBER:',
-          style: TextStyle(fontWeight: FontWeight.normal),
+          style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
         ),
         Text(
           invoiceNum.toString(),
-          style: TextStyle(fontWeight: FontWeight.normal),
+          style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
         ),
       ]),
     );
@@ -772,11 +823,11 @@ class OmniPrinter with SaveFile implements Printable {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           "DATE:${transaction.lastTouched?.formattedDate}",
-          style: TextStyle(fontWeight: FontWeight.normal),
+          style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
         ),
         Text(
           "TIME:${whenCreated.formattedTime}",
-          style: TextStyle(fontWeight: FontWeight.normal),
+          style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
         ),
       ]),
     );
@@ -784,11 +835,11 @@ class OmniPrinter with SaveFile implements Printable {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
           'MRC',
-          style: TextStyle(fontWeight: FontWeight.normal),
+          style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
         ),
         Text(
           ProxyService.box.mrc() ?? mrc,
-          style: TextStyle(fontWeight: FontWeight.normal),
+          style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
         ),
       ]),
     );
@@ -798,15 +849,18 @@ class OmniPrinter with SaveFile implements Printable {
         SizedBox(height: 12),
         Text(
           'THANK YOU',
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont),
         ),
         Text(
           'COME BACK AGAIN',
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont),
         ),
         Text(
           'flipper v1.0.0',
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont),
         ),
       ]),
     );
@@ -888,6 +942,7 @@ class OmniPrinter with SaveFile implements Printable {
     required String transactionId,
     required DateTime timeFromServer,
   }) async {
+    await loadUnicodeFont();
     talker.warning("ReceiptNo: $rcptNo: totRcptNo: $totRcptNo");
     final left = await _loadLogoImage(position: "left");
     final right = await _loadLogoImage(position: "right");
@@ -959,12 +1014,31 @@ class OmniPrinter with SaveFile implements Printable {
 
     // Convert the first page of the PDF to an image using the printing package
     Uint8List pdfData = await doc.save();
+
+    // Use a higher DPI for better text clarity on thermal printers
+    // 203 DPI is standard for many thermal printers
     Uint8List? image;
-    await for (var page in Printing.raster(pdfData, pages: [0], dpi: 300)) {
+    try {
+      // Start the rasterization process with higher DPI
+      final page = await Printing.raster(pdfData, pages: [0], dpi: 300).first;
+
+      // Convert to PNG with maximum quality
       image = await page.toPng();
-      break; // Only need the first page
+
+      // Log the image size for debugging
+      print("Receipt image size: ${image.length} bytes");
+    } catch (e) {
+      print("Error during PDF rasterization: $e");
+      // Fallback to lower DPI if high DPI fails
+      try {
+        final page = await Printing.raster(pdfData, pages: [0], dpi: 150).first;
+        image = await page.toPng();
+      } catch (e) {
+        print("Fallback rasterization also failed: $e");
+      }
     }
 
+    // Use non-blocking calls to handle the PDF data
     handlePdfData(
       pdfData: pdfData,
       image: image!,
@@ -972,6 +1046,8 @@ class OmniPrinter with SaveFile implements Printable {
       autoPrint: autoPrint,
       transactionId: transactionId,
     );
+
+    // Return immediately to avoid blocking the UI
     return printCallback(pdfData);
   }
 

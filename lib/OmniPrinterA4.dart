@@ -10,6 +10,15 @@ import 'package:flipper_models/helperModels/extensions.dart';
 
 //
 class OmniPrinterA4 with SaveFile implements Printable {
+  static Font? _unicodeFont;
+  static Future<void> loadUnicodeFont() async {
+    if (_unicodeFont == null) {
+      final fontData = await rootBundle
+          .load('packages/receipt/assets/fonts/NotoSans-Regular.ttf');
+      _unicodeFont = Font.ttf(fontData);
+    }
+  }
+
   Future<ImageProvider?> _loadLogoImage({required String position}) async {
     ImageProvider? image;
     switch (position) {
@@ -97,6 +106,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     required Function(Uint8List bytes) printCallback,
     required DateTime timeFromServer,
   }) async {
+    await loadUnicodeFont(); // Load font before generating PDF
     final pdf = Document(
       compress: true,
       // Ensures all content fits on a single page (no multipage)
@@ -141,23 +151,33 @@ class OmniPrinterA4 with SaveFile implements Printable {
                         Text(
                           'COMPANY ADDRESS',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 11),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11,
+                              font: _unicodeFont), // Use _unicodeFont
                         ),
                         Text(
                           brandAddress,
-                          style: TextStyle(fontSize: 10),
+                          style: TextStyle(
+                              fontSize: 10,
+                              font: _unicodeFont), // Use _unicodeFont
                         ),
                         Text(
                           'TEL: $brandTel',
-                          style: TextStyle(fontSize: 10),
+                          style: TextStyle(
+                              fontSize: 10,
+                              font: _unicodeFont), // Use _unicodeFont
                         ),
                         Text(
                           'EMAIL:',
-                          style: TextStyle(fontSize: 10),
+                          style: TextStyle(
+                              fontSize: 10,
+                              font: _unicodeFont), // Use _unicodeFont
                         ),
                         Text(
                           'TIN: $brandTIN',
-                          style: TextStyle(fontSize: 10),
+                          style: TextStyle(
+                              fontSize: 10,
+                              font: _unicodeFont), // Use _unicodeFont
                         ),
                       ],
                     ),
@@ -184,11 +204,13 @@ class OmniPrinterA4 with SaveFile implements Printable {
                 Center(
                   child: Column(
                     children: [
-                      Text("TRAINING MODE",
-                          style: TextStyle(
+                      Text(
+                        "TRAINING MODE",
+                        style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
-                          )),
+                            font: _unicodeFont), // Use _unicodeFont
+                      ),
                       SizedBox(height: 2),
                     ],
                   ),
@@ -197,11 +219,13 @@ class OmniPrinterA4 with SaveFile implements Printable {
                 Center(
                   child: Column(
                     children: [
-                      Text("PROFORMA",
-                          style: TextStyle(
+                      Text(
+                        "PROFORMA",
+                        style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
-                          )),
+                            font: _unicodeFont), // Use _unicodeFont
+                      ),
                       SizedBox(height: 2),
                     ],
                   ),
@@ -217,7 +241,9 @@ class OmniPrinterA4 with SaveFile implements Printable {
                     children: [
                       Text('COPY',
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold)),
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              font: _unicodeFont)), // Use _unicodeFont
                       dashWidget(),
                       SizedBox(height: 10),
                     ],
@@ -233,13 +259,19 @@ class OmniPrinterA4 with SaveFile implements Printable {
                     children: [
                       Text('Refund',
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold)),
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              font: _unicodeFont)), // Use _unicodeFont
                       if (receiptType == "NR" || receiptType == "TR")
                         Text('REF.NORMAL RECEIPT:# ${invoiceNum - 1}',
-                            style: const TextStyle(fontSize: 10)),
+                            style: TextStyle(
+                                fontSize: 10,
+                                font: _unicodeFont)), // Use _unicodeFont
                       dashWidget(),
                       Text('REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT',
-                          style: const TextStyle(fontSize: 10)),
+                          style: TextStyle(
+                              fontSize: 10,
+                              font: _unicodeFont)), // Use _unicodeFont
                     ],
                   ),
                 ),
@@ -249,8 +281,10 @@ class OmniPrinterA4 with SaveFile implements Printable {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('INVOICE TO',
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          font: _unicodeFont)), // Use _unicodeFont
                   SizedBox(height: 5),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -268,9 +302,15 @@ class OmniPrinterA4 with SaveFile implements Printable {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('TIN: $customerTin'),
+                              Text('TIN: $customerTin',
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      font: _unicodeFont)), // Use _unicodeFont
                               SizedBox(height: 5),
-                              Text('Name: $customerName'),
+                              Text('Name: $customerName',
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      font: _unicodeFont)), // Use _unicodeFont
                             ],
                           ),
                         ),
@@ -289,9 +329,15 @@ class OmniPrinterA4 with SaveFile implements Printable {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('INVOICE NO: $invoiceNum'),
+                              Text('INVOICE NO: $invoiceNum',
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      font: _unicodeFont)), // Use _unicodeFont
                               SizedBox(height: 5),
-                              Text('Date: ${whenCreated.isoDateTime}'),
+                              Text('Date: ${whenCreated.isoDateTime}',
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      font: _unicodeFont)), // Use _unicodeFont
                             ],
                           ),
                         ),
@@ -319,9 +365,15 @@ class OmniPrinterA4 with SaveFile implements Printable {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(item.name),
+                            Text(item.name,
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    font: _unicodeFont)), // Use _unicodeFont
                             if (item.dcRt != 0)
-                              Text("Discount - ${item.dcRt}%"),
+                              Text("Discount - ${item.dcRt}%",
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      font: _unicodeFont)), // Use _unicodeFont
                           ],
                         ),
                         '${item.qty}',
@@ -337,21 +389,26 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                         receiptType == "TR")
                                     ? "-${(item.qty * item.price).toNoCurrencyFormatted()}"
                                     : (item.qty * item.price)
-                                        .toNoCurrencyFormatted()),
+                                        .toNoCurrencyFormatted(),
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    font: _unicodeFont)), // Use _unicodeFont
                             if (item.dcRt != 0)
                               Text(
-                                // Add negative sign for refunds
-                                (receiptType == "NR" ||
-                                        receiptType == "CR" ||
-                                        receiptType == "TR")
-                                    ? "-${((item.qty * item.price) - (item.qty * item.price * item.dcRt! / 100)).toNoCurrencyFormatted()}"
-                                    : ((item.qty * item.price) -
-                                            (item.qty *
-                                                item.price *
-                                                item.dcRt! /
-                                                100))
-                                        .toNoCurrencyFormatted(),
-                              ),
+                                  // Add negative sign for refunds
+                                  (receiptType == "NR" ||
+                                          receiptType == "CR" ||
+                                          receiptType == "TR")
+                                      ? "-${((item.qty * item.price) - (item.qty * item.price * item.dcRt! / 100)).toNoCurrencyFormatted()}"
+                                      : ((item.qty * item.price) -
+                                              (item.qty *
+                                                  item.price *
+                                                  item.dcRt! /
+                                                  100))
+                                          .toNoCurrencyFormatted(),
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      font: _unicodeFont)), // Use _unicodeFont
                           ],
                         ),
                       ]),
@@ -362,9 +419,12 @@ class OmniPrinterA4 with SaveFile implements Printable {
                       (_) => ['', '', '', '', '', ''],
                     ),
                 ],
-                headerStyle:
-                    TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
-                cellStyle: const TextStyle(fontSize: 10),
+                headerStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 10,
+                    font: _unicodeFont), // Use _unicodeFont
+                cellStyle: TextStyle(
+                    fontSize: 10, font: _unicodeFont), // Use _unicodeFont
                 cellAlignment: Alignment.topLeft,
                 headerHeight: 40,
                 columnWidths: {
@@ -406,7 +466,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
-                    color: PdfColors.black,
+                    font: _unicodeFont, // Use _unicodeFont
                   ),
                 ),
               SizedBox(height: 5),
@@ -422,36 +482,49 @@ class OmniPrinterA4 with SaveFile implements Printable {
                         children: [
                           Text('SDC INFORMATION',
                               style: TextStyle(
-                                  fontSize: 10, fontWeight: FontWeight.bold)),
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                  font: _unicodeFont)), // Use _unicodeFont
                           dashWidget(),
                           SizedBox(height: 5),
                           Text('Date: ${timeFromServer.isoDateTime}',
-                              style: const TextStyle(fontSize: 10)),
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  font: _unicodeFont)), // Use _unicodeFont
                           Text('SDC ID: $sdcId',
-                              style: const TextStyle(fontSize: 10)),
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  font: _unicodeFont)), // Use _unicodeFont
                           Text(
-                            'Receipt Number: $rcptNo/$totRcptNo ($receiptType)',
-                            style: const TextStyle(fontSize: 10),
-                          ),
+                              'Receipt Number: $rcptNo/$totRcptNo ($receiptType)',
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  font: _unicodeFont)), // Use _unicodeFont
                           Text(
-                            'Internal Data: ${internalData.toDashedStringInternalData()}',
-                            style: const TextStyle(fontSize: 10),
-                          ),
+                              'Internal Data: ${internalData.toDashedStringInternalData()}',
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  font: _unicodeFont)), // Use _unicodeFont
                           Text(
-                            'Receipt Signature: ${receiptSignature.toDashedStringRcptSign()}',
-                            style: const TextStyle(fontSize: 10),
-                          ),
+                              'Receipt Signature: ${receiptSignature.toDashedStringRcptSign()}',
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  font: _unicodeFont)), // Use _unicodeFont
                           SizedBox(height: 5),
                           dashWidget(),
                           SizedBox(height: 5),
-                          Text(
-                            'Receipt Number: $invoiceNum',
-                            style: const TextStyle(fontSize: 10),
-                          ),
+                          Text('Receipt Number: $invoiceNum',
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  font: _unicodeFont)), // Use _unicodeFont
                           Text('Date: ${whenCreated.isoDateTime}',
-                              style: const TextStyle(fontSize: 10)),
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  font: _unicodeFont)), // Use _unicodeFont
                           Text('MRC: $mrc',
-                              style: const TextStyle(fontSize: 10)),
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  font: _unicodeFont)), // Use _unicodeFont
                           dashWidget(),
                         ],
                       ),
@@ -485,7 +558,12 @@ class OmniPrinterA4 with SaveFile implements Printable {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(4),
-                                  child: Text('Total Rwf'),
+                                  child: Text('TOTAL:',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 10,
+                                          font:
+                                              _unicodeFont)), // Use _unicodeFont
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(4),
@@ -495,54 +573,69 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                               receiptType == "CR" ||
                                               receiptType == "TR")
                                           ? "-${safeParseDouble(totalPayable - totalDiscount).toStringAsFixed(2)}"
-                                          : safeParseDouble(totalPayable - totalDiscount)
-                                              .toStringAsFixed(2)),
+                                          : safeParseDouble(
+                                                  totalPayable - totalDiscount)
+                                              .toStringAsFixed(2),
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          font:
+                                              _unicodeFont)), // Use _unicodeFont
                                 ),
                               ],
                             ),
-                            if (safeParseDouble(totalTaxA) != 0)
-                              TableRow(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(4),
-                                    child: Text('Total A-EX Rwf'),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(4),
-                                    child: Text(
-                                        // Format with exactly 2 decimal places without rounding
-                                        // Add negative sign for refunds
-                                        (receiptType == "NR" ||
-                                                receiptType == "CR" ||
-                                                receiptType == "TR")
-                                            ? "-${safeParseDouble(totalTaxA).toStringAsFixed(2)}"
-                                            : safeParseDouble(totalTaxA)
-                                                .toStringAsFixed(2)),
-                                  ),
-                                ],
-                              ),
+                            TableRow(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child: Text('Total A-EX:'),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child: Text(
+                                      // Calculate total for A-EX items (tax type A)
+                                      (receiptType == "NR" ||
+                                              receiptType == "CR" ||
+                                              receiptType == "TR")
+                                          ? "-${items.where((item) => item.taxTyCd == "A").fold<double>(0.0, (sum, item) => sum + (item.price * item.qty)).toStringAsFixed(2)}"
+                                          : items
+                                              .where(
+                                                  (item) => item.taxTyCd == "A")
+                                              .fold<double>(
+                                                  0.0,
+                                                  (sum, item) =>
+                                                      sum +
+                                                      (item.price * item.qty))
+                                              .toStringAsFixed(2),
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          font:
+                                              _unicodeFont)), // Use _unicodeFont
+                                ),
+                              ],
+                            ),
                             if (safeParseDouble(totalTaxB) != 0)
                               TableRow(
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.all(4),
-                                    child: Text('Total B-18% Rwf'),
+                                    child: Text('Total B-18%:'),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(4),
                                     child: Text(
-                                        // Format with exactly 2 decimal places without rounding
-                                        // Add negative sign for refunds
                                         (receiptType == "NR" ||
                                                 receiptType == "CR" ||
                                                 receiptType == "TR")
                                             ? "-${safeParseDouble(totalTaxB).toStringAsFixed(2)}"
                                             : safeParseDouble(totalTaxB)
-                                                .toStringAsFixed(2)),
+                                                .toStringAsFixed(2),
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            font:
+                                                _unicodeFont)), // Use _unicodeFont
                                   ),
                                 ],
                               ),
-                            // Only show Tax C if value is non-zero, exactly matching omni_printer.dart
                             if (safeParseDouble(totalTaxC) != 0)
                               TableRow(
                                 children: [
@@ -552,13 +645,17 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(4),
-                                    // Add negative sign for refunds
-                                    child: Text((receiptType == "NR" ||
-                                            receiptType == "CR" ||
-                                            receiptType == "TR")
-                                        ? "-${safeParseDouble(totalTaxC).toStringAsFixed(2)}"
-                                        : safeParseDouble(totalTaxC)
-                                            .toStringAsFixed(2)),
+                                    child: Text(
+                                        (receiptType == "NR" ||
+                                                receiptType == "CR" ||
+                                                receiptType == "TR")
+                                            ? "-${safeParseDouble(totalTaxC).toStringAsFixed(2)}"
+                                            : safeParseDouble(totalTaxC)
+                                                .toStringAsFixed(2),
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            font:
+                                                _unicodeFont)), // Use _unicodeFont
                                   ),
                                 ],
                               ),
@@ -572,18 +669,19 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   Padding(
                                     padding: const EdgeInsets.all(4),
                                     child: Text(
-                                        // Format with exactly 2 decimal places without rounding
-                                        // Add negative sign for refunds
                                         (receiptType == "NR" ||
                                                 receiptType == "CR" ||
                                                 receiptType == "TR")
                                             ? "-${safeParseDouble(totalTaxD).toStringAsFixed(2)}"
                                             : safeParseDouble(totalTaxD)
-                                                .toStringAsFixed(2)),
+                                                .toStringAsFixed(2),
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            font:
+                                                _unicodeFont)), // Use _unicodeFont
                                   ),
                                 ],
                               ),
-                            // Only show total tax if it's not zero
                             if (safeParseDouble(totalTax) != 0)
                               TableRow(
                                 children: [
@@ -593,15 +691,17 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(4),
-                                    // Format with exactly 2 decimal places without rounding
-                                    // to match the implementation in omni_printer.dart
-                                    // Add negative sign for refunds
-                                    child: Text((receiptType == "NR" ||
-                                            receiptType == "CR" ||
-                                            receiptType == "TR")
-                                        ? "-${safeParseDouble(totalTax).toStringAsFixed(2)}"
-                                        : safeParseDouble(totalTax)
-                                            .toStringAsFixed(2)),
+                                    child: Text(
+                                        (receiptType == "NR" ||
+                                                receiptType == "CR" ||
+                                                receiptType == "TR")
+                                            ? "-${safeParseDouble(totalTax).toStringAsFixed(2)}"
+                                            : safeParseDouble(totalTax)
+                                                .toStringAsFixed(2),
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            font:
+                                                _unicodeFont)), // Use _unicodeFont
                                   ),
                                 ],
                               ),
@@ -620,7 +720,11 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(4),
-                                  child: Text(payMode),
+                                  child: Text(payMode,
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          font:
+                                              _unicodeFont)), // Use _unicodeFont
                                 ),
                               ],
                             ),
@@ -632,7 +736,11 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(4),
-                                  child: Text(items.length.toString()),
+                                  child: Text(items.length.toString(),
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          font:
+                                              _unicodeFont)), // Use _unicodeFont
                                 ),
                               ],
                             ),
@@ -647,8 +755,10 @@ class OmniPrinterA4 with SaveFile implements Printable {
               // Footer
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text('flipper v1.0.0',
-                    style:
-                        TextStyle(fontStyle: FontStyle.normal, fontSize: 10)),
+                    style: TextStyle(
+                        fontStyle: FontStyle.normal,
+                        fontSize: 10,
+                        font: _unicodeFont)), // Use _unicodeFont
                 SizedBox(width: 30),
                 if (middle != null) Image(middle, width: 20, height: 40),
               ])
