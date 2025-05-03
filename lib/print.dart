@@ -1,4 +1,4 @@
-library receipt;
+library;
 
 import 'package:flipper_services/proxy.dart';
 import 'package:flutter/foundation.dart';

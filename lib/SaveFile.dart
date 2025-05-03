@@ -176,33 +176,39 @@ mixin SaveFile {
               // No available printer found, share the PDF via email
               if (Platform.isAndroid || Platform.isIOS) {
                 // await sharePdfViaEmail(pdfData, emails);
-                if (!skipFileOpen)
+                if (!skipFileOpen) {
                   _openOrShareFile(filePath, bytes: pdfData, image: image);
+                }
               } else {
-                if (!skipFileOpen)
+                if (!skipFileOpen) {
                   _openOrShareFile(filePath, bytes: pdfData, image: image);
+                }
               }
             }
           } else {
             // Unable to list printers, share the PDF via email
             if (Platform.isAndroid || Platform.isIOS) {
               // await sharePdfViaEmail(pdfData, emails);
-              if (!skipFileOpen)
+              if (!skipFileOpen) {
                 _openOrShareFile(filePath, bytes: pdfData, image: image);
+              }
             } else {
-              if (!skipFileOpen)
+              if (!skipFileOpen) {
                 _openOrShareFile(filePath, bytes: pdfData, image: image);
+              }
             }
           }
         } else {
           // For Android and iOS devices
           if (Platform.isAndroid || Platform.isIOS) {
             // await sharePdfViaEmail(pdfData, emails);
-            if (!skipFileOpen)
+            if (!skipFileOpen) {
               _openOrShareFile(filePath, bytes: pdfData, image: image);
+            }
           } else {
-            if (!skipFileOpen)
+            if (!skipFileOpen) {
               _openOrShareFile(filePath, bytes: pdfData, image: image);
+            }
           }
         }
       } catch (e) {
