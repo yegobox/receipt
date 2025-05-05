@@ -149,13 +149,6 @@ class OmniPrinterA4 with SaveFile implements Printable {
                       children: [
                         SizedBox(height: 6),
                         Text(
-                          'COMPANY ADDRESS',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 11,
-                              font: _unicodeFont), // Use _unicodeFont
-                        ),
-                        Text(
                           brandAddress,
                           style: TextStyle(
                               fontSize: 10,
@@ -461,12 +454,14 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   receiptType == "NR" ||
                   receiptType == "TR" ||
                   receiptType == "CP")
-                Text(
-                  "THIS IS NOT AN OFFICIAL RECEIPT",
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                    font: _unicodeFont, // Use _unicodeFont
+                Center(
+                  child: Text(
+                    "THIS IS NOT AN OFFICIAL RECEIPT",
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      font: _unicodeFont, // Use _unicodeFont
+                    ),
                   ),
                 ),
               SizedBox(height: 5),
@@ -475,63 +470,67 @@ class OmniPrinterA4 with SaveFile implements Printable {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  if (receiptType != "PS" && receiptType != "TS")
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('SDC INFORMATION',
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                  font: _unicodeFont)), // Use _unicodeFont
-                          dashWidget(),
-                          SizedBox(height: 5),
-                          Text('Date: ${timeFromServer.isoDateTime}',
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  font: _unicodeFont)), // Use _unicodeFont
-                          Text('SDC ID: $sdcId',
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  font: _unicodeFont)), // Use _unicodeFont
-                          Text(
-                              'Receipt Number: $rcptNo/$totRcptNo ($receiptType)',
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  font: _unicodeFont)), // Use _unicodeFont
-                          Text(
-                              'Internal Data: ${internalData.toDashedStringInternalData()}',
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  font: _unicodeFont)), // Use _unicodeFont
-                          Text(
-                              'Receipt Signature: ${receiptSignature.toDashedStringRcptSign()}',
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  font: _unicodeFont)), // Use _unicodeFont
-                          SizedBox(height: 5),
-                          dashWidget(),
-                          SizedBox(height: 5),
-                          Text('Receipt Number: $invoiceNum',
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  font: _unicodeFont)), // Use _unicodeFont
-                          Text('Date: ${whenCreated.isoDateTime}',
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  font: _unicodeFont)), // Use _unicodeFont
-                          Text('MRC: $mrc',
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  font: _unicodeFont)), // Use _unicodeFont
-                          dashWidget(),
-                        ],
-                      ),
+                  // if (receiptType != "CR")
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('SDC INFORMATION',
+                            style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                font: _unicodeFont)), // Use _unicodeFont
+                        dashWidget(),
+                        SizedBox(height: 5),
+                        Text('Date: ${timeFromServer.isoDateTime}',
+                            style: TextStyle(
+                                fontSize: 10,
+                                font: _unicodeFont)), // Use _unicodeFont
+                        Text('SDC ID: $sdcId',
+                            style: TextStyle(
+                                fontSize: 10,
+                                font: _unicodeFont)), // Use _unicodeFont
+                        Text(
+                            'Receipt Number: $rcptNo/$totRcptNo ($receiptType)',
+                            style: TextStyle(
+                                fontSize: 10,
+                                font: _unicodeFont)), // Use _unicodeFont
+                        Text(
+                            'Internal Data: ${internalData.toDashedStringInternalData()}',
+                            style: TextStyle(
+                                fontSize: 10,
+                                font: _unicodeFont)), // Use _unicodeFont
+                        Text(
+                            'Receipt Signature: ${receiptSignature.toDashedStringRcptSign()}',
+                            style: TextStyle(
+                                fontSize: 10,
+                                font: _unicodeFont)), // Use _unicodeFont
+                        SizedBox(height: 5),
+                        dashWidget(),
+                        SizedBox(height: 5),
+                        Text('Receipt Number: $invoiceNum',
+                            style: TextStyle(
+                                fontSize: 10,
+                                font: _unicodeFont)), // Use _unicodeFont
+                        Text('Date: ${whenCreated.isoDateTime}',
+                            style: TextStyle(
+                                fontSize: 10,
+                                font: _unicodeFont)), // Use _unicodeFont
+                        Text('MRC: $mrc',
+                            style: TextStyle(
+                                fontSize: 10,
+                                font: _unicodeFont)), // Use _unicodeFont
+                        dashWidget(),
+                      ],
                     ),
-                  if (receiptType != "PS" && receiptType != "TS")
+                  ),
+                  if (receiptType != "PS" &&
+                      receiptType != "TS" &&
+                      receiptType != "CR")
                     SizedBox(width: 20),
-                  if (receiptType != "PS" && receiptType != "TS")
+                  if (receiptType != "PS" &&
+                      receiptType != "TS" &&
+                      receiptType != "CR")
                     Center(
                       child: SizedBox(
                         width: 60,
