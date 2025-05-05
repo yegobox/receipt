@@ -587,7 +587,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(4),
-                                  child: Text('Total A-EX:'),
+                                  child: Text('TOTAL A-EX:'),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(4),
@@ -618,7 +618,37 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.all(4),
-                                    child: Text('Total B-18%:'),
+                                    child: Text('TOTAL B-18%:'),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: Text(
+                                        (receiptType == "NR" ||
+                                                receiptType == "CR" ||
+                                                receiptType == "TR")
+                                            ? "-${items.where((item) => item.taxTyCd == "B").fold<double>(0.0, (sum, item) => sum + (item.price * item.qty)).toStringAsFixed(2)}"
+                                            : items
+                                                .where((item) =>
+                                                    item.taxTyCd == "B")
+                                                .fold<double>(
+                                                    0.0,
+                                                    (sum, item) =>
+                                                        sum +
+                                                        (item.price * item.qty))
+                                                .toStringAsFixed(2),
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            font:
+                                                _unicodeFont)), // Use _unicodeFont
+                                  ),
+                                ],
+                              ),
+                            if (safeParseDouble(totalTaxB) != 0)
+                              TableRow(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: Text('TOTAL TAX B'),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(4),
