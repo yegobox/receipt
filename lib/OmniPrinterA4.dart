@@ -273,7 +273,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('INVOICE TO',
+                  Text('INVOICE TO:',
                       style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -447,13 +447,16 @@ class OmniPrinterA4 with SaveFile implements Printable {
                     const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
               ),
               SizedBox(height: 10),
+
+              // Disclaimer
               if (receiptType == "TS" ||
                   receiptType == "PS" ||
                   receiptType == "CS" ||
                   receiptType == "CR" ||
                   receiptType == "NR" ||
                   receiptType == "TR" ||
-                  receiptType == "CP")
+                  receiptType == "CP") ...[
+                SizedBox(height: 10),
                 Center(
                   child: Text(
                     "THIS IS NOT AN OFFICIAL RECEIPT",
@@ -464,7 +467,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
                     ),
                   ),
                 ),
-              SizedBox(height: 5),
+                SizedBox(height: 10),
+              ],
 
               // SDC Information
               Row(
@@ -530,6 +534,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                     SizedBox(width: 20),
                   if (receiptType != "PS" &&
                       receiptType != "TS" &&
+                      receiptType != "TR" &&
                       receiptType != "CR")
                     Center(
                       child: SizedBox(
@@ -635,7 +640,9 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                                         (item.price * item.qty))
                                                 .toNoCurrencyFormatted(),
                                         style: TextStyle(
-                                            fontSize: 10, font: _unicodeFont)),
+                                            fontSize: 10,
+                                            font:
+                                                _unicodeFont)), // Use _unicodeFont
                                   ),
                                 ],
                               ),
@@ -656,7 +663,9 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                             : safeParseDouble(totalTaxB)
                                                 .toNoCurrencyFormatted(),
                                         style: TextStyle(
-                                            fontSize: 10, font: _unicodeFont)),
+                                            fontSize: 10,
+                                            font:
+                                                _unicodeFont)), // Use _unicodeFont
                                   ),
                                 ],
                               ),
@@ -677,7 +686,9 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                             : safeParseDouble(totalTaxC)
                                                 .toNoCurrencyFormatted(),
                                         style: TextStyle(
-                                            fontSize: 10, font: _unicodeFont)),
+                                            fontSize: 10,
+                                            font:
+                                                _unicodeFont)), // Use _unicodeFont
                                   ),
                                 ],
                               ),
@@ -698,7 +709,9 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                             : safeParseDouble(totalTaxD)
                                                 .toStringAsFixed(2),
                                         style: TextStyle(
-                                            fontSize: 10, font: _unicodeFont)),
+                                            fontSize: 10,
+                                            font:
+                                                _unicodeFont)), // Use _unicodeFont
                                   ),
                                 ],
                               ),
@@ -719,7 +732,9 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                             : safeParseDouble(totalTax)
                                                 .toNoCurrencyFormatted(),
                                         style: TextStyle(
-                                            fontSize: 10, font: _unicodeFont)),
+                                            fontSize: 10,
+                                            font:
+                                                _unicodeFont)), // Use _unicodeFont
                                   ),
                                 ],
                               ),
@@ -769,7 +784,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   ),
                 ],
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 6),
               // Footer
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text('flipper v1.0.0',
