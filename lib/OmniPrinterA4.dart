@@ -568,14 +568,13 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 Padding(
                                   padding: const EdgeInsets.all(4),
                                   child: Text(
-                                      // Add negative sign for refunds
                                       (receiptType == "NR" ||
                                               receiptType == "CR" ||
                                               receiptType == "TR")
-                                          ? "-${safeParseDouble(totalPayable - totalDiscount).toStringAsFixed(2)}"
+                                          ? "-${safeParseDouble(totalPayable - totalDiscount).toNoCurrencyFormatted()}"
                                           : safeParseDouble(
                                                   totalPayable - totalDiscount)
-                                              .toStringAsFixed(2),
+                                              .toNoCurrencyFormatted(),
                                       style: TextStyle(
                                           fontSize: 10,
                                           font:
@@ -626,7 +625,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                         (receiptType == "NR" ||
                                                 receiptType == "CR" ||
                                                 receiptType == "TR")
-                                            ? "-${items.where((item) => item.taxTyCd == "B").fold<double>(0.0, (sum, item) => sum + (item.price * item.qty)).toStringAsFixed(2)}"
+                                            ? "-${items.where((item) => item.taxTyCd == "B").fold<double>(0.0, (sum, item) => sum + (item.price * item.qty)).toNoCurrencyFormatted()}"
                                             : items
                                                 .where((item) =>
                                                     item.taxTyCd == "B")
@@ -635,11 +634,9 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                                     (sum, item) =>
                                                         sum +
                                                         (item.price * item.qty))
-                                                .toStringAsFixed(2),
+                                                .toNoCurrencyFormatted(),
                                         style: TextStyle(
-                                            fontSize: 10,
-                                            font:
-                                                _unicodeFont)), // Use _unicodeFont
+                                            fontSize: 10, font: _unicodeFont)),
                                   ),
                                 ],
                               ),
@@ -656,13 +653,11 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                         (receiptType == "NR" ||
                                                 receiptType == "CR" ||
                                                 receiptType == "TR")
-                                            ? "-${safeParseDouble(totalTaxB).toStringAsFixed(2)}"
+                                            ? "-${safeParseDouble(totalTaxB).toNoCurrencyFormatted()}"
                                             : safeParseDouble(totalTaxB)
-                                                .toStringAsFixed(2),
+                                                .toNoCurrencyFormatted(),
                                         style: TextStyle(
-                                            fontSize: 10,
-                                            font:
-                                                _unicodeFont)), // Use _unicodeFont
+                                            fontSize: 10, font: _unicodeFont)),
                                   ),
                                 ],
                               ),
@@ -679,13 +674,11 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                         (receiptType == "NR" ||
                                                 receiptType == "CR" ||
                                                 receiptType == "TR")
-                                            ? "-${safeParseDouble(totalTaxC).toStringAsFixed(2)}"
+                                            ? "-${safeParseDouble(totalTaxC).toNoCurrencyFormatted()}"
                                             : safeParseDouble(totalTaxC)
-                                                .toStringAsFixed(2),
+                                                .toNoCurrencyFormatted(),
                                         style: TextStyle(
-                                            fontSize: 10,
-                                            font:
-                                                _unicodeFont)), // Use _unicodeFont
+                                            fontSize: 10, font: _unicodeFont)),
                                   ),
                                 ],
                               ),
@@ -706,9 +699,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                             : safeParseDouble(totalTaxD)
                                                 .toStringAsFixed(2),
                                         style: TextStyle(
-                                            fontSize: 10,
-                                            font:
-                                                _unicodeFont)), // Use _unicodeFont
+                                            fontSize: 10, font: _unicodeFont)),
                                   ),
                                 ],
                               ),
@@ -725,13 +716,11 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                         (receiptType == "NR" ||
                                                 receiptType == "CR" ||
                                                 receiptType == "TR")
-                                            ? "-${safeParseDouble(totalTax).toStringAsFixed(2)}"
+                                            ? "-${safeParseDouble(totalTax).toNoCurrencyFormatted()}"
                                             : safeParseDouble(totalTax)
-                                                .toStringAsFixed(2),
+                                                .toNoCurrencyFormatted(),
                                         style: TextStyle(
-                                            fontSize: 10,
-                                            font:
-                                                _unicodeFont)), // Use _unicodeFont
+                                            fontSize: 10, font: _unicodeFont)),
                                   ),
                                 ],
                               ),
