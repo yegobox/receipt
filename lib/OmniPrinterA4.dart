@@ -190,7 +190,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 5),
 
               // Training and Proforma Labels - Added to match omni_printer.dart implementation
               if (receiptType == "TS")
@@ -238,7 +238,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                               fontWeight: FontWeight.bold,
                               font: _unicodeFont)), // Use _unicodeFont
                       dashWidget(),
-                      SizedBox(height: 10),
+                      SizedBox(height: 5),
                     ],
                   ),
                 ),
@@ -785,16 +785,22 @@ class OmniPrinterA4 with SaveFile implements Printable {
                 ],
               ),
               SizedBox(height: 6),
-              // Footer
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text('flipper v1.0.0',
-                    style: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        fontSize: 10,
-                        font: _unicodeFont)), // Use _unicodeFont
-                SizedBox(width: 30),
-                if (middle != null) Image(middle, width: 20, height: 40),
-              ])
+              // Ensure footer always shows at the end
+              Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('flipper v1.0.0',
+                      style: TextStyle(
+                          fontStyle: FontStyle.normal,
+                          fontSize: 10,
+                          font: _unicodeFont)), // Use _unicodeFont
+                  if (middle != null) ...[
+                    SizedBox(width: 30),
+                    Image(middle, width: 20, height: 40),
+                  ]
+                ],
+              ),
             ],
           );
         },
