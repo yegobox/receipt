@@ -617,7 +617,7 @@ class OmniPrinter with SaveFile implements Printable {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('CASH:',
+          Text("${_getPaymentType(ProxyService.box.pmtTyCd())}:",
               style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal)),
           Text(formattedCash,
               style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal)),
@@ -675,6 +675,26 @@ class OmniPrinter with SaveFile implements Printable {
           ],
         ),
       );
+    }
+  }
+
+  String _getPaymentType(String paymentCode) {
+    switch (paymentCode) {
+      case '01':
+        return 'CASH';
+      case '02':
+        return 'CREDIT CARD';
+      case '03':
+        return 'CASH/CREDIT CARD';
+      case '04':
+        return 'BANK CHECK';
+      case '05':
+        return 'DEBIT&CREDIT CARD';
+      case '06':
+        return 'MOBILE MONEY';
+      case '07':
+      default:
+        return 'OTHER';
     }
   }
 

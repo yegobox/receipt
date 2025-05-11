@@ -1,3 +1,4 @@
+import 'package:flipper_services/proxy.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:receipt/SaveFile.dart';
@@ -61,6 +62,26 @@ class OmniPrinterA4 with SaveFile implements Printable {
       return parsed;
     }
     return 0.0;
+  }
+
+  String _getPaymentType(String paymentCode) {
+    switch (paymentCode) {
+      case '01':
+        return 'CASH';
+      case '02':
+        return 'CREDIT CARD';
+      case '03':
+        return 'CASH/CREDIT CARD';
+      case '04':
+        return 'BANK CHECK';
+      case '05':
+        return 'DEBIT&CREDIT CARD';
+      case '06':
+        return 'MOBILE MONEY';
+      case '07':
+      default:
+        return 'OTHER';
+    }
   }
 
   @override
@@ -753,7 +774,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(4),
-                                  child: Text(payMode,
+                                  child: Text(
+                                      "${_getPaymentType(ProxyService.box.pmtTyCd())}:",
                                       style: TextStyle(
                                           fontSize: 10,
                                           font:
