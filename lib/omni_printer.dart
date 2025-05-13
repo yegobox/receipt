@@ -767,7 +767,7 @@ class OmniPrinter with SaveFile implements Printable {
         SizedBox(height: 4),
       ]),
     );
-    if (receiptType != "PS" && receiptType != "TS") {
+    if (receiptType != "PS" && receiptType != "TS" && receiptType != "TR") {
       rows.add(
         Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Text(
@@ -805,7 +805,10 @@ class OmniPrinter with SaveFile implements Printable {
         SizedBox(height: 1),
       ]),
     );
-    if (receiptType != "PS" && receiptType != "TS" && receiptType != "CR") {
+    if (receiptType != "PS" &&
+        receiptType != "TS" &&
+        receiptType != "CR" &&
+        receiptType != "TR") {
       rows.add(
         Column(children: [
           SizedBox(),
@@ -858,7 +861,13 @@ class OmniPrinter with SaveFile implements Printable {
           style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
         ),
         Text(
-          ProxyService.box.mrc() ?? mrc,
+          (() {
+            final boxMrc = ProxyService.box.mrc();
+            if (boxMrc != null && boxMrc.isNotEmpty && boxMrc.length == 11) {
+              return boxMrc;
+            }
+            return mrc;
+          })(),
           style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
         ),
       ]),
@@ -878,7 +887,7 @@ class OmniPrinter with SaveFile implements Printable {
               fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont),
         ),
         Text(
-          'flipper v1.0.0',
+          'flipper v1.0.0 powered by RRA VSDC EBM 2.1',
           style: TextStyle(
               fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont),
         ),

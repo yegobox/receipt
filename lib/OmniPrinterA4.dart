@@ -520,16 +520,20 @@ class OmniPrinterA4 with SaveFile implements Printable {
                             style: TextStyle(
                                 fontSize: 10,
                                 font: _unicodeFont)), // Use _unicodeFont
-                        Text(
-                            'Internal Data: ${internalData.toDashedStringInternalData()}',
-                            style: TextStyle(
-                                fontSize: 10,
-                                font: _unicodeFont)), // Use _unicodeFont
-                        Text(
-                            'Receipt Signature: ${receiptSignature.toDashedStringRcptSign()}',
-                            style: TextStyle(
-                                fontSize: 10,
-                                font: _unicodeFont)), // Use _unicodeFont
+                        if (receiptType != "PS" &&
+                            receiptType != "TS" &&
+                            receiptType != "TR")
+                          Text(
+                              'Internal Data: ${internalData.toDashedStringInternalData()}',
+                              style:
+                                  TextStyle(fontSize: 10, font: _unicodeFont)),
+                        if (receiptType != "PS" &&
+                            receiptType != "TS" &&
+                            receiptType != "TR") // Use _unicodeFont
+                          Text(
+                              'Receipt Signature: ${receiptSignature.toDashedStringRcptSign()}',
+                              style:
+                                  TextStyle(fontSize: 10, font: _unicodeFont)),
                         SizedBox(height: 5),
                         dashWidget(),
                         SizedBox(height: 5),
@@ -541,7 +545,15 @@ class OmniPrinterA4 with SaveFile implements Printable {
                             style: TextStyle(
                                 fontSize: 10,
                                 font: _unicodeFont)), // Use _unicodeFont
-                        Text('MRC: $mrc',
+                        Text((() {
+                          final boxMrc = ProxyService.box.mrc();
+                          if (boxMrc != null &&
+                              boxMrc.isNotEmpty &&
+                              boxMrc.length == 11) {
+                            return boxMrc;
+                          }
+                          return mrc;
+                        })(),
                             style: TextStyle(
                                 fontSize: 10,
                                 font: _unicodeFont)), // Use _unicodeFont
@@ -812,7 +824,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('flipper v1.0.0',
+                  Text('flipper v1.0.0 powered by RRA VSDC EBM 2.1',
                       style: TextStyle(
                           fontStyle: FontStyle.normal,
                           fontSize: 10,
