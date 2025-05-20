@@ -887,7 +887,7 @@ class OmniPrinter with SaveFile implements Printable {
               fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont),
         ),
         Text(
-          'flipper v1.0.0 powered by RRA VSDC EBM 2.1',
+          'Powered by RRA VSDC EBM 2.1',
           style: TextStyle(
               fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont),
         ),

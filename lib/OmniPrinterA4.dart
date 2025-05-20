@@ -824,7 +824,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('flipper v1.0.0 powered by RRA VSDC EBM 2.1',
+                  Text('Powered by RRA VSDC EBM 2.1',
                       style: TextStyle(
                           fontStyle: FontStyle.normal,
                           fontSize: 10,
