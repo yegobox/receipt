@@ -276,8 +276,11 @@ class OmniPrinterA4 with SaveFile implements Printable {
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                               font: _unicodeFont)), // Use _unicodeFont
-                      if (receiptType == "NR" || receiptType == "TR")
-                        Text('REF.NORMAL RECEIPT:# ${invoiceNum - 1}',
+                      if (receiptType == "NR" ||
+                          receiptType == "TR" ||
+                          receiptType == "CR")
+                        Text(
+                            'REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
                             style: TextStyle(
                                 fontSize: 10,
                                 font: _unicodeFont)), // Use _unicodeFont
@@ -345,8 +348,16 @@ class OmniPrinterA4 with SaveFile implements Printable {
                             children: [
                               Text('INVOICE NO: $invoiceNum',
                                   style: TextStyle(
-                                      fontSize: 10,
-                                      font: _unicodeFont)), // Use _unicodeFont
+                                      fontSize: 10, font: _unicodeFont)),
+                              if (receiptType == "NR" ||
+                                  receiptType == "TR" ||
+                                  receiptType == "CR")
+                                Text(
+                                    'REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        font:
+                                            _unicodeFont)), // Use _unicodeFont
                               SizedBox(height: 5),
                               Text('Date: ${whenCreated.isoDateTime}',
                                   style: TextStyle(
@@ -545,15 +556,17 @@ class OmniPrinterA4 with SaveFile implements Printable {
                             style: TextStyle(
                                 fontSize: 10,
                                 font: _unicodeFont)), // Use _unicodeFont
-                        Text((() {
-                          final boxMrc = ProxyService.box.mrc();
-                          if (boxMrc != null &&
-                              boxMrc.isNotEmpty &&
-                              boxMrc.length == 11) {
-                            return boxMrc;
-                          }
-                          return mrc;
-                        })(),
+                        Text(
+                            "MRC: " +
+                                (() {
+                                  final boxMrc = ProxyService.box.mrc();
+                                  if (boxMrc != null &&
+                                      boxMrc.isNotEmpty &&
+                                      boxMrc.length == 11) {
+                                    return boxMrc;
+                                  }
+                                  return mrc;
+                                })(),
                             style: TextStyle(
                                 fontSize: 10,
                                 font: _unicodeFont)), // Use _unicodeFont
