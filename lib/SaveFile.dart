@@ -10,7 +10,6 @@ import 'package:universal_platform/universal_platform.dart';
 import 'package:path/path.dart' as p;
 import 'package:talker_flutter/talker_flutter.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'dart:ui' as ui;
 import 'platform_printer.dart';
 
 final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
