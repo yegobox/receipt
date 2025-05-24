@@ -84,6 +84,7 @@ class OmniPrinter with SaveFile implements Printable {
     required ImageProvider middleImage,
     required String brandAddress,
     required String brandTel,
+    required ITransaction transaction,
     required String brandTIN,
     required String brandName,
     required String customerTin,
@@ -103,7 +104,7 @@ class OmniPrinter with SaveFile implements Printable {
 
             /// here we take the existing receipt number -1 to get the receipt number of the refund
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
-            Text('REF.NORMAL RECEIPT:# ${int.parse(receiptNumber) - 1}',
+            Text('REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
                 style: TextStyle(fontSize: 10, font: _unicodeFont)),
             dashWidget(),
             Text(
@@ -120,7 +121,7 @@ class OmniPrinter with SaveFile implements Printable {
 
             /// here we take the existing receipt number -1 to get the receipt number of the refund
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
-            Text('REF.NORMAL RECEIPT:# ${int.parse(receiptNumber) - 1}',
+            Text('REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
                 style: TextStyle(fontSize: 10, font: _unicodeFont)),
             dashWidget(),
             Text(
@@ -144,7 +145,7 @@ class OmniPrinter with SaveFile implements Printable {
 
             /// here we take the existing receipt number -1 to get the receipt number of the refund
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
-            Text('REF.NORMAL RECEIPT:# ${int.parse(receiptNumber) - 1}',
+            Text('REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
                 style: TextStyle(fontSize: 10, font: _unicodeFont)),
             dashWidget(),
             Text(
@@ -977,6 +978,7 @@ class OmniPrinter with SaveFile implements Printable {
     final right = await _loadLogoImage(position: "right");
     final middle = await _loadLogoImage(position: "middle");
     await _header(
+        transaction: transaction,
         middleImage: middle!,
         leftImage: left!,
         rightImage: right!,
