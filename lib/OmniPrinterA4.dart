@@ -632,36 +632,45 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 ),
                               ],
                             ),
-                            TableRow(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(4),
-                                  child: Text('TOTAL A-EX:'),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(4),
-                                  child: Text(
-                                      // Calculate total for A-EX items (tax type A)
-                                      (receiptType == "NR" ||
-                                              receiptType == "CR" ||
-                                              receiptType == "TR")
-                                          ? "-${items.where((item) => item.taxTyCd == "A").fold<double>(0.0, (sum, item) => sum + (item.price * item.qty)).toStringAsFixed(2)}"
-                                          : items
-                                              .where(
-                                                  (item) => item.taxTyCd == "A")
-                                              .fold<double>(
-                                                  0.0,
-                                                  (sum, item) =>
-                                                      sum +
-                                                      (item.price * item.qty))
-                                              .toStringAsFixed(2),
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          font:
-                                              _unicodeFont)), // Use _unicodeFont
-                                ),
-                              ],
-                            ),
+                            // Only show TOTAL A-EX if there are items with tax type A
+                            if (items.any((item) => item.taxTyCd == "A") &&
+                                items
+                                        .where((item) => item.taxTyCd == "A")
+                                        .fold<double>(
+                                            0.0,
+                                            (sum, item) =>
+                                                sum + (item.price * item.qty)) >
+                                    0)
+                              TableRow(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: Text('TOTAL A-EX:'),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: Text(
+                                        // Calculate total for A-EX items (tax type A)
+                                        (receiptType == "NR" ||
+                                                receiptType == "CR" ||
+                                                receiptType == "TR")
+                                            ? "-${items.where((item) => item.taxTyCd == "A").fold<double>(0.0, (sum, item) => sum + (item.price * item.qty)).toStringAsFixed(2)}"
+                                            : items
+                                                .where((item) =>
+                                                    item.taxTyCd == "A")
+                                                .fold<double>(
+                                                    0.0,
+                                                    (sum, item) =>
+                                                        sum +
+                                                        (item.price * item.qty))
+                                                .toStringAsFixed(2),
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            font:
+                                                _unicodeFont)), // Use _unicodeFont
+                                  ),
+                                ],
+                              ),
                             if (safeParseDouble(totalTaxB) != 0)
                               TableRow(
                                 children: [
@@ -715,7 +724,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   ),
                                 ],
                               ),
-                            if (safeParseDouble(totalTaxC) != 0)
+                            // Show if there are items with tax type C, even if the tax amount is zero
+                            if (items.any((item) => item.taxTyCd == "C"))
                               TableRow(
                                 children: [
                                   Padding(
@@ -728,9 +738,43 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                         (receiptType == "NR" ||
                                                 receiptType == "CR" ||
                                                 receiptType == "TR")
-                                            ? "-${safeParseDouble(totalTaxC).toNoCurrencyFormatted()}"
-                                            : safeParseDouble(totalTaxC)
+                                            ? "-${items.where((item) => item.taxTyCd == "C").fold<double>(0.0, (sum, item) => sum + (item.price * item.qty)).toNoCurrencyFormatted()}"
+                                            : items
+                                                .where((item) =>
+                                                    item.taxTyCd == "C")
+                                                .fold<double>(
+                                                    0.0,
+                                                    (sum, item) =>
+                                                        sum +
+                                                        (item.price * item.qty))
                                                 .toNoCurrencyFormatted(),
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            font:
+                                                _unicodeFont)), // Use _unicodeFont
+                                  ),
+                                ],
+                              ),
+                            // Show TOTAL TAX: only if all items in the receipt have tax type C and no other tax types
+                            if (items.any((item) => item.taxTyCd == "C") &&
+                                items.every((item) =>
+                                    item.taxTyCd == "C" ||
+                                    item.taxTyCd == null))
+                              TableRow(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: Text('TOTAL TAX:'),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(4),
+                                    child: Text(
+                                        // Always display 0 for tax C amount
+                                        (receiptType == "NR" ||
+                                                receiptType == "CR" ||
+                                                receiptType == "TR")
+                                            ? "-0.00"
+                                            : "0.00",
                                         style: TextStyle(
                                             fontSize: 10,
                                             font:

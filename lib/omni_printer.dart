@@ -320,15 +320,22 @@ class OmniPrinter with SaveFile implements Printable {
     }
   }
 
-  _buildTaxC({required String totalTaxC, required String receiptType}) async {
-    double value = safeParseDouble(totalTaxC);
-    if (value != 0) {
-      String displayTotalTaxC = totalTaxC;
+  // Display the total value of items with tax type C
+  _buildTotalC(
+      {required List<TransactionItem> items,
+      required String receiptType}) async {
+    // Only show if there are items with tax type C
+    if (items.any((item) => item.taxTyCd == "C")) {
+      // Calculate total for C items
+      double totalCValue = items
+          .where((item) => item.taxTyCd == "C")
+          .fold<double>(0.0, (sum, item) => sum + (item.price * item.qty));
 
+      String displayTotalC;
       if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
-        displayTotalTaxC = "-${value.toNoCurrencyFormatted()}";
+        displayTotalC = "-${totalCValue.toNoCurrencyFormatted()}";
       } else {
-        displayTotalTaxC = value.toNoCurrencyFormatted();
+        displayTotalC = totalCValue.toNoCurrencyFormatted();
       }
 
       rows.add(
@@ -337,6 +344,39 @@ class OmniPrinter with SaveFile implements Printable {
           children: [
             Text(
               'TOTAL C:',
+              style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
+            ),
+            Text(
+              displayTotalC,
+              style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
+            )
+          ],
+        ),
+      );
+    }
+  }
+
+  // Display the tax amount for tax type C (always 0.00)
+  _buildTaxC(
+      {required String totalTaxC,
+      required String receiptType,
+      List<TransactionItem>? items}) async {
+    // Only show if all items in the receipt have tax type C and no other tax types
+    if (items != null &&
+        items.any((item) => item.taxTyCd == "C") &&
+        items.every((item) => item.taxTyCd == "C" || item.taxTyCd == null)) {
+      // Always display 0.00 for tax C amount
+      String displayTotalTaxC =
+          (receiptType == "NR" || receiptType == "CR" || receiptType == "TR")
+              ? "-0.00"
+              : "0.00";
+
+      rows.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'TOTAL TAX:',
               style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
             ),
             Text(
@@ -593,9 +633,14 @@ class OmniPrinter with SaveFile implements Printable {
         totalAEx: safeParseDouble(taxA).toStringAsFixed(2),
         receiptType: receiptType);
 
+    // Display total C (sum of items with tax type C)
+    await _buildTotalC(items: items, receiptType: receiptType);
+
+    // Display tax C amount (always 0.00)
     await _buildTaxC(
         totalTaxC: safeParseDouble(taxC).toStringAsFixed(2),
-        receiptType: receiptType);
+        receiptType: receiptType,
+        items: items);
     await _buildTaxD(
         totalTaxD: safeParseDouble(taxD).toStringAsFixed(2),
         receiptType: receiptType);
