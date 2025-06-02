@@ -209,7 +209,7 @@ class OmniPrinter with SaveFile implements Printable {
       Column(children: [dashWidget()]),
       SizedBox(height: 4),
       if (receiptType != "NR")
-        Text('Welcome to our shop',
+        Text('Welcome to our shop'.toUpperCase(),
             style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.normal,
@@ -235,7 +235,6 @@ class OmniPrinter with SaveFile implements Printable {
     double taxValue = safeParseDouble(totalTax);
 
     // Format with exactly 2 decimal places without rounding
-    // We truncate to 2 decimal places by converting to string with fixed decimal places
     String formattedTax = taxValue.toStringAsFixed(2);
 
     // Add negative sign for returns and credits
@@ -644,7 +643,11 @@ class OmniPrinter with SaveFile implements Printable {
     await _buildTaxD(
         totalTaxD: safeParseDouble(taxD).toStringAsFixed(2),
         receiptType: receiptType);
-    await _buildTotalTax(totalTax: totalTax, receiptType: receiptType);
+    // Only show TOTAL TAX: if not all items are tax type C (to avoid duplicate row)
+    if (!(items.isNotEmpty &&
+        items.every((item) => item.taxTyCd == "C" || item.taxTyCd == null))) {
+      await _buildTotalTax(totalTax: totalTax, receiptType: receiptType);
+    }
 
     rows.add(Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -903,7 +906,7 @@ class OmniPrinter with SaveFile implements Printable {
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
-          'MRC',
+          'MRC:',
           style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
         ),
         Text(
