@@ -805,29 +805,6 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   ),
                                 ],
                               ),
-                            if (safeParseDouble(totalTax) != 0)
-                              TableRow(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(4),
-                                    child: Text('TOTAL TAX:'),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(4),
-                                    child: Text(
-                                        (receiptType == "NR" ||
-                                                receiptType == "CR" ||
-                                                receiptType == "TR")
-                                            ? "-${safeParseDouble(totalTax).toNoCurrencyFormatted()}"
-                                            : safeParseDouble(totalTax)
-                                                .toNoCurrencyFormatted(),
-                                        style: TextStyle(
-                                            fontSize: 10,
-                                            font:
-                                                _unicodeFont)), // Use _unicodeFont
-                                  ),
-                                ],
-                              ),
                           ],
                         ),
                         // Payment Method and Items Number table - placed directly below tax table
