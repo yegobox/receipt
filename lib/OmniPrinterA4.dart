@@ -755,11 +755,11 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   ),
                                 ],
                               ),
-                            // Show TOTAL TAX: only if all items in the receipt have tax type C and no other tax types
-                            if (items.any((item) => item.taxTyCd == "C") &&
+                            // Only show TOTAL TAX: if not all items are tax type C (to avoid duplicate row)
+                            if (!(items.isNotEmpty &&
                                 items.every((item) =>
                                     item.taxTyCd == "C" ||
-                                    item.taxTyCd == null))
+                                    item.taxTyCd == null)))
                               TableRow(
                                 children: [
                                   Padding(
@@ -769,12 +769,12 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   Padding(
                                     padding: const EdgeInsets.all(4),
                                     child: Text(
-                                        // Always display 0 for tax C amount
                                         (receiptType == "NR" ||
                                                 receiptType == "CR" ||
                                                 receiptType == "TR")
-                                            ? "-0.00"
-                                            : "0.00",
+                                            ? "-${safeParseDouble(totalTax).toStringAsFixed(2)}"
+                                            : safeParseDouble(totalTax)
+                                                .toStringAsFixed(2),
                                         style: TextStyle(
                                             fontSize: 10,
                                             font:
