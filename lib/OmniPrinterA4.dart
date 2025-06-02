@@ -755,33 +755,29 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                   ),
                                 ],
                               ),
-                            // Only show TOTAL TAX: if not all items are tax type C (to avoid duplicate row)
-                            if (!(items.isNotEmpty &&
-                                items.every((item) =>
-                                    item.taxTyCd == "C" ||
-                                    item.taxTyCd == null)))
-                              TableRow(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(4),
-                                    child: Text('TOTAL TAX:'),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(4),
-                                    child: Text(
-                                        (receiptType == "NR" ||
-                                                receiptType == "CR" ||
-                                                receiptType == "TR")
-                                            ? "-${safeParseDouble(totalTax).toStringAsFixed(2)}"
-                                            : safeParseDouble(totalTax)
-                                                .toStringAsFixed(2),
-                                        style: TextStyle(
-                                            fontSize: 10,
-                                            font:
-                                                _unicodeFont)), // Use _unicodeFont
-                                  ),
-                                ],
-                              ),
+                            // Show TOTAL TAX: row unconditionally
+                            TableRow(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child: Text('TOTAL TAX:'),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(4),
+                                  child: Text(
+                                      (receiptType == "NR" ||
+                                              receiptType == "CR" ||
+                                              receiptType == "TR")
+                                          ? "-${safeParseDouble(totalTax).toStringAsFixed(2)}"
+                                          : safeParseDouble(totalTax)
+                                              .toStringAsFixed(2),
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          font:
+                                              _unicodeFont)), // Use _unicodeFont
+                                ),
+                              ],
+                            ),
                             if (safeParseDouble(totalTaxD) != 0)
                               TableRow(
                                 children: [
