@@ -277,7 +277,7 @@ class OmniPrinter with SaveFile implements Printable {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'TOTAL TAX B',
+              'TOTAL TAX B:',
               style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
             ),
             Text(
@@ -306,7 +306,7 @@ class OmniPrinter with SaveFile implements Printable {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'TOTAL B-18%',
+              'TOTAL B-18%:',
               style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
             ),
             Text(

@@ -706,7 +706,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.all(4),
-                                    child: Text('TOTAL TAX B'),
+                                    child: Text('TOTAL TAX B:'),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(4),
