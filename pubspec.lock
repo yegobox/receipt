@@ -393,6 +393,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.2"
+  build_cli_annotations:
+    dependency: transitive
+    description:
+      name: build_cli_annotations
+      sha256: b59d2769769efd6c9ff6d4c4cede0be115a566afc591705c2040b707534b1172
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   build_config:
     dependency: transitive
     description:
@@ -473,6 +481,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  cancellation_token:
+    dependency: transitive
+    description:
+      name: cancellation_token
+      sha256: ad95acf9d4b2f3563e25dc937f63587e46a70ce534e910b65d10e115490f1027
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   cbor:
     dependency: transitive
     description:
@@ -633,6 +649,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.11"
+  decimal:
+    dependency: transitive
+    description:
+      name: decimal
+      sha256: "28239b8b929c1bd8618702e6dbc96e2618cf99770bbe9cb040d6cf56a11e4ec3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.1"
   demo_ui_components:
     dependency: "direct overridden"
     description:
@@ -760,6 +784,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.1"
+  ejson:
+    dependency: transitive
+    description:
+      name: ejson
+      sha256: "5856e32943e476d67304731dedcd2a4b2363f2d14442176e2a151039605c4633"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.1"
+  ejson_annotation:
+    dependency: transitive
+    description:
+      name: ejson_annotation
+      sha256: "966c38370f21a0b5ed296a33293c2592a7d14e4b320cc1a5de49d6c55606cc2f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.1"
   email_validator:
     dependency: transitive
     description:
@@ -1197,7 +1237,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223233997+1748000228"
+    version: "1.170.4252223234048+1749642193"
   flipper_services:
     dependency: "direct main"
     description:
@@ -2322,6 +2362,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  objectid:
+    dependency: transitive
+    description:
+      name: objectid
+      sha256: "4d0866753dde818e34fd043d6ef0baf698f65c1db202054c58c87087ccfb4dcf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.1"
   octo_image:
     dependency: transitive
     description:
@@ -2705,6 +2753,46 @@ packages:
       relative: true
     source: path
     version: "4.0.2"
+  rational:
+    dependency: transitive
+    description:
+      name: rational
+      sha256: cb808fb6f1a839e6fc5f7d8cb3b0a10e1db48b3be102de73938c627f0b636336
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.3"
+  realm:
+    dependency: transitive
+    description:
+      name: realm
+      sha256: "05f3ebd928d301880fbf17cc4b793db59a5f56b4a373e8e3a66c56676afed24d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "20.1.1"
+  realm_common:
+    dependency: transitive
+    description:
+      name: realm_common
+      sha256: "738db1835d1d79d4ea73c6dc037d54a0062a26fb1c3fa6c5280b56e6d8d927cc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "20.1.1"
+  realm_dart:
+    dependency: transitive
+    description:
+      name: realm_dart
+      sha256: "6b6856f1f53ab30b9891355a38f064fb34829657677de2ec9f53157b257da4cb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "20.1.1"
+  realm_generator:
+    dependency: transitive
+    description:
+      name: realm_generator
+      sha256: "4c9668f8e24601605480185fc38a03ccd83a4221961745d4f64aa3dca08263cc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "20.1.1"
   realtime_client:
     dependency: transitive
     description:
@@ -2753,6 +2841,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.28.0"
+  sane_uuid:
+    dependency: transitive
+    description:
+      name: sane_uuid
+      sha256: "5b3fd581f51d01aef0526344c175e198d04ff701249c1a75186429dbb4367265"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   screen_retriever:
     dependency: transitive
     description:
@@ -3308,6 +3404,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.7.1"
+  tar:
+    dependency: transitive
+    description:
+      name: tar
+      sha256: "8e67ab1baa07d3ef2c5d52cfb84e7ed4742799141e9e2ac3d0801a1a7ccb7575"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   term_glyph:
     dependency: transitive
     description:
