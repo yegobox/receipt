@@ -782,7 +782,7 @@ class OmniPrinter with SaveFile implements Printable {
         SizedBox(
           width: 1120,
           child: Text(
-            timeFromServer.toDateTimeString(),
+            timeFromServer.isoDateTime,
             style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
           ),
         ),
@@ -916,7 +916,8 @@ class OmniPrinter with SaveFile implements Printable {
               return boxMrc;
             }
             return mrc;
-          })(),
+          })()
+              .toUpperCase(),
           style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
         ),
       ]),
@@ -936,7 +937,7 @@ class OmniPrinter with SaveFile implements Printable {
               fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont),
         ),
         Text(
-          'Powered by RRA VSDC EBM 2.1',
+          'Flipper V2 Powered by RRA VSDC EBM 2.1',
           style: TextStyle(
               fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont),
         ),

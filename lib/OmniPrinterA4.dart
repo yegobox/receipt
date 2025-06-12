@@ -506,74 +506,77 @@ class OmniPrinterA4 with SaveFile implements Printable {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // if (receiptType != "CR")
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('SDC INFORMATION',
-                            style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                                font: _unicodeFont)), // Use _unicodeFont
-                        dashWidget(),
-                        SizedBox(height: 5),
-                        Text('Date: ${timeFromServer.isoDateTime}',
-                            style: TextStyle(
-                                fontSize: 10,
-                                font: _unicodeFont)), // Use _unicodeFont
-                        Text('SDC ID: $sdcId',
-                            style: TextStyle(
-                                fontSize: 10,
-                                font: _unicodeFont)), // Use _unicodeFont
-                        Text(
-                            'Receipt Number: $rcptNo/$totRcptNo ($receiptType)',
-                            style: TextStyle(
-                                fontSize: 10,
-                                font: _unicodeFont)), // Use _unicodeFont
-                        if (receiptType != "PS" &&
-                            receiptType != "TS" &&
-                            receiptType != "TR")
+                  if (receiptType != "CR" &&
+                      receiptType != "PS" &&
+                      receiptType != "TR" &&
+                      receiptType != "TS")
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('SDC INFORMATION',
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                  font: _unicodeFont)), // Use _unicodeFont
+                          dashWidget(),
+                          SizedBox(height: 5),
+                          Text('Date: ${timeFromServer.isoDateTime}',
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  font: _unicodeFont)), // Use _unicodeFont
+                          Text('SDC ID: $sdcId',
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  font: _unicodeFont)), // Use _unicodeFont
                           Text(
-                              'Internal Data: ${internalData.toDashedStringInternalData()}',
-                              style:
-                                  TextStyle(fontSize: 10, font: _unicodeFont)),
-                        if (receiptType != "PS" &&
-                            receiptType != "TS" &&
-                            receiptType != "TR") // Use _unicodeFont
+                              'Receipt Number: $rcptNo/$totRcptNo $receiptType',
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  font: _unicodeFont)), // Use _unicodeFont
+                          if (receiptType != "PS" &&
+                              receiptType != "TS" &&
+                              receiptType != "TR")
+                            Text(
+                                'Internal Data: ${internalData.toDashedStringInternalData()}',
+                                style: TextStyle(
+                                    fontSize: 10, font: _unicodeFont)),
+                          if (receiptType != "PS" &&
+                              receiptType != "TS" &&
+                              receiptType != "TR") // Use _unicodeFont
+                            Text(
+                                'Receipt Signature: ${receiptSignature.toDashedStringRcptSign()}',
+                                style: TextStyle(
+                                    fontSize: 10, font: _unicodeFont)),
+                          SizedBox(height: 5),
+                          dashWidget(),
+                          SizedBox(height: 5),
+                          Text('Receipt Number: $invoiceNum',
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  font: _unicodeFont)), // Use _unicodeFont
+                          Text('Date: ${whenCreated.isoDateTime}',
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  font: _unicodeFont)), // Use _unicodeFont
                           Text(
-                              'Receipt Signature: ${receiptSignature.toDashedStringRcptSign()}',
-                              style:
-                                  TextStyle(fontSize: 10, font: _unicodeFont)),
-                        SizedBox(height: 5),
-                        dashWidget(),
-                        SizedBox(height: 5),
-                        Text('Receipt Number: $invoiceNum',
-                            style: TextStyle(
-                                fontSize: 10,
-                                font: _unicodeFont)), // Use _unicodeFont
-                        Text('Date: ${whenCreated.isoDateTime}',
-                            style: TextStyle(
-                                fontSize: 10,
-                                font: _unicodeFont)), // Use _unicodeFont
-                        Text(
-                            "MRC: " +
-                                (() {
-                                  final boxMrc = ProxyService.box.mrc();
-                                  if (boxMrc != null &&
-                                      boxMrc.isNotEmpty &&
-                                      boxMrc.length == 11) {
-                                    return boxMrc;
-                                  }
-                                  return mrc;
-                                })(),
-                            style: TextStyle(
-                                fontSize: 10,
-                                font: _unicodeFont)), // Use _unicodeFont
-                        dashWidget(),
-                      ],
+                              "MRC: ${(() {
+                                final boxMrc = ProxyService.box.mrc();
+                                if (boxMrc != null &&
+                                    boxMrc.isNotEmpty &&
+                                    boxMrc.length == 11) {
+                                  return boxMrc;
+                                }
+                                return mrc;
+                              })()}"
+                                  .toUpperCase(),
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  font: _unicodeFont)), // Use _unicodeFont
+                          dashWidget(),
+                        ],
+                      ),
                     ),
-                  ),
                   if (receiptType != "PS" &&
                       receiptType != "TS" &&
                       receiptType != "CR")
@@ -848,7 +851,6 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   ),
                 ],
               ),
-              SizedBox(height: 6),
               // Ensure footer always shows at the end
               Spacer(),
               Row(
