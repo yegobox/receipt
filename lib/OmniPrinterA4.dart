@@ -1,4 +1,5 @@
 import 'package:flipper_services/proxy.dart';
+import 'package:flipper_services/proxy.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:receipt/SaveFile.dart';
@@ -327,7 +328,12 @@ class OmniPrinterA4 with SaveFile implements Printable {
                               Text('Name: $customerName',
                                   style: TextStyle(
                                       fontSize: 10,
-                                      font: _unicodeFont)), // Use _unicodeFont
+                                      font: _unicodeFont)),
+                              SizedBox(height: 5),
+                              Text('Phone Number: ${ProxyService.box.customPhoneNumberForPayment()?? "N/A"}',
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      font: _unicodeFont)) // Use _unicodeFont
                             ],
                           ),
                         ),
