@@ -327,10 +327,10 @@ class OmniPrinterA4 with SaveFile implements Printable {
                               SizedBox(height: 5),
                               Text('Name: $customerName',
                                   style: TextStyle(
-                                      fontSize: 10,
-                                      font: _unicodeFont)),
+                                      fontSize: 10, font: _unicodeFont)),
                               SizedBox(height: 5),
-                              Text('Phone Number: ${ProxyService.box.customPhoneNumberForPayment()?? "N/A"}',
+                              Text(
+                                  'Phone Number: ${ProxyService.box.customPhoneNumberForPayment() ?? "N/A"}',
                                   style: TextStyle(
                                       fontSize: 10,
                                       font: _unicodeFont)) // Use _unicodeFont

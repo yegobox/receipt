@@ -190,7 +190,8 @@ class OmniPrinter with SaveFile implements Printable {
               fontSize: 10, fontWeight: FontWeight.normal, font: _unicodeFont)),
 
       SizedBox(height: 4),
-      Text("Phone number: ${ProxyService.box.customPhoneNumberForPayment()?? "N/A"}",
+      Text(
+          "Phone number: ${ProxyService.box.customPhoneNumberForPayment() ?? "N/A"}",
           style: TextStyle(
               fontSize: 10, fontWeight: FontWeight.normal, font: _unicodeFont)),
 

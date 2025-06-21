@@ -192,6 +192,9 @@ class _MyHomePageState extends State<MyHomePage> {
           TransactionItem(
             lastTouched: DateTime.now().toUtc(),
             splyAmt: 1,
+            itemTyCd: "",
+            pkgUnitCd: "",
+            qtyUnitCd: "",
             itemNm: "1",
             discount: 0,
             prc: 1,
@@ -203,6 +206,9 @@ class _MyHomePageState extends State<MyHomePage> {
             price: 10.0,
           ),
           TransactionItem(
+            itemTyCd: "",
+            pkgUnitCd: "",
+            qtyUnitCd: "",
             lastTouched: DateTime.now().toUtc(),
             splyAmt: 1,
             itemNm: "1",
@@ -216,6 +222,9 @@ class _MyHomePageState extends State<MyHomePage> {
             price: 10.0,
           ),
           TransactionItem(
+            itemTyCd: "",
+            pkgUnitCd: "",
+            qtyUnitCd: "",
             lastTouched: DateTime.now().toUtc(),
             splyAmt: 1,
             itemNm: "1",
