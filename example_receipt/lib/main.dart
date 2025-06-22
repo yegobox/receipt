@@ -102,12 +102,14 @@ class _MyHomePageState extends State<MyHomePage> {
     required Function(Uint8List bytes) printCallback,
     required double totalDiscount,
     required DateTime timeFromServer,
+    required String customerPhone,
   }) async {
     Printable printer = OmniPrinter();
     Printable printerA4 = OmniPrinterA4();
 
     return await printerA4.generatePdfAndPrint(
       taxB: taxB,
+      customerPhone: customerPhone,
       totalDiscount: totalDiscount,
       taxA: taxA,
       taxC: taxC,
@@ -156,8 +158,9 @@ class _MyHomePageState extends State<MyHomePage> {
     print(
       timeFromServer: DateTime.now(),
       totalDiscount: 10,
+      customerPhone: "0783054874",
       whenCreated: DateTime.now().toUtc(),
-      transaction: ITransaction(
+        transaction: ITransaction(
           id: "2",
           isIncome: true,
           isExpense: false,

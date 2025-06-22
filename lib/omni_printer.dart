@@ -1,4 +1,5 @@
 import 'package:flipper_models/helperModels/talker.dart';
+import 'package:receipt/widgets/receipt_footer.dart';
 import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:flipper_models/helperModels/extensions.dart';
 import 'package:flipper_services/proxy.dart';
@@ -90,6 +91,7 @@ class OmniPrinter with SaveFile implements Printable {
     required String customerTin,
     required String receiptType,
     required String customerName,
+    String? customerPhone,
     required String receiptNumber,
   }) async {
     List<Widget> receiptTypeWidgets(String receiptType) {
@@ -188,13 +190,7 @@ class OmniPrinter with SaveFile implements Printable {
       Text("TIN  : $brandTIN",
           style: TextStyle(
               fontSize: 10, fontWeight: FontWeight.normal, font: _unicodeFont)),
-
       SizedBox(height: 4),
-      Text(
-          "Phone number: ${ProxyService.box.customPhoneNumberForPayment() ?? "N/A"}",
-          style: TextStyle(
-              fontSize: 10, fontWeight: FontWeight.normal, font: _unicodeFont)),
-
       if (receiptType == "TS") SizedBox(height: 4),
       if (receiptType == "TS")
         Text("TRAINING MODE",
@@ -211,7 +207,6 @@ class OmniPrinter with SaveFile implements Printable {
               fontWeight: FontWeight.bold,
               font: _unicodeFont,
             )),
-
       Column(children: [dashWidget()]),
       SizedBox(height: 4),
       if (receiptType != "NR")
@@ -221,15 +216,16 @@ class OmniPrinter with SaveFile implements Printable {
                 fontWeight: FontWeight.normal,
                 font: _unicodeFont)),
       ...receiptTypeWidgets(receiptType),
-
       if (receiptType != "NR")
-        Text('Client ID: $customerTin',
+        Text('TIN: $customerTin',
             style: TextStyle(
                 fontSize: 12, fontWeight: FontWeight.bold, font: _unicodeFont)),
-      // Text('Customer Tin: $customerTin',
-      //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
       if (receiptType != "NR")
-        Text('Customer Name: $customerName',
+        Text('Name: $customerName',
+            style: TextStyle(
+                fontSize: 12, fontWeight: FontWeight.bold, font: _unicodeFont)),
+      if (receiptType != "NR")
+        Text('Phone Number: $customerPhone',
             style: TextStyle(
                 fontSize: 12, fontWeight: FontWeight.bold, font: _unicodeFont)),
     ]));
@@ -930,24 +926,7 @@ class OmniPrinter with SaveFile implements Printable {
     );
     dashedLine();
     rows.add(
-      Column(children: [
-        SizedBox(height: 12),
-        Text(
-          'THANK YOU',
-          style: TextStyle(
-              fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont),
-        ),
-        Text(
-          'COME BACK AGAIN',
-          style: TextStyle(
-              fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont),
-        ),
-        Text(
-          'Flipper V2 Powered by RRA VSDC EBM 2.1',
-          style: TextStyle(
-              fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont),
-        ),
-      ]),
+      ReceiptFooter(font: _unicodeFont),
     );
   }
 
@@ -991,6 +970,7 @@ class OmniPrinter with SaveFile implements Printable {
     required double taxC,
     required double totalDiscount,
     required double taxD,
+    String? customerPhone,
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
     String brandTel = "271311123",
@@ -1040,6 +1020,7 @@ class OmniPrinter with SaveFile implements Printable {
         brandAddress: brandAddress,
         brandTel: brandTel,
         brandTIN: brandTIN,
+        customerPhone: customerPhone,
         brandName: brandName,
         customerTin: customerTin!,
         receiptType: receiptType,

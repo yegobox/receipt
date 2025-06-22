@@ -86,16 +86,19 @@ class Print {
     required Function(Uint8List bytes) printCallback,
     required double totalDiscount,
     required DateTime timeFromServer,
+    String? customerPhone,
   }) async {
     Printable printer = OmniPrinter();
     Printable printerA4 = OmniPrinterA4();
     if (ProxyService.box.A4()) {
       return await printerA4.generatePdfAndPrint(
         taxB: taxB,
+        customerTin: customerTin,
         timeFromServer: timeFromServer,
         totalTaxC: taxC,
         totalDiscount: totalDiscount,
         taxA: taxA,
+        customerPhone: customerPhone,
         taxC: taxC,
         whenCreated: whenCreated,
         taxD: taxD,
@@ -108,7 +111,6 @@ class Print {
         autoPrint: autoPrint,
         brandFooter: brandFooter,
         emails: emails,
-        customerTin: customerTin.toString(),
         receiptType: receiptType,
         items: items,
         totalTax: totalTax,
@@ -140,6 +142,7 @@ class Print {
         timeFromServer: timeFromServer,
         totalDiscount: totalDiscount,
         taxA: taxA,
+        customerPhone: customerPhone,
         taxC: taxC,
         whenCreated: whenCreated,
         taxD: taxD,
@@ -152,7 +155,7 @@ class Print {
         autoPrint: autoPrint,
         brandFooter: brandFooter,
         emails: emails,
-        customerTin: customerTin.toString(),
+        customerTin: customerTin,
         receiptType: receiptType,
         items: items,
         totalTax: totalTax,

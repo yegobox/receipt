@@ -44,5 +44,6 @@ abstract class Printable {
     required double totalDiscount,
     required String transactionId,
     required DateTime timeFromServer,
+    String? customerPhone,
   });
 }
