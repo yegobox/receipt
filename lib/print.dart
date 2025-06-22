@@ -87,6 +87,7 @@ class Print {
     required double totalDiscount,
     required DateTime timeFromServer,
     String? customerPhone,
+    String? brandEmail,
   }) async {
     Printable printer = OmniPrinter();
     Printable printerA4 = OmniPrinterA4();
@@ -132,6 +133,7 @@ class Print {
         totalTaxB: totalTaxB,
         totalTaxD: totalTaxD,
         transactionId: transaction.id,
+        brandEmail: brandEmail,
         printCallback: (Uint8List bytes) {
           printCallback(bytes);
         },
@@ -139,6 +141,7 @@ class Print {
     } else {
       return await printer.generatePdfAndPrint(
         taxB: taxB,
+        brandEmail: brandEmail,
         timeFromServer: timeFromServer,
         totalDiscount: totalDiscount,
         taxA: taxA,

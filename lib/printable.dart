@@ -45,5 +45,6 @@ abstract class Printable {
     required String transactionId,
     required DateTime timeFromServer,
     String? customerPhone,
+    String? brandEmail,
   });
 }

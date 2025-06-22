@@ -13,6 +13,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     required double taxB,
     required double taxC,
     String? customerPhone,
+    String? brandEmail,
     required double totalDiscount,
     required double taxD,
     String brandName = "yegobox shop",

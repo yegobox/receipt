@@ -93,6 +93,7 @@ class OmniPrinter with SaveFile implements Printable {
     required String customerName,
     String? customerPhone,
     required String receiptNumber,
+    String? brandEmail,
   }) async {
     List<Widget> receiptTypeWidgets(String receiptType) {
       switch (receiptType) {
@@ -183,11 +184,15 @@ class OmniPrinter with SaveFile implements Printable {
           style: TextStyle(
               fontSize: 10, fontWeight: FontWeight.normal, font: _unicodeFont)),
       SizedBox(height: 4),
-      Text("Phone number: $brandTel",
+      Text("TEL: $brandTel",
           style: TextStyle(
               fontSize: 10, fontWeight: FontWeight.normal, font: _unicodeFont)),
       SizedBox(height: 4),
-      Text("TIN  : $brandTIN",
+      Text("EMAIL: ${brandEmail ?? " "}",
+          style: TextStyle(
+              fontSize: 10, fontWeight: FontWeight.normal, font: _unicodeFont)),
+      SizedBox(height: 4),
+      Text("TIN: $brandTIN",
           style: TextStyle(
               fontSize: 10, fontWeight: FontWeight.normal, font: _unicodeFont)),
       SizedBox(height: 4),
@@ -918,8 +923,7 @@ class OmniPrinter with SaveFile implements Printable {
               return boxMrc;
             }
             return mrc;
-          })()
-              .toUpperCase(),
+          })(),
           style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
         ),
       ]),
@@ -1006,6 +1010,7 @@ class OmniPrinter with SaveFile implements Printable {
     required Function(Uint8List bytes) printCallback,
     required String transactionId,
     required DateTime timeFromServer,
+    String? brandEmail,
   }) async {
     await loadUnicodeFont();
     talker.warning("ReceiptNo: $rcptNo: totRcptNo: $totRcptNo");
@@ -1017,6 +1022,7 @@ class OmniPrinter with SaveFile implements Printable {
         middleImage: middle!,
         leftImage: left!,
         rightImage: right!,
+        brandEmail: brandEmail,
         brandAddress: brandAddress,
         brandTel: brandTel,
         brandTIN: brandTIN,

@@ -9,6 +9,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart' as c;
 import 'package:printing/printing.dart';
 import 'package:flipper_models/helperModels/extensions.dart';
+import 'widgets/a4_header.dart';
+import 'widgets/a4_invoice_info.dart';
+import 'widgets/a4_items_table.dart';
+import 'widgets/a4_disclaimer.dart';
 
 //
 class OmniPrinterA4 with SaveFile implements Printable {
@@ -128,6 +132,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     required String transactionId,
     required Function(Uint8List bytes) printCallback,
     required DateTime timeFromServer,
+    String? brandEmail,
   }) async {
     await loadUnicodeFont(); // Load font before generating PDF
     final pdf = Document(
@@ -146,73 +151,15 @@ class OmniPrinterA4 with SaveFile implements Printable {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Header Section
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Left: RRA Logo
-                    Expanded(
-                      flex: 2,
-                      child: left != null
-                          ? Align(
-                              alignment: Alignment.topLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 8, right: 8, top: 8),
-                                child: Image(left, width: 60, height: 60),
-                              ),
-                            )
-                          : SizedBox(),
-                    ),
-                    // Center: Company Info
-                    Expanded(
-                      flex: 3,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 6),
-                          Text(
-                            brandAddress,
-                            style: TextStyle(
-                                fontSize: 10,
-                                font: _unicodeFont), // Use _unicodeFont
-                          ),
-                          Text(
-                            'TEL: $brandTel',
-                            style: TextStyle(
-                                fontSize: 10,
-                                font: _unicodeFont), // Use _unicodeFont
-                          ),
-                          Text(
-                            'EMAIL:',
-                            style: TextStyle(
-                                fontSize: 10,
-                                font: _unicodeFont), // Use _unicodeFont
-                          ),
-                          Text(
-                            'TIN: $brandTIN',
-                            style: TextStyle(
-                                fontSize: 10,
-                                font: _unicodeFont), // Use _unicodeFont
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Right: Rwanda Seal/Logo
-                    Expanded(
-                      flex: 2,
-                      child: right != null
-                          ? Align(
-                              alignment: Alignment.topRight,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(right: 16, top: 8),
-                                child: Image(right, width: 60, height: 60),
-                              ),
-                            )
-                          : SizedBox(),
-                    ),
-                  ],
+                A4Header(
+                  leftLogo: left,
+                  rightLogo: right,
+                  brandName: brandName,
+                  brandAddress: brandAddress,
+                  brandTel: brandTel,
+                  brandTIN: brandTIN,
+                  brandEmail: brandEmail,
+                  font: _unicodeFont,
                 ),
                 SizedBox(height: 5),
 
@@ -298,225 +245,30 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   ),
 
                 // Invoice Information
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('INVOICE TO:',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            font: _unicodeFont)), // Use _unicodeFont
-                    SizedBox(height: 5),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          // width: 250,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: PdfColors.black,
-                              width: 0.5,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('TIN: ${customerTin ?? " "}',
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        font:
-                                            _unicodeFont)), // Use _unicodeFont
-                                SizedBox(height: 5),
-                                Text('Name: $customerName',
-                                    style: TextStyle(
-                                        fontSize: 10, font: _unicodeFont)),
-                                SizedBox(height: 5),
-                                Text('Phone Number: ${customerPhone ?? " "}',
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        font: _unicodeFont)) // Use _unicodeFont
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Container(
-                          // width: 250,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: PdfColors.black,
-                              width: 0.5,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('INVOICE NO: $invoiceNum',
-                                    style: TextStyle(
-                                        fontSize: 10, font: _unicodeFont)),
-                                if (receiptType == "NR" ||
-                                    receiptType == "TR" ||
-                                    receiptType == "CR")
-                                  Text(
-                                      'REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          font:
-                                              _unicodeFont)), // Use _unicodeFont
-                                SizedBox(height: 5),
-                                Text('Date: ${whenCreated.isoDateTime}',
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        font:
-                                            _unicodeFont)), // Use _unicodeFont
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
+                A4InvoiceInfo(
+                  customerTin: customerTin,
+                  customerName: customerName,
+                  customerPhone: customerPhone,
+                  invoiceNum: invoiceNum,
+                  invoiceNumber: invoiceNum.toString(),
+                  whenCreated: whenCreated,
+                  receiptType: receiptType,
+                  font: _unicodeFont,
                 ),
-                SizedBox(height: 15),
 
-                // Item Table Header
-                TableHelper.fromTextArray(
-                  headers: [
-                    'Item Code',
-                    'Description',
-                    'Qty',
-                    'Tax',
-                    'Unit Price',
-                    'Total Price'
-                  ],
-                  data: [
-                    ...items.map((item) => [
-                          item.itemCd,
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(item.name,
-                                  style: TextStyle(
-                                      fontSize: 10,
-                                      font: _unicodeFont)), // Use _unicodeFont
-                              if (item.dcRt != 0)
-                                Text("Discount - ${item.dcRt}%",
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        font:
-                                            _unicodeFont)), // Use _unicodeFont
-                            ],
-                          ),
-                          '${item.qty}',
-                          '${item.taxTyCd}',
-                          item.price.toNoCurrencyFormatted(),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                  // Add negative sign for refunds
-                                  (receiptType == "NR" ||
-                                          receiptType == "CR" ||
-                                          receiptType == "TR")
-                                      ? "-${(item.qty * item.price).toNoCurrencyFormatted()}"
-                                      : (item.qty * item.price)
-                                          .toNoCurrencyFormatted(),
-                                  style: TextStyle(
-                                      fontSize: 10,
-                                      font: _unicodeFont)), // Use _unicodeFont
-                              if (item.dcRt != 0)
-                                Text(
-                                    // Add negative sign for refunds
-                                    (receiptType == "NR" ||
-                                            receiptType == "CR" ||
-                                            receiptType == "TR")
-                                        ? "-${((item.qty * item.price) - (item.qty * item.price * item.dcRt! / 100)).toNoCurrencyFormatted()}"
-                                        : ((item.qty * item.price) -
-                                                (item.qty *
-                                                    item.price *
-                                                    item.dcRt! /
-                                                    100))
-                                            .toNoCurrencyFormatted(),
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        font:
-                                            _unicodeFont)), // Use _unicodeFont
-                            ],
-                          ),
-                        ]),
-                    // Padding the table with empty rows to maintain a minimum of 10 rows
-                    if (items.length < 10)
-                      ...List.generate(
-                        110 - items.length,
-                        (_) => ['', '', '', '', '', ''],
-                      ),
-                  ],
-                  headerStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 10,
-                      font: _unicodeFont), // Use _unicodeFont
-                  cellStyle: TextStyle(
-                      fontSize: 10, font: _unicodeFont), // Use _unicodeFont
-                  cellAlignment: Alignment.topLeft,
-                  headerHeight: 40,
-                  columnWidths: {
-                    0: const FixedColumnWidth(
-                        50), // Item Code - slightly smaller
-                    1: const FixedColumnWidth(
-                        120), // Description - fixed width to limit space
-                    2: const FixedColumnWidth(25), // Qty - slightly smaller
-                    3: const FixedColumnWidth(25), // Tax - slightly smaller
-                    4: const FixedColumnWidth(
-                        80), // Unit Price - increased width
-                    5: const FixedColumnWidth(
-                        90), // Total Price - increased width
-                  },
-                  headerDecoration: const BoxDecoration(
-                    border: Border(
-                      top: BorderSide(width: 0.5),
-                      bottom: BorderSide(width: 0.5),
-                      left: BorderSide(width: 0.5),
-                      right: BorderSide(width: 0.5),
-                    ),
-                  ),
-                  border: const TableBorder(
-                    right: BorderSide(width: 0.5),
-                    left: BorderSide(width: 0.5),
-                    bottom: BorderSide(width: 0.5),
-                    horizontalInside: BorderSide.none,
-                    verticalInside: BorderSide(width: 0.5),
-                  ),
-                  cellPadding:
-                      const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
+                // Items Table
+                A4ItemsTable(
+                  items: items,
+                  receiptType: receiptType,
+                  font: _unicodeFont,
                 ),
                 SizedBox(height: 10),
 
                 // Disclaimer
-                if (receiptType == "TS" ||
-                    receiptType == "PS" ||
-                    receiptType == "CS" ||
-                    receiptType == "CR" ||
-                    receiptType == "NR" ||
-                    receiptType == "TR" ||
-                    receiptType == "CP") ...[
-                  SizedBox(height: 10),
-                  Center(
-                    child: Text(
-                      "THIS IS NOT AN OFFICIAL RECEIPT",
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        font: _unicodeFont, // Use _unicodeFont
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                ],
+                A4Disclaimer(
+                  receiptType: receiptType,
+                  font: _unicodeFont,
+                ),
 
                 // SDC Information
                 Row(
@@ -584,8 +336,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                                     return boxMrc;
                                   }
                                   return mrc;
-                                })()}"
-                                    .toUpperCase(),
+                                })()}",
                                 style: TextStyle(
                                     fontSize: 10,
                                     font: _unicodeFont)), // Use _unicodeFont
