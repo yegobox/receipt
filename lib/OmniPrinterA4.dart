@@ -465,12 +465,16 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   cellAlignment: Alignment.topLeft,
                   headerHeight: 40,
                   columnWidths: {
-                    0: const FixedColumnWidth(60),
-                    1: const FlexColumnWidth(),
-                    2: const FixedColumnWidth(30),
-                    3: const FixedColumnWidth(30),
-                    4: const FixedColumnWidth(60),
-                    5: const FixedColumnWidth(60),
+                    0: const FixedColumnWidth(
+                        50), // Item Code - slightly smaller
+                    1: const FixedColumnWidth(
+                        120), // Description - fixed width to limit space
+                    2: const FixedColumnWidth(25), // Qty - slightly smaller
+                    3: const FixedColumnWidth(25), // Tax - slightly smaller
+                    4: const FixedColumnWidth(
+                        80), // Unit Price - increased width
+                    5: const FixedColumnWidth(
+                        90), // Total Price - increased width
                   },
                   headerDecoration: const BoxDecoration(
                     border: Border(
