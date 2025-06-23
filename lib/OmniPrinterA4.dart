@@ -13,6 +13,7 @@ import 'widgets/a4_header.dart';
 import 'widgets/a4_invoice_info.dart';
 import 'widgets/a4_items_table.dart';
 import 'widgets/a4_disclaimer.dart';
+import 'widgets/a4_refund_header.dart';
 
 //
 class OmniPrinterA4 with SaveFile implements Printable {
@@ -214,36 +215,13 @@ class OmniPrinterA4 with SaveFile implements Printable {
                     ),
                   ),
 
-                // Refund Title - Added to match omni_printer.dart implementation
-                if (receiptType == "NR" ||
-                    receiptType == "TR" ||
-                    receiptType == "CR")
-                  Center(
-                    child: Column(
-                      children: [
-                        Text('Refund',
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                font: _unicodeFont)), // Use _unicodeFont
-                        if (receiptType == "NR" ||
-                            receiptType == "TR" ||
-                            receiptType == "CR")
-                          Text(
-                              'REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  font: _unicodeFont)), // Use _unicodeFont
-                        dashWidget(),
-                        Text(
-                            'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT',
-                            style: TextStyle(
-                                fontSize: 10,
-                                font: _unicodeFont)), // Use _unicodeFont
-                      ],
-                    ),
-                  ),
-
+                // Refund header
+                A4RefundHeader(
+                  receiptType: receiptType,
+                  invoiceNumber: transaction.invoiceNumber?.toString(),
+                  font: _unicodeFont,
+                  dashWidget: dashWidget,
+                ),
                 // Invoice Information
                 A4InvoiceInfo(
                   customerTin: customerTin,
@@ -264,7 +242,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                 ),
                 SizedBox(height: 10),
 
-                // Disclaimer
+                // Disclaimer with refund information if applicable
                 A4Disclaimer(
                   receiptType: receiptType,
                   font: _unicodeFont,
@@ -274,10 +252,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    if (receiptType != "CR" &&
-                        receiptType != "PS" &&
-                        receiptType != "TR" &&
-                        receiptType != "TS")
+                    if (receiptType != "TR")
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

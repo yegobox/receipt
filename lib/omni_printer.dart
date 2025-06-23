@@ -88,7 +88,7 @@ class OmniPrinter with SaveFile implements Printable {
     required ITransaction transaction,
     required String brandTIN,
     required String brandName,
-    required String customerTin,
+    String? customerTin,
     required String receiptType,
     required String customerName,
     String? customerPhone,
@@ -222,7 +222,7 @@ class OmniPrinter with SaveFile implements Printable {
                 font: _unicodeFont)),
       ...receiptTypeWidgets(receiptType),
       if (receiptType != "NR")
-        Text('TIN: $customerTin',
+        Text('TIN: ${customerTin ?? " "}',
             style: TextStyle(
                 fontSize: 12, fontWeight: FontWeight.bold, font: _unicodeFont)),
       if (receiptType != "NR")
@@ -230,7 +230,7 @@ class OmniPrinter with SaveFile implements Printable {
             style: TextStyle(
                 fontSize: 12, fontWeight: FontWeight.bold, font: _unicodeFont)),
       if (receiptType != "NR")
-        Text('Phone Number: $customerPhone',
+        Text('TEL: ${customerPhone ?? " "}',
             style: TextStyle(
                 fontSize: 12, fontWeight: FontWeight.bold, font: _unicodeFont)),
     ]));
@@ -789,7 +789,7 @@ class OmniPrinter with SaveFile implements Printable {
         SizedBox(
           width: 1120,
           child: Text(
-            timeFromServer.isoDateTime,
+            "Date: ${timeFromServer.isoDateTime}",
             style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
           ),
         ),
@@ -1028,7 +1028,7 @@ class OmniPrinter with SaveFile implements Printable {
         brandTIN: brandTIN,
         customerPhone: customerPhone,
         brandName: brandName,
-        customerTin: customerTin!,
+        customerTin: customerTin,
         receiptType: receiptType,
         receiptNumber: invoiceNum.toString(),
         customerName: customerName);
