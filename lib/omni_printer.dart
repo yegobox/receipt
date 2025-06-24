@@ -169,71 +169,113 @@ class OmniPrinter with SaveFile implements Printable {
       }
     }
 
-    rows.add(Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Image(leftImage, width: 25, height: 25),
-        Image(middleImage, width: 25, height: 25),
-        Image(rightImage, width: 25, height: 25),
-      ]),
-      SizedBox(height: 8),
-      Text(brandName,
-          style: TextStyle(
-              fontSize: 12, fontWeight: FontWeight.bold, font: _unicodeFont)),
-      SizedBox(height: 4),
-      Text(brandAddress,
-          style: TextStyle(
-              fontSize: 10, fontWeight: FontWeight.normal, font: _unicodeFont)),
-      SizedBox(height: 4),
-      Text("TEL: $brandTel",
-          style: TextStyle(
-              fontSize: 10, fontWeight: FontWeight.normal, font: _unicodeFont)),
-      SizedBox(height: 4),
-      Text("EMAIL: ${brandEmail ?? " "}",
-          style: TextStyle(
-              fontSize: 10, fontWeight: FontWeight.normal, font: _unicodeFont)),
-      SizedBox(height: 4),
-      Text("TIN: $brandTIN",
-          style: TextStyle(
-              fontSize: 10, fontWeight: FontWeight.normal, font: _unicodeFont)),
-      SizedBox(height: 4),
-      if (receiptType == "TS") SizedBox(height: 4),
-      if (receiptType == "TS")
-        Text("TRAINING MODE",
-            style: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.bold,
-              font: _unicodeFont,
-            )),
-      if (receiptType == "PS") SizedBox(height: 4),
-      if (receiptType == "PS")
-        Text("PROFORMA",
-            style: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.bold,
-              font: _unicodeFont,
-            )),
-      Column(children: [dashWidget()]),
-      SizedBox(height: 4),
-      if (receiptType != "NR")
-        Text('Welcome to our shop'.toUpperCase(),
-            style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.normal,
-                font: _unicodeFont)),
-      ...receiptTypeWidgets(receiptType),
-      if (receiptType != "NR")
-        Text('TIN: ${customerTin ?? " "}',
-            style: TextStyle(
-                fontSize: 12, fontWeight: FontWeight.bold, font: _unicodeFont)),
-      if (receiptType != "NR")
-        Text('Name: $customerName',
-            style: TextStyle(
-                fontSize: 12, fontWeight: FontWeight.bold, font: _unicodeFont)),
-      if (receiptType != "NR")
-        Text('TEL: ${customerPhone ?? " "}',
-            style: TextStyle(
-                fontSize: 12, fontWeight: FontWeight.bold, font: _unicodeFont)),
-    ]));
+    rows.add(
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Image(leftImage, width: 25, height: 25),
+            Image(middleImage, width: 25, height: 25),
+            Image(rightImage, width: 25, height: 25),
+          ]),
+          SizedBox(height: 8),
+          Text(brandName,
+              style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  font: _unicodeFont)),
+          SizedBox(height: 4),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(brandAddress,
+                  style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.normal,
+                      font: _unicodeFont)),
+              Text("TEL: $brandTel",
+                  style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.normal,
+                      font: _unicodeFont)),
+              Text("EMAIL: ${brandEmail ?? " "}",
+                  style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.normal,
+                      font: _unicodeFont)),
+              Text("TIN: $brandTIN",
+                  style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.normal,
+                      font: _unicodeFont)),
+            ],
+          ),
+          SizedBox(height: 4),
+          if (receiptType == "TS") SizedBox(height: 4),
+          if (receiptType == "TS")
+            Center(
+              child: Text(
+                "TRAINING MODE",
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  font: _unicodeFont,
+                ),
+              ),
+            ),
+          if (receiptType == "PS") SizedBox(height: 4),
+          if (receiptType == "PS")
+            Center(
+              child: Text(
+                "PROFORMA",
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  font: _unicodeFont,
+                ),
+              ),
+            ),
+          Column(children: [dashWidget()]),
+          SizedBox(height: 4),
+          if (receiptType != "NR")
+            Center(
+              child: Text(
+                'Welcome to our shop'.toUpperCase(),
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.normal,
+                  font: _unicodeFont,
+                ),
+              ),
+            ),
+          ...receiptTypeWidgets(receiptType),
+          if (receiptType != "NR")
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('TIN: ${customerTin ?? " "}',
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        font: _unicodeFont)),
+                Text('Name: $customerName',
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        font: _unicodeFont)),
+
+                /// since we save phone number without the 0 then add it here
+                Text('TEL: 0${customerPhone ?? " "}',
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        font: _unicodeFont)),
+              ],
+            ),
+        ],
+      ),
+    );
   }
 
   _buildTotalTax(

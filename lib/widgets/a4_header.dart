@@ -44,8 +44,8 @@ class A4Header extends pw.StatelessWidget {
         pw.Expanded(
           flex: 3,
           child: pw.Column(
-            mainAxisAlignment: pw.MainAxisAlignment.center,
-            crossAxisAlignment: pw.CrossAxisAlignment.center,
+            mainAxisAlignment: pw.MainAxisAlignment.start,
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
               pw.SizedBox(height: 6),
               pw.Text(
