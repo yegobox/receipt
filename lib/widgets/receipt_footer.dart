@@ -2,7 +2,7 @@ import 'package:pdf/widgets.dart' as pw;
 
 class ReceiptFooter extends pw.StatelessWidget {
   final pw.Font? font;
-  
+
   ReceiptFooter({
     this.font,
   });

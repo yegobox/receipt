@@ -160,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
       totalDiscount: 10,
       customerPhone: "0783054874",
       whenCreated: DateTime.now().toUtc(),
-        transaction: ITransaction(
+      transaction: ITransaction(
           id: "2",
           isIncome: true,
           isExpense: false,

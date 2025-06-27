@@ -45,6 +45,7 @@ class A4InvoiceInfo extends pw.StatelessWidget {
                 pw.SizedBox(height: 5),
                 _buildInfoRow('Name:', customerName),
                 pw.SizedBox(height: 5),
+
                 /// since we save phone number without the 0 then add it here
                 _buildInfoRow('TEL:', "0${customerPhone ?? " "}"),
               ],
