@@ -142,7 +142,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   brandEmail: brandEmail,
                   font: _unicodeFont,
                 ),
-                SizedBox(height: 5),
+                if (receiptType != "CR") SizedBox(height: 5),
 
                 // Training and Proforma Labels - Added to match omni_printer.dart implementation
                 if (receiptType == "TS")
@@ -175,7 +175,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                       ],
                     ),
                   ),
-                SizedBox(height: 4),
+                if (receiptType != "CR") SizedBox(height: 4),
 
                 // Copy Title - Added to match omni_printer.dart implementation
                 if (receiptType == "CS" ||
@@ -208,7 +208,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   customerName: customerName,
                   customerPhone: customerPhone,
                   invoiceNum: invoiceNum,
-                  invoiceNumber: invoiceNum.toString(),
+                  originalInvcNumber: transaction.invoiceNumber?.toString(),
                   whenCreated: whenCreated,
                   receiptType: receiptType,
                   font: _unicodeFont,
@@ -220,7 +220,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   receiptType: receiptType,
                   font: _unicodeFont,
                 ),
-                SizedBox(height: 10),
+                if (receiptType != "CR") SizedBox(height: 10),
 
                 // Disclaimer with refund information if applicable
                 A4Disclaimer(
@@ -250,354 +250,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
                   mrc: mrc,
                   transaction: transaction,
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.start,
-                //   children: [
-                //     if (receiptType != "TR")
-                //       Expanded(
-                //         child: Column(
-                //           crossAxisAlignment: CrossAxisAlignment.start,
-                //           children: [
-                //             Text('SDC INFORMATION',
-                //                 style: TextStyle(
-                //                     fontSize: 10,
-                //                     fontWeight: FontWeight.bold,
-                //                     font: _unicodeFont)), // Use _unicodeFont
-                //             dashWidget(),
-                //             SizedBox(height: 5),
-                //             Text('Date: ${timeFromServer.isoDateTime}',
-                //                 style: TextStyle(
-                //                     fontSize: 10,
-                //                     font: _unicodeFont)), // Use _unicodeFont
-                //             Text('SDC ID: $sdcId',
-                //                 style: TextStyle(
-                //                     fontSize: 10,
-                //                     font: _unicodeFont)), // Use _unicodeFont
-                //             Text(
-                //                 'Receipt Number: $rcptNo/$totRcptNo $receiptType',
-                //                 style: TextStyle(
-                //                     fontSize: 10,
-                //                     font: _unicodeFont)), // Use _unicodeFont
-                //             if (receiptType != "PS" &&
-                //                 receiptType != "TS" &&
-                //                 receiptType != "TR")
-                //               Text(
-                //                   'Internal Data: ${internalData.toDashedStringInternalData()}',
-                //                   style: TextStyle(
-                //                       fontSize: 10, font: _unicodeFont)),
-                //             if (receiptType != "PS" &&
-                //                 receiptType != "TS" &&
-                //                 receiptType != "TR") // Use _unicodeFont
-                //               Text(
-                //                   'Receipt Signature: ${receiptSignature.toDashedStringRcptSign()}',
-                //                   style: TextStyle(
-                //                       fontSize: 10, font: _unicodeFont)),
-                //             SizedBox(height: 5),
-                //             dashWidget(),
-                //             SizedBox(height: 5),
-                //             Text('Receipt Number: $invoiceNum',
-                //                 style: TextStyle(
-                //                     fontSize: 10,
-                //                     font: _unicodeFont)), // Use _unicodeFont
-                //             Text('Date: ${whenCreated.isoDateTime}',
-                //                 style: TextStyle(
-                //                     fontSize: 10,
-                //                     font: _unicodeFont)), // Use _unicodeFont
-                //             Text(
-                //                 "MRC: ${(() {
-                //                   final boxMrc = ProxyService.box.mrc();
-                //                   if (boxMrc != null &&
-                //                       boxMrc.isNotEmpty &&
-                //                       boxMrc.length == 11) {
-                //                     return boxMrc;
-                //                   }
-                //                   return mrc;
-                //                 })()}",
-                //                 style: TextStyle(
-                //                     fontSize: 10,
-                //                     font: _unicodeFont)), // Use _unicodeFont
-                //             dashWidget(),
-                //           ],
-                //         ),
-                //       ),
-                //     if (receiptType != "PS" &&
-                //         receiptType != "TS" &&
-                //         receiptType != "CR")
-                //       SizedBox(width: 20),
-                //     if (receiptType != "PS" &&
-                //         receiptType != "TS" &&
-                //         receiptType != "TR" &&
-                //         receiptType != "CR")
-                //       Center(
-                //         child: SizedBox(
-                //           width: 60,
-                //           height: 60,
-                //           child: BarcodeWidget(
-                //             barcode: Barcode.qrCode(
-                //               errorCorrectLevel: BarcodeQRCorrectionLevel.high,
-                //             ),
-                //             data: receiptQrCode,
-                //           ),
-                //         ),
-                //       ),
-                //     SizedBox(width: 20), // Space between columns
 
-                //     // Summary Table
-                //     Expanded(
-                //       child: Column(
-                //         children: [
-                //           SizedBox(height: 5),
-                //           Table(
-                //             border: TableBorder.all(width: 0.5),
-                //             children: [
-                //               TableRow(
-                //                 children: [
-                //                   Padding(
-                //                     padding: const EdgeInsets.all(4),
-                //                     child: Text('TOTAL:',
-                //                         style: TextStyle(
-                //                             fontWeight: FontWeight.bold,
-                //                             fontSize: 10,
-                //                             font:
-                //                                 _unicodeFont)), // Use _unicodeFont
-                //                   ),
-                //                   Padding(
-                //                     padding: const EdgeInsets.all(4),
-                //                     child: Text(
-                //                         (receiptType == "NR" ||
-                //                                 receiptType == "CR" ||
-                //                                 receiptType == "TR")
-                //                             ? "-${safeParseDouble(totalPayable - totalDiscount).toNoCurrencyFormatted()}"
-                //                             : safeParseDouble(totalPayable -
-                //                                     totalDiscount)
-                //                                 .toNoCurrencyFormatted(),
-                //                         style: TextStyle(
-                //                             fontSize: 10,
-                //                             font:
-                //                                 _unicodeFont)), // Use _unicodeFont
-                //                   ),
-                //                 ],
-                //               ),
-                //               // Only show TOTAL A-EX if there are items with tax type A
-                //               if (items.any((item) => item.taxTyCd == "A") &&
-                //                   items
-                //                           .where((item) => item.taxTyCd == "A")
-                //                           .fold<double>(
-                //                               0.0,
-                //                               (sum, item) =>
-                //                                   sum +
-                //                                   (item.price * item.qty)) >
-                //                       0)
-                //                 TableRow(
-                //                   children: [
-                //                     Padding(
-                //                       padding: const EdgeInsets.all(4),
-                //                       child: Text('TOTAL A-EX:'),
-                //                     ),
-                //                     Padding(
-                //                       padding: const EdgeInsets.all(4),
-                //                       child: Text(
-                //                           // Calculate total for A-EX items (tax type A)
-                //                           (receiptType == "NR" ||
-                //                                   receiptType == "CR" ||
-                //                                   receiptType == "TR")
-                //                               ? "-${items.where((item) => item.taxTyCd == "A").fold<double>(0.0, (sum, item) => sum + (item.price * item.qty)).toStringAsFixed(2)}"
-                //                               : items
-                //                                   .where((item) =>
-                //                                       item.taxTyCd == "A")
-                //                                   .fold<double>(
-                //                                       0.0,
-                //                                       (sum, item) =>
-                //                                           sum +
-                //                                           (item.price *
-                //                                               item.qty))
-                //                                   .toStringAsFixed(2),
-                //                           style: TextStyle(
-                //                               fontSize: 10,
-                //                               font:
-                //                                   _unicodeFont)), // Use _unicodeFont
-                //                     ),
-                //                   ],
-                //                 ),
-                //               if (safeParseDouble(totalTaxB) != 0)
-                //                 TableRow(
-                //                   children: [
-                //                     Padding(
-                //                       padding: const EdgeInsets.all(4),
-                //                       child: Text('TOTAL B-18%:'),
-                //                     ),
-                //                     Padding(
-                //                       padding: const EdgeInsets.all(4),
-                //                       child: Text(
-                //                           (receiptType == "NR" ||
-                //                                   receiptType == "CR" ||
-                //                                   receiptType == "TR")
-                //                               ? "-${items.where((item) => item.taxTyCd == "B").fold<double>(0.0, (sum, item) => sum + (item.price * item.qty)).toNoCurrencyFormatted()}"
-                //                               : items
-                //                                   .where((item) =>
-                //                                       item.taxTyCd == "B")
-                //                                   .fold<double>(
-                //                                       0.0,
-                //                                       (sum, item) =>
-                //                                           sum +
-                //                                           (item.price *
-                //                                               item.qty))
-                //                                   .toNoCurrencyFormatted(),
-                //                           style: TextStyle(
-                //                               fontSize: 10,
-                //                               font:
-                //                                   _unicodeFont)), // Use _unicodeFont
-                //                     ),
-                //                   ],
-                //                 ),
-                //               if (safeParseDouble(totalTaxB) != 0)
-                //                 TableRow(
-                //                   children: [
-                //                     Padding(
-                //                       padding: const EdgeInsets.all(4),
-                //                       child: Text('TOTAL TAX B:'),
-                //                     ),
-                //                     Padding(
-                //                       padding: const EdgeInsets.all(4),
-                //                       child: Text(
-                //                           (receiptType == "NR" ||
-                //                                   receiptType == "CR" ||
-                //                                   receiptType == "TR")
-                //                               ? "-${safeParseDouble(totalTaxB).toNoCurrencyFormatted()}"
-                //                               : safeParseDouble(totalTaxB)
-                //                                   .toNoCurrencyFormatted(),
-                //                           style: TextStyle(
-                //                               fontSize: 10,
-                //                               font:
-                //                                   _unicodeFont)), // Use _unicodeFont
-                //                     ),
-                //                   ],
-                //                 ),
-                //               // Show if there are items with tax type C, even if the tax amount is zero
-                //               if (items.any((item) => item.taxTyCd == "C"))
-                //                 TableRow(
-                //                   children: [
-                //                     Padding(
-                //                       padding: const EdgeInsets.all(4),
-                //                       child: Text('TOTAL C:'),
-                //                     ),
-                //                     Padding(
-                //                       padding: const EdgeInsets.all(4),
-                //                       child: Text(
-                //                           (receiptType == "NR" ||
-                //                                   receiptType == "CR" ||
-                //                                   receiptType == "TR")
-                //                               ? "-${items.where((item) => item.taxTyCd == "C").fold<double>(0.0, (sum, item) => sum + (item.price * item.qty)).toNoCurrencyFormatted()}"
-                //                               : items
-                //                                   .where((item) =>
-                //                                       item.taxTyCd == "C")
-                //                                   .fold<double>(
-                //                                       0.0,
-                //                                       (sum, item) =>
-                //                                           sum +
-                //                                           (item.price *
-                //                                               item.qty))
-                //                                   .toNoCurrencyFormatted(),
-                //                           style: TextStyle(
-                //                               fontSize: 10,
-                //                               font:
-                //                                   _unicodeFont)), // Use _unicodeFont
-                //                     ),
-                //                   ],
-                //                 ),
-                //               // Show TOTAL TAX: row unconditionally
-                //               TableRow(
-                //                 children: [
-                //                   Padding(
-                //                     padding: const EdgeInsets.all(4),
-                //                     child: Text('TOTAL TAX:'),
-                //                   ),
-                //                   Padding(
-                //                     padding: const EdgeInsets.all(4),
-                //                     child: Text(
-                //                         (receiptType == "NR" ||
-                //                                 receiptType == "CR" ||
-                //                                 receiptType == "TR")
-                //                             ? "-${safeParseDouble(totalTax).toStringAsFixed(2)}"
-                //                             : safeParseDouble(totalTax)
-                //                                 .toStringAsFixed(2),
-                //                         style: TextStyle(
-                //                             fontSize: 10,
-                //                             font:
-                //                                 _unicodeFont)), // Use _unicodeFont
-                //                   ),
-                //                 ],
-                //               ),
-                //               if (safeParseDouble(totalTaxD) != 0)
-                //                 TableRow(
-                //                   children: [
-                //                     Padding(
-                //                       padding: const EdgeInsets.all(4),
-                //                       child: Text('Total D'),
-                //                     ),
-                //                     Padding(
-                //                       padding: const EdgeInsets.all(4),
-                //                       child: Text(
-                //                           (receiptType == "NR" ||
-                //                                   receiptType == "CR" ||
-                //                                   receiptType == "TR")
-                //                               ? "-${safeParseDouble(totalTaxD).toStringAsFixed(2)}"
-                //                               : safeParseDouble(totalTaxD)
-                //                                   .toStringAsFixed(2),
-                //                           style: TextStyle(
-                //                               fontSize: 10,
-                //                               font:
-                //                                   _unicodeFont)), // Use _unicodeFont
-                //                     ),
-                //                   ],
-                //                 ),
-                //             ],
-                //           ),
-                //           // Payment Method and Items Number table - placed directly below tax table
-                //           SizedBox(height: 5),
-                //           Table(
-                //             border: TableBorder.all(width: 0.5),
-                //             children: [
-                //               TableRow(
-                //                 children: [
-                //                   Padding(
-                //                     padding: const EdgeInsets.all(4),
-                //                     child: Text('PAYMENT METHOD:'),
-                //                   ),
-                //                   Padding(
-                //                     padding: const EdgeInsets.all(4),
-                //                     child: Text(
-                //                         "${_getPaymentType(ProxyService.box.pmtTyCd())}:",
-                //                         style: TextStyle(
-                //                             fontSize: 10,
-                //                             font:
-                //                                 _unicodeFont)), // Use _unicodeFont
-                //                   ),
-                //                 ],
-                //               ),
-                //               TableRow(
-                //                 children: [
-                //                   Padding(
-                //                     padding: const EdgeInsets.all(4),
-                //                     child: Text('ITEMS NUMBER:'),
-                //                   ),
-                //                   Padding(
-                //                     padding: const EdgeInsets.all(4),
-                //                     child: Text(items.length.toString(),
-                //                         style: TextStyle(
-                //                             fontSize: 10,
-                //                             font:
-                //                                 _unicodeFont)), // Use _unicodeFont
-                //                   ),
-                //                 ],
-                //               ),
-                //             ],
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //   ],
-                // ),
                 // Ensure footer always shows at the end
                 Spacer(),
 

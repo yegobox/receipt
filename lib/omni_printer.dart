@@ -99,69 +99,91 @@ class OmniPrinter with SaveFile implements Printable {
       switch (receiptType) {
         case "NR":
           return [
-            Text('Refund',
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    font: _unicodeFont)),
-
-            /// here we take the existing receipt number -1 to get the receipt number of the refund
-            /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
-            Text('REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
-                style: TextStyle(fontSize: 10, font: _unicodeFont)),
-            dashWidget(),
-            Text(
-                'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID: $customerTin',
-                style: TextStyle(fontSize: 10, font: _unicodeFont)),
-          ];
-        case "TR":
-          return [
-            Text('Refund',
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    font: _unicodeFont)),
-
-            /// here we take the existing receipt number -1 to get the receipt number of the refund
-            /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
-            Text('REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
-                style: TextStyle(fontSize: 10, font: _unicodeFont)),
-            dashWidget(),
-            Text(
-                'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
-                style: TextStyle(fontSize: 10, font: _unicodeFont)),
-          ];
-        case "CR":
-          return [
-            if (receiptType == "CR" || receiptType == "CS")
-              Text('COPY',
+            Center(
+              child: Text('Refund',
                   style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                       font: _unicodeFont)),
-            Text('Refund',
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    font: _unicodeFont)),
+            ),
+
+            /// here we take the existing receipt number -1 to get the receipt number of the refund
+            /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
+            Center(
+              child: Text('REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
+                  style: TextStyle(fontSize: 10, font: _unicodeFont)),
+            ),
+            dashWidget(),
+            Center(
+              child: Text(
+                  'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID: $customerTin',
+                  style: TextStyle(fontSize: 10, font: _unicodeFont)),
+            ),
+          ];
+        case "TR":
+          return [
+            Center(
+              child: Text('Refund',
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      font: _unicodeFont)),
+            ),
+
+            /// here we take the existing receipt number -1 to get the receipt number of the refund
+            /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
+            Center(
+              child: Text('REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
+                  style: TextStyle(fontSize: 10, font: _unicodeFont)),
+            ),
+            dashWidget(),
+            Center(
+              child: Text(
+                  'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
+                  style: TextStyle(fontSize: 10, font: _unicodeFont)),
+            ),
+          ];
+        case "CR":
+          return [
+            if (receiptType == "CR" || receiptType == "CS")
+              Center(
+                child: Text('COPY',
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        font: _unicodeFont)),
+              ),
+            Center(
+              child: Text('Refund',
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      font: _unicodeFont)),
+            ),
             dashWidget(),
 
             /// here we take the existing receipt number -1 to get the receipt number of the refund
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
-            Text('REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
-                style: TextStyle(fontSize: 10, font: _unicodeFont)),
+            Center(
+              child: Text('REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
+                  style: TextStyle(fontSize: 10, font: _unicodeFont)),
+            ),
             dashWidget(),
-            Text(
-                'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
-                style: TextStyle(fontSize: 10, font: _unicodeFont)),
+            Center(
+              child: Text(
+                  'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
+                  style: TextStyle(fontSize: 10, font: _unicodeFont)),
+            ),
           ];
         case "CS":
           return [
-            Text('COPY',
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    font: _unicodeFont)),
+            Center(
+              child: Text('COPY',
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      font: _unicodeFont)),
+            ),
           ];
 
         default:
@@ -236,6 +258,7 @@ class OmniPrinter with SaveFile implements Printable {
                 ),
               ),
             ),
+          ...receiptTypeWidgets(receiptType),
           Column(children: [dashWidget()]),
           SizedBox(height: 4),
           if (receiptType != "NR")
@@ -249,7 +272,6 @@ class OmniPrinter with SaveFile implements Printable {
                 ),
               ),
             ),
-          ...receiptTypeWidgets(receiptType),
           if (receiptType != "NR")
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -737,15 +759,14 @@ class OmniPrinter with SaveFile implements Printable {
 
     // Handle copy receipts
     if (receiptType == "CS" || receiptType == "CR") {
-      rows.add(dashWidget());
       rows.add(Text('COPY',
           style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.normal,
               font: _unicodeFont)));
+      rows.add(dashWidget());
     }
 
-    dashedLine();
     rows.add(Column(children: [SizedBox(height: 12)]));
 
     // Handle special receipt footers

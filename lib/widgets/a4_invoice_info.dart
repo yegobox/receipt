@@ -6,7 +6,7 @@ class A4InvoiceInfo extends pw.StatelessWidget {
   final String customerName;
   final String? customerPhone;
   final int invoiceNum;
-  final String? invoiceNumber;
+  final String? originalInvcNumber;
   final DateTime whenCreated;
   final String receiptType;
   final pw.Font? font;
@@ -16,7 +16,7 @@ class A4InvoiceInfo extends pw.StatelessWidget {
     required this.customerName,
     required this.customerPhone,
     required this.invoiceNum,
-    this.invoiceNumber,
+    this.originalInvcNumber,
     required this.whenCreated,
     required this.receiptType,
     required this.font,
@@ -58,7 +58,7 @@ class A4InvoiceInfo extends pw.StatelessWidget {
                     receiptType == "TR" ||
                     receiptType == "CR")
                   pw.Text(
-                    'REF.NORMAL RECEIPT:# $invoiceNumber',
+                    'REF.NORMAL RECEIPT:# $originalInvcNumber',
                     style: pw.TextStyle(fontSize: 10, font: font),
                   ),
                 pw.SizedBox(height: 5),
