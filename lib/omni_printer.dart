@@ -139,7 +139,7 @@ class OmniPrinter with SaveFile implements Printable {
             dashWidget(),
             Center(
               child: Text(
-                  'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
+                  'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID: $customerTin',
                   style: TextStyle(fontSize: 10, font: _unicodeFont)),
             ),
           ];
@@ -171,7 +171,7 @@ class OmniPrinter with SaveFile implements Printable {
             dashWidget(),
             Center(
               child: Text(
-                  'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID:$customerTin',
+                  'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID: $customerTin',
                   style: TextStyle(fontSize: 10, font: _unicodeFont)),
             ),
           ];
@@ -1045,7 +1045,7 @@ class OmniPrinter with SaveFile implements Printable {
     String brandDescription = "We build app that server you!",
     String brandFooter = "yegobox shop",
     List<String>? emails,
-    String? customerTin = "000000000",
+    String? customerTin,
     required List<TransactionItem> items,
     required String receiptType,
     required String totalTax,

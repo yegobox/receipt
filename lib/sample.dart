@@ -23,7 +23,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     String brandDescription = "We build app that server you!",
     String brandFooter = "yegobox shop",
     List<String>? emails,
-    String? customerTin = "000000000",
+    String? customerTin,
     required List<TransactionItem> items,
     required String receiptType,
     required String totalTax,
