@@ -291,7 +291,7 @@ class OmniPrinter with SaveFile implements Printable {
                 ),
               ),
             ),
-          if (receiptType != "NR")
+          if (receiptType != "NR" && receiptType != "TR" && receiptType != "CR")
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
