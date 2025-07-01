@@ -1245,7 +1245,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223234190+1751189867"
+    version: "1.170.4252223234223+1751368149"
   flipper_services:
     dependency: "direct main"
     description:
@@ -3137,10 +3137,10 @@ packages:
     dependency: transitive
     description:
       name: sqflite_common_ffi
-      sha256: "1f3ef3888d3bfbb47785cc1dda0dc7dd7ebd8c1955d32a9e8e9dae1e38d1c4c1"
+      sha256: "9faa2fedc5385ef238ce772589f7718c24cdddd27419b609bb9c6f703ea27988"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.5"
+    version: "2.3.6"
   sqflite_common_ffi_web:
     dependency: transitive
     description:
@@ -3169,18 +3169,18 @@ packages:
     dependency: "direct overridden"
     description:
       name: sqlite3
-      sha256: "310af39c40dd0bb2058538333c9d9840a2725ae0b9f77e4fd09ad6696aa8f66e"
+      sha256: c0503c69b44d5714e6abbf4c1f51a3c3cc42b75ce785f44404765e4635481d38
       url: "https://pub.dev"
     source: hosted
-    version: "2.7.5"
+    version: "2.7.6"
   sqlite3_flutter_libs:
     dependency: transitive
     description:
       name: sqlite3_flutter_libs
-      sha256: "1a96b59227828d9eb1463191d684b37a27d66ee5ed7597fcf42eee6452c88a14"
+      sha256: e07232b998755fe795655c56d1f5426e0190c9c435e1752d39e7b1cd33699c71
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.32"
+    version: "0.5.34"
   sqlite3_web:
     dependency: transitive
     description:
