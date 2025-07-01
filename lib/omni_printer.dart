@@ -114,11 +114,16 @@ class OmniPrinter with SaveFile implements Printable {
                   style: TextStyle(fontSize: 10, font: _unicodeFont)),
             ),
             dashWidget(),
-            Center(
-              child: Text(
-                  'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID: $customerTin',
+            Column(children: [
+              Text('REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT',
                   style: TextStyle(fontSize: 10, font: _unicodeFont)),
-            ),
+              Text("TIN: ${customerTin ?? ""}",
+                  style: TextStyle(fontSize: 10, font: _unicodeFont)),
+              Text("Name: $customerName",
+                  style: TextStyle(fontSize: 10, font: _unicodeFont)),
+              Text("TEL: ${customerPhone ?? ""}",
+                  style: TextStyle(fontSize: 10, font: _unicodeFont))
+            ])
           ];
         case "TR":
           return [
@@ -129,6 +134,7 @@ class OmniPrinter with SaveFile implements Printable {
                       fontWeight: FontWeight.bold,
                       font: _unicodeFont)),
             ),
+            dashWidget(),
 
             /// here we take the existing receipt number -1 to get the receipt number of the refund
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
@@ -137,11 +143,16 @@ class OmniPrinter with SaveFile implements Printable {
                   style: TextStyle(fontSize: 10, font: _unicodeFont)),
             ),
             dashWidget(),
-            Center(
-              child: Text(
-                  'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID: $customerTin',
+            Column(children: [
+              Text('REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT',
                   style: TextStyle(fontSize: 10, font: _unicodeFont)),
-            ),
+              Text("TIN: ${customerTin ?? ""}",
+                  style: TextStyle(fontSize: 10, font: _unicodeFont)),
+              Text("Name: $customerName",
+                  style: TextStyle(fontSize: 10, font: _unicodeFont)),
+              Text("TEL: ${customerPhone ?? ""}",
+                  style: TextStyle(fontSize: 10, font: _unicodeFont))
+            ]),
           ];
         case "CR":
           return [
@@ -170,9 +181,16 @@ class OmniPrinter with SaveFile implements Printable {
             ),
             dashWidget(),
             Center(
-              child: Text(
-                  'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT CLIENT ID: $customerTin',
-                  style: TextStyle(fontSize: 10, font: _unicodeFont)),
+              child: Column(children: [
+                Text('REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT',
+                    style: TextStyle(fontSize: 10, font: _unicodeFont)),
+                Text("TIN: ${customerTin ?? ""}",
+                    style: TextStyle(fontSize: 10, font: _unicodeFont)),
+                Text("Name: $customerName",
+                    style: TextStyle(fontSize: 10, font: _unicodeFont)),
+                Text("TEL: ${customerPhone ?? ""}",
+                    style: TextStyle(fontSize: 10, font: _unicodeFont))
+              ]),
             ),
           ];
         case "CS":
@@ -208,31 +226,32 @@ class OmniPrinter with SaveFile implements Printable {
                   fontWeight: FontWeight.bold,
                   font: _unicodeFont)),
           SizedBox(height: 4),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(brandAddress,
-                  style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.normal,
-                      font: _unicodeFont)),
-              Text("TEL: $brandTel",
-                  style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.normal,
-                      font: _unicodeFont)),
-              Text("EMAIL: ${brandEmail ?? " "}",
-                  style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.normal,
-                      font: _unicodeFont)),
-              Text("TIN: $brandTIN",
-                  style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.normal,
-                      font: _unicodeFont)),
-            ],
-          ),
+          if (receiptType != "NR" || receiptType != "TR" || receiptType != "CR")
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(brandAddress,
+                    style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.normal,
+                        font: _unicodeFont)),
+                Text("TEL: $brandTel",
+                    style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.normal,
+                        font: _unicodeFont)),
+                Text("EMAIL: ${brandEmail ?? " "}",
+                    style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.normal,
+                        font: _unicodeFont)),
+                Text("TIN: $brandTIN",
+                    style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.normal,
+                        font: _unicodeFont)),
+              ],
+            ),
           SizedBox(height: 4),
           if (receiptType == "TS") SizedBox(height: 4),
           if (receiptType == "TS")
