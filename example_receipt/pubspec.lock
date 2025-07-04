@@ -1168,6 +1168,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.5.1"
+  flipper_accounting:
+    dependency: "direct overridden"
+    description:
+      path: "../../../packages/flipper_accounting"
+      relative: true
+    source: path
+    version: "0.0.1"
   flipper_actionable:
     dependency: "direct overridden"
     description:
@@ -1245,7 +1252,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223234253+1751618408"
+    version: "1.170.4252223234258+1751621288"
   flipper_services:
     dependency: "direct main"
     description:

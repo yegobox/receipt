@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: demo_ui_components,flipper_actionable,flipper_dashboard,flipper_infra,flipper_loading,flipper_localize,flipper_login,flipper_mocks,flipper_models,flipper_routing,flipper_rw,flipper_services,flipper_socials,flipper_ui,flowy_svg,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,qr_flutter,scrollable_positioned_list,supabase_models,http,meta,web,sqlite3,device_info_plus,drift,nfc_manager
+# melos_managed_dependency_overrides: demo_ui_components,flipper_actionable,flipper_dashboard,flipper_infra,flipper_loading,flipper_localize,flipper_login,flipper_mocks,flipper_models,flipper_routing,flipper_rw,flipper_services,flipper_socials,flipper_ui,flowy_svg,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,qr_flutter,scrollable_positioned_list,supabase_models,http,meta,web,sqlite3,device_info_plus,drift,nfc_manager,flipper_accounting
 dependency_overrides:
   demo_ui_components:
     path: ../../packages/demo_ui_components
@@ -51,3 +51,5 @@ dependency_overrides:
   device_info_plus: ^11.2.2
   drift: ^2.26.0
   nfc_manager: ^4.0.0-dev
+  flipper_accounting:
+    path: ../../packages/flipper_accounting
