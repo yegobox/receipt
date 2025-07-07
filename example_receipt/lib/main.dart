@@ -207,6 +207,7 @@ class _MyHomePageState extends State<MyHomePage> {
             taxTyCd: "A",
             dcRt: 10,
             price: 10.0,
+            inventoryRequestId: "",
           ),
           TransactionItem(
             itemTyCd: "",
@@ -223,6 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
             taxTyCd: "A",
             dcRt: 10,
             price: 10.0,
+            inventoryRequestId: "",
           ),
           TransactionItem(
             itemTyCd: "",
@@ -239,6 +241,7 @@ class _MyHomePageState extends State<MyHomePage> {
             taxTyCd: "A",
             dcRt: 10,
             price: 10.0,
+            inventoryRequestId: "",
           ),
           // TransactionItem(
           //
