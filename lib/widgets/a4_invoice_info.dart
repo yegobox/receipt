@@ -1,5 +1,6 @@
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:receipt/print_extensions.dart';
 
 class A4InvoiceInfo extends pw.StatelessWidget {
   final String? customerTin;
@@ -41,13 +42,18 @@ class A4InvoiceInfo extends pw.StatelessWidget {
           children: [
             _buildInfoBox(
               children: [
-                _buildInfoRow('TIN:', customerTin ?? " "),
+                _buildInfoRow('TIN:', customerTin ?? " ")
+                    .hideIf(customerTin == null)
+                    .hideIf(customerTin == "" || customerTin == null),
                 pw.SizedBox(height: 5),
                 _buildInfoRow('Name:', customerName),
                 pw.SizedBox(height: 5),
 
                 /// since we save phone number without the 0 then add it here
-                _buildInfoRow('TEL:', "0${customerPhone ?? " "}"),
+                _buildInfoRow(
+                        'TEL:', customerPhone?.normalizePhoneNumber() ?? " ")
+                    .hideIf(customerPhone == null)
+                    .hideIf(customerPhone == "" || customerPhone == null),
               ],
             ),
             pw.SizedBox(width: 10),

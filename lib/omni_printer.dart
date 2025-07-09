@@ -13,6 +13,9 @@ import 'package:receipt/printable.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'dart:async';
 
+import 'print_extensions.dart';
+
+
 final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 
 /// [generatePdfAndPrint] example
@@ -124,11 +127,11 @@ class OmniPrinter with SaveFile implements Printable {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text("TIN: ${customerTin ?? ""}",
-                      style: TextStyle(fontSize: 10, font: _unicodeFont)),
+                      style: TextStyle(fontSize: 10, font: _unicodeFont)).hideIf(customerTin == null),
                   Text("Name: $customerName",
                       style: TextStyle(fontSize: 10, font: _unicodeFont)),
-                  Text("TEL: ${customerPhone ?? ""}",
-                      style: TextStyle(fontSize: 10, font: _unicodeFont))
+                  Text("TEL: ${customerPhone?.normalizePhoneNumber() ?? ""}",
+                      style: TextStyle(fontSize: 10, font: _unicodeFont)).hideIf(customerPhone == null),
                 ])
           ];
         case "TR":
@@ -159,11 +162,11 @@ class OmniPrinter with SaveFile implements Printable {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text("TIN: ${customerTin ?? ""}",
-                      style: TextStyle(fontSize: 10, font: _unicodeFont)),
+                      style: TextStyle(fontSize: 10, font: _unicodeFont)).hideIf(customerTin == null),
                   Text("Name: $customerName",
                       style: TextStyle(fontSize: 10, font: _unicodeFont)),
-                  Text("TEL: ${customerPhone ?? ""}",
-                      style: TextStyle(fontSize: 10, font: _unicodeFont))
+                  Text("TEL: ${customerPhone?.normalizePhoneNumber() ?? ""}",
+                      style: TextStyle(fontSize: 10, font: _unicodeFont)).hideIf(customerPhone == null),
                 ]),
           ];
         case "CR":
@@ -202,11 +205,11 @@ class OmniPrinter with SaveFile implements Printable {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text("TIN: ${customerTin ?? ""}",
-                    style: TextStyle(fontSize: 10, font: _unicodeFont)),
+                    style: TextStyle(fontSize: 10, font: _unicodeFont)).hideIf(customerTin == null),
                 Text("Name: $customerName",
                     style: TextStyle(fontSize: 10, font: _unicodeFont)),
-                Text("TEL: ${customerPhone ?? ""}",
-                    style: TextStyle(fontSize: 10, font: _unicodeFont))
+                Text("TEL: ${customerPhone?.normalizePhoneNumber() ?? ""}",
+                    style: TextStyle(fontSize: 10, font: _unicodeFont)).hideIf(customerPhone == null),
               ],
             ),
           ];
@@ -252,7 +255,7 @@ class OmniPrinter with SaveFile implements Printable {
                         fontSize: 10,
                         fontWeight: FontWeight.normal,
                         font: _unicodeFont)),
-                Text("TEL: $brandTel",
+                Text("TEL: ${brandTel.normalizePhoneNumber()}",
                     style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.normal,
@@ -316,7 +319,7 @@ class OmniPrinter with SaveFile implements Printable {
                     style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        font: _unicodeFont)),
+                        font: _unicodeFont)).hideIf(customerTin == null),
                 Text('Name: $customerName',
                     style: TextStyle(
                         fontSize: 12,
@@ -324,11 +327,11 @@ class OmniPrinter with SaveFile implements Printable {
                         font: _unicodeFont)),
 
                 /// since we save phone number without the 0 then add it here
-                Text('TEL: 0${customerPhone ?? " "}',
+                Text('TEL: ${customerPhone?.normalizePhoneNumber() ?? " "}',
                     style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        font: _unicodeFont)),
+                        font: _unicodeFont)).hideIf(customerPhone == null),
               ],
             ),
         ],
