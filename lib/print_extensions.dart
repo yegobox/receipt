@@ -1,10 +1,6 @@
 import 'package:pdf/widgets.dart';
 
 extension NormalizePhoneNumber on String {
-  /// Normalizes a phone number:
-  /// - "00783054874" => "0783054874"
-  /// - "783054874"   => "0783054874"
-  /// - "0783054874"  => "0783054874"
   String normalizePhoneNumber() {
     final digitsOnly = replaceAll(RegExp(r'\D'), ''); // remove non-digits
     if (digitsOnly.startsWith('00')) {
@@ -19,5 +15,5 @@ extension NormalizePhoneNumber on String {
 
 extension HideIfNull on Widget {
   /// Hides this widget if [hide] is true, otherwise returns the widget.
-  Widget hideIf(bool hide) => hide ? SizedBox.shrink() : this;
+  Widget hideIf(bool hide) => hide ? this : this;
 }

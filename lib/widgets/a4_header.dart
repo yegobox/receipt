@@ -68,6 +68,10 @@ class A4Header extends pw.StatelessWidget {
                 'TIN: $brandTIN',
                 style: pw.TextStyle(fontSize: 10, font: font),
               ),
+              pw.Text(
+                'WELCOME TO OUR SHOP',
+                style: pw.TextStyle(fontSize: 10, font: font),
+              ),
             ],
           ),
         ),

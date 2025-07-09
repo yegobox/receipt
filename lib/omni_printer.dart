@@ -15,7 +15,6 @@ import 'dart:async';
 
 import 'print_extensions.dart';
 
-
 final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 
 /// [generatePdfAndPrint] example
@@ -122,16 +121,30 @@ class OmniPrinter with SaveFile implements Printable {
               'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT',
               style: TextStyle(fontSize: 10, font: _unicodeFont),
             )),
+            dashWidget(),
+            Center(
+              child: Text(
+                'Welcome to our shop'.toUpperCase(),
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.normal,
+                  font: _unicodeFont,
+                ),
+              ),
+            ),
+            dashWidget(),
             Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text("TIN: ${customerTin ?? ""}",
-                      style: TextStyle(fontSize: 10, font: _unicodeFont)).hideIf(customerTin == null),
+                          style: TextStyle(fontSize: 10, font: _unicodeFont))
+                      .hideIf(customerTin == null),
                   Text("Name: $customerName",
                       style: TextStyle(fontSize: 10, font: _unicodeFont)),
                   Text("TEL: ${customerPhone?.normalizePhoneNumber() ?? ""}",
-                      style: TextStyle(fontSize: 10, font: _unicodeFont)).hideIf(customerPhone == null),
+                          style: TextStyle(fontSize: 10, font: _unicodeFont))
+                      .hideIf(customerPhone == null),
                 ])
           ];
         case "TR":
@@ -162,11 +175,13 @@ class OmniPrinter with SaveFile implements Printable {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text("TIN: ${customerTin ?? ""}",
-                      style: TextStyle(fontSize: 10, font: _unicodeFont)).hideIf(customerTin == null),
+                          style: TextStyle(fontSize: 10, font: _unicodeFont))
+                      .hideIf(customerTin == null),
                   Text("Name: $customerName",
                       style: TextStyle(fontSize: 10, font: _unicodeFont)),
                   Text("TEL: ${customerPhone?.normalizePhoneNumber() ?? ""}",
-                      style: TextStyle(fontSize: 10, font: _unicodeFont)).hideIf(customerPhone == null),
+                          style: TextStyle(fontSize: 10, font: _unicodeFont))
+                      .hideIf(customerPhone == null),
                 ]),
           ];
         case "CR":
@@ -205,11 +220,13 @@ class OmniPrinter with SaveFile implements Printable {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text("TIN: ${customerTin ?? ""}",
-                    style: TextStyle(fontSize: 10, font: _unicodeFont)).hideIf(customerTin == null),
+                        style: TextStyle(fontSize: 10, font: _unicodeFont))
+                    .hideIf(customerTin == null),
                 Text("Name: $customerName",
                     style: TextStyle(fontSize: 10, font: _unicodeFont)),
                 Text("TEL: ${customerPhone?.normalizePhoneNumber() ?? ""}",
-                    style: TextStyle(fontSize: 10, font: _unicodeFont)).hideIf(customerPhone == null),
+                        style: TextStyle(fontSize: 10, font: _unicodeFont))
+                    .hideIf(customerPhone == null),
               ],
             ),
           ];
@@ -316,10 +333,11 @@ class OmniPrinter with SaveFile implements Printable {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('TIN: ${customerTin ?? " "}',
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        font: _unicodeFont)).hideIf(customerTin == null),
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            font: _unicodeFont))
+                    .hideIf(customerTin == null),
                 Text('Name: $customerName',
                     style: TextStyle(
                         fontSize: 12,
@@ -328,10 +346,11 @@ class OmniPrinter with SaveFile implements Printable {
 
                 /// since we save phone number without the 0 then add it here
                 Text('TEL: ${customerPhone?.normalizePhoneNumber() ?? " "}',
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        font: _unicodeFont)).hideIf(customerPhone == null),
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            font: _unicodeFont))
+                    .hideIf(customerPhone == null),
               ],
             ),
         ],
