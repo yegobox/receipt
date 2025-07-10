@@ -330,61 +330,54 @@ packages:
     source: hosted
     version: "4.0.4"
   brick_core:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: brick_core
-      sha256: "4028265fec9c53cec59ba5c62ce09b292edadedee6b8dd6230d41dcbce23cf78"
-      url: "https://pub.dev"
-    source: hosted
+      path: "../../packages/brick/packages/brick_core"
+      relative: true
+    source: path
     version: "2.0.0"
   brick_offline_first:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: brick_offline_first
-      sha256: ed11c6beb35c3b00f3cef0631b4875be98e694ba061a7b196a995486ab141aeb
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.0"
+      path: "../../packages/brick/packages/brick_offline_first"
+      relative: true
+    source: path
+    version: "4.0.1"
   brick_offline_first_with_rest:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: brick_offline_first_with_rest
-      sha256: "634ec36a43c443d85b407da305fed6fa85a93c3647851500f7759030339e50fc"
-      url: "https://pub.dev"
-    source: hosted
+      path: "../../packages/brick/packages/brick_offline_first_with_rest"
+      relative: true
+    source: path
     version: "4.0.1"
   brick_offline_first_with_supabase:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: brick_offline_first_with_supabase
-      sha256: ca085a83732ba6fcc6a2dc20a8f28e98fb2c2a76afafa00469b55f86b60980ef
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
+      path: "../../packages/brick/packages/brick_offline_first_with_supabase"
+      relative: true
+    source: path
+    version: "2.1.0"
   brick_rest:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: brick_rest
-      sha256: "41420702a24d2597bfd40004412061709cfd7201a32035e10e6cbc9e4780f59b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.0+1"
+      path: "../../packages/brick/packages/brick_rest"
+      relative: true
+    source: path
+    version: "4.0.0"
   brick_sqlite:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: brick_sqlite
-      sha256: "37f0011263e9113801df02121d87ace42fdb6f92f2f456427bf4e433e473057e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.1"
+      path: "../../packages/brick/packages/brick_sqlite"
+      relative: true
+    source: path
+    version: "4.1.0"
   brick_supabase:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: brick_supabase
-      sha256: "196beab4b06d376fb865e0a7ffdd29b52621de6d338e520c8349fe00c9990e91"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
+      path: "../../packages/brick/packages/brick_supabase"
+      relative: true
+    source: path
+    version: "2.1.0"
   build:
     dependency: transitive
     description:
@@ -1252,7 +1245,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223234300+1751859693"
+    version: "1.170.4252223234344+1752089402"
   flipper_services:
     dependency: "direct main"
     description:
