@@ -1245,7 +1245,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223234390+1752427100"
+    version: "1.172.4252223234396+1752430829"
   flipper_services:
     dependency: "direct main"
     description:
@@ -1714,14 +1714,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.3"
-  go_router:
-    dependency: transitive
-    description:
-      name: go_router
-      sha256: f02fd7d2a4dc512fec615529824fdd217fecb3a3d3de68360293a551f21634b3
-      url: "https://pub.dev"
-    source: hosted
-    version: "14.8.1"
   google_fonts:
     dependency: transitive
     description:
@@ -2330,14 +2322,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
-  newrelic_mobile:
-    dependency: transitive
-    description:
-      name: newrelic_mobile
-      sha256: d88995b47869da144434586ff7e525a624a6d585370ad64214ba119a5424ed89
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.12"
   nfc_manager:
     dependency: "direct overridden"
     description:
@@ -3116,22 +3100,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.1"
-  speech_to_text:
-    dependency: transitive
-    description:
-      name: speech_to_text
-      sha256: "130fde359c23a4da6c2a4f032eab43e4c2b57c9818fe93694c091dfbdca6ae70"
-      url: "https://pub.dev"
-    source: hosted
-    version: "7.1.0"
-  speech_to_text_platform_interface:
-    dependency: transitive
-    description:
-      name: speech_to_text_platform_interface
-      sha256: a1935847704e41ee468aad83181ddd2423d0833abe55d769c59afca07adb5114
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.0"
   sprintf:
     dependency: transitive
     description:
