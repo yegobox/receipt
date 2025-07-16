@@ -69,7 +69,11 @@ class A4InvoiceInfo extends pw.StatelessWidget {
                   ),
                 pw.SizedBox(height: 5),
                 _buildInfoRow(
-                    'Date:', whenCreated.toIso8601String().split('.')[0]),
+                    'Date:',
+                    whenCreated
+                        .toIso8601String()
+                        .split('.')[0]
+                        .replaceAll("T", " ")),
               ],
             ),
           ],

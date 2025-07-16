@@ -127,25 +127,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     pdf.addPage(
       MultiPage(
         pageFormat: PdfPageFormat.a4,
-        margin: const EdgeInsets.all(8),
-        // clip: true,
-        footer: (Context context) {
-          return Column(
-            children: [
-              Center(child: ReceiptFooter(font: _unicodeFont)),
-              if (middle != null) ...[
-                SizedBox(height: 4),
-                Center(
-                  child: Image(
-                    middle,
-                    width: 20,
-                    height: 20,
-                  ),
-                ),
-              ],
-            ],
-          );
-        },
+        margin: const EdgeInsets.all(4),
         build: (Context context) {
           return <Widget>[
             // Header Section
@@ -267,6 +249,18 @@ class OmniPrinterA4 with SaveFile implements Printable {
               mrc: mrc,
               transaction: transaction,
             ),
+            Center(child: ReceiptFooter(font: _unicodeFont)),
+            SizedBox(height: 4),
+            if (middle != null) ...[
+              SizedBox(height: 4),
+              Center(
+                child: Image(
+                  middle,
+                  width: 20,
+                  height: 20,
+                ),
+              ),
+            ],
           ];
         },
       ),

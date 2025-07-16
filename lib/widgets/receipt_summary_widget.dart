@@ -161,6 +161,9 @@ class ReceiptSummaryWidget extends StatelessWidget {
               if (safeParseDouble(totalTaxB) != 0) _buildTotalTaxBRow(),
               if (items.any((item) => item.taxTyCd == "C")) _buildTaxCRow(),
               _buildTotalTaxRow(),
+              _builtPaymentInfoRow(
+                payment: transaction.paymentType!.toUpperCase(),
+              ),
               if (safeParseDouble(totalTaxD) != 0) _buildTaxDRow(),
             ],
           ),
@@ -265,6 +268,20 @@ class ReceiptSummaryWidget extends StatelessWidget {
     );
   }
 
+  TableRow _builtPaymentInfoRow({required String payment}) {
+    return TableRow(
+      children: [
+        _buildCell('$payment:'),
+        _buildCell((receiptType == "NR" ||
+                receiptType == "CR" ||
+                receiptType == "TR")
+            ? "-${safeParseDouble(totalPayable - totalDiscount).toNoCurrencyFormatted()}"
+            : safeParseDouble(totalPayable - totalDiscount)
+                .toNoCurrencyFormatted()),
+      ],
+    );
+  }
+
   TableRow _buildTaxDRow() {
     return TableRow(
       children: [
@@ -285,7 +302,7 @@ class ReceiptSummaryWidget extends StatelessWidget {
         TableRow(
           children: [
             _buildCell('PAYMENT METHOD:'),
-            _buildCell("${transaction.paymentType}:"),
+            _buildCell(transaction.paymentType ?? ""),
           ],
         ),
         TableRow(

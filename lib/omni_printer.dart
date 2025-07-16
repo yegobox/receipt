@@ -1196,14 +1196,18 @@ class OmniPrinter with SaveFile implements Printable {
       timeFromServer: timeFromServer,
     );
 
-    // Add a page to the document
+    /// Add a page to the document
+    /// we do not need multiPage in rolling paper mode.
+    /// as in it it has a way to have infinite height
     doc.addPage(
       Page(
         pageFormat: PdfPageFormat.roll80,
         orientation: PageOrientation.portrait,
-        build: (context) => Column(
-          children: rows,
-        ),
+        build: (Context context) {
+          return Column(
+            children: rows,
+          );
+        },
       ),
     );
 
