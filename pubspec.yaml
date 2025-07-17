@@ -22,7 +22,7 @@ dependencies:
   path_provider: ^2.1.5
   path: ^1.8.1
   permission_handler: ^11.3.1
-  image: ^4.0.17
+  image: ^4.5.4
   intl: ^0.20.2
   dotted_line: ^3.2.2
   talker_flutter: ^4.1.5
@@ -40,6 +40,8 @@ dependency_overrides:
   device_info_plus: ^11.2.2
   drift: ^2.26.0
   nfc_manager: ^4.0.0-dev
+  archive: ^3.6.1
+  excel: ^4.0.6
   
 
 dev_dependencies:
