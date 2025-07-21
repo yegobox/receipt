@@ -87,13 +87,14 @@ class Print {
     required double totalDiscount,
     required DateTime timeFromServer,
     String? customerPhone,
-    String? brandEmail,
+    String? brandEmail, int? originalInvoiceNumber,
   }) async {
     Printable printer = OmniPrinter();
     Printable printerA4 = OmniPrinterA4();
     if (ProxyService.box.A4()) {
       return await printerA4.generatePdfAndPrint(
         taxB: taxB,
+        originalInvoiceNumber: originalInvoiceNumber,
         customerTin: customerTin,
         timeFromServer: timeFromServer,
         totalTaxC: taxC,
@@ -158,6 +159,7 @@ class Print {
         autoPrint: autoPrint,
         brandFooter: brandFooter,
         emails: emails,
+        originalInvoiceNumber:originalInvoiceNumber,
         customerTin: customerTin,
         receiptType: receiptType,
         items: items,

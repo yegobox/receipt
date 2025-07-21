@@ -5,12 +5,14 @@ class A4RefundHeader extends pw.StatelessWidget {
   final String? invoiceNumber;
   final pw.Font? font;
   final Function() dashWidget;
+  int? originalInvoiceNumber;
 
   A4RefundHeader({
     required this.receiptType,
     this.invoiceNumber,
     required this.font,
     required this.dashWidget,
+    this.originalInvoiceNumber,
   });
 
   @override
@@ -32,7 +34,7 @@ class A4RefundHeader extends pw.StatelessWidget {
           ),
           if (receiptType == "NR" || receiptType == "TR" || receiptType == "CR")
             pw.Text(
-              'REF.NORMAL RECEIPT:# $invoiceNumber',
+              'REF.NORMAL RECEIPT:# $originalInvoiceNumber',
               style: pw.TextStyle(
                 fontSize: 10,
                 font: font,

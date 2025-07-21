@@ -96,6 +96,7 @@ class OmniPrinter with SaveFile implements Printable {
     String? customerPhone,
     required String receiptNumber,
     String? brandEmail,
+    int? originalInvoiceNumber,
   }) async {
     List<Widget> receiptTypeWidgets(String receiptType) {
       switch (receiptType) {
@@ -112,7 +113,7 @@ class OmniPrinter with SaveFile implements Printable {
             /// here we take the existing receipt number -1 to get the receipt number of the refund
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
             Center(
-              child: Text('REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
+              child: Text('REF.NORMAL RECEIPT:# ${originalInvoiceNumber}',
                   style: TextStyle(fontSize: 10, font: _unicodeFont)),
             ),
             dashWidget(),
@@ -161,7 +162,7 @@ class OmniPrinter with SaveFile implements Printable {
             /// here we take the existing receipt number -1 to get the receipt number of the refund
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
             Center(
-              child: Text('REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
+              child: Text('REF.NORMAL RECEIPT:# ${originalInvoiceNumber}',
                   style: TextStyle(fontSize: 10, font: _unicodeFont)),
             ),
             dashWidget(),
@@ -206,7 +207,7 @@ class OmniPrinter with SaveFile implements Printable {
             /// here we take the existing receipt number -1 to get the receipt number of the refund
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
             Center(
-              child: Text('REF.NORMAL RECEIPT:# ${transaction.invoiceNumber}',
+              child: Text('REF.NORMAL RECEIPT:# ${originalInvoiceNumber}',
                   style: TextStyle(fontSize: 10, font: _unicodeFont)),
             ),
             dashWidget(),
@@ -1095,6 +1096,7 @@ class OmniPrinter with SaveFile implements Printable {
     required double totalDiscount,
     required double taxD,
     String? customerPhone,
+    int? originalInvoiceNumber,
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
     String brandTel = "271311123",
@@ -1140,6 +1142,7 @@ class OmniPrinter with SaveFile implements Printable {
     await _header(
         transaction: transaction,
         middleImage: middle!,
+        originalInvoiceNumber: originalInvoiceNumber,
         leftImage: left!,
         rightImage: right!,
         brandEmail: brandEmail,

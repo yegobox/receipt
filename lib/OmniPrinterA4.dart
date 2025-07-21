@@ -1,11 +1,12 @@
 import 'package:pdf/pdf.dart';
 import 'package:receipt/widgets/receipt_summary_widget.dart'
     show ReceiptSummaryWidget;
+import 'package:supabase_models/brick/models/transaction.model.dart';
+import 'package:supabase_models/brick/models/transactionItem.model.dart';
 import 'widgets/receipt_footer.dart';
 import 'package:pdf/widgets.dart';
 import 'package:receipt/SaveFile.dart';
 import 'package:receipt/printable.dart';
-import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart' as c;
 import 'package:printing/printing.dart';
@@ -74,6 +75,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
   Future<void> generatePdfAndPrint({
     required double taxA,
     required double taxB,
+    int? originalInvoiceNumber,
     required double taxC,
     required double taxD,
     required double totalDiscount,
@@ -196,6 +198,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
 
             // Refund header
             A4RefundHeader(
+              originalInvoiceNumber: originalInvoiceNumber,
               receiptType: receiptType,
               invoiceNumber: transaction.invoiceNumber?.toString(),
               font: _unicodeFont,
@@ -250,9 +253,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
               transaction: transaction,
             ),
             Center(child: ReceiptFooter(font: _unicodeFont)),
-            SizedBox(height: 4),
             if (middle != null) ...[
-              SizedBox(height: 4),
+              SizedBox(height: 1),
               Center(
                 child: Image(
                   middle,

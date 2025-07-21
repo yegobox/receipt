@@ -16,6 +16,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     String? brandEmail,
     required double totalDiscount,
     required double taxD,
+    int? originalInvoiceNumber,
     String brandName = "yegobox shop",
     String brandAddress = "CITY CENTER, Kigali Rwanda",
     String brandTel = "271311123",
