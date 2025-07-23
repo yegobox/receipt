@@ -113,7 +113,7 @@ class OmniPrinter with SaveFile implements Printable {
             /// here we take the existing receipt number -1 to get the receipt number of the refund
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
             Center(
-              child: Text('REF.NORMAL RECEIPT:# ${originalInvoiceNumber}',
+              child: Text('REF.NORMAL RECEIPT:# $originalInvoiceNumber',
                   style: TextStyle(fontSize: 10, font: _unicodeFont)),
             ),
             dashWidget(),
@@ -162,7 +162,7 @@ class OmniPrinter with SaveFile implements Printable {
             /// here we take the existing receipt number -1 to get the receipt number of the refund
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
             Center(
-              child: Text('REF.NORMAL RECEIPT:# ${originalInvoiceNumber}',
+              child: Text('REF.NORMAL RECEIPT:# $originalInvoiceNumber',
                   style: TextStyle(fontSize: 10, font: _unicodeFont)),
             ),
             dashWidget(),
@@ -207,7 +207,7 @@ class OmniPrinter with SaveFile implements Printable {
             /// here we take the existing receipt number -1 to get the receipt number of the refund
             /// maybe in future we can have a better way to do this maybe saving them both in the same table or something
             Center(
-              child: Text('REF.NORMAL RECEIPT:# ${originalInvoiceNumber}',
+              child: Text('REF.NORMAL RECEIPT:# $originalInvoiceNumber',
                   style: TextStyle(fontSize: 10, font: _unicodeFont)),
             ),
             dashWidget(),
@@ -1216,41 +1216,41 @@ class OmniPrinter with SaveFile implements Printable {
 
     // Convert the first page of the PDF to an image using the printing package
     Uint8List pdfData = await doc.save();
-
-    // Use a higher DPI for better text clarity on thermal printers
-    // 203 DPI is standard for many thermal printers
     Uint8List? image;
-    try {
-      // Start the rasterization process with higher DPI
-      final page = await Printing.raster(pdfData, pages: [0], dpi: 300).first;
 
-      // Convert to PNG with maximum quality
-      image = await page.toPng();
-
-      // Log the image size for debugging
-      print("Receipt image size: ${image.length} bytes");
-    } catch (e) {
-      print("Error during PDF rasterization: $e");
-      // Fallback to lower DPI if high DPI fails
+    for (int dpi in [300, 203, 150]) {
       try {
-        final page = await Printing.raster(pdfData, pages: [0], dpi: 150).first;
+        final page =
+            await Printing.raster(pdfData, pages: [0], dpi: dpi.toDouble())
+                .first
+                .timeout(Duration(seconds: 10));
         image = await page.toPng();
+
+        break;
       } catch (e) {
-        print("Fallback rasterization also failed: $e");
+        continue;
       }
     }
 
-    // Use non-blocking calls to handle the PDF data
+    if (image == null) {
+      talker.error("Failed to rasterize PDF");
+      return;
+    }
+
+// Handle data (pass clones if needed)
     handlePdfData(
-      pdfData: pdfData,
-      image: image!,
+      pdfData: Uint8List.fromList(pdfData),
+      image: Uint8List.fromList(image),
       emails: emails,
       autoPrint: autoPrint,
       transactionId: transactionId,
     );
 
-    // Return immediately to avoid blocking the UI
-    return printCallback(pdfData);
+// Free memory
+    final result = printCallback(Uint8List.fromList(pdfData));
+    pdfData = Uint8List(0); // Free original
+    image = null;
+    return result;
   }
 
   /// Draws a dashed line separator on the PDF document.

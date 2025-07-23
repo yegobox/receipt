@@ -90,9 +90,10 @@ mixin SaveFile {
           transactionId: transactionId);
 
       // For Android, always trigger printing immediately
-      if (Platform.isAndroid && !kIsWeb) {
+      // for debugging we also print on maocs to save image and be able to troubleshoot
+      if (Platform.isAndroid || Platform.isMacOS && !kIsWeb) {
         // This ensures printing happens regardless of path
-        _printInBackground(image);
+        PlatformPrinter().printFile(image);
       }
 
       // Immediately open/share file without waiting for printer checks
@@ -109,31 +110,8 @@ mixin SaveFile {
       _checkPrintersInBackground(filePath, pdfData, image, emails,
           skipFileOpen: true);
     } catch (e) {
-      print('Error in sharePdf: $e');
-      // Fallback to direct file opening if anything fails
-      try {
-        final directory = await getApplicationDocumentsDirectory();
-        final fileName = generateFileName();
-        final filePath = '${directory.path}/$fileName.pdf';
-        final file = File(filePath);
-        await file.writeAsBytes(pdfData);
-
-        // For Android, ensure printing happens even in fallback path
-        if (Platform.isAndroid && !kIsWeb) {
-          _printInBackground(image);
-        }
-
-        await OpenFilex.open(filePath);
-      } catch (e) {
-        print('Fallback error: $e');
-      }
+      rethrow;
     }
-  }
-
-  void _printInBackground(Uint8List image) {
-    // Add debug print to verify this is being called
-    print('Starting background printing on Android');
-    PlatformPrinter().printFile(image);
   }
 
   void _checkPrintersInBackground(
@@ -218,9 +196,9 @@ mixin SaveFile {
 
   Future<void> _openOrShareFile(String filePath,
       {required Uint8List bytes, required Uint8List image}) async {
-    if (Platform.isAndroid && !kIsWeb) {
+    if (Platform.isAndroid || Platform.isMacOS && !kIsWeb) {
       // Start printing in background
-      _printInBackground(image);
+      PlatformPrinter().printFile(image);
     }
     // Open file immediately
     await OpenFilex.open(filePath);
