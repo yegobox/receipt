@@ -697,6 +697,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.2"
+  df_safer_dart:
+    dependency: transitive
+    description:
+      name: df_safer_dart
+      sha256: b2458b88cbe340cfb6e11f8eabc965c78cfc39852039286c057fc27570d803e9
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.17.8"
+  df_safer_dart_annotations:
+    dependency: transitive
+    description:
+      name: df_safer_dart_annotations
+      sha256: "154f0f7f579190a9ab8f89b0de0235e6500f46fcc3b1f2feacf8599f58fe66b2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
+  df_type:
+    dependency: transitive
+    description:
+      name: df_type
+      sha256: ab3da91736d106264df283a91e8f0cc56372f55ff96f871062327971488ebb18
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.14.2"
   diacritic:
     dependency: transitive
     description:
@@ -1245,7 +1269,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223234515+1753435146"
+    version: "1.170.4252223234516+1753448545"
   flipper_services:
     dependency: "direct main"
     description:
