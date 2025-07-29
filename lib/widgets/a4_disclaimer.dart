@@ -18,7 +18,7 @@ class A4Disclaimer extends pw.StatelessWidget {
 
     return pw.Column(
       children: [
-        pw.SizedBox(height: 10),
+        pw.SizedBox(height: 1),
         pw.Center(
           child: pw.Text(
             "THIS IS NOT AN OFFICIAL RECEIPT",
@@ -29,7 +29,7 @@ class A4Disclaimer extends pw.StatelessWidget {
             ),
           ),
         ),
-        pw.SizedBox(height: 10),
+        pw.SizedBox(height: 1),
       ],
     );
   }

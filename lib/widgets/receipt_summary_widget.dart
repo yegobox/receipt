@@ -103,9 +103,9 @@ class ReceiptSummaryWidget extends StatelessWidget {
               'Receipt Signature: ${receiptSignature.toDashedStringRcptSign()}',
               style: TextStyle(fontSize: 10, font: unicodeFont),
             ),
-          SizedBox(height: 5),
+          SizedBox(height: 1),
           _dashWidget(),
-          SizedBox(height: 5),
+          SizedBox(height: 1),
           Text(
             'Receipt Number: $invoiceNum',
             style: TextStyle(fontSize: 10, font: unicodeFont),
@@ -151,7 +151,7 @@ class ReceiptSummaryWidget extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-          SizedBox(height: 5),
+          SizedBox(height: 1),
           Table(
             border: TableBorder.all(width: 0.5),
             children: [
@@ -160,14 +160,14 @@ class ReceiptSummaryWidget extends StatelessWidget {
               if (safeParseDouble(totalTaxB) != 0) _buildTaxBRow(),
               if (safeParseDouble(totalTaxB) != 0) _buildTotalTaxBRow(),
               if (items.any((item) => item.taxTyCd == "C")) _buildTaxCRow(),
+              if (items.any((item) => item.taxTyCd == "D")) _buildTaxDRow(),
               _buildTotalTaxRow(),
               _builtPaymentInfoRow(
                 payment: transaction.paymentType!.toUpperCase(),
               ),
-              if (safeParseDouble(totalTaxD) != 0) _buildTaxDRow(),
             ],
           ),
-          SizedBox(height: 5),
+          SizedBox(height: 1),
           _buildPaymentInfoTable(),
         ],
       ),
@@ -285,7 +285,7 @@ class ReceiptSummaryWidget extends StatelessWidget {
   TableRow _buildTaxDRow() {
     return TableRow(
       children: [
-        _buildCell('Total D'),
+        _buildCell('Total D:'),
         _buildCell(
           (receiptType == "NR" || receiptType == "CR" || receiptType == "TR")
               ? "-${safeParseDouble(totalTaxD).toStringAsFixed(2)}"

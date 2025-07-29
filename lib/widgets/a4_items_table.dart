@@ -28,7 +28,7 @@ class A4ItemsTable extends pw.StatelessWidget {
       ],
       data: [
         ...items.map((item) => [
-              item.itemCd,
+              item.itemCd ?? '',
               pw.Column(
                 mainAxisAlignment: pw.MainAxisAlignment.start,
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -37,7 +37,7 @@ class A4ItemsTable extends pw.StatelessWidget {
                     item.name,
                     style: pw.TextStyle(fontSize: 10, font: font),
                   ),
-                  if (item.dcRt != 0)
+                  if (item.dcRt != null && item.dcRt != 0)
                     pw.Text(
                       "Discount - ${item.dcRt}%",
                       style: pw.TextStyle(fontSize: 10, font: font),
@@ -45,10 +45,11 @@ class A4ItemsTable extends pw.StatelessWidget {
                 ],
               ),
               '${item.qty}',
-              '${item.taxTyCd}',
+              (item.taxTyCd ?? ''),
               item.price.toNoCurrencyFormatted(),
               pw.Column(
                 mainAxisAlignment: pw.MainAxisAlignment.start,
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: [
                   pw.Text(
                     (receiptType == "NR" ||
@@ -58,7 +59,7 @@ class A4ItemsTable extends pw.StatelessWidget {
                         : (item.qty * item.price).toNoCurrencyFormatted(),
                     style: pw.TextStyle(fontSize: 10, font: font),
                   ),
-                  if (item.dcRt != 0)
+                  if (item.dcRt != null && item.dcRt != 0)
                     pw.Text(
                       (receiptType == "NR" ||
                               receiptType == "CR" ||
@@ -72,10 +73,10 @@ class A4ItemsTable extends pw.StatelessWidget {
                 ],
               ),
             ]),
-        // Padding the table with empty rows to maintain a minimum of 10 rows
-        if (items.length < 10)
+        // Only add empty rows if we have fewer items than minRows
+        if (items.length < minRows)
           ...List.generate(
-            110 - items.length,
+            minRows - items.length,
             (_) => ['', '', '', '', '', ''],
           ),
       ],
@@ -86,7 +87,8 @@ class A4ItemsTable extends pw.StatelessWidget {
       ),
       cellStyle: pw.TextStyle(fontSize: 10, font: font),
       cellAlignment: pw.Alignment.topLeft,
-      headerHeight: 40,
+      headerHeight: 20,
+      // Remove rowHeight to allow rows to grow with content
       columnWidths: {
         0: const pw.FixedColumnWidth(50), // Item Code - slightly smaller
         1: const pw.FixedColumnWidth(
@@ -111,7 +113,7 @@ class A4ItemsTable extends pw.StatelessWidget {
         horizontalInside: pw.BorderSide.none,
         verticalInside: pw.BorderSide(width: 0.5),
       ),
-      cellPadding: const pw.EdgeInsets.symmetric(vertical: 1, horizontal: 5),
+      cellPadding: const pw.EdgeInsets.symmetric(vertical: 5, horizontal: 5),
     );
   }
 }
