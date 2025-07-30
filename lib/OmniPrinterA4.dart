@@ -127,148 +127,145 @@ class OmniPrinterA4 with SaveFile implements Printable {
     final middle = await _loadLogoImage(position: "middle");
     final right = await _loadLogoImage(position: "right");
     pdf.addPage(
-      Page(
+      MultiPage(
         pageFormat: PdfPageFormat.a4,
         margin: const EdgeInsets.all(8),
         build: (Context context) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header Section
-              A4Header(
-                leftLogo: left,
-                rightLogo: right,
-                brandName: brandName,
-                brandAddress: brandAddress,
-                brandTel: brandTel,
-                brandTIN: brandTIN,
-                brandEmail: brandEmail,
-                font: _unicodeFont,
-              ),
-              if (receiptType != "CR") SizedBox(height: 5),
+          return [
+            // Header Section
+            A4Header(
+              leftLogo: left,
+              rightLogo: right,
+              brandName: brandName,
+              brandAddress: brandAddress,
+              brandTel: brandTel,
+              brandTIN: brandTIN,
+              brandEmail: brandEmail,
+              font: _unicodeFont,
+            ),
+            if (receiptType != "CR") SizedBox(height: 5),
 
-              // Training and Proforma Labels
-              if (receiptType == "TS")
-                Center(
-                  child: Column(
-                    children: [
-                      Text(
-                        "TRAINING MODE",
+            // Training and Proforma Labels
+            if (receiptType == "TS")
+              Center(
+                child: Column(
+                  children: [
+                    Text(
+                      "TRAINING MODE",
+                      style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          font: _unicodeFont),
+                    ),
+                    SizedBox(height: 2),
+                  ],
+                ),
+              ),
+            if (receiptType == "PS")
+              Center(
+                child: Column(
+                  children: [
+                    Text(
+                      "PROFORMA",
+                      style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          font: _unicodeFont),
+                    ),
+                    SizedBox(height: 2),
+                  ],
+                ),
+              ),
+            if (receiptType != "CR") SizedBox(height: 4),
+
+            // Copy Title
+            if (receiptType == "CS" ||
+                receiptType == "CR" ||
+                receiptType == "CP")
+              Center(
+                child: Column(
+                  children: [
+                    Text('COPY',
                         style: TextStyle(
-                            fontSize: 10,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            font: _unicodeFont),
-                      ),
-                      SizedBox(height: 2),
-                    ],
-                  ),
+                            font: _unicodeFont)),
+                    dashWidget(),
+                    SizedBox(height: 5),
+                  ],
                 ),
-              if (receiptType == "PS")
-                Center(
-                  child: Column(
-                    children: [
-                      Text(
-                        "PROFORMA",
-                        style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            font: _unicodeFont),
-                      ),
-                      SizedBox(height: 2),
-                    ],
-                  ),
+              ),
+
+            // Refund header
+            A4RefundHeader(
+              originalInvoiceNumber: originalInvoiceNumber,
+              receiptType: receiptType,
+              invoiceNumber: transaction.invoiceNumber?.toString(),
+              font: _unicodeFont,
+              dashWidget: dashWidget,
+            ),
+
+            // Invoice Information
+            A4InvoiceInfo(
+              customerTin: customerTin,
+              customerName: customerName,
+              customerPhone: customerPhone,
+              invoiceNum: invoiceNum,
+              originalInvcNumber: transaction.invoiceNumber?.toString(),
+              whenCreated: whenCreated,
+              receiptType: receiptType,
+              font: _unicodeFont,
+            ),
+
+            // Items Table
+            A4ItemsTable(
+              items: items,
+              receiptType: receiptType,
+              font: _unicodeFont,
+              minRows: 1,
+            ),
+            if (receiptType != "CR") SizedBox(height: 1),
+
+            // Disclaimer with refund information if applicable
+            A4Disclaimer(
+              receiptType: receiptType,
+              font: _unicodeFont,
+            ),
+
+            // SDC Information
+            ReceiptSummaryWidget(
+              receiptType: receiptType,
+              receiptQrCode: receiptQrCode,
+              items: items,
+              totalPayable: totalPayable,
+              totalDiscount: totalDiscount,
+              totalTax: safeParseDouble(totalTax),
+              totalTaxB: totalTaxB,
+              totalTaxD: totalTaxD,
+              unicodeFont: _unicodeFont,
+              timeFromServer: timeFromServer,
+              sdcId: sdcId,
+              internalData: internalData,
+              receiptSignature: receiptSignature,
+              rcptNo: rcptNo,
+              totRcptNo: totRcptNo,
+              invoiceNum: invoiceNum,
+              whenCreated: whenCreated,
+              mrc: mrc,
+              transaction: transaction,
+            ),
+            Center(child: ReceiptFooter(font: _unicodeFont)),
+            if (middle != null) ...[
+              SizedBox(height: 1),
+              Center(
+                child: Image(
+                  middle,
+                  width: 20,
+                  height: 20,
                 ),
-              if (receiptType != "CR") SizedBox(height: 4),
-
-              // Copy Title
-              if (receiptType == "CS" ||
-                  receiptType == "CR" ||
-                  receiptType == "CP")
-                Center(
-                  child: Column(
-                    children: [
-                      Text('COPY',
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              font: _unicodeFont)),
-                      dashWidget(),
-                      SizedBox(height: 5),
-                    ],
-                  ),
-                ),
-
-              // Refund header
-              A4RefundHeader(
-                originalInvoiceNumber: originalInvoiceNumber,
-                receiptType: receiptType,
-                invoiceNumber: transaction.invoiceNumber?.toString(),
-                font: _unicodeFont,
-                dashWidget: dashWidget,
               ),
-
-              // Invoice Information
-              A4InvoiceInfo(
-                customerTin: customerTin,
-                customerName: customerName,
-                customerPhone: customerPhone,
-                invoiceNum: invoiceNum,
-                originalInvcNumber: transaction.invoiceNumber?.toString(),
-                whenCreated: whenCreated,
-                receiptType: receiptType,
-                font: _unicodeFont,
-              ),
-
-              // Items Table
-              A4ItemsTable(
-                items: items,
-                receiptType: receiptType,
-                font: _unicodeFont,
-                minRows: 1,
-              ),
-              if (receiptType != "CR") SizedBox(height: 1),
-
-              // Disclaimer with refund information if applicable
-              A4Disclaimer(
-                receiptType: receiptType,
-                font: _unicodeFont,
-              ),
-
-              // SDC Information
-              ReceiptSummaryWidget(
-                receiptType: receiptType,
-                receiptQrCode: receiptQrCode,
-                items: items,
-                totalPayable: totalPayable,
-                totalDiscount: totalDiscount,
-                totalTax: safeParseDouble(totalTax),
-                totalTaxB: totalTaxB,
-                totalTaxD: totalTaxD,
-                unicodeFont: _unicodeFont,
-                timeFromServer: timeFromServer,
-                sdcId: sdcId,
-                internalData: internalData,
-                receiptSignature: receiptSignature,
-                rcptNo: rcptNo,
-                totRcptNo: totRcptNo,
-                invoiceNum: invoiceNum,
-                whenCreated: whenCreated,
-                mrc: mrc,
-                transaction: transaction,
-              ),
-              Center(child: ReceiptFooter(font: _unicodeFont)),
-              if (middle != null) ...[
-                SizedBox(height: 1),
-                Center(
-                  child: Image(
-                    middle,
-                    width: 20,
-                    height: 20,
-                  ),
-                ),
-              ],
             ],
-          );
+          ];
         },
       ),
     );
