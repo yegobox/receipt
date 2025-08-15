@@ -1161,14 +1161,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
-  fkafka:
-    dependency: transitive
-    description:
-      name: fkafka
-      sha256: "7bf33c0ba07c08f94666746cd7fa1546507dd83de283ccbf07e81b6fa27acbf8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.3"
   fl_chart:
     dependency: transitive
     description:
@@ -1285,7 +1277,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223234734+1755097052"
+    version: "1.170.4252223234782+1755253714"
   flipper_services:
     dependency: "direct main"
     description:
