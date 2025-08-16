@@ -1277,7 +1277,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223234795+1755341287"
+    version: "1.170.4252223234800+1755357457"
   flipper_scanner:
     dependency: "direct overridden"
     description:
@@ -2393,14 +2393,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
-  ndef_record:
-    dependency: transitive
-    description:
-      name: ndef_record
-      sha256: "2761c19b73350fd0391a555b4843688b1cbf0feaefdd9dc0b40afd8be0179305"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.1"
   nested:
     dependency: transitive
     description:
@@ -2410,13 +2402,13 @@ packages:
     source: hosted
     version: "1.0.0"
   nfc_manager:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
       name: nfc_manager
-      sha256: e42901037b92fe8833b1fe719997bd201eea4d6877f91ef6fb696348de262398
+      sha256: f5be75e90f8f2bff3ee49fbd7ef65bdd4a86ee679c2412e71ab2846a8cff8c59
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.0-dev"
+    version: "3.5.0"
   nm:
     dependency: transitive
     description:
@@ -3319,18 +3311,18 @@ packages:
     dependency: "direct overridden"
     description:
       name: sqlite3
-      sha256: c0503c69b44d5714e6abbf4c1f51a3c3cc42b75ce785f44404765e4635481d38
+      sha256: f393d92c71bdcc118d6203d07c991b9be0f84b1a6f89dd4f7eed348131329924
       url: "https://pub.dev"
     source: hosted
-    version: "2.7.6"
+    version: "2.9.0"
   sqlite3_flutter_libs:
     dependency: transitive
     description:
       name: sqlite3_flutter_libs
-      sha256: e07232b998755fe795655c56d1f5426e0190c9c435e1752d39e7b1cd33699c71
+      sha256: "2b03273e71867a8a4d030861fc21706200debe5c5858a4b9e58f4a1c129586a4"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.34"
+    version: "0.5.39"
   sqlite3_web:
     dependency: transitive
     description:
