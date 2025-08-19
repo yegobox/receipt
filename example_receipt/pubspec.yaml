@@ -48,7 +48,7 @@ dependencies:
   dotted_line: ^3.2.2
   talker_flutter: ^4.1.5
   sentry_flutter: ^8.14.2
-  syncfusion_flutter_pdf: ^29.1.37
+  syncfusion_flutter_pdf: ^29.2.11
   receipt: 
     path: "../"
   flipper_rw: any
@@ -57,7 +57,7 @@ dependency_overrides:
   meta: ^1.12.0
   web: ^1.1.0
   sqlite3: ^2.9.0
-  device_info_plus: ^11.2.2
+  device_info_plus: ^11.3.3
   # nfc_manager: ^4.0.2
   archive: ^3.6.1
   excel: ^4.0.6
