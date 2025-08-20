@@ -39,7 +39,6 @@ dependency_overrides:
   sqlite3: ^2.9.0
   device_info_plus: ^11.3.3
   drift: ^2.26.0
-  # nfc_manager: ^4.0.2
   archive: ^3.6.1
   excel: ^4.0.6
   
