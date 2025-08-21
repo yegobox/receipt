@@ -1283,7 +1283,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.170.4252223234838+1755713191"
+    version: "1.170.4252223234839+1755716834"
   flipper_scanner:
     dependency: "direct overridden"
     description:
