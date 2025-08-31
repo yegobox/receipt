@@ -74,5 +74,5 @@ dependency_overrides:
   drift: ^2.26.0
   archive: ^3.6.1
   excel: ^4.0.6
-  cbor: ^6.3.7
+  cbor: ^4.0.0
   pubnub: ^5.2.0
