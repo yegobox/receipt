@@ -41,7 +41,8 @@ dependency_overrides:
   drift: ^2.26.0
   archive: ^3.6.1
   excel: ^4.0.6
-  
+  cbor: ^6.2.0
+  pubnub: ^5.2.0
 
 dev_dependencies:
   flutter_lints: ^5.0.0
