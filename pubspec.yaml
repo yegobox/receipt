@@ -31,6 +31,7 @@ dependencies:
   supabase_models: any
   flipper_rw: any
   jni: ^0.14.2
+  example_receipt: any
   
 dependency_overrides:
   http: ^1.2.2

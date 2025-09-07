@@ -873,6 +873,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.7"
+  example_receipt:
+    dependency: "direct main"
+    description:
+      path: example_receipt
+      relative: true
+    source: path
+    version: "1.0.0+1"
   excel:
     dependency: "direct overridden"
     description:
@@ -1213,7 +1220,7 @@ packages:
       path: "../../apps/flipper_auth"
       relative: true
     source: path
-    version: "1.0.1+147"
+    version: "1.0.1+148"
   flipper_dashboard:
     dependency: "direct overridden"
     description:
@@ -1291,7 +1298,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.180.4252223234901+1756527996"
+    version: "1.180.4252223234901+1756527997"
   flipper_scanner:
     dependency: "direct overridden"
     description:

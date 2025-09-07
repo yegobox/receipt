@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'package:flipper_rw/printer_service.dart';
+// import 'package:flipper_rw/printer_service.dart';
+import 'package:example_receipt/printer_service.dart';
 import 'package:jni/jni.dart';
 import 'dart:typed_data';
 import 'package:path_provider/path_provider.dart'; // Import path_provider
