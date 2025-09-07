@@ -15,6 +15,7 @@ import androidx.annotation.Keep;
 import com.zcs.sdk.DriverManager;
 import com.zcs.sdk.Printer;
 import com.zcs.sdk.SdkResult;
+import com.zcs.sdk.Sys;
 import com.zcs.sdk.print.PrnStrFormat;
 
 import java.io.ByteArrayInputStream;
@@ -25,9 +26,8 @@ import java.util.Objects;
 @Keep
 public class PrinterService {
     private static final String TAG = "PrinterService";
-    private static final boolean DEBUG = true;
 
-    // Error codes
+    // Custom error codes
     private static final int ERROR_INVALID_INPUT = -1;
     private static final int ERROR_BITMAP_DECODE = -2;
     private static final int ERROR_GENERAL_EXCEPTION = -3;
@@ -36,9 +36,12 @@ public class PrinterService {
     private static final int ERROR_PRINTER_WIDTH_UNKNOWN = -5;
 
     private static PrinterService instance;
+    private DriverManager mDriverManager;
     private Printer mPrinter;
+    private Sys mSys;
+
     private boolean isInitialized = false;
-    private int printerWidth = 384; // Default width for 58mm printer
+    private int printerWidth = 384; // default for 58mm
 
     private PrinterService() {}
 
@@ -49,33 +52,31 @@ public class PrinterService {
         return instance;
     }
 
-
     public int initializePrinter() {
         try {
-            DriverManager mDriverManager = DriverManager.getInstance();
-
+            mDriverManager = DriverManager.getInstance();
             if (mDriverManager == null) {
                 Log.e(TAG, "DriverManager instance is null");
                 return ERROR_DEVICE_CONNECTION;
             }
 
+            mSys = mDriverManager.getBaseSysDevice();
             mPrinter = mDriverManager.getPrinter();
-            if (mPrinter == null) {
-                Log.e(TAG, "Printer instance is null");
+
+            if (mPrinter == null || mSys == null) {
+                Log.e(TAG, "Printer or Sys instance is null");
                 return ERROR_DEVICE_CONNECTION;
             }
 
-            int status = mPrinter.getPrinterStatus();
-            Log.i(TAG, "Printer status: " + status);
-
-            try {
-                // Set your printer width in dots/pixels here.
-                // 384 dots is standard for 58mm printers (8 dots/mm × 48mm printable area)
-                printerWidth = 384;
-                Log.i(TAG, "Printer width set to: " + printerWidth);
-            } catch (Exception e) {
-                Log.e(TAG, "Failed to retrieve printer width, using default", e);
+            // Init SDK
+            int status = mSys.sdkInit();
+            if (status != SdkResult.SDK_OK) {
+                Log.e(TAG, "SDK init failed: " + status);
+                return ERROR_PRINTER_POWER;
             }
+
+            printerWidth = 384; // assume 58mm by default
+            Log.i(TAG, "Printer initialized, width = " + printerWidth);
 
             isInitialized = true;
             return SdkResult.SDK_OK;
@@ -110,25 +111,23 @@ public class PrinterService {
                 return ERROR_BITMAP_DECODE;
             }
 
-            // 1. Resize to printer width – keeps memory usage predictable
-            Bitmap resizedBitmap = resizeToPrinterWidth(bitmap, printerWidth);
+            Bitmap resized = resizeToPrinterWidth(bitmap, printerWidth);
             bitmap.recycle();
 
-            // 2. Convert the scaled image to grayscale
-            Bitmap grayscaleBitmap = toSimpleGrayscale(resizedBitmap);
-            if (grayscaleBitmap != resizedBitmap) {
-                resizedBitmap.recycle();
-            }
+            Bitmap grayscale = toSimpleGrayscale(resized);
+            if (grayscale != resized) resized.recycle();
 
-            // 3. Apply simple threshold
-            Bitmap thresholded = applySimpleThreshold(grayscaleBitmap); // 160 is a safe threshold
-            if (thresholded != grayscaleBitmap) grayscaleBitmap.recycle();
+            Bitmap thresholded = applySimpleThreshold(grayscale);
+            if (thresholded != grayscale) grayscale.recycle();
 
-            if (mPrinter == null) {
+            int status = mPrinter.getPrinterStatus();
+            if (status == SdkResult.SDK_PRN_STATUS_PAPEROUT) {
+                Log.e(TAG, "Printer out of paper");
                 thresholded.recycle();
-                return ERROR_DEVICE_CONNECTION;
+                return status;
             }
 
+            // Append and print
             PrnStrFormat format = new PrnStrFormat();
             mPrinter.setPrintAppendBitmap(thresholded, Layout.Alignment.ALIGN_CENTER);
             mPrinter.setPrintAppendString(" ", format);
@@ -136,6 +135,7 @@ public class PrinterService {
             int printResult = mPrinter.setPrintStart();
             thresholded.recycle();
             return printResult;
+
         } catch (IOException e) {
             Log.e(TAG, "IO error during printing", e);
             return ERROR_GENERAL_EXCEPTION;
@@ -145,7 +145,6 @@ public class PrinterService {
         }
     }
 
-    // Simple grayscale conversion
     private Bitmap toSimpleGrayscale(Bitmap bmpOriginal) {
         int width = bmpOriginal.getWidth();
         int height = bmpOriginal.getHeight();
@@ -159,7 +158,6 @@ public class PrinterService {
         return bmpGrayscale;
     }
 
-    // Resize to printer width if needed
     private Bitmap resizeToPrinterWidth(Bitmap bitmap, int printerWidth) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
@@ -169,7 +167,6 @@ public class PrinterService {
         return Bitmap.createScaledBitmap(bitmap, printerWidth, newHeight, true);
     }
 
-    // Simple thresholding for thermal printers
     private Bitmap applySimpleThreshold(Bitmap bitmap) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();

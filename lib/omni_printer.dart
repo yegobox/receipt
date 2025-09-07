@@ -1218,24 +1218,8 @@ class OmniPrinter with SaveFile implements Printable {
     Uint8List pdfData = await doc.save();
     Uint8List? image;
 
-    for (int dpi in [300, 203, 150]) {
-      try {
-        final page =
-            await Printing.raster(pdfData, pages: [0], dpi: dpi.toDouble())
-                .first
-                .timeout(Duration(seconds: 10));
-        image = await page.toPng();
-
-        break;
-      } catch (e) {
-        continue;
-      }
-    }
-
-    if (image == null) {
-      talker.error("Failed to rasterize PDF");
-      return;
-    }
+    final page = await Printing.raster(pdfData, pages: [0], dpi: 150).first;
+    image = await page.toPng();
 
 // Handle data (pass clones if needed)
     handlePdfData(
