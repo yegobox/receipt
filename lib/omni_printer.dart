@@ -638,7 +638,7 @@ class OmniPrinter with SaveFile implements Printable {
               ? '-'
               : '';
 
-      talker.warning("item.Price: ${item.price}");
+      //talker.warning("item.Price: ${item.price}");
       // Add vertical space before each new block, except the first one
       if (rows.isNotEmpty) {
         rows.add(SizedBox(height: 8)); // Add spacing
@@ -1135,7 +1135,7 @@ class OmniPrinter with SaveFile implements Printable {
     String? brandEmail,
   }) async {
     await loadUnicodeFont();
-    talker.warning("ReceiptNo: $rcptNo: totRcptNo: $totRcptNo");
+    //talker.warning("ReceiptNo: $rcptNo: totRcptNo: $totRcptNo");
     final left = await _loadLogoImage(position: "left");
     final right = await _loadLogoImage(position: "right");
     final middle = await _loadLogoImage(position: "middle");

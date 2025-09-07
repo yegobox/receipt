@@ -4,10 +4,44 @@ import 'package:flutter/services.dart';
 import 'package:receipt/OmniPrinterA4.dart';
 import 'package:receipt/omni_printer.dart';
 import 'package:receipt/printable.dart';
+import 'dart:async';
+import 'package:flipper_routing/app.dialogs.dart';
+import 'package:flipper_routing/app.bottomsheets.dart';
+import 'package:flipper_services/locator.dart';
+import 'package:get_it/get_it.dart';
+import 'package:supabase_models/brick/repository/storage.dart';
+
+class MockLocalStorage implements LocalStorage {
+  @override
+  String? mrc() => '12345678901';
+
+  @override
+  String pmtTyCd() => '12345678901';
+
+  @override
+  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
 
 Future<void> main() async {
-  // await initializeDependencies();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  try {
+    // Basic initialization for receipt example
+    await _initializeBasicDependencies();
+    setupDialogUi();
+    setupBottomSheetUi();
+    await initDependencies();
+  } catch (e) {
+    debugPrint('Initialization error: $e');
+  }
+
   runApp(const MyApp());
+}
+
+Future<void> _initializeBasicDependencies() async {
+  // Register mock LocalStorage to prevent GetIt errors
+  GetIt.instance.registerSingleton<LocalStorage>(MockLocalStorage());
+  debugPrint('Receipt example initialized');
 }
 
 class MyApp extends StatelessWidget {
@@ -105,9 +139,9 @@ class _MyHomePageState extends State<MyHomePage> {
     required String customerPhone,
   }) async {
     Printable printer = OmniPrinter();
-    Printable printerA4 = OmniPrinterA4();
+    // Printable printerA4 = OmniPrinterA4();
 
-    return await printerA4.generatePdfAndPrint(
+    return await printer.generatePdfAndPrint(
       taxB: taxB,
       customerPhone: customerPhone,
       totalDiscount: totalDiscount,
