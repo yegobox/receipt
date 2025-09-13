@@ -143,6 +143,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return await printer.generatePdfAndPrint(
       taxB: taxB,
+      taxTT: 0.0,
+      totalTaxTT: 0.0,
       customerPhone: customerPhone,
       totalDiscount: totalDiscount,
       taxA: taxA,

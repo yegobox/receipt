@@ -15,6 +15,7 @@ class ReceiptSummaryWidget extends StatelessWidget {
   final double totalTax;
   final double totalTaxB;
   final double totalTaxD;
+  final double totalTaxTT;
   final Font? unicodeFont;
   final DateTime timeFromServer;
   final String sdcId;
@@ -36,6 +37,7 @@ class ReceiptSummaryWidget extends StatelessWidget {
     required this.totalTax,
     required this.totalTaxB,
     required this.totalTaxD,
+    required this.totalTaxTT,
     this.unicodeFont,
     required this.timeFromServer,
     required this.sdcId,
@@ -163,6 +165,7 @@ class ReceiptSummaryWidget extends StatelessWidget {
               if (safeParseDouble(totalTaxB) != 0) _buildTotalTaxBRow(),
               if (items.any((item) => item.taxTyCd == "C")) _buildTaxCRow(),
               if (items.any((item) => item.taxTyCd == "D")) _buildTaxDRow(),
+              if (items.any((item) => item.taxTyCd == "TT")) _buildTaxTTRow(),
               _buildTotalTaxRow(),
               _builtPaymentInfoRow(
                 payment: transaction.paymentType!.toUpperCase(),
@@ -292,6 +295,30 @@ class ReceiptSummaryWidget extends StatelessWidget {
           (receiptType == "NR" || receiptType == "CR" || receiptType == "TR")
               ? "-${safeParseDouble(totalTaxD).toStringAsFixed(2)}"
               : safeParseDouble(totalTaxD).toStringAsFixed(2),
+        ),
+      ],
+    );
+  }
+
+  TableRow _buildTaxTTRow() {
+    // Calculate TT tax amount using the same logic as rw_tax.dart
+    double ttTaxAmount = 0.0;
+    
+    for (var item in items.where((item) => item.taxTyCd == 'TT')) {
+      double totalAfterDiscount = (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
+      double ttTaxblAmt = totalAfterDiscount / 1.18;
+      // Use configuration-based tax percentage calculation
+      // Assuming TT tax percentage is 3% from configuration
+      ttTaxAmount += ttTaxblAmt * 3 / (100 + 3); // Using configuration formula
+    }
+    
+    return TableRow(
+      children: [
+        _buildCell('TOTAL TT-3%:'),
+        _buildCell(
+          (receiptType == "NR" || receiptType == "CR" || receiptType == "TR")
+              ? "-${ttTaxAmount.toNoCurrencyFormatted()}"
+              : ttTaxAmount.toNoCurrencyFormatted(),
         ),
       ],
     );

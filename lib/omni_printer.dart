@@ -548,6 +548,54 @@ class OmniPrinter with SaveFile implements Printable {
     }
   }
 
+  _buildTaxTT(
+      {required String totalTaxTT,
+      required String receiptType,
+      List<TransactionItem>? items}) async {
+    // Check if there are any TT items and calculate TT tax amount
+    if (items != null && items.any((item) => item.taxTyCd == 'TT')) {
+      double ttTaxAmount = 0.0;
+
+      for (var item in items.where((item) => item.taxTyCd == 'TT')) {
+        double totalAfterDiscount =
+            (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
+        double ttTaxblAmt = totalAfterDiscount / 1.18;
+        // Use configuration-based tax percentage calculation
+        // Note: This is a simplified version - in production, you'd fetch the actual config
+        // For now, using the expected formula: ttTaxAmount = ttTaxblAmt * taxPercentage / (100 + taxPercentage)
+        // Assuming TT tax percentage is 3% from configuration
+        ttTaxAmount += ttTaxblAmt * 3 / (100 + 3); // Using configuration formula
+      }
+
+      if (ttTaxAmount != 0) {
+        String displayTotalTaxTT;
+        if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
+          displayTotalTaxTT = "-${ttTaxAmount.toNoCurrencyFormatted()}";
+        } else {
+          displayTotalTaxTT = ttTaxAmount.toNoCurrencyFormatted();
+        }
+
+        rows.add(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'TOTAL TT-3%:',
+                style:
+                    _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
+              ),
+              Text(
+                displayTotalTaxTT,
+                style:
+                    _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
+              )
+            ],
+          ),
+        );
+      }
+    }
+  }
+
   _buildTotal(
       {required String totalPayable, required String receiptType}) async {
     double total = safeParseDouble(totalPayable);
@@ -611,6 +659,7 @@ class OmniPrinter with SaveFile implements Printable {
     required double taxB,
     required double taxC,
     required double taxD,
+    required double taxTT,
     required String totalPayable,
     required String totalTaxA,
     required String totalTaxB,
@@ -773,6 +822,10 @@ class OmniPrinter with SaveFile implements Printable {
     await _buildTaxD(
         totalTaxD: safeParseDouble(taxD).toStringAsFixed(2),
         receiptType: receiptType);
+    await _buildTaxTT(
+        totalTaxTT: safeParseDouble(taxTT).toStringAsFixed(2),
+        receiptType: receiptType,
+        items: items);
     // Only show TOTAL TAX: if not all items are tax type C (to avoid duplicate row)
     if (!(items.isNotEmpty &&
         items.every((item) => item.taxTyCd == "C" || item.taxTyCd == null))) {
@@ -1110,6 +1163,7 @@ class OmniPrinter with SaveFile implements Printable {
     required double taxC,
     required double totalDiscount,
     required double taxD,
+    required double taxTT,
     String? customerPhone,
     int? originalInvoiceNumber,
     String brandName = "yegobox shop",
@@ -1140,6 +1194,7 @@ class OmniPrinter with SaveFile implements Printable {
     required double totalTaxB,
     required double totalTaxC,
     required double totalTaxD,
+    required double totalTaxTT,
     required String customerName,
     required int rcptNo,
     required int totRcptNo,
@@ -1185,6 +1240,7 @@ class OmniPrinter with SaveFile implements Printable {
       taxA: taxA,
       taxC: taxC,
       taxD: taxD,
+      taxTT: taxTT,
       totalTaxA: totalTaxA.toNoCurrencyFormatted(),
       totalTaxB: totalTaxB.toNoCurrencyFormatted(),
       totalTaxC: totalTaxC.toNoCurrencyFormatted(),

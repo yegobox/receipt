@@ -87,7 +87,10 @@ class Print {
     required double totalDiscount,
     required DateTime timeFromServer,
     String? customerPhone,
-    String? brandEmail, int? originalInvoiceNumber,
+    String? brandEmail,
+    int? originalInvoiceNumber,
+    required double taxTT,
+    required double totalTaxTT,
   }) async {
     Printable printer = OmniPrinter();
     Printable printerA4 = OmniPrinterA4();
@@ -102,6 +105,8 @@ class Print {
         taxA: taxA,
         customerPhone: customerPhone,
         taxC: taxC,
+        taxTT: taxTT,
+        totalTaxTT: totalTaxTT,
         whenCreated: whenCreated,
         taxD: taxD,
         brandName: brandName,
@@ -150,6 +155,8 @@ class Print {
         taxC: taxC,
         whenCreated: whenCreated,
         taxD: taxD,
+        taxTT: taxTT,
+        totalTaxTT: totalTaxTT,
         brandName: brandName,
         customerName: customerName,
         brandAddress: brandAddress,
@@ -159,7 +166,7 @@ class Print {
         autoPrint: autoPrint,
         brandFooter: brandFooter,
         emails: emails,
-        originalInvoiceNumber:originalInvoiceNumber,
+        originalInvoiceNumber: originalInvoiceNumber,
         customerTin: customerTin,
         receiptType: receiptType,
         items: items,
