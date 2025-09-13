@@ -34,6 +34,11 @@ public class PrinterService {
     private static final int ERROR_DEVICE_CONNECTION = -1001;
     private static final int ERROR_PRINTER_POWER = -4;
     private static final int ERROR_PRINTER_WIDTH_UNKNOWN = -5;
+    
+    // Image processing constants
+    private static final int GRAYSCALE_THRESHOLD = 128; // Lowered from 160 for better text visibility
+    private static final int DEFAULT_PRINTER_WIDTH_58MM = 384;
+    private static final int DEFAULT_PRINTER_WIDTH_80MM = 576;
 
     private static PrinterService instance;
     private DriverManager mDriverManager;
@@ -41,7 +46,7 @@ public class PrinterService {
     private Sys mSys;
 
     private boolean isInitialized = false;
-    private int printerWidth = 384; // default for 58mm
+    private int printerWidth = DEFAULT_PRINTER_WIDTH_58MM; // default for 58mm
 
     private PrinterService() {}
 
@@ -75,7 +80,7 @@ public class PrinterService {
                 return ERROR_PRINTER_POWER;
             }
 
-            printerWidth = 384; // assume 58mm by default
+            printerWidth = DEFAULT_PRINTER_WIDTH_58MM; // assume 58mm by default
             Log.i(TAG, "Printer initialized, width = " + printerWidth);
 
             isInitialized = true;
@@ -96,10 +101,6 @@ public class PrinterService {
         if (!isInitialized) {
             int result = initializePrinter();
             if (result != SdkResult.SDK_OK) return result;
-            if (printerWidth <= 0) {
-                Log.e(TAG, "Printer width is invalid or not initialized.");
-                return ERROR_PRINTER_WIDTH_UNKNOWN;
-            }
         }
 
         try (InputStream inputStream = new ByteArrayInputStream(imageData)) {
@@ -111,29 +112,35 @@ public class PrinterService {
                 return ERROR_BITMAP_DECODE;
             }
 
-            Bitmap resized = resizeToPrinterWidth(bitmap, printerWidth);
+            // Process bitmap with improved memory management
+            Bitmap processedBitmap = processImageForPrinting(bitmap);
             bitmap.recycle();
 
-            Bitmap grayscale = toSimpleGrayscale(resized);
-            if (grayscale != resized) resized.recycle();
-
-            Bitmap thresholded = applySimpleThreshold(grayscale);
-            if (thresholded != grayscale) grayscale.recycle();
-
+            // Check printer status
             int status = mPrinter.getPrinterStatus();
+            Log.i(TAG, "Printer status: " + status);
+            
             if (status == SdkResult.SDK_PRN_STATUS_PAPEROUT) {
                 Log.e(TAG, "Printer out of paper");
-                thresholded.recycle();
-                return status;
+                processedBitmap.recycle();
+                return -1002;
             }
 
-            // Append and print
+            // Append bitmap and text
             PrnStrFormat format = new PrnStrFormat();
-            mPrinter.setPrintAppendBitmap(thresholded, Layout.Alignment.ALIGN_CENTER);
-            mPrinter.setPrintAppendString(" ", format);
+            mPrinter.setPrintAppendBitmap(processedBitmap, Layout.Alignment.ALIGN_CENTER);
+            mPrinter.setPrintAppendString("\n", format);
 
+            // Start printing
             int printResult = mPrinter.setPrintStart();
-            thresholded.recycle();
+            Log.i(TAG, "Print result: " + printResult);
+            processedBitmap.recycle();
+            
+            // Handle specific ZCS SDK error codes
+            if (printResult == -1403) {
+                Log.e(TAG, "ZCS SDK Error -1403: Printer hardware error or not ready");
+            }
+            
             return printResult;
 
         } catch (IOException e) {
@@ -145,40 +152,61 @@ public class PrinterService {
         }
     }
 
-    private Bitmap toSimpleGrayscale(Bitmap bmpOriginal) {
-        int width = bmpOriginal.getWidth();
-        int height = bmpOriginal.getHeight();
-        Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(bmpGrayscale);
-        ColorMatrix cm = new ColorMatrix();
-        cm.setSaturation(0);
-        Paint paint = new Paint();
-        paint.setColorFilter(new ColorMatrixColorFilter(cm));
-        c.drawBitmap(bmpOriginal, 0, 0, paint);
-        return bmpGrayscale;
+    /**
+     * Process image for printing with optimized memory usage and better contrast
+     */
+    private Bitmap processImageForPrinting(Bitmap original) {
+        // Resize first to reduce memory usage
+        Bitmap resized = resizeToPrinterWidth(original);
+        
+        // Convert to grayscale and apply threshold in one step
+        return convertToMonochrome(resized);
     }
-
-    private Bitmap resizeToPrinterWidth(Bitmap bitmap, int printerWidth) {
+    
+    private Bitmap resizeToPrinterWidth(Bitmap bitmap) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
-        if (width <= printerWidth) return bitmap;
+        
+        if (width <= printerWidth) {
+            return bitmap.copy(Bitmap.Config.RGB_565, false); // Use more memory-efficient format
+        }
+        
         float scale = (float) printerWidth / width;
         int newHeight = (int) (height * scale);
         return Bitmap.createScaledBitmap(bitmap, printerWidth, newHeight, true);
     }
-
-    private Bitmap applySimpleThreshold(Bitmap bitmap) {
+    
+    /**
+     * Convert bitmap to monochrome (black and white) with improved contrast
+     */
+    private Bitmap convertToMonochrome(Bitmap bitmap) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
-        Bitmap output = bitmap.copy(Objects.requireNonNull(bitmap.getConfig()), true);
-        int[] pixels = new int[width * height];
-        output.getPixels(pixels, 0, width, 0, 0, width, height);
-        for (int i = 0; i < pixels.length; i++) {
-            int gray = Color.red(pixels[i]);
-            int bw = (gray > 160) ? 255 : 0;
-            pixels[i] = Color.rgb(bw, bw, bw);
+        
+        // Use RGB_565 for better memory efficiency
+        Bitmap monochrome = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        
+        // Process pixels directly for better performance
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int pixel = bitmap.getPixel(x, y);
+                
+                // Calculate luminance using standard formula
+                int gray = (int) (0.299 * Color.red(pixel) + 
+                                 0.587 * Color.green(pixel) + 
+                                 0.114 * Color.blue(pixel));
+                
+                // Apply threshold - lowered for better text visibility
+                int bw = (gray > GRAYSCALE_THRESHOLD) ? Color.WHITE : Color.BLACK;
+                monochrome.setPixel(x, y, bw);
+            }
         }
-        output.setPixels(pixels, 0, width, 0, 0, width, height);
-        return output;
+        
+        // Recycle the input bitmap if it's different from original
+        if (bitmap != null && !bitmap.isRecycled()) {
+            bitmap.recycle();
+        }
+        
+        return monochrome;
     }
 }

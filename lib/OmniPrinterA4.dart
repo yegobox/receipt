@@ -124,7 +124,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
       pageMode: PdfPageMode.none,
     );
     final left = await _loadLogoImage(position: "left");
-    final middle = await _loadLogoImage(position: "middle");
+    // final middle = await _loadLogoImage(position: "middle");
     final right = await _loadLogoImage(position: "right");
     pdf.addPage(
       MultiPage(
@@ -255,16 +255,16 @@ class OmniPrinterA4 with SaveFile implements Printable {
               transaction: transaction,
             ),
             Center(child: ReceiptFooter(font: _unicodeFont)),
-            if (middle != null) ...[
-              SizedBox(height: 1),
-              Center(
-                child: Image(
-                  middle,
-                  width: 20,
-                  height: 20,
-                ),
-              ),
-            ],
+            // if (middle != null) ...[
+            //   SizedBox(height: 1),
+            //   Center(
+            //     child: Image(
+            //       middle,
+            //       width: 20,
+            //       height: 20,
+            //     ),
+            //   ),
+            // ],
           ];
         },
       ),

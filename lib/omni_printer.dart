@@ -1,4 +1,3 @@
-import 'package:flipper_models/helperModels/talker.dart';
 import 'package:receipt/widgets/receipt_footer.dart';
 import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:flipper_models/helperModels/extensions.dart';
@@ -84,7 +83,7 @@ class OmniPrinter with SaveFile implements Printable {
   Future<void> _header({
     required ImageProvider leftImage,
     required ImageProvider rightImage,
-    required ImageProvider middleImage,
+    ImageProvider? middleImage,
     required String brandAddress,
     required String brandTel,
     required ITransaction transaction,
@@ -254,7 +253,9 @@ class OmniPrinter with SaveFile implements Printable {
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Image(leftImage, width: 25, height: 25),
-            Image(middleImage, width: 25, height: 25),
+            middleImage != null
+                ? Image(middleImage, width: 25, height: 25)
+                : Container(width: 25, height: 25),
             Image(rightImage, width: 25, height: 25),
           ]),
           SizedBox(height: 8),
@@ -815,6 +816,10 @@ class OmniPrinter with SaveFile implements Printable {
       ),
     );
 
+    // Add dashed line below ITEMS NUMBER for CS receipts
+
+    dashedLine();
+
     // Handle copy receipts
     if (receiptType == "CS" || receiptType == "CR") {
       rows.add(Text('COPY',
@@ -900,6 +905,11 @@ class OmniPrinter with SaveFile implements Printable {
         SizedBox(height: 8),
       ]),
     );
+
+    // Add dashed line below SDC INFORMATION for CS receipts
+
+    dashedLine();
+
     rows.add(
       Column(children: [
         SizedBox(height: 1),
@@ -960,6 +970,11 @@ class OmniPrinter with SaveFile implements Printable {
           ),
         ]),
       );
+
+      // Add dashed line below Internal Data for CS receipts
+
+      dashedLine();
+
       rows.add(
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
@@ -1141,7 +1156,7 @@ class OmniPrinter with SaveFile implements Printable {
     final middle = await _loadLogoImage(position: "middle");
     await _header(
         transaction: transaction,
-        middleImage: middle!,
+        // middleImage: middle!,
         originalInvoiceNumber: originalInvoiceNumber,
         leftImage: left!,
         rightImage: right!,

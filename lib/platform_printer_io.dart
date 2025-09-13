@@ -11,20 +11,11 @@ class PlatformPrinter {
     await _saveImageToDocuments(imageData);
 
     if (Platform.isAndroid) {
-      PrinterService.getInstance()?.initializePrinter();
-      try {
-        // 1. Convert Uint8List to JByteArray
-        final byteArray = JByteArray.from(imageData);
+      PrinterService.getInstance()!.initializePrinter();
 
-        // 2. Call the printer.printNow function with the JByteArray
-        final int status = PrinterService.getInstance()!.printNow(byteArray);
-
-        if (status != 0) {
-          throw Exception('Failed to print file');
-        }
-      } catch (e) {
-        throw Exception('Failed to print file: $e');
-      }
+      final byteArray = JByteArray.from(imageData);
+      final int status = PrinterService.getInstance()!.printNow(byteArray);
+      print('Print status: $status');
     }
   }
 

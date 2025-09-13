@@ -1220,7 +1220,7 @@ packages:
       path: "../../apps/flipper_auth"
       relative: true
     source: path
-    version: "1.0.1+148"
+    version: "1.0.1+169"
   flipper_dashboard:
     dependency: "direct overridden"
     description:
@@ -1298,7 +1298,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.180.4252223234901+1756527997"
+    version: "1.180.4252223234901+1756528018"
   flipper_scanner:
     dependency: "direct overridden"
     description:
@@ -2810,10 +2810,10 @@ packages:
     dependency: transitive
     description:
       name: posthog_flutter
-      sha256: "2a74b86306b3e1b27ad227aeeb5d63374afb03aa50e87af5062fec1341824b3b"
+      sha256: "7be6408dd164b40d6eed86f19c36f25d69db16d015f22029431fb2cb0a43ac60"
       url: "https://pub.dev"
     source: hosted
-    version: "4.11.0"
+    version: "5.5.0"
   printing:
     dependency: "direct main"
     description:
@@ -3104,18 +3104,18 @@ packages:
     dependency: transitive
     description:
       name: sentry
-      sha256: "599701ca0693a74da361bc780b0752e1abc98226cf5095f6b069648116c896bb"
+      sha256: d9f3dcf1ecdd600cf9ce134f622383adde5423ecfdaf0ca9b20fbc1c44849337
       url: "https://pub.dev"
     source: hosted
-    version: "8.14.2"
+    version: "9.6.0"
   sentry_flutter:
     dependency: "direct main"
     description:
       name: sentry_flutter
-      sha256: "5ba2cf40646a77d113b37a07bd69f61bb3ec8a73cbabe5537b05a7c89d2656f8"
+      sha256: "37deb4ef8837d10b5c1f527ec18591f8d2d2da9c34f19b3d97ccbbe7f84077c0"
       url: "https://pub.dev"
     source: hosted
-    version: "8.14.2"
+    version: "9.6.0"
   share_plus:
     dependency: transitive
     description:

@@ -1,7 +1,7 @@
 import 'package:flipper_models/db_model_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:receipt/OmniPrinterA4.dart';
+// import 'package:receipt/OmniPrinterA4.dart';
 import 'package:receipt/omni_printer.dart';
 import 'package:receipt/printable.dart';
 import 'dart:async';

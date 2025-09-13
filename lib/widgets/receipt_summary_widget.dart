@@ -3,6 +3,8 @@ import 'package:pdf/widgets.dart';
 import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:flipper_models/helperModels/extensions.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart';
 
 class ReceiptSummaryWidget extends StatelessWidget {
   final String receiptType;
@@ -330,10 +332,21 @@ class ReceiptSummaryWidget extends StatelessWidget {
   }
 
   Widget _dashWidget() {
-    return Container(
-      height: 1,
-      // color: Colors.black,
-      margin: const EdgeInsets.symmetric(vertical: 2),
+    return CustomPaint(
+      size: const PdfPoint(double.infinity, 10),
+      painter: (PdfGraphics canvas, PdfPoint size) {
+        const double dashWidth = 2.0, dashSpace = 2.0;
+        double startX = 0.0;
+        while (startX < size.x) {
+          canvas
+            ..moveTo(startX, 0)
+            ..lineTo(startX + dashWidth, 0)
+            ..setColor(PdfColors.black)
+            ..setLineWidth(0.5)
+            ..strokePath();
+          startX += dashWidth + dashSpace;
+        }
+      },
     );
   }
 
