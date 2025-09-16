@@ -564,7 +564,8 @@ class OmniPrinter with SaveFile implements Printable {
         // Note: This is a simplified version - in production, you'd fetch the actual config
         // For now, using the expected formula: ttTaxAmount = ttTaxblAmt * taxPercentage / (100 + taxPercentage)
         // Assuming TT tax percentage is 3% from configuration
-        ttTaxAmount += ttTaxblAmt * 3 / (100 + 3); // Using configuration formula
+        ttTaxAmount +=
+            ttTaxblAmt * 3 / (100 + 3); // Using configuration formula
       }
 
       if (ttTaxAmount != 0) {
@@ -829,7 +830,22 @@ class OmniPrinter with SaveFile implements Printable {
     // Only show TOTAL TAX: if not all items are tax type C (to avoid duplicate row)
     if (!(items.isNotEmpty &&
         items.every((item) => item.taxTyCd == "C" || item.taxTyCd == null))) {
-      await _buildTotalTax(totalTax: totalTax, receiptType: receiptType);
+      // Calculate actual total tax including TT tax
+      double actualTotalTax = safeParseDouble(totalTax);
+      if (items.any((item) => item.taxTyCd == 'TT')) {
+        double ttTaxAmount = 0.0;
+        for (var item in items.where((item) => item.taxTyCd == 'TT')) {
+          double totalAfterDiscount =
+              (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
+          double ttTaxblAmt = totalAfterDiscount / 1.18;
+          ttTaxAmount += ttTaxblAmt * 3 / (100 + 3);
+        }
+        // Add TT tax since it's not included in the original totalTax parameter
+        actualTotalTax += ttTaxAmount;
+      }
+      await _buildTotalTax(
+          totalTax: actualTotalTax.toStringAsFixed(2),
+          receiptType: receiptType);
     }
 
     rows.add(Row(

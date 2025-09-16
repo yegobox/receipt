@@ -261,13 +261,28 @@ class ReceiptSummaryWidget extends StatelessWidget {
   }
 
   TableRow _buildTotalTaxRow() {
+    // Calculate actual total tax including TT tax
+    double actualTotalTax = safeParseDouble(totalTax);
+    
+    // Add TT tax amount if there are TT items and it's not already included
+    if (items.any((item) => item.taxTyCd == 'TT')) {
+      double ttTaxAmount = 0.0;
+      for (var item in items.where((item) => item.taxTyCd == 'TT')) {
+        double totalAfterDiscount = (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
+        double ttTaxblAmt = totalAfterDiscount / 1.18;
+        ttTaxAmount += ttTaxblAmt * 3 / (100 + 3);
+      }
+      // Add TT tax since it's not included in the original totalTax parameter
+      actualTotalTax += ttTaxAmount;
+    }
+    
     return TableRow(
       children: [
         _buildCell('TOTAL TAX:'),
         _buildCell(
           (receiptType == "NR" || receiptType == "CR" || receiptType == "TR")
-              ? "-${safeParseDouble(totalTax).toStringAsFixed(2)}"
-              : safeParseDouble(totalTax).toStringAsFixed(2),
+              ? "-${actualTotalTax.toStringAsFixed(2)}"
+              : actualTotalTax.toStringAsFixed(2),
         ),
       ],
     );
