@@ -14,6 +14,42 @@ class A4ItemsTable extends pw.StatelessWidget {
     required this.font,
     this.minRows = 10,
   });
+  // Helper method:
+  String _buildTotalPriceText(TransactionItem item, String receiptType) {
+    final isNegativeReceipt = ["NR", "CR", "TR"].contains(receiptType);
+    final baseAmount = item.qty * item.price;
+
+    String firstLine = isNegativeReceipt
+        ? "-${baseAmount.toNoCurrencyFormatted()}"
+        : baseAmount.toNoCurrencyFormatted();
+
+    if (safeParseDouble(item.dcRt) == 0) {
+      return firstLine;
+    }
+
+    final discountedAmount = baseAmount - (baseAmount * item.dcRt! / 100);
+    String secondLine = isNegativeReceipt
+        ? "-${discountedAmount.toNoCurrencyFormatted()}"
+        : discountedAmount.toNoCurrencyFormatted();
+
+    return "$firstLine\n$secondLine";
+  }
+
+  double safeParseDouble(dynamic value) {
+    if (value == null) return 0.0;
+    if (value is double) {
+      if (value.isNaN || value.isInfinite) return 0.0;
+      return value;
+    }
+    if (value is int) return value.toDouble();
+    if (value is String) {
+      final cleaned = value.replaceAll(',', '').trim();
+      final parsed = double.tryParse(cleaned);
+      if (parsed == null || parsed.isNaN || parsed.isInfinite) return 0.0;
+      return parsed;
+    }
+    return 0.0;
+  }
 
   @override
   pw.Widget build(pw.Context context) {
@@ -29,48 +65,19 @@ class A4ItemsTable extends pw.StatelessWidget {
       data: [
         ...items.map((item) => [
               item.itemCd ?? '',
-              pw.Column(
-                mainAxisAlignment: pw.MainAxisAlignment.start,
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: [
-                  pw.Text(
-                    item.name,
-                    style: pw.TextStyle(fontSize: 10, font: font),
-                  ),
-                  if (item.dcRt != null && item.dcRt != 0)
-                    pw.Text(
-                      "Discount - ${item.dcRt}%",
-                      style: pw.TextStyle(fontSize: 10, font: font),
-                    ),
-                ],
+              pw.Text(
+                item.name +
+                    (safeParseDouble(item.dcRt) != 0
+                        ? "\nDiscount - ${item.dcRt}%"
+                        : ""),
+                style: pw.TextStyle(fontSize: 10, font: font),
               ),
               '${item.qty}',
               (item.taxTyCd ?? ''),
               item.price.toNoCurrencyFormatted(),
-              pw.Column(
-                mainAxisAlignment: pw.MainAxisAlignment.start,
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: [
-                  pw.Text(
-                    (receiptType == "NR" ||
-                            receiptType == "CR" ||
-                            receiptType == "TR")
-                        ? "-${(item.qty * item.price).toNoCurrencyFormatted()}"
-                        : (item.qty * item.price).toNoCurrencyFormatted(),
-                    style: pw.TextStyle(fontSize: 10, font: font),
-                  ),
-                  if (item.dcRt != null && item.dcRt != 0)
-                    pw.Text(
-                      (receiptType == "NR" ||
-                              receiptType == "CR" ||
-                              receiptType == "TR")
-                          ? "-${((item.qty * item.price) - (item.qty * item.price * item.dcRt! / 100)).toNoCurrencyFormatted()}"
-                          : ((item.qty * item.price) -
-                                  (item.qty * item.price * item.dcRt! / 100))
-                              .toNoCurrencyFormatted(),
-                      style: pw.TextStyle(fontSize: 10, font: font),
-                    ),
-                ],
+              pw.Text(
+                _buildTotalPriceText(item, receiptType),
+                style: pw.TextStyle(fontSize: 10, font: font),
               ),
             ]),
         // Only add empty rows if we have fewer items than minRows
