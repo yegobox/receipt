@@ -553,19 +553,19 @@ class OmniPrinter with SaveFile implements Printable {
       required String receiptType,
       List<TransactionItem>? items}) async {
     // Check if there are any TT items and calculate TT tax amount
-    if (items != null && items.any((item) => item.taxTyCd == 'TT')) {
+    if (items != null && items.any((item) => item.ttCatCd == 'TT')) {
       double ttTaxAmount = 0.0;
 
-      for (var item in items.where((item) => item.taxTyCd == 'TT')) {
+      for (var item in items.where((item) => item.ttCatCd == 'TT')) {
         double totalAfterDiscount =
             (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
-        double ttTaxblAmt = totalAfterDiscount / 1.18;
+        // Determine base for TT tax depending on VAT setting
+        double ttBase = ProxyService.box.vatEnabled()
+            ? totalAfterDiscount / 1.18
+            : totalAfterDiscount;
         // Use configuration-based tax percentage calculation
-        // Note: This is a simplified version - in production, you'd fetch the actual config
-        // For now, using the expected formula: ttTaxAmount = ttTaxblAmt * taxPercentage / (100 + taxPercentage)
         // Assuming TT tax percentage is 3% from configuration
-        ttTaxAmount +=
-            ttTaxblAmt * 3 / (100 + 3); // Using configuration formula
+        ttTaxAmount += ttBase * 3 / (100 + 3); // Using configuration formula
       }
 
       if (ttTaxAmount != 0) {
@@ -683,7 +683,21 @@ class OmniPrinter with SaveFile implements Printable {
     // Process items
     for (var item in items) {
       double total = safeParseDouble(item.price) * safeParseDouble(item.qty);
-      String taxLabel = item.taxTyCd != null ? "(${item.taxTyCd!})" : "(B)";
+      // Construct tax label. For TT items: when VAT enabled we show primary as (B)
+      // and render a secondary (B&TT) total row. When not VAT, show (TT) on the
+      // single line. For non-TT items keep their taxTyCd or default to (B).
+      String taxLabel;
+      if (item.ttCatCd == 'TT') {
+        if (ProxyService.box.vatEnabled()) {
+          // Primary line should show B only (TT will be shown on the secondary line)
+          taxLabel = '(B)';
+        } else {
+          // Not VAT: show TT on the single-line representation
+          taxLabel = '(TT)';
+        }
+      } else {
+        taxLabel = item.taxTyCd != null ? "(${item.taxTyCd!})" : "(B)";
+      }
       String totalPrefix =
           receiptType == "NR" || receiptType == "CR" || receiptType == "TR"
               ? '-'
@@ -694,36 +708,58 @@ class OmniPrinter with SaveFile implements Printable {
       if (rows.isNotEmpty) {
         rows.add(SizedBox(height: 8)); // Add spacing
       }
-      // Item row
+      // Item name row
       rows.add(
         Row(
           children: [
-            Text(item.name, style: smallTextStyle), // Item name
+            Text(item.name, style: smallTextStyle), // Item name on its own line
           ],
         ),
       );
 
-      // Add price, qty, and total on the second row
-      rows.add(
-        Row(
+      // For TT items we have two different behaviors depending on VAT setting:
+      // - VAT enabled: two lines (primary name with (B), secondary shows base total with (B&TT))
+      // - VAT disabled: single line with (TT) shown on the amount
+      if (item.ttCatCd == 'TT' && ProxyService.box.vatEnabled()) {
+        String baseTotal = total.toNoCurrencyFormatted();
+        rows.add(Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               "${safeParseDouble(item.price).toStringAsFixed(2)}x ",
               style: smallTextStyle,
             ),
+            Text('  ${safeParseDouble(item.qty)}  ', style: smallTextStyle),
             Text(
-              "  ${safeParseDouble(item.qty)}  ",
-              style: smallTextStyle,
-            ),
-            Text(
-              '$totalPrefix${total.toNoCurrencyFormatted()}$taxLabel',
+              '$baseTotal (B&TT)',
               style: smallTextStyle,
               textAlign: TextAlign.right,
             ),
           ],
-        ),
-      );
+        ));
+      } else {
+        // Default behavior: show unit price x qty and the total with tax label
+        rows.add(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "${safeParseDouble(item.price).toStringAsFixed(2)}x ",
+                style: smallTextStyle,
+              ),
+              Text(
+                "  ${safeParseDouble(item.qty)}  ",
+                style: smallTextStyle,
+              ),
+              Text(
+                '$totalPrefix${total.toNoCurrencyFormatted()}$taxLabel',
+                style: smallTextStyle,
+                textAlign: TextAlign.right,
+              ),
+            ],
+          ),
+        );
+      }
 
       // Discount row if applicable
       if (safeParseDouble(item.dcRt) != 0) {
@@ -804,8 +840,11 @@ class OmniPrinter with SaveFile implements Printable {
         totalTaxB: safeParseDouble(taxB).toStringAsFixed(2),
         receiptType: receiptType);
 
+    // Add TT VAT contribution to displayed totalTaxB
+    double displayedTotalTaxB = safeParseDouble(totalTaxB);
+    // double displayedTotalTaxB = safeParseDouble(totalTaxB) + extraTtToTaxB;
     await _buildTotalTaxB(
-        totalTaxB: safeParseDouble(totalTaxB).toStringAsFixed(2),
+        totalTaxB: displayedTotalTaxB.toStringAsFixed(2),
         receiptType: receiptType);
 
     await _buildTaxA(
@@ -832,13 +871,16 @@ class OmniPrinter with SaveFile implements Printable {
         items.every((item) => item.taxTyCd == "C" || item.taxTyCd == null))) {
       // Calculate actual total tax including TT tax
       double actualTotalTax = safeParseDouble(totalTax);
-      if (items.any((item) => item.taxTyCd == 'TT')) {
+      // Ensure TT tax is included in TOTAL TAX as well
+      if (items.any((item) => item.ttCatCd == 'TT')) {
         double ttTaxAmount = 0.0;
-        for (var item in items.where((item) => item.taxTyCd == 'TT')) {
+        for (var item in items.where((item) => item.ttCatCd == 'TT')) {
           double totalAfterDiscount =
               (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
-          double ttTaxblAmt = totalAfterDiscount / 1.18;
-          ttTaxAmount += ttTaxblAmt * 3 / (100 + 3);
+          double ttBase = ProxyService.box.vatEnabled()
+              ? totalAfterDiscount / 1.18
+              : totalAfterDiscount;
+          ttTaxAmount += ttBase * 3 / (100 + 3);
         }
         // Add TT tax since it's not included in the original totalTax parameter
         actualTotalTax += ttTaxAmount;
@@ -1224,7 +1266,6 @@ class OmniPrinter with SaveFile implements Printable {
     //talker.warning("ReceiptNo: $rcptNo: totRcptNo: $totRcptNo");
     final left = await _loadLogoImage(position: "left");
     final right = await _loadLogoImage(position: "right");
-    final middle = await _loadLogoImage(position: "middle");
     await _header(
         transaction: transaction,
         // middleImage: middle!,

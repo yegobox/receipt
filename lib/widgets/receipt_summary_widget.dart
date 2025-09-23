@@ -165,7 +165,7 @@ class ReceiptSummaryWidget extends StatelessWidget {
               if (safeParseDouble(totalTaxB) != 0) _buildTotalTaxBRow(),
               if (items.any((item) => item.taxTyCd == "C")) _buildTaxCRow(),
               if (items.any((item) => item.taxTyCd == "D")) _buildTaxDRow(),
-              if (items.any((item) => item.taxTyCd == "TT")) _buildTaxTTRow(),
+              if (items.any((item) => item.ttCatCd == "TT")) _buildTaxTTRow(),
               _buildTotalTaxRow(),
               _builtPaymentInfoRow(
                 payment: transaction.paymentType!.toUpperCase(),
@@ -232,13 +232,18 @@ class ReceiptSummaryWidget extends StatelessWidget {
   }
 
   TableRow _buildTotalTaxBRow() {
+    // Start with configured totalTaxB. Do NOT add TT VAT portion here —
+    // upstream calculations already include any VAT contributions to totalTaxB.
+    // The TT-specific VAT/exclusive breakdown is shown under 'TOTAL TT-3%'.
+    double displayedTotalTaxB = safeParseDouble(totalTaxB);
+
     return TableRow(
       children: [
         _buildCell('TOTAL TAX B:'),
         _buildCell(
           (receiptType == "NR" || receiptType == "CR" || receiptType == "TR")
-              ? "-${safeParseDouble(totalTaxB).toNoCurrencyFormatted()}"
-              : safeParseDouble(totalTaxB).toNoCurrencyFormatted(),
+              ? "-${displayedTotalTaxB.toNoCurrencyFormatted()}"
+              : displayedTotalTaxB.toNoCurrencyFormatted(),
         ),
       ],
     );
@@ -263,19 +268,23 @@ class ReceiptSummaryWidget extends StatelessWidget {
   TableRow _buildTotalTaxRow() {
     // Calculate actual total tax including TT tax
     double actualTotalTax = safeParseDouble(totalTax);
-    
+
     // Add TT tax amount if there are TT items and it's not already included
-    if (items.any((item) => item.taxTyCd == 'TT')) {
+    if (items.any((item) => item.ttCatCd == 'TT')) {
       double ttTaxAmount = 0.0;
-      for (var item in items.where((item) => item.taxTyCd == 'TT')) {
-        double totalAfterDiscount = (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
-        double ttTaxblAmt = totalAfterDiscount / 1.18;
-        ttTaxAmount += ttTaxblAmt * 3 / (100 + 3);
+      for (var item in items.where((item) => item.ttCatCd == 'TT')) {
+        double totalAfterDiscount =
+            (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
+        // Determine base for TT tax depending on VAT setting
+        double ttBase = ProxyService.box.vatEnabled()
+            ? totalAfterDiscount / 1.18
+            : totalAfterDiscount;
+        ttTaxAmount += ttBase * 3 / (100 + 3); // Using configuration formula
       }
       // Add TT tax since it's not included in the original totalTax parameter
       actualTotalTax += ttTaxAmount;
     }
-    
+
     return TableRow(
       children: [
         _buildCell('TOTAL TAX:'),
@@ -318,15 +327,17 @@ class ReceiptSummaryWidget extends StatelessWidget {
   TableRow _buildTaxTTRow() {
     // Calculate TT tax amount using the same logic as rw_tax.dart
     double ttTaxAmount = 0.0;
-    
-    for (var item in items.where((item) => item.taxTyCd == 'TT')) {
-      double totalAfterDiscount = (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
-      double ttTaxblAmt = totalAfterDiscount / 1.18;
-      // Use configuration-based tax percentage calculation
-      // Assuming TT tax percentage is 3% from configuration
-      ttTaxAmount += ttTaxblAmt * 3 / (100 + 3); // Using configuration formula
+
+    for (var item in items.where((item) => item.ttCatCd == 'TT')) {
+      double totalAfterDiscount =
+          (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
+      // Determine base for TT tax depending on VAT setting
+      double ttBase = ProxyService.box.vatEnabled()
+          ? totalAfterDiscount / 1.18
+          : totalAfterDiscount;
+      ttTaxAmount += ttBase * 3 / (100 + 3); // Using configuration formula
     }
-    
+
     return TableRow(
       children: [
         _buildCell('TOTAL TT-3%:'),

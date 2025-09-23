@@ -1,6 +1,7 @@
 import 'package:pdf/widgets.dart' as pw;
 import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:flipper_models/helperModels/extensions.dart';
+import 'package:flipper_services/proxy.dart';
 
 class A4ItemsTable extends pw.StatelessWidget {
   final List<TransactionItem> items;
@@ -53,6 +54,57 @@ class A4ItemsTable extends pw.StatelessWidget {
 
   @override
   pw.Widget build(pw.Context context) {
+    // Build table rows, emitting a second row for TT items when VAT is enabled
+    final List<List<dynamic>> rowsData = [];
+    for (var item in items) {
+      // Primary row
+      // TT items behave differently depending on VAT setting
+      if (item.ttCatCd == 'TT' && ProxyService.box.vatEnabled()) {
+        // Primary row: name (show description) + tax B&TT marker
+        // Secondary row: show base total with (B&TT)
+        final baseTotal =
+            (safeParseDouble(item.price) * safeParseDouble(item.qty))
+                .toNoCurrencyFormatted();
+        rowsData.add([
+          item.itemCd ?? '',
+          pw.Text(item.name, style: pw.TextStyle(fontSize: 10, font: font)),
+          '${item.qty}',
+          'B&TT',
+          item.price.toNoCurrencyFormatted(),
+          '$baseTotal (B&TT)',
+        ]);
+      } else if (item.ttCatCd == 'TT' && !ProxyService.box.vatEnabled()) {
+        // Non-VAT TT: single line showing TT as tax
+        rowsData.add([
+          item.itemCd ?? '',
+          pw.Text(item.name, style: pw.TextStyle(fontSize: 10, font: font)),
+          '${item.qty}',
+          'TT',
+          item.price.toNoCurrencyFormatted(),
+          _buildTotalPriceText(item, receiptType),
+        ]);
+      } else {
+        // Default behavior for non-TT items
+        rowsData.add([
+          item.itemCd ?? '',
+          pw.Text(
+            item.name +
+                (safeParseDouble(item.dcRt) != 0
+                    ? "\nDiscount - ${item.dcRt}%"
+                    : ""),
+            style: pw.TextStyle(fontSize: 10, font: font),
+          ),
+          '${item.qty}',
+          (item.taxTyCd ?? ''),
+          item.price.toNoCurrencyFormatted(),
+          pw.Text(
+            _buildTotalPriceText(item, receiptType),
+            style: pw.TextStyle(fontSize: 10, font: font),
+          ),
+        ]);
+      }
+    }
+
     return pw.TableHelper.fromTextArray(
       headers: [
         'Item Code',
@@ -63,27 +115,11 @@ class A4ItemsTable extends pw.StatelessWidget {
         'Total Price'
       ],
       data: [
-        ...items.map((item) => [
-              item.itemCd ?? '',
-              pw.Text(
-                item.name +
-                    (safeParseDouble(item.dcRt) != 0
-                        ? "\nDiscount - ${item.dcRt}%"
-                        : ""),
-                style: pw.TextStyle(fontSize: 10, font: font),
-              ),
-              '${item.qty}',
-              (item.taxTyCd ?? ''),
-              item.price.toNoCurrencyFormatted(),
-              pw.Text(
-                _buildTotalPriceText(item, receiptType),
-                style: pw.TextStyle(fontSize: 10, font: font),
-              ),
-            ]),
+        ...rowsData,
         // Only add empty rows if we have fewer items than minRows
-        if (items.length < minRows)
+        if (rowsData.length < minRows)
           ...List.generate(
-            minRows - items.length,
+            minRows - rowsData.length,
             (_) => ['', '', '', '', '', ''],
           ),
       ],
