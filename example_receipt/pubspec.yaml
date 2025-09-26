@@ -56,15 +56,15 @@ dependencies:
   realm_dart: ^20.1.1
 dependency_overrides:
   http: ^1.2.2
-  meta: ^1.12.0
+  meta: ^1.16.0
   web: ^1.1.0
   sqlite3: ^2.9.0
   device_info_plus: ^11.3.3
   archive: ^3.6.1
   excel: ^4.0.6
   collection: ^1.19.0
-  cbor: ^4.0.0
-  pubnub: ^5.2.0
+  cbor: ^6.3.7
+  
   nfc_manager: ^4.0.2
 
 dev_dependencies:
