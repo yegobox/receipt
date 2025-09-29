@@ -52,7 +52,7 @@ dependencies:
   receipt: 
     path: "../"
   flipper_rw: any
-  realm: ^20.1.1
+  # realm: ^20.1.1
   realm_dart: ^20.1.1
 dependency_overrides:
   http: ^1.2.2
