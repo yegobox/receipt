@@ -65,7 +65,6 @@ dependency_overrides:
   collection: ^1.19.0
   cbor: ^6.3.7
   
-  nfc_manager: ^4.0.2
 
 dev_dependencies:
   jnigen: ^0.14.2

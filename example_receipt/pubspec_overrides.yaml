@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: brick_core,brick_offline_first,brick_offline_first_with_rest,brick_offline_first_with_supabase,brick_rest,brick_sqlite,brick_supabase,demo_ui_components,flipper_accounting,flipper_actionable,flipper_auth,flipper_dashboard,flipper_infra,flipper_loading,flipper_localize,flipper_login,flipper_mfa,flipper_mocks,flipper_models,flipper_personal,flipper_routing,flipper_rw,flipper_scanner,flipper_services,flipper_socials,flipper_ui,flipper_web,flowy_svg,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,qr_flutter,receipt,scrollable_positioned_list,supabase_models,http,meta,web,sqlite3,device_info_plus,archive,excel,collection,cbor,nfc_manager
+# melos_managed_dependency_overrides: brick_core,brick_offline_first,brick_offline_first_with_rest,brick_offline_first_with_supabase,brick_rest,brick_sqlite,brick_supabase,demo_ui_components,flipper_accounting,flipper_actionable,flipper_auth,flipper_dashboard,flipper_infra,flipper_loading,flipper_localize,flipper_login,flipper_mfa,flipper_mocks,flipper_models,flipper_personal,flipper_routing,flipper_rw,flipper_scanner,flipper_services,flipper_socials,flipper_ui,flipper_web,flowy_svg,flutter_form_bloc,flutter_slidable,flutter_statusbarcolor_ns,form_bloc,qr_flutter,receipt,scrollable_positioned_list,supabase_models,http,meta,web,sqlite3,device_info_plus,archive,excel,collection,cbor,nfc_manager,brick_build,brick_ditto,brick_ditto_generators
 dependency_overrides:
   brick_core:
     path: ../../../packages/brick/packages/brick_core
@@ -81,4 +81,9 @@ dependency_overrides:
   excel: ^4.0.6
   collection: ^1.19.0
   cbor: ^6.3.7
-  nfc_manager: ^4.0.2
+  brick_build:
+    path: ../../../packages/brick/packages/brick_build
+  brick_ditto:
+    path: ../../../packages/brick/packages/brick_ditto
+  brick_ditto_generators:
+    path: ../../../packages/brick/packages/brick_ditto_generators

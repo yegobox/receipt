@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:pdf/pdf.dart';
 import 'package:receipt/widgets/receipt_summary_widget.dart'
     show ReceiptSummaryWidget;
@@ -10,6 +12,7 @@ import 'package:receipt/printable.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart' as c;
 import 'package:printing/printing.dart';
+import 'package:flipper_services/proxy.dart';
 import 'widgets/a4_header.dart';
 import 'widgets/a4_invoice_info.dart';
 import 'widgets/a4_items_table.dart';
@@ -28,6 +31,20 @@ class OmniPrinterA4 with SaveFile implements Printable {
   }
 
   Future<ImageProvider?> _loadLogoImage({required String position}) async {
+    if (position == "middle") {
+      final customLogo = ProxyService.box.receiptLogoBase64();
+      if (customLogo != null && customLogo.isNotEmpty) {
+        try {
+          final bytes = base64Decode(customLogo);
+          if (bytes.isNotEmpty) {
+            return MemoryImage(bytes);
+          }
+        } catch (_) {
+          // Ignore decode errors and fall back to default asset
+        }
+      }
+    }
+
     ImageProvider? image;
     switch (position) {
       case "left":
@@ -37,10 +54,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
             configuration: const c.ImageConfiguration(size: Size(600, 600)));
         break;
       case "middle":
-        const imageLogo =
-            c.AssetImage('assets/flipper_logo.png', package: 'receipt');
-        image = await flutterImageProvider(imageLogo,
-            configuration: const c.ImageConfiguration(size: Size(100, 100)));
+        // No fallback asset for the middle position; keep empty when custom logo absent
+        image = null;
         break;
       case "right":
         const imageLogo =
@@ -126,7 +141,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
       pageMode: PdfPageMode.none,
     );
     final left = await _loadLogoImage(position: "left");
-    // final middle = await _loadLogoImage(position: "middle");
+    final middle = await _loadLogoImage(position: "middle");
     final right = await _loadLogoImage(position: "right");
     pdf.addPage(
       MultiPage(
@@ -137,6 +152,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
             // Header Section
             A4Header(
               leftLogo: left,
+              middleLogo: middle,
               rightLogo: right,
               brandName: brandName,
               brandAddress: brandAddress,

@@ -2,6 +2,7 @@ import 'package:pdf/widgets.dart' as pw;
 
 class A4Header extends pw.StatelessWidget {
   final pw.ImageProvider? leftLogo;
+  final pw.ImageProvider? middleLogo;
   final pw.ImageProvider? rightLogo;
   final String brandAddress;
   final String brandTel;
@@ -12,6 +13,7 @@ class A4Header extends pw.StatelessWidget {
 
   A4Header({
     required this.leftLogo,
+    this.middleLogo,
     required this.rightLogo,
     required this.brandAddress,
     required this.brandTel,
@@ -48,6 +50,10 @@ class A4Header extends pw.StatelessWidget {
             mainAxisSize: pw.MainAxisSize.min,
             crossAxisAlignment: pw.CrossAxisAlignment.center,
             children: [
+              if (middleLogo != null) ...[
+                pw.Image(middleLogo!, width: 50, height: 50),
+                pw.SizedBox(height: 4),
+              ],
               pw.Text(
                 brandName,
                 style: pw.TextStyle(fontSize: 12, font: font),

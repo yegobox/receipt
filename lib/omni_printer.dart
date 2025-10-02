@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:receipt/widgets/receipt_footer.dart';
 import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:flipper_models/helperModels/extensions.dart';
@@ -10,7 +13,6 @@ import 'package:printing/printing.dart';
 import 'package:receipt/SaveFile.dart';
 import 'package:receipt/printable.dart';
 import 'package:universal_platform/universal_platform.dart';
-import 'dart:async';
 
 import 'print_extensions.dart';
 
@@ -38,6 +40,21 @@ class OmniPrinter with SaveFile implements Printable {
   }
 
   Future<ImageProvider?> _loadLogoImage({required String position}) async {
+    if (position == "middle") {
+      final customLogo = ProxyService.box.receiptLogoBase64();
+      if (customLogo != null && customLogo.isNotEmpty) {
+        try {
+          final bytes = base64Decode(customLogo);
+          if (bytes.isNotEmpty) {
+            return MemoryImage(bytes);
+          }
+        } catch (_) {
+          // Ignore decoding errors and fall back to no logo
+        }
+      }
+      return null;
+    }
+
     ImageProvider? image;
     switch (position) {
       case "left":
@@ -45,12 +62,6 @@ class OmniPrinter with SaveFile implements Printable {
             c.AssetImage('assets/logo_left.png', package: 'receipt');
         image = await flutterImageProvider(imageLogo,
             configuration: const c.ImageConfiguration(size: Size(600, 600)));
-        break;
-      case "middle":
-        const imageLogo =
-            c.AssetImage('assets/flipper_logo.png', package: 'receipt');
-        image = await flutterImageProvider(imageLogo,
-            configuration: const c.ImageConfiguration(size: Size(100, 100)));
         break;
       case "right":
         const imageLogo =
@@ -1265,10 +1276,11 @@ class OmniPrinter with SaveFile implements Printable {
     await loadUnicodeFont();
     //talker.warning("ReceiptNo: $rcptNo: totRcptNo: $totRcptNo");
     final left = await _loadLogoImage(position: "left");
+    final middle = await _loadLogoImage(position: "middle");
     final right = await _loadLogoImage(position: "right");
     await _header(
         transaction: transaction,
-        // middleImage: middle!,
+        middleImage: middle,
         originalInvoiceNumber: originalInvoiceNumber,
         leftImage: left!,
         rightImage: right!,

@@ -337,6 +337,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.4"
+  brick_build:
+    dependency: "direct overridden"
+    description:
+      path: "../../../packages/brick/packages/brick_build"
+      relative: true
+    source: path
+    version: "4.0.0"
   brick_core:
     dependency: "direct overridden"
     description:
@@ -344,6 +351,20 @@ packages:
       relative: true
     source: path
     version: "2.0.0"
+  brick_ditto:
+    dependency: "direct overridden"
+    description:
+      path: "../../../packages/brick/packages/brick_ditto"
+      relative: true
+    source: path
+    version: "1.0.0"
+  brick_ditto_generators:
+    dependency: "direct overridden"
+    description:
+      path: "../../../packages/brick/packages/brick_ditto_generators"
+      relative: true
+    source: path
+    version: "1.0.0"
   brick_offline_first:
     dependency: "direct overridden"
     description:
@@ -925,10 +946,10 @@ packages:
     dependency: transitive
     description:
       name: file_picker
-      sha256: ab13ae8ef5580a411c458d6207b6774a6c237d77ac37011b13994879f68a8810
+      sha256: f2d9f173c2c14635cc0e9b14c143c49ef30b4934e8d1d274d6206fcb0086a06f
       url: "https://pub.dev"
     source: hosted
-    version: "8.3.7"
+    version: "10.3.3"
   file_selector_linux:
     dependency: transitive
     description:
@@ -1205,7 +1226,7 @@ packages:
       path: "../../../apps/flipper_auth"
       relative: true
     source: path
-    version: "1.0.1+252"
+    version: "1.0.1+274"
   flipper_dashboard:
     dependency: "direct overridden"
     description:
@@ -1290,7 +1311,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.180.4252223234901+1756528101"
+    version: "1.180.4252223234901+1756528123"
   flipper_scanner:
     dependency: "direct overridden"
     description:
@@ -1325,7 +1346,7 @@ packages:
       path: "../../../apps/flipper_web"
       relative: true
     source: path
-    version: "1.0.0+100"
+    version: "1.0.0+122"
   flowy_svg:
     dependency: "direct overridden"
     description:
@@ -2453,14 +2474,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
-  ndef_record:
-    dependency: transitive
-    description:
-      name: ndef_record
-      sha256: "876e2774f18573e8afba1aa9db3998aaf4e3384c825c843c3f86d001bec8510d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.3"
   nested:
     dependency: transitive
     description:
@@ -2470,13 +2483,13 @@ packages:
     source: hosted
     version: "1.0.0"
   nfc_manager:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
       name: nfc_manager
-      sha256: "4977eec64f758b6d2470b2df52f023ac2812f4376b75de30e56a413fce3541aa"
+      sha256: f5be75e90f8f2bff3ee49fbd7ef65bdd4a86ee679c2412e71ab2846a8cff8c59
       url: "https://pub.dev"
     source: hosted
-    version: "4.1.0"
+    version: "3.5.0"
   nm:
     dependency: transitive
     description:
@@ -3967,5 +3980,5 @@ packages:
     source: hosted
     version: "2.1.0"
 sdks:
-  dart: ">=3.9.2 <4.0.0"
+  dart: ">=3.9.0 <4.0.0"
   flutter: ">=3.35.0"
