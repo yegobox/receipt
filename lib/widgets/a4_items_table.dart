@@ -60,18 +60,20 @@ class A4ItemsTable extends pw.StatelessWidget {
       // Primary row
       // TT items behave differently depending on VAT setting
       if (item.ttCatCd == 'TT' && ProxyService.box.vatEnabled()) {
-        // Primary row: name (show description) + tax B&TT marker
-        // Secondary row: show base total with (B&TT)
+        // Primary row: name (show description) + tax taxType&TT marker
+        // Secondary row: show base total with (taxType&TT)
         final baseTotal =
             (safeParseDouble(item.price) * safeParseDouble(item.qty))
                 .toNoCurrencyFormatted();
+        // Use the item's actual tax type instead of hardcoding "B"
+        final itemTaxType = item.taxTyCd ?? 'B';
         rowsData.add([
           item.itemCd ?? '',
           pw.Text(item.name, style: pw.TextStyle(fontSize: 10, font: font)),
           '${item.qty}',
-          'B&TT',
+          '$itemTaxType&TT',
           item.price.toNoCurrencyFormatted(),
-          '$baseTotal (B&TT)',
+          '$baseTotal ($itemTaxType&TT)',
         ]);
       } else if (item.ttCatCd == 'TT' && !ProxyService.box.vatEnabled()) {
         // Non-VAT TT: single line showing TT as tax

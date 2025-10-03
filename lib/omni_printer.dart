@@ -694,14 +694,14 @@ class OmniPrinter with SaveFile implements Printable {
     // Process items
     for (var item in items) {
       double total = safeParseDouble(item.price) * safeParseDouble(item.qty);
-      // Construct tax label. For TT items: when VAT enabled we show primary as (B)
-      // and render a secondary (B&TT) total row. When not VAT, show (TT) on the
+      // Construct tax label. For TT items: when VAT enabled we show primary as the actual tax type
+      // and render a secondary (taxType&TT) total row. When not VAT, show (TT) on the
       // single line. For non-TT items keep their taxTyCd or default to (B).
       String taxLabel;
       if (item.ttCatCd == 'TT') {
         if (ProxyService.box.vatEnabled()) {
-          // Primary line should show B only (TT will be shown on the secondary line)
-          taxLabel = '(B)';
+          // Primary line should show actual tax type (TT will be shown on the secondary line)
+          taxLabel = item.taxTyCd != null ? '(${item.taxTyCd!})' : '(B)';
         } else {
           // Not VAT: show TT on the single-line representation
           taxLabel = '(TT)';
@@ -729,10 +729,12 @@ class OmniPrinter with SaveFile implements Printable {
       );
 
       // For TT items we have two different behaviors depending on VAT setting:
-      // - VAT enabled: two lines (primary name with (B), secondary shows base total with (B&TT))
+      // - VAT enabled: two lines (primary name with tax type, secondary shows base total with (taxType&TT))
       // - VAT disabled: single line with (TT) shown on the amount
       if (item.ttCatCd == 'TT' && ProxyService.box.vatEnabled()) {
         String baseTotal = total.toNoCurrencyFormatted();
+        // Use the item's actual tax type instead of hardcoding "B"
+        String itemTaxType = item.taxTyCd ?? "B";
         rows.add(Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -742,7 +744,7 @@ class OmniPrinter with SaveFile implements Printable {
             ),
             Text('  ${safeParseDouble(item.qty)}  ', style: smallTextStyle),
             Text(
-              '$baseTotal (B&TT)',
+              '$baseTotal ($itemTaxType&TT)',
               style: smallTextStyle,
               textAlign: TextAlign.right,
             ),
