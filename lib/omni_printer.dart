@@ -570,10 +570,22 @@ class OmniPrinter with SaveFile implements Printable {
       for (var item in items.where((item) => item.ttCatCd == 'TT')) {
         double totalAfterDiscount =
             (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
-        // Determine base for TT tax depending on VAT setting
-        double ttBase = ProxyService.box.vatEnabled()
-            ? totalAfterDiscount / 1.18
-            : totalAfterDiscount;
+
+        // Determine base for TT tax depending on the ITEM'S tax type, not branch VAT setting
+        // For items with VAT (B, C): exclude VAT from base
+        // For items without VAT (A, D): use full amount as base
+        String itemTaxType = item.taxTyCd ?? "B";
+        double ttBase;
+
+        if (itemTaxType == "B" || itemTaxType == "C") {
+          // VAT-inclusive items: remove VAT to get base
+          // Note: This assumes 18% for B. For C, we'd need the actual config percentage
+          ttBase = totalAfterDiscount / 1.18;
+        } else {
+          // Non-VAT items (A: Exempt, D: Non-VAT): use full amount
+          ttBase = totalAfterDiscount;
+        }
+
         // Use configuration-based tax percentage calculation
         // Assuming TT tax percentage is 3% from configuration
         ttTaxAmount += ttBase * 3 / (100 + 3); // Using configuration formula
@@ -890,9 +902,19 @@ class OmniPrinter with SaveFile implements Printable {
         for (var item in items.where((item) => item.ttCatCd == 'TT')) {
           double totalAfterDiscount =
               (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
-          double ttBase = ProxyService.box.vatEnabled()
-              ? totalAfterDiscount / 1.18
-              : totalAfterDiscount;
+
+          // Determine base for TT tax depending on the ITEM'S tax type, not branch VAT setting
+          String itemTaxType = item.taxTyCd ?? "B";
+          double ttBase;
+
+          if (itemTaxType == "B" || itemTaxType == "C") {
+            // VAT-inclusive items: remove VAT to get base
+            ttBase = totalAfterDiscount / 1.18;
+          } else {
+            // Non-VAT items (A: Exempt, D: Non-VAT): use full amount
+            ttBase = totalAfterDiscount;
+          }
+
           ttTaxAmount += ttBase * 3 / (100 + 3);
         }
         // Add TT tax since it's not included in the original totalTax parameter

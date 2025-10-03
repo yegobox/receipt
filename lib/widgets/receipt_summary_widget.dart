@@ -275,10 +275,19 @@ class ReceiptSummaryWidget extends StatelessWidget {
       for (var item in items.where((item) => item.ttCatCd == 'TT')) {
         double totalAfterDiscount =
             (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
-        // Determine base for TT tax depending on VAT setting
-        double ttBase = ProxyService.box.vatEnabled()
-            ? totalAfterDiscount / 1.18
-            : totalAfterDiscount;
+
+        // Determine base for TT tax depending on the ITEM'S tax type, not branch VAT setting
+        String itemTaxType = item.taxTyCd ?? "B";
+        double ttBase;
+
+        if (itemTaxType == "B" || itemTaxType == "C") {
+          // VAT-inclusive items: remove VAT to get base
+          ttBase = totalAfterDiscount / 1.18;
+        } else {
+          // Non-VAT items (A: Exempt, D: Non-VAT): use full amount
+          ttBase = totalAfterDiscount;
+        }
+
         ttTaxAmount += ttBase * 3 / (100 + 3); // Using configuration formula
       }
       // Add TT tax since it's not included in the original totalTax parameter
@@ -331,10 +340,19 @@ class ReceiptSummaryWidget extends StatelessWidget {
     for (var item in items.where((item) => item.ttCatCd == 'TT')) {
       double totalAfterDiscount =
           (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
-      // Determine base for TT tax depending on VAT setting
-      double ttBase = ProxyService.box.vatEnabled()
-          ? totalAfterDiscount / 1.18
-          : totalAfterDiscount;
+
+      // Determine base for TT tax depending on the ITEM'S tax type, not branch VAT setting
+      String itemTaxType = item.taxTyCd ?? "B";
+      double ttBase;
+
+      if (itemTaxType == "B" || itemTaxType == "C") {
+        // VAT-inclusive items: remove VAT to get base
+        ttBase = totalAfterDiscount / 1.18;
+      } else {
+        // Non-VAT items (A: Exempt, D: Non-VAT): use full amount
+        ttBase = totalAfterDiscount;
+      }
+
       ttTaxAmount += ttBase * 3 / (100 + 3); // Using configuration formula
     }
 
