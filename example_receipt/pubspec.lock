@@ -1226,7 +1226,7 @@ packages:
       path: "../../../apps/flipper_auth"
       relative: true
     source: path
-    version: "1.0.1+274"
+    version: "1.0.1+296"
   flipper_dashboard:
     dependency: "direct overridden"
     description:
@@ -1311,7 +1311,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.180.4252223234901+1756528123"
+    version: "1.180.4252223234901+1756528145"
   flipper_scanner:
     dependency: "direct overridden"
     description:
@@ -1346,7 +1346,7 @@ packages:
       path: "../../../apps/flipper_web"
       relative: true
     source: path
-    version: "1.0.0+122"
+    version: "1.0.0+144"
   flowy_svg:
     dependency: "direct overridden"
     description:
