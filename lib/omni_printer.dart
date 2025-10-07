@@ -1118,8 +1118,8 @@ class OmniPrinter with SaveFile implements Printable {
       );
 
       // Add dashed line below Internal Data for CS receipts
-
-      dashedLine();
+      // this was commented as requested during review that there is no dash-line bellow internal data
+      // dashedLine();
 
       rows.add(
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
