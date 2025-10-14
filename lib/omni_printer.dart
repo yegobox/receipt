@@ -132,18 +132,9 @@ class OmniPrinter with SaveFile implements Printable {
               'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT',
               style: TextStyle(fontSize: 10, font: _unicodeFont),
             )),
-            dashWidget(),
-            Center(
-              child: Text(
-                'Welcome to our shop'.toUpperCase(),
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.normal,
-                  font: _unicodeFont,
-                ),
-              ),
-            ),
-            dashWidget(),
+            // The generic welcome/dash after receiptTypeWidgets will handle
+            // showing 'WELCOME TO OUR SHOP' and the dash for non-CR receipts.
+            // Avoid duplicating it here for CR to prevent double welcome/dashes.
             Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -226,6 +217,19 @@ class OmniPrinter with SaveFile implements Printable {
               'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT',
               style: TextStyle(fontSize: 10, font: _unicodeFont),
             )),
+            // Mirror the NR layout: show welcome and a dash after the refund approval
+            dashWidget(),
+            Center(
+              child: Text(
+                'Welcome to our shop'.toUpperCase(),
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.normal,
+                  font: _unicodeFont,
+                ),
+              ),
+            ),
+            dashWidget(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -328,9 +332,10 @@ class OmniPrinter with SaveFile implements Printable {
               ),
             ),
           ...receiptTypeWidgets(receiptType),
-          Column(children: [dashWidget()]),
+          if (receiptType != "CR")
+            Column(children: [dashWidget()]),
           SizedBox(height: 4),
-          if (receiptType != "NR")
+          if (receiptType != "NR" && receiptType != "CR")
             Center(
               child: Text(
                 'Welcome to our shop'.toUpperCase(),
