@@ -65,7 +65,7 @@ class A4ReceiptTypeLabels extends pw.StatelessWidget {
               font: font,
             ),
           ),
-          _dashWidget(),
+          // _dashWidget(),
           pw.SizedBox(height: 5),
         ],
       ),
