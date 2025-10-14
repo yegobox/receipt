@@ -162,10 +162,15 @@ class A4SummaryTable extends pw.StatelessWidget {
   }
 
   String _calculateTaxBTotal() {
+    // Sum item totals for tax type B after applying per-item discounts
     final total = items.where((item) => item.taxTyCd == "B").fold<double>(
-          0.0,
-          (sum, item) => sum + (item.price * item.qty),
-        );
+      0.0,
+      (sum, item) {
+        final itemTotal = item.price * item.qty;
+        final discounted = itemTotal * (1 - (item.dcRt ?? 0) / 100);
+        return sum + discounted;
+      },
+    );
     final prefix =
         (receiptType == "NR" || receiptType == "CR" || receiptType == "TR")
             ? "-"

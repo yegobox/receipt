@@ -132,9 +132,20 @@ class OmniPrinter with SaveFile implements Printable {
               'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT',
               style: TextStyle(fontSize: 10, font: _unicodeFont),
             )),
-            // The generic welcome/dash after receiptTypeWidgets will handle
-            // showing 'WELCOME TO OUR SHOP' and the dash for non-CR receipts.
-            // Avoid duplicating it here for CR to prevent double welcome/dashes.
+            // Mirror CR: add a separating dash, welcome line, then another dash
+            // so Refund receipts show the same header arrangement as Copy Refund.
+            dashWidget(),
+            Center(
+              child: Text(
+                'Welcome to our shop'.toUpperCase(),
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.normal,
+                  font: _unicodeFont,
+                ),
+              ),
+            ),
+            dashWidget(),
             Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -172,6 +183,19 @@ class OmniPrinter with SaveFile implements Printable {
               'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT',
               style: TextStyle(fontSize: 10, font: _unicodeFont),
             )),
+            // Add dash + welcome for TR as well to match NR/CR
+            dashWidget(),
+            Center(
+              child: Text(
+                'Welcome to our shop'.toUpperCase(),
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.normal,
+                  font: _unicodeFont,
+                ),
+              ),
+            ),
+            dashWidget(),
             Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -332,10 +356,12 @@ class OmniPrinter with SaveFile implements Printable {
               ),
             ),
           ...receiptTypeWidgets(receiptType),
-          if (receiptType != "CR")
+          // Do not insert an extra header dash for refund / copy receipts since
+          // they already include their own dash/welcome sequence.
+          if (receiptType != "CR" && receiptType != "NR" && receiptType != "TR")
             Column(children: [dashWidget()]),
           SizedBox(height: 4),
-          if (receiptType != "NR" && receiptType != "CR")
+          if (receiptType != "NR" && receiptType != "TR" && receiptType != "CR")
             Center(
               child: Text(
                 'Welcome to our shop'.toUpperCase(),
@@ -437,33 +463,40 @@ class OmniPrinter with SaveFile implements Printable {
     }
   }
 
-  _buildTaxB18({required String totalTaxB, required String receiptType}) async {
-    double value = safeParseDouble(totalTaxB);
-    if (value != 0) {
-      String displayTotalTaxB = totalTaxB;
+  // Compute TOTAL B-18% from items after applying per-item discounts.
+  _buildTaxB18FromItems(
+      {required List<TransactionItem> items,
+      required String receiptType}) async {
+    // Sum item totals for tax type B after per-item discount
+    double totalB = items.where((item) => item.taxTyCd == "B").fold<double>(0.0,
+        (sum, item) {
+      final itemTotal = safeParseDouble(item.price) * safeParseDouble(item.qty);
+      final discounted = itemTotal * (1 - (safeParseDouble(item.dcRt) / 100));
+      return sum + discounted;
+    });
 
-      if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
-        displayTotalTaxB = "-${value.toNoCurrencyFormatted()}";
-      } else {
-        displayTotalTaxB = value.toNoCurrencyFormatted();
-      }
+    if (totalB == 0) return;
 
-      rows.add(
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'TOTAL B-18%:',
-              style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
-            ),
-            Text(
-              displayTotalTaxB,
-              style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
-            )
-          ],
-        ),
-      );
-    }
+    final display =
+        (receiptType == "NR" || receiptType == "CR" || receiptType == "TR")
+            ? "-${totalB.toNoCurrencyFormatted()}"
+            : totalB.toNoCurrencyFormatted();
+
+    rows.add(
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'TOTAL B-18%:',
+            style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
+          ),
+          Text(
+            display,
+            style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
+          ),
+        ],
+      ),
+    );
   }
 
   // Display the total value of items with tax type C
@@ -866,9 +899,8 @@ class OmniPrinter with SaveFile implements Printable {
 
     await _buildTotal(
         totalPayable: totalWithDiscount.toString(), receiptType: receiptType);
-    await _buildTaxB18(
-        totalTaxB: safeParseDouble(taxB).toStringAsFixed(2),
-        receiptType: receiptType);
+    // Compute TOTAL B-18% from items after discounts so discounts are considered
+    await _buildTaxB18FromItems(items: items, receiptType: receiptType);
 
     // Add TT VAT contribution to displayed totalTaxB
     double displayedTotalTaxB = safeParseDouble(totalTaxB);
