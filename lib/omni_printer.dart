@@ -132,19 +132,6 @@ class OmniPrinter with SaveFile implements Printable {
               'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT',
               style: TextStyle(fontSize: 10, font: _unicodeFont),
             )),
-            // Mirror CR: add a separating dash, welcome line, then another dash
-            // so Refund receipts show the same header arrangement as Copy Refund.
-            dashWidget(),
-            Center(
-              child: Text(
-                'Welcome to our shop'.toUpperCase(),
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.normal,
-                  font: _unicodeFont,
-                ),
-              ),
-            ),
             dashWidget(),
             Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,7 +145,8 @@ class OmniPrinter with SaveFile implements Printable {
                   Text("TEL: ${customerPhone?.normalizePhoneNumber() ?? ""}",
                           style: TextStyle(fontSize: 10, font: _unicodeFont))
                       .hideIf(customerPhone == null),
-                ])
+                ]),
+            dashWidget(),
           ];
         case "TR":
           return [
@@ -183,18 +171,6 @@ class OmniPrinter with SaveFile implements Printable {
               'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT',
               style: TextStyle(fontSize: 10, font: _unicodeFont),
             )),
-            // Add dash + welcome for TR as well to match NR/CR
-            dashWidget(),
-            Center(
-              child: Text(
-                'Welcome to our shop'.toUpperCase(),
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.normal,
-                  font: _unicodeFont,
-                ),
-              ),
-            ),
             dashWidget(),
             Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,6 +185,7 @@ class OmniPrinter with SaveFile implements Printable {
                           style: TextStyle(fontSize: 10, font: _unicodeFont))
                       .hideIf(customerPhone == null),
                 ]),
+            dashWidget(),
           ];
         case "CR":
           return [
@@ -241,18 +218,6 @@ class OmniPrinter with SaveFile implements Printable {
               'REFUND IS APPROVED ONLY FOR ORIGINAL SALES RECEIPT',
               style: TextStyle(fontSize: 10, font: _unicodeFont),
             )),
-            // Mirror the NR layout: show welcome and a dash after the refund approval
-            dashWidget(),
-            Center(
-              child: Text(
-                'Welcome to our shop'.toUpperCase(),
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.normal,
-                  font: _unicodeFont,
-                ),
-              ),
-            ),
             dashWidget(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -304,7 +269,7 @@ class OmniPrinter with SaveFile implements Printable {
                   fontWeight: FontWeight.bold,
                   font: _unicodeFont)),
           SizedBox(height: 4),
-          if (receiptType != "NR" || receiptType != "TR" || receiptType != "CR")
+          if (receiptType != "NR" && receiptType != "TR" && receiptType != "CR")
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -331,6 +296,17 @@ class OmniPrinter with SaveFile implements Printable {
               ],
             ),
           SizedBox(height: 4),
+          Center(
+            child: Text(
+              'Welcome to our shop'.toUpperCase(),
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.normal,
+                font: _unicodeFont,
+              ),
+            ),
+          ),
+          dashWidget(),
           if (receiptType == "TS") SizedBox(height: 4),
           if (receiptType == "TS")
             Center(
@@ -356,22 +332,6 @@ class OmniPrinter with SaveFile implements Printable {
               ),
             ),
           ...receiptTypeWidgets(receiptType),
-          // Do not insert an extra header dash for refund / copy receipts since
-          // they already include their own dash/welcome sequence.
-          if (receiptType != "CR" && receiptType != "NR" && receiptType != "TR")
-            Column(children: [dashWidget()]),
-          SizedBox(height: 4),
-          if (receiptType != "NR" && receiptType != "TR" && receiptType != "CR")
-            Center(
-              child: Text(
-                'Welcome to our shop'.toUpperCase(),
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.normal,
-                  font: _unicodeFont,
-                ),
-              ),
-            ),
           if (receiptType != "NR" && receiptType != "TR" && receiptType != "CR")
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
