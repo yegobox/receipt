@@ -319,6 +319,7 @@ class OmniPrinter with SaveFile implements Printable {
                 ),
               ),
             ),
+          if (receiptType == "TS") dashWidget(),
           if (receiptType == "PS") SizedBox(height: 4),
           if (receiptType == "PS")
             Center(
@@ -331,6 +332,7 @@ class OmniPrinter with SaveFile implements Printable {
                 ),
               ),
             ),
+          if (receiptType == "PS") dashWidget(),
           ...receiptTypeWidgets(receiptType),
           if (receiptType != "NR" && receiptType != "TR" && receiptType != "CR")
             Column(
@@ -1315,9 +1317,9 @@ class OmniPrinter with SaveFile implements Printable {
         receiptType: receiptType,
         receiptNumber: invoiceNum.toString(),
         customerName: customerName);
-    if (receiptType != "NR") {
-      dashedLine();
-    }
+    // header already contains its own dash separators where appropriate.
+    // avoid adding an extra dashed line here to prevent double separators
+    // between customer info and item details.
     final cash = items
             .map((e) => safeParseDouble(e.price) * safeParseDouble(e.qty))
             .reduce((sum, value) => sum + value) -
