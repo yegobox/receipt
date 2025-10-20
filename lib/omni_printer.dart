@@ -359,6 +359,8 @@ class OmniPrinter with SaveFile implements Printable {
                     .hideIf(customerPhone == null),
               ],
             ),
+          // Ensure there's a dashed separator between customer info and the items list
+          if (receiptType != "NR" && receiptType != "TR") dashWidget(),
         ],
       ),
     );
