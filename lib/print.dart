@@ -133,7 +133,11 @@ class Print {
         receiptQrCode: receiptQrCode,
         invoiceNum: invoiceNum,
         mrc: mrc,
-        totalPayable: transaction.subTotal?.toDouble() ?? 0.0,
+        totalPayable: items
+            .map((e) =>
+                (double.tryParse(e.price.toString()) ?? 0.0) *
+                (double.tryParse(e.qty.toString()) ?? 0.0))
+            .fold(0.0, (sum, value) => sum + value),
         totalTaxA: totalTaxA,
         transaction: transaction,
         totalTaxB: totalTaxB,
@@ -184,7 +188,11 @@ class Print {
         receiptQrCode: receiptQrCode,
         invoiceNum: invoiceNum,
         mrc: mrc,
-        totalPayable: transaction.subTotal?.toDouble() ?? 0.0,
+        totalPayable: items
+            .map((e) =>
+                (double.tryParse(e.price.toString()) ?? 0.0) *
+                (double.tryParse(e.qty.toString()) ?? 0.0))
+            .fold(0.0, (sum, value) => sum + value),
         totalTaxA: totalTaxA,
         transaction: transaction,
         totalTaxB: totalTaxB,

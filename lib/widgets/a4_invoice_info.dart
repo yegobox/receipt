@@ -63,10 +63,10 @@ class A4InvoiceInfo extends pw.StatelessWidget {
                 if (receiptType == "NR" ||
                     receiptType == "TR" ||
                     receiptType == "CR")
-                  pw.Text(
-                    'REF.NORMAL RECEIPT:# $originalInvcNumber',
-                    style: pw.TextStyle(fontSize: 10, font: font),
-                  ),
+                  // pw.Text(
+                  //   'REF.NORMAL RECEIPT:# $originalInvcNumber',
+                  //   style: pw.TextStyle(fontSize: 10, font: font),
+                  // ),
                 pw.SizedBox(height: 5),
                 _buildInfoRow(
                     'Date:',
