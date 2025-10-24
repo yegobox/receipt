@@ -10,7 +10,7 @@ abstract class Printable {
     required double taxD,
     required double taxTT,
     String brandName = "yegobox shop",
-    String brandAddress = "CITY CENTER, Kigali Rwanda",
+    String brandAddress = "",
     String brandTel = "271311123",
     String brandTIN = "1211287390",
     String brandDescription = "We build app that server you!",
@@ -47,6 +47,7 @@ abstract class Printable {
     required String transactionId,
     required DateTime timeFromServer,
     String? customerPhone,
-    String? brandEmail, int? originalInvoiceNumber,
+    String? brandEmail,
+    int? originalInvoiceNumber,
   });
 }

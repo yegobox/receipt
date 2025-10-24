@@ -269,32 +269,26 @@ class OmniPrinter with SaveFile implements Printable {
                   fontWeight: FontWeight.bold,
                   font: _unicodeFont)),
           SizedBox(height: 4),
-          if (receiptType != "NR" && receiptType != "TR" && receiptType != "CR")
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(brandAddress,
-                    style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.normal,
-                        font: _unicodeFont)),
-                Text("TEL: ${brandTel.normalizePhoneNumber()}",
-                    style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.normal,
-                        font: _unicodeFont)),
-                Text("EMAIL: ${brandEmail ?? " "}",
-                    style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.normal,
-                        font: _unicodeFont)),
-                Text("TIN: $brandTIN",
-                    style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.normal,
-                        font: _unicodeFont)),
-              ],
-            ),
+          Text(brandAddress,
+              style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.normal,
+                  font: _unicodeFont)),
+          Text("TEL: ${brandTel.normalizePhoneNumber()}",
+              style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.normal,
+                  font: _unicodeFont)),
+          Text("EMAIL: ${brandEmail ?? " "}",
+              style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.normal,
+                  font: _unicodeFont)),
+          Text("TIN: $brandTIN",
+              style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.normal,
+                  font: _unicodeFont)),
           SizedBox(height: 4),
           Center(
             child: Text(
@@ -1261,7 +1255,7 @@ class OmniPrinter with SaveFile implements Printable {
     String? customerPhone,
     int? originalInvoiceNumber,
     String brandName = "yegobox shop",
-    String brandAddress = "CITY CENTER, Kigali Rwanda",
+    String brandAddress = "",
     String brandTel = "271311123",
     String brandTIN = "1211287390",
     String brandDescription = "We build app that server you!",

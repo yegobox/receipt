@@ -20,7 +20,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     required double taxD,
     int? originalInvoiceNumber,
     String brandName = "yegobox shop",
-    String brandAddress = "CITY CENTER, Kigali Rwanda",
+    String brandAddress = "",
     String brandTel = "271311123",
     String brandTIN = "1211287390",
     String brandDescription = "We build app that server you!",
