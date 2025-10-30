@@ -49,5 +49,6 @@ abstract class Printable {
     String? customerPhone,
     String? brandEmail,
     int? originalInvoiceNumber,
+    required bool vatEnabled,
   });
 }

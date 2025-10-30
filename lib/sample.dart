@@ -9,6 +9,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
   @override
   Future<void> generatePdfAndPrint({
     required double taxTT,
+    required bool vatEnabled,
     required double totalTaxTT,
     required DateTime timeFromServer,
     required double taxA,

@@ -133,6 +133,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     required Function(Uint8List bytes) printCallback,
     required DateTime timeFromServer,
     String? brandEmail,
+    required bool vatEnabled,
   }) async {
     await loadUnicodeFont(); // Load font before generating PDF
     final pdf = Document(
@@ -272,6 +273,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
               whenCreated: whenCreated,
               mrc: mrc,
               transaction: transaction,
+              vatEnabled: vatEnabled,
             ),
             Center(child: ReceiptFooter(font: _unicodeFont)),
             // if (middle != null) ...[

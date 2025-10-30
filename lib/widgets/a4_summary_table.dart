@@ -14,19 +14,23 @@ class A4SummaryTable extends pw.StatelessWidget {
   final double totalTaxC;
   final double totalTaxD;
   final pw.Font? font;
+  final bool vatEnabled;
 
-  A4SummaryTable({
-    required this.receiptType,
-    required this.items,
-    required this.totalPayable,
-    required this.totalDiscount,
-    required this.totalTax,
-    required this.totalTaxA,
-    required this.totalTaxB,
-    required this.totalTaxC,
-    required this.totalTaxD,
-    required this.font,
-  });
+  final bool hasTTItem;
+
+  A4SummaryTable(
+      {required this.receiptType,
+      required this.items,
+      required this.totalPayable,
+      required this.totalDiscount,
+      required this.totalTax,
+      required this.totalTaxA,
+      required this.totalTaxB,
+      required this.totalTaxC,
+      required this.totalTaxD,
+      required this.font,
+      required this.vatEnabled,
+      required this.hasTTItem});
 
   @override
   pw.Widget build(pw.Context context) {
@@ -81,18 +85,23 @@ class A4SummaryTable extends pw.StatelessWidget {
                   label: 'TOTAL C:',
                   value: _calculateTaxCTotal(),
                 ),
-
-              // Total Tax
-              _buildTableRow(
-                label: 'TOTAL TAX:',
-                value: '$prefix${totalTax.toStringAsFixed(2)}',
-              ),
-
               // Total D (if applicable)
               if (totalTaxD != 0)
                 _buildTableRow(
-                  label: 'Total D',
+                  label: 'Total D:',
                   value: '$prefix${totalTaxD.toStringAsFixed(2)}',
+                ),
+              if (!vatEnabled && hasTTItem)
+                // Total TT (if applicable)
+                _buildTableRow(
+                  label: 'TOTAL TT:',
+                  value: _calculateTaxCTotal(),
+                ),
+              if (vatEnabled || (!vatEnabled && !hasTTItem))
+                // Total Tax
+                _buildTableRow(
+                  label: 'TOTAL TAX:',
+                  value: '$prefix${totalTax.toStringAsFixed(2)}',
                 ),
             ],
           ),

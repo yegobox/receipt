@@ -27,6 +27,7 @@ class ReceiptSummaryWidget extends StatelessWidget {
   final DateTime whenCreated;
   final String mrc;
   final ITransaction transaction;
+  final bool vatEnabled;
 
   ReceiptSummaryWidget({
     required this.receiptType,
@@ -49,6 +50,7 @@ class ReceiptSummaryWidget extends StatelessWidget {
     required this.whenCreated,
     required this.mrc,
     required this.transaction,
+    required this.vatEnabled,
   });
 
   @override
@@ -327,16 +329,24 @@ class ReceiptSummaryWidget extends StatelessWidget {
   }
 
   TableRow _buildTaxDRow() {
-    return TableRow(
-      children: [
-        _buildCell('Total D:'),
-        _buildCell(
-          (receiptType == "NR" || receiptType == "CR" || receiptType == "TR")
-              ? "-${safeParseDouble(totalTaxD).toStringAsFixed(2)}"
-              : safeParseDouble(totalTaxD).toStringAsFixed(2),
-        ),
-      ],
+    // Sum item totals for tax type D after applying per-item discounts
+    final totalD = items.where((item) => item.taxTyCd == "D").fold<double>(
+      0.0,
+      (sum, item) {
+        final itemTotal = item.price * item.qty;
+        final discounted = itemTotal * (1 - (item.dcRt ?? 0) / 100);
+        return sum + discounted;
+      },
     );
+
+    return TableRow(children: [
+      _buildCell('TOTAL D:'),
+      _buildCell(
+        (receiptType == "NR" || receiptType == "CR" || receiptType == "TR")
+            ? "-${totalD.toNoCurrencyFormatted()}"
+            : totalD.toNoCurrencyFormatted(),
+      ),
+    ]);
   }
 
   TableRow _buildTaxTTRow() {

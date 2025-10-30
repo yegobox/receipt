@@ -142,6 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // Printable printerA4 = OmniPrinterA4();
 
     return await printer.generatePdfAndPrint(
+      vatEnabled:false,
       taxB: taxB,
       taxTT: 0.0,
       totalTaxTT: 0.0,

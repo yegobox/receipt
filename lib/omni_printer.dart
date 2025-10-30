@@ -361,7 +361,10 @@ class OmniPrinter with SaveFile implements Printable {
   }
 
   _buildTotalTax(
-      {required String totalTax, required String receiptType}) async {
+      {required String totalTax,
+      required String receiptType,
+      required bool vatEnabled,
+      required bool hasTTItem}) async {
     // Parse the tax value from the string
     double taxValue = safeParseDouble(totalTax);
 
@@ -373,22 +376,41 @@ class OmniPrinter with SaveFile implements Printable {
         (receiptType == "NR" || receiptType == "CR" || receiptType == "TR")
             ? "-$formattedTax"
             : formattedTax;
+    if (!vatEnabled && hasTTItem) {
+      rows.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'TOTAL TT:',
+              style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
+            ),
+            Text(
+              displayTotalTax,
+              style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
+            ),
+          ],
+        ),
+      );
+    }
 
-    rows.add(
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'TOTAL TAX:',
-            style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
-          ),
-          Text(
-            displayTotalTax,
-            style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
-          ),
-        ],
-      ),
-    );
+    if (vatEnabled || (!vatEnabled && !hasTTItem)) {
+      rows.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'TOTAL TAX:',
+              style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
+            ),
+            Text(
+              displayTotalTax,
+              style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   _buildTotalTaxB(
@@ -526,33 +548,39 @@ class OmniPrinter with SaveFile implements Printable {
     }
   }
 
-  _buildTaxD({required String totalTaxD, required String receiptType}) async {
-    double value = safeParseDouble(totalTaxD);
-    if (value != 0) {
-      String displayTotalTaxD = totalTaxD;
+  _buildTaxD(
+      {required List<TransactionItem> items,
+      required String receiptType}) async {
+    // Sum item totals for tax type D after per-item discount
+    double totalD = items.where((item) => item.taxTyCd == "D").fold<double>(0.0,
+        (sum, item) {
+      final itemTotal = safeParseDouble(item.price) * safeParseDouble(item.qty);
+      final discounted = itemTotal * (1 - (safeParseDouble(item.dcRt) / 100));
+      return sum + discounted;
+    });
 
-      if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
-        displayTotalTaxD = "-${value.toNoCurrencyFormatted()}";
-      } else {
-        displayTotalTaxD = value.toNoCurrencyFormatted();
-      }
+    if (totalD == 0) return;
 
-      rows.add(
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'TOTAL D:',
-              style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
-            ),
-            Text(
-              displayTotalTaxD,
-              style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
-            )
-          ],
-        ),
-      );
-    }
+    final display =
+        (receiptType == "NR" || receiptType == "CR" || receiptType == "TR")
+            ? "-${totalD.toNoCurrencyFormatted()}"
+            : totalD.toNoCurrencyFormatted();
+
+    rows.add(
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'TOTAL D:',
+            style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
+          ),
+          Text(
+            display,
+            style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
+          ),
+        ],
+      ),
+    );
   }
 
   _buildTaxTT(
@@ -690,6 +718,7 @@ class OmniPrinter with SaveFile implements Printable {
     required String cashierName,
     required double cash,
     required double totalDiscount,
+    required bool vatEnabled,
   }) async {
     var bodyWidgets = <Widget>[];
     List<List<Widget>> data = <List<Widget>>[];
@@ -879,9 +908,7 @@ class OmniPrinter with SaveFile implements Printable {
         totalTaxC: safeParseDouble(taxC).toStringAsFixed(2),
         receiptType: receiptType,
         items: items);
-    await _buildTaxD(
-        totalTaxD: safeParseDouble(taxD).toStringAsFixed(2),
-        receiptType: receiptType);
+    await _buildTaxD(items: items, receiptType: receiptType);
     await _buildTaxTT(
         totalTaxTT: safeParseDouble(taxTT).toStringAsFixed(2),
         receiptType: receiptType,
@@ -917,7 +944,9 @@ class OmniPrinter with SaveFile implements Printable {
       }
       await _buildTotalTax(
           totalTax: actualTotalTax.toStringAsFixed(2),
-          receiptType: receiptType);
+          receiptType: receiptType,
+          vatEnabled: vatEnabled,
+          hasTTItem: items.any((item) => item.ttCatCd == 'TT'));
     }
 
     rows.add(Row(
@@ -1291,9 +1320,10 @@ class OmniPrinter with SaveFile implements Printable {
     required String transactionId,
     required DateTime timeFromServer,
     String? brandEmail,
+    required bool vatEnabled,
   }) async {
     await loadUnicodeFont();
-    //talker.warning("ReceiptNo: $rcptNo: totRcptNo: $totRcptNo");
+
     final left = await _loadLogoImage(position: "left");
     final middle = await _loadLogoImage(position: "middle");
     final right = await _loadLogoImage(position: "right");
@@ -1321,6 +1351,7 @@ class OmniPrinter with SaveFile implements Printable {
             .reduce((sum, value) => sum + value) -
         safeParseDouble(totalDiscount);
     await _body(
+      vatEnabled: vatEnabled,
       items: items,
       totalTax: totalTax,
       totalDiscount: totalDiscount,
