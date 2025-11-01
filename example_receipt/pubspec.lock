@@ -802,10 +802,10 @@ packages:
     dependency: transitive
     description:
       name: ditto_live
-      sha256: "86aa472c77557632612aefd59a5e098d545f8080350a0d70d68b55c70deec362"
+      sha256: "154035efccb539b94a33a502f3e4a73748ea44c00f9fe8ea7f8dc030b8b46e9e"
       url: "https://pub.dev"
     source: hosted
-    version: "4.12.3"
+    version: "4.12.4"
   dotted_line:
     dependency: "direct main"
     description:
@@ -1234,7 +1234,7 @@ packages:
       path: "../../../apps/flipper_auth"
       relative: true
     source: path
-    version: "1.0.1+430"
+    version: "1.0.1+432"
   flipper_dashboard:
     dependency: "direct overridden"
     description:
@@ -1311,7 +1311,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.180.4252223234901+1756528279"
+    version: "1.180.4252223234901+1756528281"
   flipper_scanner:
     dependency: "direct overridden"
     description:
@@ -1346,7 +1346,7 @@ packages:
       path: "../../../apps/flipper_web"
       relative: true
     source: path
-    version: "1.0.0+278"
+    version: "1.0.0+280"
   flowy_svg:
     dependency: "direct overridden"
     description:
