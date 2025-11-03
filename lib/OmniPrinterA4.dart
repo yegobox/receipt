@@ -242,6 +242,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
               receiptType: receiptType,
               font: _unicodeFont,
               minRows: 1,
+              vatEnabled: vatEnabled,
             ),
             if (receiptType != "CR") SizedBox(height: 1),
 

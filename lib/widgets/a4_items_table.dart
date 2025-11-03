@@ -1,18 +1,20 @@
+import 'package:flipper_models/helperModels/talker.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:flipper_models/helperModels/extensions.dart';
-import 'package:flipper_services/proxy.dart';
 
 class A4ItemsTable extends pw.StatelessWidget {
   final List<TransactionItem> items;
   final String receiptType;
   final pw.Font? font;
   final int minRows;
+  final bool vatEnabled;
 
   A4ItemsTable({
     required this.items,
     required this.receiptType,
     required this.font,
+    required this.vatEnabled,
     this.minRows = 10,
   });
   // Helper method:
@@ -59,7 +61,7 @@ class A4ItemsTable extends pw.StatelessWidget {
     for (var item in items) {
       // Primary row
       // TT items behave differently depending on VAT setting
-      if (item.ttCatCd == 'TT' && ProxyService.box.vatEnabled()) {
+      if (item.ttCatCd == 'TT' && vatEnabled) {
         // Primary row: name (show description) + tax taxType&TT marker
         // Secondary row: show base total with (taxType&TT)
         final baseTotal =
@@ -75,17 +77,19 @@ class A4ItemsTable extends pw.StatelessWidget {
           item.price.toNoCurrencyFormatted(),
           '$baseTotal ($itemTaxType&TT)',
         ]);
-      } else if (item.ttCatCd == 'TT' && !ProxyService.box.vatEnabled()) {
+      } else if (item.ttCatCd == 'TT' && !vatEnabled) {
         // Non-VAT TT: single line showing TT as tax
         rowsData.add([
           item.itemCd ?? '',
           pw.Text(item.name, style: pw.TextStyle(fontSize: 10, font: font)),
           '${item.qty}',
-          'TT',
+          'D&TT',
           item.price.toNoCurrencyFormatted(),
-          _buildTotalPriceText(item, receiptType),
+          '${_buildTotalPriceText(item, receiptType)}(D&TT)',
         ]);
       } else {
+        talker.debug(
+            'Building row for non-TT item: ${item.taxTyCd}, VAT enabled: $vatEnabled');
         // Default behavior for non-TT items
         rowsData.add([
           item.itemCd ?? '',
@@ -100,7 +104,8 @@ class A4ItemsTable extends pw.StatelessWidget {
           (item.taxTyCd ?? ''),
           item.price.toNoCurrencyFormatted(),
           pw.Text(
-            _buildTotalPriceText(item, receiptType),
+            _buildTotalPriceText(item, receiptType) +
+                (item.taxTyCd != null ? '(${item.taxTyCd})' : '(B)'),
             style: pw.TextStyle(fontSize: 10, font: font),
           ),
         ]);

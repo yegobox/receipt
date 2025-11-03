@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flipper_models/helperModels/talker.dart';
 import 'package:receipt/widgets/receipt_footer.dart';
 import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:flipper_models/helperModels/extensions.dart';
@@ -414,17 +415,17 @@ class OmniPrinter with SaveFile implements Printable {
   }
 
   _buildTotalTaxB(
-      {required String totalTaxB, required String receiptType}) async {
-    double value = safeParseDouble(totalTaxB);
-    if (value != 0) {
-      String displayTotalTaxB = totalTaxB;
+      {required List<TransactionItem> items,
+      required String receiptType}) async {
+    double totalTaxB = items
+        .where((item) => item.taxTyCd == "B" && item.ttCatCd != 'TT')
+        .fold<double>(0.0, (sum, item) {
+      final itemTotal = safeParseDouble(item.price) * safeParseDouble(item.qty);
+      final discounted = itemTotal * (1 - (safeParseDouble(item.dcRt) / 100));
+      return sum + (discounted * 18 / 118);
+    });
 
-      if (receiptType == "NR" || receiptType == "CR" || receiptType == "TR") {
-        displayTotalTaxB = "-${value.toNoCurrencyFormatted()}";
-      } else {
-        displayTotalTaxB = value.toNoCurrencyFormatted();
-      }
-
+    if (totalTaxB != 0) {
       rows.add(
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -434,7 +435,11 @@ class OmniPrinter with SaveFile implements Printable {
               style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
             ),
             Text(
-              displayTotalTaxB,
+              (receiptType == "NR" ||
+                      receiptType == "CR" ||
+                      receiptType == "TR")
+                  ? "-${totalTaxB.toNoCurrencyFormatted()}"
+                  : totalTaxB.toNoCurrencyFormatted(),
               style: _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
             )
           ],
@@ -448,8 +453,9 @@ class OmniPrinter with SaveFile implements Printable {
       {required List<TransactionItem> items,
       required String receiptType}) async {
     // Sum item totals for tax type B after per-item discount
-    double totalB = items.where((item) => item.taxTyCd == "B").fold<double>(0.0,
-        (sum, item) {
+    double totalB = items
+        .where((item) => item.taxTyCd == "B" && item.ttCatCd != 'TT')
+        .fold<double>(0.0, (sum, item) {
       final itemTotal = safeParseDouble(item.price) * safeParseDouble(item.qty);
       final discounted = itemTotal * (1 - (safeParseDouble(item.dcRt) / 100));
       return sum + discounted;
@@ -551,9 +557,10 @@ class OmniPrinter with SaveFile implements Printable {
   _buildTaxD(
       {required List<TransactionItem> items,
       required String receiptType}) async {
-    // Sum item totals for tax type D after per-item discount
-    double totalD = items.where((item) => item.taxTyCd == "D").fold<double>(0.0,
-        (sum, item) {
+    // Sum item totals for tax type D after per-item discount, excluding TT items
+    double totalD = items
+        .where((item) => item.taxTyCd == "D" && item.ttCatCd != 'TT')
+        .fold<double>(0.0, (sum, item) {
       final itemTotal = safeParseDouble(item.price) * safeParseDouble(item.qty);
       final discounted = itemTotal * (1 - (safeParseDouble(item.dcRt) / 100));
       return sum + discounted;
@@ -592,27 +599,16 @@ class OmniPrinter with SaveFile implements Printable {
       double ttTaxAmount = 0.0;
 
       for (var item in items.where((item) => item.ttCatCd == 'TT')) {
+        talker.debug("TOTAL OF TT BASE 1: ${{item.price * item.qty}}");
+        talker.debug("TOTAL OF TT BASE 2: ${{1 - (item.dcRt ?? 0) / 100}}");
         double totalAfterDiscount =
             (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
 
-        // Determine base for TT tax depending on the ITEM'S tax type, not branch VAT setting
-        // For items with VAT (B, C): exclude VAT from base
-        // For items without VAT (A, D): use full amount as base
-        String itemTaxType = item.taxTyCd ?? "B";
-        double ttBase;
-
-        if (itemTaxType == "B" || itemTaxType == "C") {
-          // VAT-inclusive items: remove VAT to get base
-          // Note: This assumes 18% for B. For C, we'd need the actual config percentage
-          ttBase = totalAfterDiscount / 1.18;
-        } else {
-          // Non-VAT items (A: Exempt, D: Non-VAT): use full amount
-          ttBase = totalAfterDiscount;
-        }
-
+        talker.debug("TOTAL OF TT BASE: $totalAfterDiscount");
         // Use configuration-based tax percentage calculation
         // Assuming TT tax percentage is 3% from configuration
-        ttTaxAmount += ttBase * 3 / (100 + 3); // Using configuration formula
+        ttTaxAmount +=
+            totalAfterDiscount * 3 / (100 + 3); // Using configuration formula
       }
 
       if (ttTaxAmount != 0) {
@@ -736,12 +732,12 @@ class OmniPrinter with SaveFile implements Printable {
       // single line. For non-TT items keep their taxTyCd or default to (B).
       String taxLabel;
       if (item.ttCatCd == 'TT') {
-        if (ProxyService.box.vatEnabled()) {
+        if (vatEnabled) {
           // Primary line should show actual tax type (TT will be shown on the secondary line)
-          taxLabel = item.taxTyCd != null ? '(${item.taxTyCd!})' : '(B)';
+          taxLabel = item.taxTyCd != null ? '(${item.taxTyCd!}&TT)' : '(B)';
         } else {
           // Not VAT: show TT on the single-line representation
-          taxLabel = '(TT)';
+          taxLabel = '(D&TT)';
         }
       } else {
         taxLabel = item.taxTyCd != null ? "(${item.taxTyCd!})" : "(B)";
@@ -890,11 +886,9 @@ class OmniPrinter with SaveFile implements Printable {
     await _buildTaxB18FromItems(items: items, receiptType: receiptType);
 
     // Add TT VAT contribution to displayed totalTaxB
-    double displayedTotalTaxB = safeParseDouble(totalTaxB);
+    // double displayedTotalTaxB = safeParseDouble(totalTaxB);
     // double displayedTotalTaxB = safeParseDouble(totalTaxB) + extraTtToTaxB;
-    await _buildTotalTaxB(
-        totalTaxB: displayedTotalTaxB.toStringAsFixed(2),
-        receiptType: receiptType);
+    await _buildTotalTaxB(items: items, receiptType: receiptType);
 
     await _buildTaxA(
         totalAEx: safeParseDouble(taxA).toStringAsFixed(2),
@@ -909,15 +903,17 @@ class OmniPrinter with SaveFile implements Printable {
         receiptType: receiptType,
         items: items);
     await _buildTaxD(items: items, receiptType: receiptType);
-    await _buildTaxTT(
-        totalTaxTT: safeParseDouble(taxTT).toStringAsFixed(2),
-        receiptType: receiptType,
-        items: items);
+    if (vatEnabled) {
+      await _buildTaxTT(
+          totalTaxTT: safeParseDouble(taxTT).toStringAsFixed(2),
+          receiptType: receiptType,
+          items: items);
+    }
     // Only show TOTAL TAX: if not all items are tax type C (to avoid duplicate row)
     if (!(items.isNotEmpty &&
         items.every((item) => item.taxTyCd == "C" || item.taxTyCd == null))) {
       // Calculate actual total tax including TT tax
-      double actualTotalTax = safeParseDouble(totalTax);
+      // double actualTotalTax = safeParseDouble(totalTax);
       // Ensure TT tax is included in TOTAL TAX as well
       if (items.any((item) => item.ttCatCd == 'TT')) {
         double ttTaxAmount = 0.0;
@@ -925,28 +921,26 @@ class OmniPrinter with SaveFile implements Printable {
           double totalAfterDiscount =
               (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
 
-          // Determine base for TT tax depending on the ITEM'S tax type, not branch VAT setting
-          String itemTaxType = item.taxTyCd ?? "B";
-          double ttBase;
-
-          if (itemTaxType == "B" || itemTaxType == "C") {
-            // VAT-inclusive items: remove VAT to get base
-            ttBase = totalAfterDiscount / 1.18;
-          } else {
-            // Non-VAT items (A: Exempt, D: Non-VAT): use full amount
-            ttBase = totalAfterDiscount;
-          }
-
-          ttTaxAmount += ttBase * 3 / (100 + 3);
+          ttTaxAmount += totalAfterDiscount * 3 / (100 + 3);
         }
         // Add TT tax since it's not included in the original totalTax parameter
-        actualTotalTax += ttTaxAmount;
+        // actualTotalTax += ttTaxAmount;
+
+        final total =
+            ((double.tryParse(totalTax) ?? 0) + ttTaxAmount).toStringAsFixed(2);
+
+        await _buildTotalTax(
+            totalTax: total,
+            receiptType: receiptType,
+            vatEnabled: vatEnabled,
+            hasTTItem: items.any((item) => item.ttCatCd == 'TT'));
+      } else {
+        await _buildTotalTax(
+            totalTax: safeParseDouble(totalTax).toStringAsFixed(2),
+            receiptType: receiptType,
+            vatEnabled: vatEnabled,
+            hasTTItem: items.any((item) => item.ttCatCd == 'TT'));
       }
-      await _buildTotalTax(
-          totalTax: actualTotalTax.toStringAsFixed(2),
-          receiptType: receiptType,
-          vatEnabled: vatEnabled,
-          hasTTItem: items.any((item) => item.ttCatCd == 'TT'));
     }
 
     rows.add(Row(

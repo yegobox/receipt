@@ -167,7 +167,8 @@ class ReceiptSummaryWidget extends StatelessWidget {
               if (safeParseDouble(totalTaxB) != 0) _buildTotalTaxBRow(),
               if (items.any((item) => item.taxTyCd == "C")) _buildTaxCRow(),
               if (items.any((item) => item.taxTyCd == "D")) _buildTaxDRow(),
-              if (items.any((item) => item.ttCatCd == "TT")) _buildTaxTTRow(),
+              if (items.any((item) => item.ttCatCd == "TT") && vatEnabled)
+                _buildTaxTTRow(),
               _buildTotalTaxRow(),
               _builtPaymentInfoRow(
                 payment: transaction.paymentType!.toUpperCase(),
@@ -221,7 +222,9 @@ class ReceiptSummaryWidget extends StatelessWidget {
 
   TableRow _buildTaxBRow() {
     // Sum item totals for tax type B after applying per-item discounts
-    final totalB = items.where((item) => item.taxTyCd == "B").fold<double>(
+    final totalB = items
+        .where((item) => item.taxTyCd == "B" && item.ttCatCd != 'TT')
+        .fold<double>(
       0.0,
       (sum, item) {
         final itemTotal = item.price * item.qty;
@@ -276,35 +279,28 @@ class ReceiptSummaryWidget extends StatelessWidget {
   TableRow _buildTotalTaxRow() {
     // Calculate actual total tax including TT tax
     double actualTotalTax = safeParseDouble(totalTax);
+    bool hasTTItem = items.any((item) => item.ttCatCd == 'TT');
 
     // Add TT tax amount if there are TT items and it's not already included
-    if (items.any((item) => item.ttCatCd == 'TT')) {
+    if (hasTTItem) {
       double ttTaxAmount = 0.0;
       for (var item in items.where((item) => item.ttCatCd == 'TT')) {
         double totalAfterDiscount =
             (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
 
-        // Determine base for TT tax depending on the ITEM'S tax type, not branch VAT setting
-        String itemTaxType = item.taxTyCd ?? "B";
-        double ttBase;
-
-        if (itemTaxType == "B" || itemTaxType == "C") {
-          // VAT-inclusive items: remove VAT to get base
-          ttBase = totalAfterDiscount / 1.18;
-        } else {
-          // Non-VAT items (A: Exempt, D: Non-VAT): use full amount
-          ttBase = totalAfterDiscount;
-        }
-
-        ttTaxAmount += ttBase * 3 / (100 + 3); // Using configuration formula
+        ttTaxAmount +=
+            totalAfterDiscount * 3 / (100 + 3); // Using configuration formula
       }
       // Add TT tax since it's not included in the original totalTax parameter
       actualTotalTax += ttTaxAmount;
     }
 
+    // Show 'TOTAL TT:' when VAT disabled and TT items exist, otherwise 'TOTAL TAX:'
+    String taxLabel = (!vatEnabled && hasTTItem) ? 'TOTAL TT:' : 'TOTAL TAX:';
+
     return TableRow(
       children: [
-        _buildCell('TOTAL TAX:'),
+        _buildCell(taxLabel),
         _buildCell(
           (receiptType == "NR" || receiptType == "CR" || receiptType == "TR")
               ? "-${actualTotalTax.toStringAsFixed(2)}"
@@ -329,8 +325,10 @@ class ReceiptSummaryWidget extends StatelessWidget {
   }
 
   TableRow _buildTaxDRow() {
-    // Sum item totals for tax type D after applying per-item discounts
-    final totalD = items.where((item) => item.taxTyCd == "D").fold<double>(
+    // Sum item totals for tax type D after applying per-item discounts, excluding TT items
+    final totalD = items
+        .where((item) => item.taxTyCd == "D" && item.ttCatCd != 'TT')
+        .fold<double>(
       0.0,
       (sum, item) {
         final itemTotal = item.price * item.qty;
@@ -357,19 +355,8 @@ class ReceiptSummaryWidget extends StatelessWidget {
       double totalAfterDiscount =
           (item.price * item.qty) * (1 - (item.dcRt ?? 0) / 100);
 
-      // Determine base for TT tax depending on the ITEM'S tax type, not branch VAT setting
-      String itemTaxType = item.taxTyCd ?? "B";
-      double ttBase;
-
-      if (itemTaxType == "B" || itemTaxType == "C") {
-        // VAT-inclusive items: remove VAT to get base
-        ttBase = totalAfterDiscount / 1.18;
-      } else {
-        // Non-VAT items (A: Exempt, D: Non-VAT): use full amount
-        ttBase = totalAfterDiscount;
-      }
-
-      ttTaxAmount += ttBase * 3 / (100 + 3); // Using configuration formula
+      ttTaxAmount +=
+          totalAfterDiscount * 3 / (100 + 3); // Using configuration formula
     }
 
     return TableRow(
