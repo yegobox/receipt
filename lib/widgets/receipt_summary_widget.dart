@@ -222,9 +222,7 @@ class ReceiptSummaryWidget extends StatelessWidget {
 
   TableRow _buildTaxBRow() {
     // Sum item totals for tax type B after applying per-item discounts
-    final totalB = items
-        .where((item) => item.taxTyCd == "B" && item.ttCatCd != 'TT')
-        .fold<double>(
+    final totalB = items.where((item) => item.taxTyCd == "B").fold<double>(
       0.0,
       (sum, item) {
         final itemTotal = item.price * item.qty;
@@ -326,9 +324,7 @@ class ReceiptSummaryWidget extends StatelessWidget {
 
   TableRow _buildTaxDRow() {
     // Sum item totals for tax type D after applying per-item discounts, excluding TT items
-    final totalD = items
-        .where((item) => item.taxTyCd == "D" && item.ttCatCd != 'TT')
-        .fold<double>(
+    final totalD = items.where((item) => item.taxTyCd == "D").fold<double>(
       0.0,
       (sum, item) {
         final itemTotal = item.price * item.qty;
@@ -361,7 +357,7 @@ class ReceiptSummaryWidget extends StatelessWidget {
 
     return TableRow(
       children: [
-        _buildCell('TOTAL TT-3%:'),
+        _buildCell('TOTAL TT:'),
         _buildCell(
           (receiptType == "NR" || receiptType == "CR" || receiptType == "TR")
               ? "-${ttTaxAmount.toNoCurrencyFormatted()}"

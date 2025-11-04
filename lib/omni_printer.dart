@@ -418,7 +418,7 @@ class OmniPrinter with SaveFile implements Printable {
       {required List<TransactionItem> items,
       required String receiptType}) async {
     double totalTaxB = items
-        .where((item) => item.taxTyCd == "B" && item.ttCatCd != 'TT')
+        .where((item) => item.taxTyCd == "B")
         .fold<double>(0.0, (sum, item) {
       final itemTotal = safeParseDouble(item.price) * safeParseDouble(item.qty);
       final discounted = itemTotal * (1 - (safeParseDouble(item.dcRt) / 100));
@@ -453,9 +453,8 @@ class OmniPrinter with SaveFile implements Printable {
       {required List<TransactionItem> items,
       required String receiptType}) async {
     // Sum item totals for tax type B after per-item discount
-    double totalB = items
-        .where((item) => item.taxTyCd == "B" && item.ttCatCd != 'TT')
-        .fold<double>(0.0, (sum, item) {
+    double totalB = items.where((item) => item.taxTyCd == "B").fold<double>(0.0,
+        (sum, item) {
       final itemTotal = safeParseDouble(item.price) * safeParseDouble(item.qty);
       final discounted = itemTotal * (1 - (safeParseDouble(item.dcRt) / 100));
       return sum + discounted;
@@ -625,7 +624,7 @@ class OmniPrinter with SaveFile implements Printable {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'TOTAL TT-3%:',
+                'TOTAL TT:',
                 style:
                     _receiptTextStyle.copyWith(fontWeight: FontWeight.normal),
               ),
@@ -778,7 +777,7 @@ class OmniPrinter with SaveFile implements Printable {
             ),
             Text('  ${safeParseDouble(item.qty)}  ', style: smallTextStyle),
             Text(
-              '$baseTotal ($itemTaxType&TT)',
+              '$totalPrefix$baseTotal ($itemTaxType&TT)',
               style: smallTextStyle,
               textAlign: TextAlign.right,
             ),
