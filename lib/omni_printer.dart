@@ -556,7 +556,8 @@ class OmniPrinter with SaveFile implements Printable {
 
   _buildTaxD(
       {required List<TransactionItem> items,
-      required String receiptType}) async {
+      required String receiptType,
+      required bool vatEnabled}) async {
     // Sum item totals for tax type D after per-item discount, excluding TT items
     double totalD = items
         .where((item) => item.taxTyCd == "D" && item.ttCatCd != 'TT')
@@ -902,7 +903,8 @@ class OmniPrinter with SaveFile implements Printable {
         totalTaxC: safeParseDouble(taxC).toStringAsFixed(2),
         receiptType: receiptType,
         items: items);
-    await _buildTaxD(items: items, receiptType: receiptType);
+    await _buildTaxD(
+        items: items, receiptType: receiptType, vatEnabled: vatEnabled);
     if (vatEnabled) {
       await _buildTaxTT(
           totalTaxTT: safeParseDouble(taxTT).toStringAsFixed(2),

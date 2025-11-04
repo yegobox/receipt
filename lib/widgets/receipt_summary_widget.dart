@@ -336,7 +336,7 @@ class ReceiptSummaryWidget extends StatelessWidget {
         return sum + discounted;
       },
     );
-
+    if (totalD == 0) return TableRow(children: []);
     return TableRow(children: [
       _buildCell('TOTAL D:'),
       _buildCell(
