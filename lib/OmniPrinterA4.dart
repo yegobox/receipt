@@ -165,7 +165,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
             if (receiptType != "CR") SizedBox(height: 5),
 
             // Training and Proforma Labels
-            if (receiptType == "TS")
+            if (receiptType == "TS" || receiptType == "TR")
               Center(
                 child: Column(
                   children: [
