@@ -303,7 +303,7 @@ class OmniPrinter with SaveFile implements Printable {
           ),
           dashWidget(),
           if (receiptType == "TS") SizedBox(height: 4),
-          if (receiptType == "TS")
+          if (receiptType == "TS" || receiptType == "TR")
             Center(
               child: Text(
                 "TRAINING MODE",
@@ -998,7 +998,7 @@ class OmniPrinter with SaveFile implements Printable {
     rows.add(Column(children: [SizedBox(height: 12)]));
 
     // Handle special receipt footers
-    if (receiptType == "TS") {
+    if (receiptType == "TS" || receiptType == "TR") {
       rows.add(
         Column(
           crossAxisAlignment: CrossAxisAlignment.center,
