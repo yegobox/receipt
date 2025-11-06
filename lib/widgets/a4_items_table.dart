@@ -64,9 +64,12 @@ class A4ItemsTable extends pw.StatelessWidget {
       if (item.ttCatCd == 'TT' && vatEnabled) {
         // Primary row: name (show description) + tax taxType&TT marker
         // Secondary row: show base total with (taxType&TT)
-        final baseTotal =
-            (safeParseDouble(item.price) * safeParseDouble(item.qty))
-                .toNoCurrencyFormatted();
+        final isNegativeReceipt = ["NR", "CR", "TR"].contains(receiptType);
+        final baseAmount =
+            safeParseDouble(item.price) * safeParseDouble(item.qty);
+        final baseTotal = isNegativeReceipt
+            ? "-${baseAmount.toNoCurrencyFormatted()}"
+            : baseAmount.toNoCurrencyFormatted();
         // Use the item's actual tax type instead of hardcoding "B"
         final itemTaxType = item.taxTyCd ?? 'B';
         rowsData.add([
@@ -85,7 +88,7 @@ class A4ItemsTable extends pw.StatelessWidget {
           '${item.qty}',
           'D&TT',
           item.price.toNoCurrencyFormatted(),
-          '${_buildTotalPriceText(item, receiptType)}(D&TT)',
+          '${_buildTotalPriceText(item, receiptType)} (D&TT)',
         ]);
       } else {
         talker.debug(
