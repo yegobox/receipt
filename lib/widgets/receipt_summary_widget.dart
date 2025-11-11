@@ -323,8 +323,11 @@ class ReceiptSummaryWidget extends StatelessWidget {
   }
 
   TableRow _buildTaxDRow() {
-    // Sum item totals for tax type D after applying per-item discounts, excluding TT items
-    final totalD = items.where((item) => item.taxTyCd == "D").fold<double>(
+    // Sum item totals for tax type D after applying per-item discounts
+    // When VAT is disabled, include TT items in TOTAL D
+    final totalD = items.where((item) => 
+        item.taxTyCd == "D" && 
+        (vatEnabled ? item.ttCatCd != 'TT' : true)).fold<double>(
       0.0,
       (sum, item) {
         final itemTotal = item.price * item.qty;

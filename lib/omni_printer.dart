@@ -557,9 +557,12 @@ class OmniPrinter with SaveFile implements Printable {
       {required List<TransactionItem> items,
       required String receiptType,
       required bool vatEnabled}) async {
-    // Sum item totals for tax type D after per-item discount, excluding TT items
+    // Sum item totals for tax type D after per-item discount
+    // When VAT is disabled, include TT items in TOTAL D
     double totalD = items
-        .where((item) => item.taxTyCd == "D" && item.ttCatCd != 'TT')
+        .where((item) => 
+            item.taxTyCd == "D" && 
+            (vatEnabled ? item.ttCatCd != 'TT' : true))
         .fold<double>(0.0, (sum, item) {
       final itemTotal = safeParseDouble(item.price) * safeParseDouble(item.qty);
       final discounted = itemTotal * (1 - (safeParseDouble(item.dcRt) / 100));
