@@ -26,7 +26,7 @@ dependencies:
   intl: ^0.20.2
   dotted_line: ^3.2.2
   talker_flutter: ^4.1.5
-  sentry_flutter: ^9.6.0
+  sentry_flutter: ^9.8.0
   syncfusion_flutter_pdf: ^29.2.11
   supabase_models: any
   flipper_rw: any
@@ -43,6 +43,7 @@ dependency_overrides:
   archive: ^3.6.1
   excel: ^4.0.6
   cbor: ^6.3.7
+  jni: ^0.14.2
   
 
 dev_dependencies:
