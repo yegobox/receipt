@@ -818,10 +818,10 @@ packages:
     dependency: "direct overridden"
     description:
       name: drift
-      sha256: "540cf382a3bfa99b76e51514db5b0ebcd81ce3679b7c1c9cb9478ff3735e47a1"
+      sha256: "83290a32ae006a7535c5ecf300722cb77177250d9df4ee2becc5fa8a36095114"
       url: "https://pub.dev"
     source: hosted
-    version: "2.28.2"
+    version: "2.29.0"
   dropdown_search:
     dependency: transitive
     description:
@@ -1241,7 +1241,7 @@ packages:
       path: "../../apps/flipper_auth"
       relative: true
     source: path
-    version: "1.0.1+526"
+    version: "1.0.1+538"
   flipper_dashboard:
     dependency: "direct overridden"
     description:
@@ -1318,7 +1318,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.180.4252223234901+1756528364"
+    version: "1.180.4252223234901+1756528376"
   flipper_scanner:
     dependency: "direct overridden"
     description:
@@ -1353,7 +1353,7 @@ packages:
       path: "../../apps/flipper_web"
       relative: true
     source: path
-    version: "1.0.0+364"
+    version: "1.0.0+376"
   flowy_svg:
     dependency: "direct overridden"
     description:
