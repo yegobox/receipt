@@ -1,7 +1,13 @@
-# melos_managed_dependency_overrides: brick_core,brick_offline_first,brick_offline_first_with_rest,brick_offline_first_with_supabase,brick_rest,brick_sqlite,brick_supabase,demo_ui_components,example_receipt,flipper_accounting,flipper_actionable,flipper_auth,flipper_dashboard,flipper_infra,flipper_loading,flipper_localize,flipper_login,flipper_mfa,flipper_mocks,flipper_models,flipper_personal,flipper_routing,flipper_rw,flipper_scanner,flipper_services,flipper_socials,flipper_ui,flipper_web,flowy_svg,flutter_form_bloc,flutter_slidable,form_bloc,qr_flutter,scrollable_positioned_list,supabase_models,http,meta,web,sqlite3,device_info_plus,drift,archive,excel,cbor,brick_build,brick_ditto,brick_ditto_generators,jni
+# melos_managed_dependency_overrides: brick_build,brick_core,brick_ditto,brick_ditto_generators,brick_offline_first,brick_offline_first_with_rest,brick_offline_first_with_supabase,brick_rest,brick_sqlite,brick_supabase,demo_ui_components,example_receipt,flipper_accounting,flipper_actionable,flipper_auth,flipper_dashboard,flipper_infra,flipper_loading,flipper_localize,flipper_login,flipper_mfa,flipper_mocks,flipper_models,flipper_personal,flipper_routing,flipper_rw,flipper_scanner,flipper_services,flipper_socials,flipper_ui,flipper_web,flowy_svg,flutter_form_bloc,flutter_slidable,form_bloc,qr_flutter,scrollable_positioned_list,supabase_models,http,meta,web,sqlite3,device_info_plus,drift,archive,excel,cbor,jni
 dependency_overrides:
+  brick_build:
+    path: ../../packages/brick/packages/brick_build
   brick_core:
     path: ../../packages/brick/packages/brick_core
+  brick_ditto:
+    path: ../../packages/brick/packages/brick_ditto
+  brick_ditto_generators:
+    path: ../../packages/brick/packages/brick_ditto_generators
   brick_offline_first:
     path: ../../packages/brick/packages/brick_offline_first
   brick_offline_first_with_rest:
@@ -79,10 +85,4 @@ dependency_overrides:
   archive: ^3.6.1
   excel: ^4.0.6
   cbor: ^6.3.7
-  brick_build:
-    path: ../../packages/brick/packages/brick_build
-  brick_ditto:
-    path: ../../packages/brick/packages/brick_ditto
-  brick_ditto_generators:
-    path: ../../packages/brick/packages/brick_ditto_generators
   jni: ^0.14.2
