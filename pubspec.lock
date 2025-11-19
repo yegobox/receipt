@@ -1241,7 +1241,7 @@ packages:
       path: "../../apps/flipper_auth"
       relative: true
     source: path
-    version: "1.0.1+554"
+    version: "1.0.1+560"
   flipper_dashboard:
     dependency: "direct overridden"
     description:
@@ -1318,7 +1318,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.180.4252223234901+1756528392"
+    version: "1.180.4252223234901+1756528398"
   flipper_scanner:
     dependency: "direct overridden"
     description:
@@ -1353,7 +1353,7 @@ packages:
       path: "../../apps/flipper_web"
       relative: true
     source: path
-    version: "1.0.0+392"
+    version: "1.0.0+398"
   flowy_svg:
     dependency: "direct overridden"
     description:
@@ -2766,10 +2766,10 @@ packages:
     dependency: transitive
     description:
       name: pinput
-      sha256: "6d571e38a484f7515a52e89024ef416f11fa6171ac6f32303701374ab9890efa"
+      sha256: bffcad45f97e372660ed512f5d87fb3253d54ae9f79e5e8085854e28f15aae5d
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.0"
+    version: "6.0.0"
   pip_view:
     dependency: transitive
     description:
@@ -3277,14 +3277,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  smart_auth:
-    dependency: transitive
-    description:
-      name: smart_auth
-      sha256: "88aa8fe66e951c78a307f26d1c29672dce2e9eb3da2e12e853864d0e615a73ad"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
   smithy:
     dependency: transitive
     description:
