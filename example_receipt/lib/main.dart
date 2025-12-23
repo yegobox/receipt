@@ -198,6 +198,7 @@ class _MyHomePageState extends State<MyHomePage> {
       customerPhone: "0783054874",
       whenCreated: DateTime.now().toUtc(),
       transaction: ITransaction(
+          agentId: 1,
           id: "2",
           isIncome: true,
           isExpense: false,
