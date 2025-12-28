@@ -142,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // Printable printerA4 = OmniPrinterA4();
 
     return await printer.generatePdfAndPrint(
-      vatEnabled:false,
+      vatEnabled: false,
       taxB: taxB,
       taxTT: 0.0,
       totalTaxTT: 0.0,
@@ -198,14 +198,14 @@ class _MyHomePageState extends State<MyHomePage> {
       customerPhone: "0783054874",
       whenCreated: DateTime.now().toUtc(),
       transaction: ITransaction(
-          agentId: 1,
+          agentId: "1",
           id: "2",
           isIncome: true,
           isExpense: false,
           subTotal: 400,
           cashReceived: 1,
           customerChangeDue: 0,
-          branchId: 1,
+          branchId: "",
           status: "PENDING",
           createdAt: DateTime.now().toUtc(),
           updatedAt: DateTime.now().toUtc(),
