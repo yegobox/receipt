@@ -1,7 +1,7 @@
 library;
 
 import 'package:flipper_services/proxy.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' hide Category;
 
 import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:receipt/OmniPrinterA4.dart';
