@@ -937,10 +937,10 @@ packages:
     dependency: transitive
     description:
       name: file_picker
-      sha256: b9c6bbfe174bcc1ec1e3a0de92e9b839fe553a46dd91862debfbbb5055ca876f
+      sha256: "7872545770c277236fd32b022767576c562ba28366204ff1a5628853cf8f2200"
       url: "https://pub.dev"
     source: hosted
-    version: "10.3.9"
+    version: "10.3.7"
   file_selector_linux:
     dependency: transitive
     description:
@@ -1217,7 +1217,7 @@ packages:
       path: "../../apps/flipper_auth"
       relative: true
     source: path
-    version: "1.0.1+966"
+    version: "1.0.1+968"
   flipper_dashboard:
     dependency: "direct overridden"
     description:
@@ -1294,7 +1294,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.180.4252223234901+1756528799"
+    version: "1.180.4252223234901+1756528801"
   flipper_scanner:
     dependency: "direct overridden"
     description:
@@ -1329,7 +1329,7 @@ packages:
       path: "../../apps/flipper_web"
       relative: true
     source: path
-    version: "1.0.0+804"
+    version: "1.0.0+806"
   flowy_svg:
     dependency: "direct overridden"
     description:
