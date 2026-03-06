@@ -1078,30 +1078,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.1"
-  firebase_remote_config:
-    dependency: transitive
-    description:
-      name: firebase_remote_config
-      sha256: d059ea9813eb7146a485462bd10ec05584da35a98af7518327a8ccebec5fca8b
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.2.0"
-  firebase_remote_config_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_remote_config_platform_interface
-      sha256: "95ed426dbcff9fcc0d90f11c6edc4f45641db2f78f754307acb2e2d9011d1fe3"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
-  firebase_remote_config_web:
-    dependency: transitive
-    description:
-      name: firebase_remote_config_web
-      sha256: "478f9beb79c0c0fa2fd9ce0bc5db2ee43efa73fe72ac90d2529cba9bcb4ea1a5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.10.4"
   firebase_ui_auth:
     dependency: transitive
     description:
@@ -1217,7 +1193,7 @@ packages:
       path: "../../../apps/flipper_auth"
       relative: true
     source: path
-    version: "1.0.17+1111"
+    version: "1.0.25+1119"
   flipper_dashboard:
     dependency: "direct overridden"
     description:
@@ -1294,7 +1270,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.181.4252223234917+1756528922"
+    version: "1.181.4252223234925+1756528930"
   flipper_scanner:
     dependency: "direct overridden"
     description:
@@ -1329,7 +1305,7 @@ packages:
       path: "../../../apps/flipper_web"
       relative: true
     source: path
-    version: "1.0.16+932"
+    version: "1.0.24+940"
   flowy_svg:
     dependency: "direct overridden"
     description:
