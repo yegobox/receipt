@@ -85,4 +85,4 @@ dependency_overrides:
   device_info_plus: ^12.3.0
   drift: ^2.29.0
   cbor: ^6.3.7
-  jni: ^0.14.2
+  jni: ^0.15.2
