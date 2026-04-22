@@ -1200,7 +1200,7 @@ packages:
       path: "../../apps/flipper_auth"
       relative: true
     source: path
-    version: "1.0.161+1255"
+    version: "1.0.166+1260"
   flipper_dashboard:
     dependency: "direct overridden"
     description:
@@ -1277,7 +1277,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.181.4252223235061+1756529066"
+    version: "1.181.4252223235066+1756529071"
   flipper_scanner:
     dependency: "direct overridden"
     description:
@@ -1312,7 +1312,7 @@ packages:
       path: "../../apps/flipper_web"
       relative: true
     source: path
-    version: "1.0.160+1076"
+    version: "1.0.165+1081"
   flowy_svg:
     dependency: "direct overridden"
     description:
@@ -2133,10 +2133,10 @@ packages:
     dependency: "direct main"
     description:
       name: jni
-      sha256: "8706a77e94c76fe9ec9315e18949cc9479cc03af97085ca9c1077b61323ea12d"
+      sha256: d2c361082d554d4593c3012e26f6b188f902acd291330f13d6427641a92b3da1
       url: "https://pub.dev"
     source: hosted
-    version: "0.15.2"
+    version: "0.14.2"
   json_annotation:
     dependency: transitive
     description:
@@ -3016,7 +3016,7 @@ packages:
     source: hosted
     version: "9.18.0"
   sentry_flutter:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: sentry_flutter
       sha256: "0c98ca79261325806c4eccc47274910306e2d914dfefc598650819677ce2b484"

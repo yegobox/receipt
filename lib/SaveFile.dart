@@ -9,7 +9,6 @@ import 'package:printing/printing.dart';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:path/path.dart' as p;
 import 'package:talker_flutter/talker_flutter.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'platform_printer.dart';
 
 final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
@@ -136,7 +135,7 @@ mixin SaveFile {
             talker.info('first available printer');
             talker.info(firstAvailablePrinter);
             if (firstAvailablePrinter.isAvailable) {
-              Sentry.captureMessage("PRINTER_AVAILABLE");
+              talker.info('PRINTER_AVAILABLE');
               // Print directly to the first available printer
               await Printing.directPrintPdf(
                 printer: firstAvailablePrinter,
