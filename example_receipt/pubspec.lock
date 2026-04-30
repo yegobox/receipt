@@ -1193,7 +1193,7 @@ packages:
       path: "../../../apps/flipper_auth"
       relative: true
     source: path
-    version: "1.0.228+1322"
+    version: "1.0.242+1336"
   flipper_dashboard:
     dependency: "direct overridden"
     description:
@@ -1270,7 +1270,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.184.4252223235128+1756529133"
+    version: "1.184.4252223235142+1756529147"
   flipper_scanner:
     dependency: "direct overridden"
     description:
@@ -1305,7 +1305,7 @@ packages:
       path: "../../../apps/flipper_web"
       relative: true
     source: path
-    version: "1.0.227+1143"
+    version: "1.0.241+1157"
   flowy_svg:
     dependency: "direct overridden"
     description:
@@ -1581,10 +1581,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_soloud
-      sha256: "09116b29197d7ecb63bd43cfc0a28a463a1559f75a6da4a6ebb75e880deeb9ee"
+      sha256: "30d297a3b9c603ce1a19b0cfd741425f37136fc11db76960c3068ef69fefa16f"
       url: "https://pub.dev"
     source: hosted
-    version: "3.4.7"
+    version: "4.0.3"
   flutter_svg:
     dependency: transitive
     description:
@@ -3876,5 +3876,5 @@ packages:
     source: hosted
     version: "2.1.0"
 sdks:
-  dart: ">=3.10.4 <4.0.0"
-  flutter: ">=3.38.0"
+  dart: ">=3.11.0 <4.0.0"
+  flutter: ">=3.41.0"
