@@ -1,6 +1,7 @@
-import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:pdf/pdf.dart';
+import 'package:receipt/receipt_pdf_assets.dart';
 import 'package:receipt/widgets/receipt_summary_widget.dart'
     show ReceiptSummaryWidget;
 import 'package:supabase_models/brick/models/transaction.model.dart';
@@ -9,10 +10,7 @@ import 'widgets/receipt_footer.dart';
 import 'package:pdf/widgets.dart';
 import 'package:receipt/SaveFile.dart';
 import 'package:receipt/printable.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/material.dart' as c;
 import 'package:printing/printing.dart';
-import 'package:flipper_services/proxy.dart';
 import 'widgets/a4_header.dart';
 import 'widgets/a4_invoice_info.dart';
 import 'widgets/a4_items_table.dart';
@@ -23,50 +21,11 @@ import 'widgets/a4_refund_header.dart';
 class OmniPrinterA4 with SaveFile implements Printable {
   static Font? _unicodeFont;
   static Future<void> loadUnicodeFont() async {
-    if (_unicodeFont == null) {
-      final fontData = await rootBundle
-          .load('packages/receipt/assets/fonts/NotoSans-Regular.ttf');
-      _unicodeFont = Font.ttf(fontData);
-    }
+    _unicodeFont ??= await ReceiptPdfAssets.unicodeFont();
   }
 
   Future<ImageProvider?> _loadLogoImage({required String position}) async {
-    if (position == "middle") {
-      final customLogo = ProxyService.box.receiptLogoBase64();
-      if (customLogo != null && customLogo.isNotEmpty) {
-        try {
-          final bytes = base64Decode(customLogo);
-          if (bytes.isNotEmpty) {
-            return MemoryImage(bytes);
-          }
-        } catch (_) {
-          // Ignore decode errors and fall back to default asset
-        }
-      }
-    }
-
-    ImageProvider? image;
-    switch (position) {
-      case "left":
-        const imageLogo =
-            c.AssetImage('assets/logo_left.png', package: 'receipt');
-        image = await flutterImageProvider(imageLogo,
-            configuration: const c.ImageConfiguration(size: Size(600, 600)));
-        break;
-      case "middle":
-        // No fallback asset for the middle position; keep empty when custom logo absent
-        image = null;
-        break;
-      case "right":
-        const imageLogo =
-            c.AssetImage('assets/logo_right.png', package: 'receipt');
-        image = await flutterImageProvider(imageLogo,
-            configuration: const c.ImageConfiguration(size: Size(100, 100)));
-        break;
-      default:
-        throw ArgumentError('Invalid position: $position');
-    }
-    return image;
+    return ReceiptPdfAssets.logo(position: position);
   }
 
   // Utility: Safe double parsing to avoid invalid double errors everywhere
@@ -141,9 +100,14 @@ class OmniPrinterA4 with SaveFile implements Printable {
       // Ensures all content fits on a single page (no multipage)
       pageMode: PdfPageMode.none,
     );
-    final left = await _loadLogoImage(position: "left");
-    final middle = await _loadLogoImage(position: "middle");
-    final right = await _loadLogoImage(position: "right");
+    final logos = await Future.wait([
+      _loadLogoImage(position: "left"),
+      _loadLogoImage(position: "middle"),
+      _loadLogoImage(position: "right"),
+    ]);
+    final left = logos[0];
+    final middle = logos[1];
+    final right = logos[2];
     pdf.addPage(
       MultiPage(
         pageFormat: PdfPageFormat.a4,

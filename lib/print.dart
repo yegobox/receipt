@@ -93,9 +93,8 @@ class Print {
     required double totalTaxTT,
     required bool vatEnabled,
   }) async {
-    Printable printer = OmniPrinter();
-    Printable printerA4 = OmniPrinterA4();
     if (ProxyService.box.A4()) {
+      final Printable printerA4 = OmniPrinterA4();
       return await printerA4.generatePdfAndPrint(
         vatEnabled: vatEnabled,
         taxB: taxB,
@@ -151,6 +150,7 @@ class Print {
         },
       );
     } else {
+      final Printable printer = OmniPrinter();
       return await printer.generatePdfAndPrint(
         vatEnabled: vatEnabled,
         taxB: taxB,

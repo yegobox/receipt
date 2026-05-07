@@ -1,13 +1,12 @@
 import 'dart:async';
-import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flipper_models/helperModels/talker.dart';
+import 'package:receipt/receipt_pdf_assets.dart';
 import 'package:receipt/widgets/receipt_footer.dart';
 import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:flipper_models/helperModels/extensions.dart';
 import 'package:flipper_services/proxy.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/material.dart' as c;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
@@ -31,49 +30,13 @@ class OmniPrinter with SaveFile implements Printable {
   static Font? _unicodeFont;
 
   static Future<void> loadUnicodeFont() async {
-    if (_unicodeFont == null) {
-      final fontData = await rootBundle
-          .load('packages/receipt/assets/fonts/NotoSans-Regular.ttf');
-      _unicodeFont = Font.ttf(fontData);
-      _receiptTextStyle = TextStyle(
-          fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont);
-    }
+    _unicodeFont ??= await ReceiptPdfAssets.unicodeFont();
+    _receiptTextStyle = TextStyle(
+        fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont);
   }
 
   Future<ImageProvider?> _loadLogoImage({required String position}) async {
-    if (position == "middle") {
-      final customLogo = ProxyService.box.receiptLogoBase64();
-      if (customLogo != null && customLogo.isNotEmpty) {
-        try {
-          final bytes = base64Decode(customLogo);
-          if (bytes.isNotEmpty) {
-            return MemoryImage(bytes);
-          }
-        } catch (_) {
-          // Ignore decoding errors and fall back to no logo
-        }
-      }
-      return null;
-    }
-
-    ImageProvider? image;
-    switch (position) {
-      case "left":
-        const imageLogo =
-            c.AssetImage('assets/logo_left.png', package: 'receipt');
-        image = await flutterImageProvider(imageLogo,
-            configuration: const c.ImageConfiguration(size: Size(600, 600)));
-        break;
-      case "right":
-        const imageLogo =
-            c.AssetImage('assets/logo_right.png', package: 'receipt');
-        image = await flutterImageProvider(imageLogo,
-            configuration: const c.ImageConfiguration(size: Size(100, 100)));
-        break;
-      default:
-        throw ArgumentError('Invalid position: $position');
-    }
-    return image;
+    return ReceiptPdfAssets.logo(position: position);
   }
 
   double safeParseDouble(dynamic value) {
@@ -560,9 +523,8 @@ class OmniPrinter with SaveFile implements Printable {
     // Sum item totals for tax type D after per-item discount
     // When VAT is disabled, include TT items in TOTAL D
     double totalD = items
-        .where((item) => 
-            item.taxTyCd == "D" && 
-            (vatEnabled ? item.ttCatCd != 'TT' : true))
+        .where((item) =>
+            item.taxTyCd == "D" && (vatEnabled ? item.ttCatCd != 'TT' : true))
         .fold<double>(0.0, (sum, item) {
       final itemTotal = safeParseDouble(item.price) * safeParseDouble(item.qty);
       final discounted = itemTotal * (1 - (safeParseDouble(item.dcRt) / 100));
@@ -1322,9 +1284,14 @@ class OmniPrinter with SaveFile implements Printable {
   }) async {
     await loadUnicodeFont();
 
-    final left = await _loadLogoImage(position: "left");
-    final middle = await _loadLogoImage(position: "middle");
-    final right = await _loadLogoImage(position: "right");
+    final logos = await Future.wait([
+      _loadLogoImage(position: "left"),
+      _loadLogoImage(position: "middle"),
+      _loadLogoImage(position: "right"),
+    ]);
+    final left = logos[0];
+    final middle = logos[1];
+    final right = logos[2];
     await _header(
         transaction: transaction,
         middleImage: middle,
@@ -1411,15 +1378,15 @@ class OmniPrinter with SaveFile implements Printable {
 
 // Handle data (pass clones if needed)
     handlePdfData(
-      pdfData: Uint8List.fromList(pdfData),
-      image: Uint8List.fromList(image),
+      pdfData: pdfData,
+      image: image,
       emails: emails,
       autoPrint: autoPrint,
       transactionId: transactionId,
     );
 
 // Free memory
-    final result = printCallback(Uint8List.fromList(pdfData));
+    final result = printCallback(pdfData);
     pdfData = Uint8List(0); // Free original
     image = null;
     return result;
