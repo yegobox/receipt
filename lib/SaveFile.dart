@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flipper_services/digital_receipt_service.dart';
 import 'package:flipper_services/proxy.dart';
 import 'package:flutter/foundation.dart' hide Category;
 import 'package:open_filex/open_filex.dart';
@@ -270,9 +271,18 @@ mixin SaveFile {
     required Uint8List pdfData,
     required List<String>? emails,
     bool? autoPrint = false,
+    bool skipPresentation = false,
     required String transactionId,
     required Uint8List image,
   }) async {
+    if (skipPresentation) {
+      await DigitalReceiptService.queueSmsAfterReceiptUpload(transactionId);
+      await savePdfToDocumentDirectory(
+        pdfData,
+        transactionId: transactionId,
+      );
+      return;
+    }
     if (autoPrint!) {
       if (isDesktopOrWeb) {
         await printPdf(pdfData, transactionId: transactionId);

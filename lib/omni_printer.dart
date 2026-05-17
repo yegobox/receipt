@@ -1267,6 +1267,7 @@ class OmniPrinter with SaveFile implements Printable {
     required double totalPayable,
     required ITransaction transaction,
     bool? autoPrint = false,
+    bool skipPresentation = false,
     required double totalTaxA,
     required double totalTaxB,
     required double totalTaxC,
@@ -1382,6 +1383,7 @@ class OmniPrinter with SaveFile implements Printable {
       image: image,
       emails: emails,
       autoPrint: autoPrint,
+      skipPresentation: skipPresentation,
       transactionId: transactionId,
     );
 

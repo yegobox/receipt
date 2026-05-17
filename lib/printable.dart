@@ -33,6 +33,7 @@ abstract class Printable {
     required double totalPayable,
     required ITransaction transaction,
     bool? autoPrint = false,
+    bool skipPresentation = false,
     required double totalTaxA,
     required double totalTaxB,
     required double totalTaxC,
