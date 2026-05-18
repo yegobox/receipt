@@ -54,6 +54,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     required String transactionId,
     required DateTime whenCreated,
     required Function(Uint8List bytes) printCallback,
+    bool skipPresentation = false,
   }) async {
     // Create a PDF document
     final PdfDocument document = PdfDocument();
