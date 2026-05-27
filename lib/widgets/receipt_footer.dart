@@ -1,4 +1,5 @@
 import 'package:pdf/widgets.dart' as pw;
+import 'package:receipt/receipt_pdf_assets.dart';
 
 class ReceiptFooter extends pw.StatelessWidget {
   final pw.Font? font;
@@ -9,11 +10,14 @@ class ReceiptFooter extends pw.StatelessWidget {
 
   @override
   pw.Widget build(pw.Context context) {
-    final textStyle = pw.TextStyle(
-      fontSize: 10,
-      fontWeight: pw.FontWeight.bold,
-      font: font,
-    );
+    final resolvedFont = font;
+    final textStyle = resolvedFont == null
+        ? pw.TextStyle(fontSize: 10, fontWeight: pw.FontWeight.bold)
+        : ReceiptPdfAssets.textStyle(
+            resolvedFont,
+            fontSize: 10,
+            fontWeight: pw.FontWeight.bold,
+          );
 
     return pw.Column(
       children: [

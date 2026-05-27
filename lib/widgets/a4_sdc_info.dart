@@ -1,5 +1,6 @@
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:receipt/receipt_pdf_assets.dart';
 import 'package:flipper_services/proxy.dart';
 import 'package:flipper_models/helperModels/extensions.dart';
 
@@ -131,15 +132,9 @@ class A4SdcInfo extends pw.StatelessWidget {
 
   pw.Widget _buildQrCode() {
     return pw.Center(
-      child: pw.SizedBox(
-        width: 60,
-        height: 60,
-        child: pw.BarcodeWidget(
-          barcode: pw.Barcode.qrCode(
-            errorCorrectLevel: pw.BarcodeQRCorrectionLevel.high,
-          ),
-          data: receiptQrCode!,
-        ),
+      child: ReceiptPdfAssets.qrBarcode(
+        data: receiptQrCode!,
+        size: 60,
       ),
     );
   }

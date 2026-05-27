@@ -96,10 +96,12 @@ class OmniPrinterA4 with SaveFile implements Printable {
     required bool vatEnabled,
   }) async {
     await loadUnicodeFont(); // Load font before generating PDF
+    final font = ReceiptPdfAssets.requireUnicodeFont(_unicodeFont);
     final pdf = Document(
       compress: true,
       // Ensures all content fits on a single page (no multipage)
       pageMode: PdfPageMode.none,
+      theme: ReceiptPdfAssets.unicodeTheme(font),
     );
     final logos = await Future.wait([
       _loadLogoImage(position: "left"),
@@ -113,6 +115,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
       MultiPage(
         pageFormat: PdfPageFormat.a4,
         margin: const EdgeInsets.all(8),
+        theme: ReceiptPdfAssets.unicodeTheme(font),
         build: (Context context) {
           return [
             // Header Section

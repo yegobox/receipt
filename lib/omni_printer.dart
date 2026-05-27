@@ -21,18 +21,41 @@ final isDesktopOrWeb = UniversalPlatform.isDesktopOrWeb;
 /// [generatePdfAndPrint] example
 
 class OmniPrinter with SaveFile implements Printable {
-  final doc = Document(version: PdfVersion.pdf_1_5, compress: true);
   List<Widget> rows = [];
 
-  // Define a style for the receipt
   static TextStyle _receiptTextStyle =
       TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
   static Font? _unicodeFont;
 
   static Future<void> loadUnicodeFont() async {
     _unicodeFont ??= await ReceiptPdfAssets.unicodeFont();
-    _receiptTextStyle = TextStyle(
-        fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont);
+    final font = ReceiptPdfAssets.requireUnicodeFont(_unicodeFont);
+    _receiptTextStyle = ReceiptPdfAssets.textStyle(
+      font,
+      fontSize: 10,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  /// Builds a receipt [Document] with a Unicode theme (not Courier).
+  static Document newReceiptDocument() {
+    final font = ReceiptPdfAssets.requireUnicodeFont(_unicodeFont);
+    return Document(
+      version: PdfVersion.pdf_1_5,
+      compress: true,
+      theme: ReceiptPdfAssets.unicodeTheme(font),
+    );
+  }
+
+  static TextStyle receiptTextStyle({
+    double fontSize = 10,
+    FontWeight fontWeight = FontWeight.normal,
+  }) {
+    return ReceiptPdfAssets.textStyle(
+      ReceiptPdfAssets.requireUnicodeFont(_unicodeFont),
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+    );
   }
 
   Future<ImageProvider?> _loadLogoImage({required String position}) async {
@@ -685,9 +708,8 @@ class OmniPrinter with SaveFile implements Printable {
     List<List<Widget>> data = <List<Widget>>[];
 
     // Define consistent styles
-    TextStyle smallTextStyle = TextStyle(fontSize: 10, font: _unicodeFont);
-    final TextStyle boldStyle = TextStyle(
-        fontSize: 10, fontWeight: FontWeight.bold, font: _unicodeFont);
+    final smallTextStyle = receiptTextStyle();
+    final boldStyle = receiptTextStyle(fontWeight: FontWeight.bold);
 
     // Process items
     for (var item in items) {
@@ -1135,15 +1157,9 @@ class OmniPrinter with SaveFile implements Printable {
         Column(children: [
           SizedBox(),
           Center(
-            child: SizedBox(
-              width: 40,
-              height: 40,
-              child: BarcodeWidget(
-                barcode: Barcode.qrCode(
-                  errorCorrectLevel: BarcodeQRCorrectionLevel.high,
-                ),
-                data: receiptQrCode,
-              ),
+            child: ReceiptPdfAssets.qrBarcode(
+              data: receiptQrCode,
+              size: 40,
             ),
           ),
           SizedBox(),
@@ -1358,10 +1374,14 @@ class OmniPrinter with SaveFile implements Printable {
     /// Add a page to the document
     /// we do not need multiPage in rolling paper mode.
     /// as in it it has a way to have infinite height
+    final doc = newReceiptDocument();
     doc.addPage(
       Page(
         pageFormat: PdfPageFormat.roll80,
         orientation: PageOrientation.portrait,
+        theme: ReceiptPdfAssets.unicodeTheme(
+          ReceiptPdfAssets.requireUnicodeFont(_unicodeFont),
+        ),
         build: (Context context) {
           return Column(
             children: rows,

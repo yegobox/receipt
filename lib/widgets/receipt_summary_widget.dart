@@ -1,4 +1,5 @@
 import 'package:flipper_services/proxy.dart';
+import 'package:receipt/receipt_pdf_assets.dart';
 import 'package:pdf/widgets.dart';
 import 'package:supabase_models/brick/models/all_models.dart';
 import 'package:flipper_models/helperModels/extensions.dart';
@@ -140,15 +141,9 @@ class ReceiptSummaryWidget extends StatelessWidget {
 
   Widget _buildQrCodeSection() {
     return Center(
-      child: SizedBox(
-        width: 60,
-        height: 60,
-        child: BarcodeWidget(
-          barcode: Barcode.qrCode(
-            errorCorrectLevel: BarcodeQRCorrectionLevel.high,
-          ),
-          data: receiptQrCode,
-        ),
+      child: ReceiptPdfAssets.qrBarcode(
+        data: receiptQrCode,
+        size: 60,
       ),
     );
   }
@@ -395,11 +390,13 @@ class ReceiptSummaryWidget extends StatelessWidget {
       padding: const EdgeInsets.all(4),
       child: Text(
         text,
-        style: TextStyle(
-          fontSize: 10,
-          font: unicodeFont,
-          fontWeight: fontWeight,
-        ),
+        style: unicodeFont == null
+            ? TextStyle(fontSize: 10, fontWeight: fontWeight)
+            : ReceiptPdfAssets.textStyle(
+                unicodeFont!,
+                fontSize: 10,
+                fontWeight: fontWeight ?? FontWeight.normal,
+              ),
       ),
     );
   }

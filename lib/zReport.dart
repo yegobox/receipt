@@ -3,6 +3,8 @@ import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 import 'package:flutter/material.dart' as c;
 
+import 'package:receipt/receipt_pdf_assets.dart';
+
 import 'omni_printer.dart';
 
 class ZReport extends OmniPrinter {
@@ -37,6 +39,8 @@ class ZReport extends OmniPrinter {
     double refundTaxeC = 0.00,
     double refundTaxeD = 0.00,
   }) async {
+    await OmniPrinter.loadUnicodeFont();
+    final doc = OmniPrinter.newReceiptDocument();
     final image = await _loadLogoImage();
 
     await _header(
@@ -73,10 +77,12 @@ class ZReport extends OmniPrinter {
     );
     // body now goes here
 
+    final font = await ReceiptPdfAssets.unicodeFont();
     doc.addPage(
       Page(
         pageFormat: PdfPageFormat.roll80,
         orientation: PageOrientation.portrait,
+        theme: ReceiptPdfAssets.unicodeTheme(font),
         build: (context) => Column(
           children: rows,
         ),
@@ -173,8 +179,11 @@ class ZReport extends OmniPrinter {
   Widget _buildAlign(String text) {
     return Align(
       alignment: Alignment.centerLeft,
-      child: Text(text,
-          style: const TextStyle(fontSize: 5), textAlign: TextAlign.left),
+      child: Text(
+        text,
+        style: OmniPrinter.receiptTextStyle(fontSize: 5),
+        textAlign: TextAlign.left,
+      ),
     );
   }
 
@@ -193,28 +202,43 @@ class ZReport extends OmniPrinter {
       ]),
       SizedBox(height: 5),
       Row(children: [
-        Text(businessName,
-            textScaleFactor: 1, style: const TextStyle(fontSize: 5)),
+        Text(
+          businessName,
+          textScaleFactor: 1,
+          style: OmniPrinter.receiptTextStyle(fontSize: 5),
+        ),
       ]),
       SizedBox(height: 5),
       Row(children: [
-        Text('TIN: $tinNumber',
-            textScaleFactor: 1, style: const TextStyle(fontSize: 5)),
+        Text(
+          'TIN: $tinNumber',
+          textScaleFactor: 1,
+          style: OmniPrinter.receiptTextStyle(fontSize: 5),
+        ),
       ]),
       SizedBox(height: 5),
       Row(children: [
-        Text('Email: $email',
-            textScaleFactor: 1, style: const TextStyle(fontSize: 5)),
+        Text(
+          'Email: $email',
+          textScaleFactor: 1,
+          style: OmniPrinter.receiptTextStyle(fontSize: 5),
+        ),
       ]),
       SizedBox(height: 5),
       Row(children: [
-        Text('Daily Z-Report',
-            textScaleFactor: 1, style: const TextStyle(fontSize: 5)),
+        Text(
+          'Daily Z-Report',
+          textScaleFactor: 1,
+          style: OmniPrinter.receiptTextStyle(fontSize: 5),
+        ),
       ]),
       SizedBox(height: 5),
       Row(children: [
-        Text('From: $fromDate To: $toDate',
-            textScaleFactor: 1, style: const TextStyle(fontSize: 5)),
+        Text(
+          'From: $fromDate To: $toDate',
+          textScaleFactor: 1,
+          style: OmniPrinter.receiptTextStyle(fontSize: 5),
+        ),
       ]),
       SizedBox(height: 5),
     ]));
