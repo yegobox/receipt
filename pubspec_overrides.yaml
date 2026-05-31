@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: brick_build,brick_core,brick_ditto,brick_ditto_generators,brick_offline_first,brick_offline_first_with_rest,brick_offline_first_with_supabase,brick_rest,brick_sqlite,brick_supabase,demo_ui_components,example_receipt,flipper_accounting,flipper_actionable,flipper_ai_feature,flipper_auth,flipper_dashboard,flipper_infra,flipper_loading,flipper_localize,flipper_login,flipper_mfa,flipper_mocks,flipper_models,flipper_personal,flipper_routing,flipper_rw,flipper_scanner,flipper_services,flipper_socials,flipper_ui,flipper_web,flowy_svg,flutter_form_bloc,flutter_slidable,form_bloc,qr_flutter,scrollable_positioned_list,supabase_models,http,meta,web,sqlite3,device_info_plus,drift,cbor,jni
+# melos_managed_dependency_overrides: brick_build,brick_core,brick_ditto,brick_ditto_generators,brick_offline_first,brick_offline_first_with_rest,brick_offline_first_with_supabase,brick_rest,brick_sqlite,brick_supabase,demo_ui_components,example_receipt,flipper_accounting,flipper_actionable,flipper_ai_feature,flipper_auth,flipper_dashboard,flipper_infra,flipper_loading,flipper_localize,flipper_login,flipper_mfa,flipper_mocks,flipper_models,flipper_personal,flipper_routing,flipper_rw,flipper_scanner,flipper_services,flipper_socials,flipper_ui,flipper_web,flowy_svg,flutter_form_bloc,flutter_slidable,form_bloc,qr_flutter,scrollable_positioned_list,supabase_models,http,meta,web,sqlite3,device_info_plus,drift,cbor,jni,flipper_design_system
 dependency_overrides:
   brick_build:
     path: ../brick/packages/brick_build
@@ -86,3 +86,5 @@ dependency_overrides:
   drift: ^2.29.0
   cbor: ^6.3.7
   jni: ^0.14.2
+  flipper_design_system:
+    path: ../../packages/flipper_design_system
