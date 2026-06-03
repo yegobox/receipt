@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flipper_services/digital_receipt_service.dart';
 import 'package:flipper_services/proxy.dart';
+import 'package:flipper_services/receipt_sync_service.dart';
 import 'package:flutter/foundation.dart' hide Category;
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
@@ -227,20 +228,43 @@ mixin SaveFile {
     await file.writeAsBytes(pdfData);
 
     // Run S3 upload in the background to avoid blocking UI
-    _uploadToS3InBackground(pdfData, fileName, transactionId);
+    _uploadToS3InBackground(
+      pdfData,
+      fileName,
+      transactionId,
+      localPath: filePath,
+    );
 
     return filePath;
   }
 
   void _uploadToS3InBackground(
-      Uint8List pdfData, String fileName, String transactionId) {
+    Uint8List pdfData,
+    String fileName,
+    String transactionId, {
+    required String localPath,
+  }) {
     // Fire and forget - don't await this
     Future(() async {
       try {
-        await ProxyService.strategy
-            .uploadPdfToS3(pdfData, fileName, transactionId: transactionId);
+        await ProxyService.strategy.uploadPdfToS3(
+          pdfData,
+          fileName,
+          transactionId: transactionId,
+        );
       } catch (e) {
-        print('S3 upload error: $e');
+        if (ReceiptSyncService.isUploadNetworkError(e)) {
+          await ReceiptSyncService().queuePendingUpload(
+            transactionId: transactionId,
+            fileName: fileName,
+            localPath: localPath,
+            sendSmsAfterUpload: DigitalReceiptService.isQueuedForSms(
+              transactionId,
+            ),
+          );
+        } else {
+          print('S3 upload error: $e');
+        }
       }
     });
   }
