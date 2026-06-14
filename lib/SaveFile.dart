@@ -86,123 +86,55 @@ mixin SaveFile {
   Future<void> sharePdf(Uint8List pdfData, List<String>? emails,
       {required String transactionId, required Uint8List image}) async {
     try {
-      // Save PDF to document directory first (this is fast)
+      // Save PDF to document directory first (also kicks off the S3 upload)
       String filePath = await savePdfToDocumentDirectory(pdfData,
           transactionId: transactionId);
 
-      // For Android, always trigger printing immediately
-      // for debugging we also print on maocs to save image and be able to troubleshoot
-      if (Platform.isAndroid || Platform.isMacOS && !kIsWeb) {
-        // This ensures printing happens regardless of path
-        PlatformPrinter().printFile(image);
-      }
-
-      // Immediately open/share file without waiting for printer checks
-      if (Platform.isAndroid && !kIsWeb) {
-        // Open file immediately
-        await OpenFilex.open(filePath);
-      } else {
+      // Try to print on a connected printer first; only open the PDF
+      // when no printer accepted the job.
+      final printed = await _tryDirectPrint(pdfData, image);
+      if (!printed) {
         await OpenFilex.open(filePath);
       }
-
-      // The rest of the printer detection logic can run in background
-      // We're removing the call to _openOrShareFile from _checkPrintersInBackground
-      // to avoid opening the file twice
-      _checkPrintersInBackground(filePath, pdfData, image, emails,
-          skipFileOpen: true);
     } catch (e) {
       rethrow;
     }
   }
 
-  void _checkPrintersInBackground(
-      String filePath, Uint8List pdfData, Uint8List image, List<String>? emails,
-      {bool skipFileOpen = false}) {
-    Future(() async {
-      try {
-        final printingInfo = await Printing.info();
-        const defaultPrinter = Printer(url: "", isAvailable: false);
-        final talker = TalkerFlutter.init();
-        talker.info(printingInfo);
-
-        if (!Platform.isAndroid && !Platform.isIOS) {
-          if (printingInfo.canListPrinters) {
-            final printers = await Printing.listPrinters();
-
-            // Pick the first available printer
-            final firstAvailablePrinter = printers.firstWhere(
-              (printer) => printer.isAvailable,
-              orElse: () => defaultPrinter,
-            );
-            talker.info('first available printer');
-            talker.info(firstAvailablePrinter);
-            if (firstAvailablePrinter.isAvailable) {
-              talker.info('PRINTER_AVAILABLE');
-              // Print directly to the first available printer
-              await Printing.directPrintPdf(
-                printer: firstAvailablePrinter,
-                format: PdfPageFormat.roll80,
-                onLayout: (PdfPageFormat format) async => pdfData,
-              );
-
-              //  await Printing.pickPrinter(
-              //   printer: firstAvailablePrinter,
-              //   format: PdfPageFormat.roll80,
-              //   onLayout: (PdfPageFormat format) async => pdfData,
-              // );
-            } else {
-              // No available printer found, share the PDF via email
-              if (Platform.isAndroid || Platform.isIOS) {
-                // await sharePdfViaEmail(pdfData, emails);
-                if (!skipFileOpen) {
-                  _openOrShareFile(filePath, bytes: pdfData, image: image);
-                }
-              } else {
-                if (!skipFileOpen) {
-                  _openOrShareFile(filePath, bytes: pdfData, image: image);
-                }
-              }
-            }
-          } else {
-            // Unable to list printers, share the PDF via email
-            if (Platform.isAndroid || Platform.isIOS) {
-              // await sharePdfViaEmail(pdfData, emails);
-              if (!skipFileOpen) {
-                _openOrShareFile(filePath, bytes: pdfData, image: image);
-              }
-            } else {
-              if (!skipFileOpen) {
-                _openOrShareFile(filePath, bytes: pdfData, image: image);
-              }
-            }
-          }
-        } else {
-          // For Android and iOS devices
-          if (Platform.isAndroid || Platform.isIOS) {
-            // await sharePdfViaEmail(pdfData, emails);
-            if (!skipFileOpen) {
-              _openOrShareFile(filePath, bytes: pdfData, image: image);
-            }
-          } else {
-            if (!skipFileOpen) {
-              _openOrShareFile(filePath, bytes: pdfData, image: image);
-            }
-          }
-        }
-      } catch (e) {
-        print('Printer check error: $e');
+  /// Attempts to print the receipt on a connected printer without showing
+  /// any dialog. On Android this targets the device's built-in POS printer;
+  /// on desktop it picks the first available system printer.
+  ///
+  /// Returns true when a printer accepted the job, false otherwise so the
+  /// caller can fall back to presenting the PDF.
+  Future<bool> _tryDirectPrint(Uint8List pdfData, Uint8List image) async {
+    final talker = TalkerFlutter.init();
+    try {
+      if (!kIsWeb && Platform.isAndroid) {
+        return await PlatformPrinter().printFile(image);
       }
-    });
-  }
 
-  Future<void> _openOrShareFile(String filePath,
-      {required Uint8List bytes, required Uint8List image}) async {
-    if (Platform.isAndroid || Platform.isMacOS && !kIsWeb) {
-      // Start printing in background
-      PlatformPrinter().printFile(image);
+      final printingInfo = await Printing.info();
+      talker.info(printingInfo);
+      if (!printingInfo.canListPrinters) return false;
+
+      final printers = await Printing.listPrinters();
+      final firstAvailablePrinter = printers.firstWhere(
+        (printer) => printer.isAvailable,
+        orElse: () => const Printer(url: "", isAvailable: false),
+      );
+      if (!firstAvailablePrinter.isAvailable) return false;
+
+      talker.info('PRINTER_AVAILABLE: ${firstAvailablePrinter.name}');
+      return await Printing.directPrintPdf(
+        printer: firstAvailablePrinter,
+        format: PdfPageFormat.roll80,
+        onLayout: (PdfPageFormat format) async => pdfData,
+      );
+    } catch (e) {
+      talker.warning('Direct print failed, falling back to PDF: $e');
+      return false;
     }
-    // Open file immediately
-    await OpenFilex.open(filePath);
   }
 
   /// Generates a filename string based on the current date and time,

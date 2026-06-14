@@ -6,17 +6,27 @@ import 'dart:typed_data';
 import 'package:path_provider/path_provider.dart'; // Import path_provider
 
 class PlatformPrinter {
-  Future<void> printFile(Uint8List imageData) async {
+  /// Attempts to print the receipt image on the device's built-in printer.
+  /// Returns true when the printer accepted the job (non-negative status),
+  /// false otherwise so callers can fall back to presenting the PDF.
+  Future<bool> printFile(Uint8List imageData) async {
     // Save image to documents folder
     await _saveImageToDocuments(imageData);
 
     if (Platform.isAndroid) {
-      PrinterService.getInstance()!.initializePrinter();
+      try {
+        PrinterService.getInstance()!.initializePrinter();
 
-      final byteArray = JByteArray.from(imageData);
-      final int status = PrinterService.getInstance()!.printNow(byteArray);
-      print('Print status: $status');
+        final byteArray = JByteArray.from(imageData);
+        final int status = PrinterService.getInstance()!.printNow(byteArray);
+        print('Print status: $status');
+        return status >= 0;
+      } catch (e) {
+        print('Built-in printer error: $e');
+        return false;
+      }
     }
+    return false;
   }
 
   Future<void> _saveImageToDocuments(Uint8List imageData) async {
