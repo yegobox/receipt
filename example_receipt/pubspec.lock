@@ -265,6 +265,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  background_downloader:
+    dependency: transitive
+    description:
+      name: background_downloader
+      sha256: aceacec2b2a72ec3a8862ab5895fcbbc71ab33765f3619d57963f3110dd268e3
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.5.5"
   badges:
     dependency: transitive
     description:
@@ -647,6 +655,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.8.0"
+  dart_sentencepiece_tokenizer:
+    dependency: transitive
+    description:
+      name: dart_sentencepiece_tokenizer
+      sha256: "85825632845cf6427ea0cd13dfba96b4341cf63525165155e5b9b97011239289"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.2"
   dart_style:
     dependency: transitive
     description:
@@ -1122,7 +1138,7 @@ packages:
       path: "../../../apps/flipper_auth"
       relative: true
     source: path
-    version: "1.0.519+1613"
+    version: "1.0.626+1720"
   flipper_dashboard:
     dependency: "direct overridden"
     description:
@@ -1206,7 +1222,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.185.4252223235419+1756529424"
+    version: "1.185.4252223235526+1756529531"
   flipper_scanner:
     dependency: "direct overridden"
     description:
@@ -1241,7 +1257,7 @@ packages:
       path: "../../../apps/flipper_web"
       relative: true
     source: path
-    version: "1.0.518+1434"
+    version: "1.0.625+1541"
   flowy_svg:
     dependency: "direct overridden"
     description:
@@ -1317,6 +1333,38 @@ packages:
       relative: true
     source: path
     version: "0.31.0-dev"
+  flutter_gemma:
+    dependency: transitive
+    description:
+      name: flutter_gemma
+      sha256: a45e48e04193080ebe37fe65a9adb33d8473feceb8e1f51659f7bee8f8c95e04
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  flutter_gemma_embeddings:
+    dependency: transitive
+    description:
+      name: flutter_gemma_embeddings
+      sha256: "1231b4a8e1c06bcf7674950a6cce0da2d940c9034b54cd216e0ed74e48dd1bf8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  flutter_gemma_litertlm:
+    dependency: transitive
+    description:
+      name: flutter_gemma_litertlm
+      sha256: "6b801403f1f682b699dbf31b485bddba2692296a894b7f23f1c78f171fc62fa3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  flutter_gemma_rag_qdrant:
+    dependency: transitive
+    description:
+      name: flutter_gemma_rag_qdrant
+      sha256: a6f1a83adbb8b8d3a85c9aea2a043e85dd2b58e3ef12b8f8ca421701b3f409ab
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   flutter_highlight:
     dependency: transitive
     description:
@@ -2082,6 +2130,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.1"
+  large_file_handler:
+    dependency: transitive
+    description:
+      name: large_file_handler
+      sha256: "234eda71f32b6a772349299d0ed185a5f3e10c59235576fd178f4d720dd956ec"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.0"
   launcher_entry:
     dependency: transitive
     description:
@@ -2330,6 +2386,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+  mutex:
+    dependency: transitive
+    description:
+      name: mutex
+      sha256: "8827da25de792088eb33e572115a5eb0d61d61a3c01acbc8bcbe76ed78f1a1f2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   native_toolchain_c:
     dependency: transitive
     description:
