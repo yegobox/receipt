@@ -10,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  printing: ^5.14.3
-  pdf: ^3.12.0
+  printing: ^5.15.0
+  pdf: ^3.13.0
   open_filex: ^4.7.0
   gap: ^2.0.0
   flipper_models: any
@@ -33,6 +33,11 @@ dependencies:
   example_receipt: any
 
 dependency_overrides:
+  xml: ^7.0.1
+  smithy:
+    path: ../smithy
+  smithy_aws:
+    path: ../smithy_aws
   http: ^1.2.2
   meta: ^1.16.0
   web: ^1.1.0
