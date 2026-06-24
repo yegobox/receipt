@@ -1136,7 +1136,7 @@ packages:
       path: "../../../apps/flipper_auth"
       relative: true
     source: path
-    version: "1.0.671+1765"
+    version: "1.0.694+1788"
   flipper_dashboard:
     dependency: "direct overridden"
     description:
@@ -1220,7 +1220,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.185.4252223235571+1756529576"
+    version: "1.185.4252223235594+1756529599"
   flipper_scanner:
     dependency: "direct overridden"
     description:
@@ -1255,7 +1255,7 @@ packages:
       path: "../../../apps/flipper_web"
       relative: true
     source: path
-    version: "1.0.670+1586"
+    version: "1.0.694+1610"
   flowy_svg:
     dependency: "direct overridden"
     description:
@@ -1508,10 +1508,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_native_splash
-      sha256: "7062602e0dbd29141fb8eb19220b5871ca650be5197ab9c1f193a28b17537bc7"
+      sha256: "9db4b80b044e9af17cc4b1272137fc7ace0054d879ef8210a76adc34aaf4cdff"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.4"
+    version: "2.4.8"
   flutter_parsed_text:
     dependency: transitive
     description:
