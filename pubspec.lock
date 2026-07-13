@@ -786,10 +786,10 @@ packages:
     dependency: transitive
     description:
       name: ditto_live
-      sha256: b6e40eca57c7181febdc7fd1ff4a043fa9dd4dece2319a4de302c345c5cdaa3a
+      sha256: "6a75e9e8f0f3cf8223a96b730770aba4c09926065d993bad9180571fde0fd388"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.1"
+    version: "5.0.2"
   dotted_line:
     dependency: "direct main"
     description:
@@ -1137,13 +1137,20 @@ packages:
       relative: true
     source: path
     version: "1.0.0+1"
+  flipper_analytics:
+    dependency: "direct overridden"
+    description:
+      path: "../../packages/flipper_analytics"
+      relative: true
+    source: path
+    version: "1.0.0-dev"
   flipper_auth:
     dependency: "direct overridden"
     description:
       path: "../../apps/flipper_auth"
       relative: true
     source: path
-    version: "1.0.694+1788"
+    version: "1.0.760+1854"
   flipper_dashboard:
     dependency: "direct overridden"
     description:
@@ -1227,7 +1234,7 @@ packages:
       path: "../../apps/flipper"
       relative: true
     source: path
-    version: "1.185.4252223235594+1756529599"
+    version: "1.185.4252223235657+1756529662"
   flipper_scanner:
     dependency: "direct overridden"
     description:
@@ -1262,7 +1269,7 @@ packages:
       path: "../../apps/flipper_web"
       relative: true
     source: path
-    version: "1.0.694+1610"
+    version: "1.0.765+1681"
   flowy_svg:
     dependency: "direct overridden"
     description:
@@ -2794,10 +2801,10 @@ packages:
     dependency: transitive
     description:
       name: posthog_flutter
-      sha256: "55a46ecf63411a6ede4a85e9d31dd251223c375fa85c18b78a134e62e11dcd6b"
+      sha256: c519532012911c5ff8d650908563eb4ef1c68178253c2a041eca45c8d5711781
       url: "https://pub.dev"
     source: hosted
-    version: "5.24.2"
+    version: "5.30.0"
   printing:
     dependency: "direct main"
     description:
@@ -3602,10 +3609,10 @@ packages:
     dependency: transitive
     description:
       name: tray_manager
-      sha256: bdc3ac6c36f3d12d871459e4a9822705ce5a1165a17fa837103bc842719bf3f7
+      sha256: "1a659b08baa6e9b91ef8ce16eda37740de398be1c4cf322b8a1ddfef25c68c5a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.4"
+    version: "0.5.3"
   tuple:
     dependency: transitive
     description:
