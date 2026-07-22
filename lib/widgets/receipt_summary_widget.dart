@@ -29,6 +29,8 @@ class ReceiptSummaryWidget extends StatelessWidget {
   final String mrc;
   final ITransaction transaction;
   final bool vatEnabled;
+  final bool isFiscalReceipt;
+  final String? nonFiscalReceiptRef;
 
   ReceiptSummaryWidget({
     required this.receiptType,
@@ -52,6 +54,8 @@ class ReceiptSummaryWidget extends StatelessWidget {
     required this.mrc,
     required this.transaction,
     required this.vatEnabled,
+    this.isFiscalReceipt = true,
+    this.nonFiscalReceiptRef,
   });
 
   @override
@@ -59,10 +63,14 @@ class ReceiptSummaryWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        _buildSdcInfoSection(),
-        if (receiptType != "PS" && receiptType != "TS" && receiptType != "CR")
+        isFiscalReceipt ? _buildSdcInfoSection() : _buildSimpleInfoSection(),
+        if (isFiscalReceipt &&
+            receiptType != "PS" &&
+            receiptType != "TS" &&
+            receiptType != "CR")
           SizedBox(width: 20),
-        if (receiptType != "PS" &&
+        if (isFiscalReceipt &&
+            receiptType != "PS" &&
             receiptType != "TS" &&
             receiptType != "TR" &&
             receiptType != "CR")
@@ -70,6 +78,24 @@ class ReceiptSummaryWidget extends StatelessWidget {
         SizedBox(width: 20),
         _buildSummaryTable(),
       ],
+    );
+  }
+
+  Widget _buildSimpleInfoSection() {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Date: ${whenCreated.isoDateTime}',
+            style: TextStyle(fontSize: 10, font: unicodeFont),
+          ),
+          Text(
+            'Receipt Number: ${nonFiscalReceiptRef ?? invoiceNum}',
+            style: TextStyle(fontSize: 10, font: unicodeFont),
+          ),
+        ],
+      ),
     );
   }
 

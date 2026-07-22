@@ -94,6 +94,7 @@ class OmniPrinter with SaveFile implements Printable {
     required String receiptNumber,
     String? brandEmail,
     int? originalInvoiceNumber,
+    bool isFiscalReceipt = true,
   }) async {
     List<Widget> receiptTypeWidgets(String receiptType) {
       switch (receiptType) {
@@ -247,7 +248,11 @@ class OmniPrinter with SaveFile implements Printable {
             middleImage != null
                 ? Image(middleImage, width: 25, height: 25)
                 : Container(width: 25, height: 25),
-            Image(rightImage, width: 25, height: 25),
+            // Right logo is the "RWANDA approved" RRA/EBM stamp — only show
+            // it on RRA-signed fiscal receipts.
+            isFiscalReceipt
+                ? Image(rightImage, width: 25, height: 25)
+                : Container(width: 25, height: 25),
           ]),
           SizedBox(height: 8),
           Text(brandName,
@@ -1045,128 +1050,135 @@ class OmniPrinter with SaveFile implements Printable {
     required int totRcptNo,
     required DateTime whenCreated,
     required DateTime timeFromServer,
+    bool isFiscalReceipt = true,
   }) async {
-    rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        SizedBox(height: 8),
-        Text(
-          "SDC INFORMATION",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
-        ),
-        SizedBox(height: 8),
-      ]),
-    );
-
-    // Add dashed line below SDC INFORMATION for CS receipts
-
-    dashedLine();
-
-    rows.add(
-      Column(children: [
-        SizedBox(height: 1),
-      ]),
-    );
-    rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-        SizedBox(
-          width: 1120,
-          child: Text(
-            "Date: ${timeFromServer.isoDateTime}",
-            style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
-          ),
-        ),
-      ]),
-    );
-    rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Text(
-          'SDC ID:',
-          style: TextStyle(font: _unicodeFont),
-        ),
-        Text(sdcId,
+    if (isFiscalReceipt) {
+      rows.add(
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          SizedBox(height: 8),
+          Text(
+            "SDC INFORMATION",
+            textAlign: TextAlign.center,
             style:
-                TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont)),
-      ]),
-    );
-    rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Text(
-          'RECEIPT NUMBER:',
-          style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
-        ),
-        Text(
-          "$rcptNo  / $totRcptNo $receiptType",
-          style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
-        ),
-      ]),
-    );
-    rows.add(
-      Column(children: [
-        SizedBox(height: 4),
-      ]),
-    );
-    if (receiptType != "PS" && receiptType != "TS" && receiptType != "TR") {
-      rows.add(
-        Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Text(
-            "Internal Data",
-            style: TextStyle(font: _unicodeFont),
+                TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
           ),
-          Text(
-            internalData.toDashedStringInternalData(),
-            style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.normal,
-                font: _unicodeFont),
-          ),
+          SizedBox(height: 8),
         ]),
       );
 
-      // Add dashed line below Internal Data for CS receipts
-      // this was commented as requested during review that there is no dash-line bellow internal data
-      // dashedLine();
+      // Add dashed line below SDC INFORMATION for CS receipts
 
-      rows.add(
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(
-            "Receipt Signature:",
-            style: TextStyle(font: _unicodeFont),
-          ),
-          Text(
-            receiptSignature.toDashedStringRcptSign(),
-            style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.normal,
-                font: _unicodeFont),
-          ),
-        ]),
-      );
-    }
+      dashedLine();
 
-    rows.add(
-      Column(children: [
-        SizedBox(height: 1),
-      ]),
-    );
-    if (receiptType != "PS" &&
-        receiptType != "TS" &&
-        receiptType != "CR" &&
-        receiptType != "TR") {
       rows.add(
         Column(children: [
-          SizedBox(),
-          Center(
-            child: ReceiptPdfAssets.qrBarcode(
-              data: receiptQrCode,
-              size: 40,
-            ),
-          ),
-          SizedBox(),
+          SizedBox(height: 1),
         ]),
       );
+      rows.add(
+        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+          SizedBox(
+            width: 1120,
+            child: Text(
+              "Date: ${timeFromServer.isoDateTime}",
+              style:
+                  TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
+            ),
+          ),
+        ]),
+      );
+      rows.add(
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Text(
+            'SDC ID:',
+            style: TextStyle(font: _unicodeFont),
+          ),
+          Text(sdcId,
+              style: TextStyle(
+                  fontWeight: FontWeight.normal, font: _unicodeFont)),
+        ]),
+      );
+      rows.add(
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Text(
+            'RECEIPT NUMBER:',
+            style:
+                TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
+          ),
+          Text(
+            "$rcptNo  / $totRcptNo $receiptType",
+            style:
+                TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
+          ),
+        ]),
+      );
+      rows.add(
+        Column(children: [
+          SizedBox(height: 4),
+        ]),
+      );
+      if (receiptType != "PS" && receiptType != "TS" && receiptType != "TR") {
+        rows.add(
+          Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            Text(
+              "Internal Data",
+              style: TextStyle(font: _unicodeFont),
+            ),
+            Text(
+              internalData.toDashedStringInternalData(),
+              style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.normal,
+                  font: _unicodeFont),
+            ),
+          ]),
+        );
+
+        // Add dashed line below Internal Data for CS receipts
+        // this was commented as requested during review that there is no dash-line bellow internal data
+        // dashedLine();
+
+        rows.add(
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(
+              "Receipt Signature:",
+              style: TextStyle(font: _unicodeFont),
+            ),
+            Text(
+              receiptSignature.toDashedStringRcptSign(),
+              style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.normal,
+                  font: _unicodeFont),
+            ),
+          ]),
+        );
+      }
+
+      rows.add(
+        Column(children: [
+          SizedBox(height: 1),
+        ]),
+      );
+      if (receiptType != "PS" &&
+          receiptType != "TS" &&
+          receiptType != "CR" &&
+          receiptType != "TR") {
+        rows.add(
+          Column(children: [
+            SizedBox(),
+            Center(
+              child: ReceiptPdfAssets.qrBarcode(
+                data: receiptQrCode,
+                size: 40,
+              ),
+            ),
+            SizedBox(),
+          ]),
+        );
+      }
+      dashedLine();
     }
-    dashedLine();
 
     rows.add(
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -1192,24 +1204,28 @@ class OmniPrinter with SaveFile implements Printable {
         ),
       ]),
     );
-    rows.add(
-      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Text(
-          'MRC:',
-          style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
-        ),
-        Text(
-          (() {
-            final boxMrc = ProxyService.box.mrc();
-            if (boxMrc != null && boxMrc.isNotEmpty && boxMrc.length == 11) {
-              return boxMrc;
-            }
-            return mrc;
-          })(),
-          style: TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
-        ),
-      ]),
-    );
+    if (isFiscalReceipt) {
+      rows.add(
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Text(
+            'MRC:',
+            style:
+                TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
+          ),
+          Text(
+            (() {
+              final boxMrc = ProxyService.box.mrc();
+              if (boxMrc != null && boxMrc.isNotEmpty && boxMrc.length == 11) {
+                return boxMrc;
+              }
+              return mrc;
+            })(),
+            style:
+                TextStyle(fontWeight: FontWeight.normal, font: _unicodeFont),
+          ),
+        ]),
+      );
+    }
     dashedLine();
     rows.add(
       ReceiptFooter(font: _unicodeFont),
@@ -1298,6 +1314,7 @@ class OmniPrinter with SaveFile implements Printable {
     required DateTime timeFromServer,
     String? brandEmail,
     required bool vatEnabled,
+    bool isFiscalReceipt = true,
   }) async {
     await loadUnicodeFont();
 
@@ -1324,7 +1341,8 @@ class OmniPrinter with SaveFile implements Printable {
         customerTin: customerTin,
         receiptType: receiptType,
         receiptNumber: invoiceNum.toString(),
-        customerName: customerName);
+        customerName: customerName,
+        isFiscalReceipt: isFiscalReceipt);
     // header already contains its own dash separators where appropriate.
     // avoid adding an extra dashed line here to prevent double separators
     // between customer info and item details.
@@ -1364,11 +1382,16 @@ class OmniPrinter with SaveFile implements Printable {
       internalData: internalData,
       whenCreated: whenCreated,
       receiptQrCode: receiptQrCode,
-      invoiceNum: invoiceNum.toString(),
+      invoiceNum: isFiscalReceipt
+          ? invoiceNum.toString()
+          : ((transaction.transactionNumber?.isNotEmpty ?? false)
+              ? transaction.transactionNumber!
+              : invoiceNum.toString()),
       rcptNo: rcptNo,
       totRcptNo: totRcptNo,
       mrc: mrc,
       timeFromServer: timeFromServer,
+      isFiscalReceipt: isFiscalReceipt,
     );
 
     /// Add a page to the document

@@ -51,5 +51,6 @@ abstract class Printable {
     String? brandEmail,
     int? originalInvoiceNumber,
     required bool vatEnabled,
+    bool isFiscalReceipt = true,
   });
 }

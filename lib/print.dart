@@ -93,6 +93,11 @@ class Print {
     required double taxTT,
     required double totalTaxTT,
     required bool vatEnabled,
+
+    /// When false, omits RRA/EBM-specific fiscal fields (SDC info, QR code,
+    /// receipt signature, MRC) from the printed receipt. Used for branches
+    /// that are not EBM-registered so they can still print a plain receipt.
+    bool isFiscalReceipt = true,
   }) async {
     if (ProxyService.box.A4()) {
       final Printable printerA4 = OmniPrinterA4();
@@ -147,6 +152,7 @@ class Print {
         totalTaxD: totalTaxD,
         transactionId: transaction.id,
         brandEmail: brandEmail,
+        isFiscalReceipt: isFiscalReceipt,
         printCallback: (Uint8List bytes) {
           printCallback(bytes);
         },
@@ -204,6 +210,7 @@ class Print {
         totalTaxB: totalTaxB,
         totalTaxC: totalTaxC,
         totalTaxD: totalTaxD,
+        isFiscalReceipt: isFiscalReceipt,
         printCallback: (Uint8List bytes) {
           printCallback(bytes);
         },

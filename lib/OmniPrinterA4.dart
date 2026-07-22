@@ -94,6 +94,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     required DateTime timeFromServer,
     String? brandEmail,
     required bool vatEnabled,
+    bool isFiscalReceipt = true,
   }) async {
     await loadUnicodeFont(); // Load font before generating PDF
     final font = ReceiptPdfAssets.requireUnicodeFont(_unicodeFont);
@@ -122,7 +123,9 @@ class OmniPrinterA4 with SaveFile implements Printable {
             A4Header(
               leftLogo: left,
               middleLogo: middle,
-              rightLogo: right,
+              // Right logo is the "RWANDA approved" RRA/EBM stamp — only
+              // show it on RRA-signed fiscal receipts.
+              rightLogo: isFiscalReceipt ? right : null,
               brandName: brandName,
               brandAddress: brandAddress,
               brandTel: brandTel,
@@ -243,6 +246,8 @@ class OmniPrinterA4 with SaveFile implements Printable {
               mrc: mrc,
               transaction: transaction,
               vatEnabled: vatEnabled,
+              isFiscalReceipt: isFiscalReceipt,
+              nonFiscalReceiptRef: transaction.transactionNumber,
             ),
             Center(child: ReceiptFooter(font: _unicodeFont)),
             // if (middle != null) ...[
