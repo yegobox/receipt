@@ -244,12 +244,15 @@ class OmniPrinter with SaveFile implements Printable {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Image(leftImage, width: 25, height: 25),
+            // Left and right logos are RRA/EBM branding (Rwanda emblem and
+            // the "RWANDA approved" stamp) — only show them on RRA-signed
+            // fiscal receipts.
+            isFiscalReceipt
+                ? Image(leftImage, width: 25, height: 25)
+                : Container(width: 25, height: 25),
             middleImage != null
                 ? Image(middleImage, width: 25, height: 25)
                 : Container(width: 25, height: 25),
-            // Right logo is the "RWANDA approved" RRA/EBM stamp — only show
-            // it on RRA-signed fiscal receipts.
             isFiscalReceipt
                 ? Image(rightImage, width: 25, height: 25)
                 : Container(width: 25, height: 25),
@@ -1228,7 +1231,7 @@ class OmniPrinter with SaveFile implements Printable {
     }
     dashedLine();
     rows.add(
-      ReceiptFooter(font: _unicodeFont),
+      ReceiptFooter(font: _unicodeFont, isFiscalReceipt: isFiscalReceipt),
     );
   }
 

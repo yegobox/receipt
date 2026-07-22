@@ -3,9 +3,11 @@ import 'package:receipt/receipt_pdf_assets.dart';
 
 class ReceiptFooter extends pw.StatelessWidget {
   final pw.Font? font;
+  final bool isFiscalReceipt;
 
   ReceiptFooter({
     this.font,
+    this.isFiscalReceipt = true,
   });
 
   @override
@@ -30,10 +32,11 @@ class ReceiptFooter extends pw.StatelessWidget {
           'COME BACK AGAIN',
           style: textStyle,
         ),
-        pw.Text(
-          'Flipper V2 Powered by RRA VSDC EBM 2.1',
-          style: textStyle,
-        ),
+        if (isFiscalReceipt)
+          pw.Text(
+            'Flipper V2 Powered by RRA VSDC EBM 2.1',
+            style: textStyle,
+          ),
       ],
     );
   }

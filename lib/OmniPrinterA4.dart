@@ -121,10 +121,11 @@ class OmniPrinterA4 with SaveFile implements Printable {
           return [
             // Header Section
             A4Header(
-              leftLogo: left,
+              // Left and right logos are RRA/EBM branding (Rwanda emblem and
+              // the "RWANDA approved" stamp) — only show them on RRA-signed
+              // fiscal receipts.
+              leftLogo: isFiscalReceipt ? left : null,
               middleLogo: middle,
-              // Right logo is the "RWANDA approved" RRA/EBM stamp — only
-              // show it on RRA-signed fiscal receipts.
               rightLogo: isFiscalReceipt ? right : null,
               brandName: brandName,
               brandAddress: brandAddress,
@@ -249,7 +250,12 @@ class OmniPrinterA4 with SaveFile implements Printable {
               isFiscalReceipt: isFiscalReceipt,
               nonFiscalReceiptRef: transaction.transactionNumber,
             ),
-            Center(child: ReceiptFooter(font: _unicodeFont)),
+            Center(
+              child: ReceiptFooter(
+                font: _unicodeFont,
+                isFiscalReceipt: isFiscalReceipt,
+              ),
+            ),
             // if (middle != null) ...[
             //   SizedBox(height: 1),
             //   Center(
