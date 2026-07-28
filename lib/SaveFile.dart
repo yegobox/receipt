@@ -159,7 +159,21 @@ mixin SaveFile {
     final file = File(filePath);
     await file.writeAsBytes(pdfData);
 
-    // Run S3 upload in the background to avoid blocking UI
+    // WhatsApp needs PDF bytes only — do not wait for Amplify S3 (often fails
+    // locally with IdentityPool not found).
+    final branchId = ProxyService.box.getBranchId();
+    if (branchId != null &&
+        DigitalReceiptService.isQueuedForSms(transactionId)) {
+      // ignore: unawaited_futures
+      DigitalReceiptService.sendWhatsAppWhenPdfReady(
+        transactionId: transactionId,
+        branchId: branchId,
+        receiptFileName: '$fileName.pdf',
+        pdfData: pdfData,
+      );
+    }
+
+    // Run S3 upload in the background to avoid blocking UI (SMS short-link path).
     _uploadToS3InBackground(
       pdfData,
       fileName,
