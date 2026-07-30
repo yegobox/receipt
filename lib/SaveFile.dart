@@ -237,16 +237,30 @@ mixin SaveFile {
   /// The pdfData is the Uint8List containing the actual PDF data.
   /// emails is an optional list of email addresses to share to.
   /// autoPrint defaults to false if not provided.
+  ///
+  /// When [deferPresentation] is true on desktop/web, the PDF is only saved
+  /// (and uploaded) here: the caller owns presenting it — e.g. the POS printer
+  /// picker dialog, which must not be raced by this method opening the PDF in
+  /// the OS viewer or silently printing it. Mobile still presents here because
+  /// the POS printer path is the only one available there.
   Future<void> handlePdfData({
     required Uint8List pdfData,
     required List<String>? emails,
     bool? autoPrint = false,
     bool skipPresentation = false,
+    bool deferPresentation = false,
     required String transactionId,
     required Uint8List image,
   }) async {
     if (skipPresentation) {
       await DigitalReceiptService.queueSmsAfterReceiptUpload(transactionId);
+      await savePdfToDocumentDirectory(
+        pdfData,
+        transactionId: transactionId,
+      );
+      return;
+    }
+    if (deferPresentation && isDesktopOrWeb) {
       await savePdfToDocumentDirectory(
         pdfData,
         transactionId: transactionId,

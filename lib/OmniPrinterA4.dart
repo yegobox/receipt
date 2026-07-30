@@ -80,6 +80,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     required ITransaction transaction,
     bool? autoPrint = false,
     bool skipPresentation = false,
+    bool deferPresentation = false,
     required double totalTaxA,
     required double totalTaxB,
     required double totalTaxC,
@@ -283,6 +284,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
       emails: emails,
       autoPrint: autoPrint,
       skipPresentation: skipPresentation,
+      deferPresentation: deferPresentation,
       transactionId: transactionId,
     );
     return printCallback(pdfData);

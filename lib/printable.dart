@@ -34,6 +34,10 @@ abstract class Printable {
     required ITransaction transaction,
     bool? autoPrint = false,
     bool skipPresentation = false,
+
+    /// When true, desktop/web callers present the generated PDF themselves
+    /// (printer picker), so this call must not open or print it.
+    bool deferPresentation = false,
     required double totalTaxA,
     required double totalTaxB,
     required double totalTaxC,

@@ -76,6 +76,11 @@ class Print {
     required ITransaction transaction,
     bool? autoPrint = false,
     bool skipPresentation = false,
+
+    /// When true, the generated PDF is only saved/uploaded here and the caller
+    /// presents it (desktop/web printer picker). Prevents the receipt from
+    /// being opened in the OS PDF viewer before the cashier picks a printer.
+    bool deferPresentation = false,
     required double totalTaxA,
     required double totalTaxB,
     required double totalTaxC,
@@ -124,6 +129,7 @@ class Print {
         brandTIN: brandTIN,
         autoPrint: autoPrint,
         skipPresentation: skipPresentation,
+        deferPresentation: deferPresentation,
         brandFooter: brandFooter,
         emails: emails,
         receiptType: receiptType,
@@ -180,6 +186,7 @@ class Print {
         brandTIN: brandTIN,
         autoPrint: autoPrint,
         skipPresentation: skipPresentation,
+        deferPresentation: deferPresentation,
         brandFooter: brandFooter,
         emails: emails,
         originalInvoiceNumber: originalInvoiceNumber,
