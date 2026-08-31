@@ -786,10 +786,10 @@ packages:
     dependency: transitive
     description:
       name: ditto_live
-      sha256: "6a75e9e8f0f3cf8223a96b730770aba4c09926065d993bad9180571fde0fd388"
+      sha256: b8b7bc4b0c4fb211c750bf77bb877b16b31b5c82806f538dac88f2e36b8727c8
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.2"
+    version: "5.0.3"
   dotted_line:
     dependency: "direct main"
     description:
@@ -1143,7 +1143,7 @@ packages:
       path: "../../../apps/flipper_auth"
       relative: true
     source: path
-    version: "1.0.765+1859"
+    version: "1.0.768+1862"
   flipper_dashboard:
     dependency: "direct overridden"
     description:
@@ -1227,7 +1227,7 @@ packages:
       path: "../../../apps/flipper"
       relative: true
     source: path
-    version: "1.289.0+1756529776"
+    version: "1.332.0+1756529819"
   flipper_scanner:
     dependency: "direct overridden"
     description:
@@ -1262,7 +1262,7 @@ packages:
       path: "../../../apps/flipper_web"
       relative: true
     source: path
-    version: "1.0.773+1689"
+    version: "1.0.779+1695"
   flowy_svg:
     dependency: "direct overridden"
     description:
@@ -3270,6 +3270,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.2"
+  speech_to_text:
+    dependency: transitive
+    description:
+      name: speech_to_text
+      sha256: "75587f7400f485fdf166beacd471549d98fe5d58e634f708916bb65dec05d6a4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.4.0"
+  speech_to_text_platform_interface:
+    dependency: transitive
+    description:
+      name: speech_to_text_platform_interface
+      sha256: a7e16e02853853ed7534ac2bde9a1c4f39c8879970a7974ac6ff832d4bdaa4b0
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.0"
+  speech_to_text_windows:
+    dependency: transitive
+    description:
+      name: speech_to_text_windows
+      sha256: "2d1d10565b23262386b453b33656299608dc7a66784453735d6c1318f13f44d7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   sqflite:
     dependency: transitive
     description:
