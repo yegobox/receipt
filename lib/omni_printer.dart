@@ -1421,8 +1421,16 @@ class OmniPrinter with SaveFile implements Printable {
     Uint8List pdfData = await doc.save();
     Uint8List? image;
 
-    final page = await Printing.raster(pdfData, pages: [0], dpi: 150).first;
-    image = await page.toPng();
+    // The PNG feeds only Android's built-in POS printer
+    // (PlatformPrinter.printFile). Elsewhere it was rendered on every receipt
+    // and thrown away, and on Windows `printing` rasterises synchronously in
+    // its method-channel handler, stalling the till's window on each sale.
+    if (UniversalPlatform.isAndroid) {
+      final page = await Printing.raster(pdfData, pages: [0], dpi: 150).first;
+      image = await page.toPng();
+    } else {
+      image = Uint8List(0);
+    }
 
 // Handle data (pass clones if needed)
     handlePdfData(
