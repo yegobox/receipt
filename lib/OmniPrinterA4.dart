@@ -10,6 +10,7 @@ import 'widgets/receipt_footer.dart';
 import 'package:pdf/widgets.dart';
 import 'package:receipt/SaveFile.dart';
 import 'package:receipt/printable.dart';
+import 'package:universal_platform/universal_platform.dart';
 import 'package:printing/printing.dart';
 import 'widgets/a4_header.dart';
 import 'widgets/a4_invoice_info.dart';
@@ -273,14 +274,17 @@ class OmniPrinterA4 with SaveFile implements Printable {
     );
 
     Uint8List pdfData = await pdf.save();
-    Uint8List? image;
-    await for (var page in Printing.raster(pdfData, pages: [0], dpi: 72)) {
-      image = await page.toPng();
-      break; // Only need the first page
+    // Only Android's built-in POS printer uses the PNG; see OmniPrinter.
+    var image = Uint8List(0);
+    if (UniversalPlatform.isAndroid) {
+      await for (var page in Printing.raster(pdfData, pages: [0], dpi: 72)) {
+        image = await page.toPng();
+        break; // Only need the first page
+      }
     }
     handlePdfData(
       pdfData: pdfData,
-      image: image!,
+      image: image,
       emails: emails,
       autoPrint: autoPrint,
       skipPresentation: skipPresentation,

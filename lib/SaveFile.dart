@@ -9,7 +9,6 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 import 'package:universal_platform/universal_platform.dart';
-import 'package:path/path.dart' as p;
 import 'package:talker_flutter/talker_flutter.dart';
 import 'platform_printer.dart';
 
@@ -49,26 +48,16 @@ mixin SaveFile {
     );
   }
 
-  /// Saves the provided PDF data as a series of PNG image files,
-  /// by rasterizing each page and writing to the downloads directory.
+  /// Auto-print on a phone (Print ticket, Print bar tab): save the PDF like
+  /// every other path, then send it straight to the device's built-in POS
+  /// printer. Nothing is opened when no printer takes it.
   ///
-  /// The `pdfData` parameter contains the raw bytes of the PDF to save.
-  ///
-  /// This handles requesting permissions, finding the downloads directory,
-  /// rasterizing each page, generating a filename, writing the PNG data,
-  /// and incrementing the page count.
-  Future<void> savePdfAsImage(Uint8List pdfData,
+  /// This used to rasterise every page at 1120 dpi and write PNG files that
+  /// nothing read: seconds of work per tap that printed nothing.
+  Future<void> autoPrintOnDevice(Uint8List pdfData,
       {required String transactionId, required Uint8List image}) async {
-    Directory? dir = await getApplicationSupportDirectory();
-    final path = dir.path;
-    var i = 0;
-    await for (final page in Printing.raster(pdfData, dpi: 1120)) {
-      final png = await page.toPng();
-      final file = File(p.normalize(
-          '$path/page-${i.toString().padLeft(3, generateFileName())}.png'));
-      await file.writeAsBytes(png);
-      i++;
-    }
+    await savePdfToDocumentDirectory(pdfData, transactionId: transactionId);
+    await _tryDirectPrint(pdfData, image);
   }
 
   /// Shares the provided PDF data by opening the system share sheet.
@@ -271,7 +260,7 @@ mixin SaveFile {
       if (isDesktopOrWeb) {
         await printPdf(pdfData, transactionId: transactionId);
       } else {
-        await savePdfAsImage(pdfData,
+        await autoPrintOnDevice(pdfData,
             transactionId: transactionId, image: image);
       }
     } else {
