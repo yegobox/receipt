@@ -57,6 +57,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     bool skipPresentation = false,
     bool deferPresentation = false,
     bool isFiscalReceipt = true,
+    String? welcomeMessage,
   }) async {
     // Create a PDF document
     final PdfDocument document = PdfDocument();
