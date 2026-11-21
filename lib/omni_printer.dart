@@ -12,6 +12,7 @@ import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 import 'package:receipt/SaveFile.dart';
 import 'package:receipt/printable.dart';
+import 'package:receipt/receipt_header_text.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 import 'print_extensions.dart';
@@ -95,6 +96,7 @@ class OmniPrinter with SaveFile implements Printable {
     String? brandEmail,
     int? originalInvoiceNumber,
     bool isFiscalReceipt = true,
+    String? welcomeMessage,
   }) async {
     List<Widget> receiptTypeWidgets(String receiptType) {
       switch (receiptType) {
@@ -269,16 +271,18 @@ class OmniPrinter with SaveFile implements Printable {
                   fontSize: 10,
                   fontWeight: FontWeight.normal,
                   font: _unicodeFont)),
-          Text("TEL: ${brandTel.normalizePhoneNumber()}",
-              style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.normal,
-                  font: _unicodeFont)),
-          Text("EMAIL: ${brandEmail ?? " "}",
-              style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.normal,
-                  font: _unicodeFont)),
+          if (hasReceiptContact(brandTel))
+            Text("TEL: ${brandTel.normalizePhoneNumber()}",
+                style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.normal,
+                    font: _unicodeFont)),
+          if (hasReceiptContact(brandEmail))
+            Text("EMAIL: ${brandEmail!.trim()}",
+                style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.normal,
+                    font: _unicodeFont)),
           Text("TIN: $brandTIN",
               style: TextStyle(
                   fontSize: 10,
@@ -287,7 +291,8 @@ class OmniPrinter with SaveFile implements Printable {
           SizedBox(height: 4),
           Center(
             child: Text(
-              'Welcome to our shop'.toUpperCase(),
+              receiptWelcomeLine(welcomeMessage),
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.normal,
@@ -1319,6 +1324,7 @@ class OmniPrinter with SaveFile implements Printable {
     String? brandEmail,
     required bool vatEnabled,
     bool isFiscalReceipt = true,
+    String? welcomeMessage,
   }) async {
     await loadUnicodeFont();
 
@@ -1346,7 +1352,8 @@ class OmniPrinter with SaveFile implements Printable {
         receiptType: receiptType,
         receiptNumber: invoiceNum.toString(),
         customerName: customerName,
-        isFiscalReceipt: isFiscalReceipt);
+        isFiscalReceipt: isFiscalReceipt,
+        welcomeMessage: welcomeMessage);
     // header already contains its own dash separators where appropriate.
     // avoid adding an extra dashed line here to prevent double separators
     // between customer info and item details.

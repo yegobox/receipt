@@ -103,6 +103,10 @@ class Print {
     /// receipt signature, MRC) from the printed receipt. Used for branches
     /// that are not EBM-registered so they can still print a plain receipt.
     bool isFiscalReceipt = true,
+
+    /// The branch's own line under the business details (replaces
+    /// "WELCOME TO OUR SHOP"). Null or blank prints the default.
+    String? welcomeMessage,
   }) async {
     if (ProxyService.box.A4()) {
       final Printable printerA4 = OmniPrinterA4();
@@ -159,6 +163,7 @@ class Print {
         transactionId: transaction.id,
         brandEmail: brandEmail,
         isFiscalReceipt: isFiscalReceipt,
+        welcomeMessage: welcomeMessage,
         printCallback: (Uint8List bytes) {
           printCallback(bytes);
         },
@@ -218,6 +223,7 @@ class Print {
         totalTaxC: totalTaxC,
         totalTaxD: totalTaxD,
         isFiscalReceipt: isFiscalReceipt,
+        welcomeMessage: welcomeMessage,
         printCallback: (Uint8List bytes) {
           printCallback(bytes);
         },

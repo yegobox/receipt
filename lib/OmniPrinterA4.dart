@@ -97,6 +97,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
     String? brandEmail,
     required bool vatEnabled,
     bool isFiscalReceipt = true,
+    String? welcomeMessage,
   }) async {
     await loadUnicodeFont(); // Load font before generating PDF
     final font = ReceiptPdfAssets.requireUnicodeFont(_unicodeFont);
@@ -134,6 +135,7 @@ class OmniPrinterA4 with SaveFile implements Printable {
               brandTel: brandTel,
               brandTIN: brandTIN,
               brandEmail: brandEmail,
+              welcomeMessage: welcomeMessage,
               font: _unicodeFont,
             ),
             if (receiptType != "CR") SizedBox(height: 5),

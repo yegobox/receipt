@@ -56,5 +56,8 @@ abstract class Printable {
     int? originalInvoiceNumber,
     required bool vatEnabled,
     bool isFiscalReceipt = true,
+
+    /// Branch's own line under the header; null or blank prints the default.
+    String? welcomeMessage,
   });
 }

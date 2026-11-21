@@ -1,4 +1,5 @@
 import 'package:pdf/widgets.dart' as pw;
+import 'package:receipt/receipt_header_text.dart';
 
 class A4Header extends pw.StatelessWidget {
   final pw.ImageProvider? leftLogo;
@@ -11,6 +12,10 @@ class A4Header extends pw.StatelessWidget {
   final String brandName;
   final String? brandEmail;
 
+  /// The branch's own line under the business details; null or blank prints
+  /// the default.
+  final String? welcomeMessage;
+
   A4Header({
     required this.leftLogo,
     this.middleLogo,
@@ -21,6 +26,7 @@ class A4Header extends pw.StatelessWidget {
     required this.font,
     required this.brandName,
     this.brandEmail,
+    this.welcomeMessage,
   });
 
   @override
@@ -64,16 +70,18 @@ class A4Header extends pw.StatelessWidget {
                 style: pw.TextStyle(fontSize: 10, font: font),
                 textAlign: pw.TextAlign.center,
               ),
-              pw.Text(
-                'TEL: $brandTel',
-                style: pw.TextStyle(fontSize: 10, font: font),
-                textAlign: pw.TextAlign.center,
-              ),
-              pw.Text(
-                'EMAIL: ${brandEmail ?? " "}',
-                style: pw.TextStyle(fontSize: 10, font: font),
-                textAlign: pw.TextAlign.center,
-              ),
+              if (hasReceiptContact(brandTel))
+                pw.Text(
+                  'TEL: $brandTel',
+                  style: pw.TextStyle(fontSize: 10, font: font),
+                  textAlign: pw.TextAlign.center,
+                ),
+              if (hasReceiptContact(brandEmail))
+                pw.Text(
+                  'EMAIL: ${brandEmail!.trim()}',
+                  style: pw.TextStyle(fontSize: 10, font: font),
+                  textAlign: pw.TextAlign.center,
+                ),
               pw.Text(
                 'TIN: $brandTIN',
                 style: pw.TextStyle(fontSize: 10, font: font),
@@ -81,8 +89,9 @@ class A4Header extends pw.StatelessWidget {
               ),
               pw.SizedBox(height: 2),
               pw.Text(
-                'WELCOME TO OUR SHOP',
+                receiptWelcomeLine(welcomeMessage),
                 style: pw.TextStyle(fontSize: 10, font: font),
+                textAlign: pw.TextAlign.center,
               ),
             ],
           ),
